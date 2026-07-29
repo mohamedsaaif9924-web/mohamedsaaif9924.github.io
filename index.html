@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mohamed Saaif Samsath — Analyst, Fintech &amp; Data Analytics</title>
-<meta name="description" content="Portfolio of Mohamed Saaif Samsath — Operations &amp; Data Analyst, MSc Fintech and Data Analytics candidate." />
+<title>Saaif's Portfolio — Mohamed Saaif Samsath</title>
+<meta name="description" content="Portfolio of Mohamed Saaif Samsath — Operations &amp; Data Analyst, MBA Fintech and Data Analytics candidate." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,7 +57,7 @@
     color:var(--gold);
   }
 
-  /* ---------- NAV ---------- */
+  /* ---------- NAV / TABS ---------- */
   header.site{
     position:sticky; top:0; z-index:50;
     background:rgba(11,15,20,.85);
@@ -70,14 +71,21 @@
   .brand{
     font-family:var(--font-display);
     font-size:19px; font-weight:600; letter-spacing:.01em;
+    white-space:nowrap;
   }
   .brand span{color:var(--gold);}
-  .nav-links{display:flex; gap:32px; list-style:none;}
-  .nav-links a{
+  @media (max-width:380px){ .brand{font-size:15.5px;} }
+  .nav-links{display:flex; gap:8px; list-style:none;}
+  .nav-links button{
+    font-family:var(--font-mono);
     font-size:13px; text-transform:uppercase; letter-spacing:.08em;
-    color:var(--ink-dim); text-decoration:none; transition:color .2s;
+    color:var(--ink-dim); background:none; border:1px solid transparent;
+    padding:8px 14px; cursor:pointer; transition:color .2s, border-color .2s, background .2s;
   }
-  .nav-links a:hover{color:var(--ink);}
+  .nav-links button:hover{color:var(--ink);}
+  .nav-links button.active{
+    color:var(--gold); border-color:var(--line); background:var(--surface);
+  }
 
   .nav-toggle{
     display:none; background:none; border:1px solid var(--line);
@@ -106,10 +114,12 @@
       opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0);
       transition:opacity .2s, transform .2s;
     }
-    .nav-links a{
-      display:block; padding:18px 0; border-bottom:1px solid var(--line);
-      font-size:15px;
+    .nav-links button{
+      display:block; width:100%; text-align:left;
+      padding:18px 4px; border-bottom:1px solid var(--line); border-top:none;
+      font-size:15px; background:none;
     }
+    .nav-links button.active{background:none; border-bottom:1px solid var(--gold);}
     .nav-toggle{display:flex;}
   }
 
@@ -153,11 +163,12 @@
   .btn{
     font-family:var(--font-mono); font-size:13px; text-decoration:none;
     padding:12px 20px; border-radius:2px; letter-spacing:.03em;
-    transition:all .2s;
+    transition:all .2s; cursor:pointer; border:none;
+    display:inline-block;
   }
   .btn-primary{background:var(--gold); color:#151109; font-weight:600;}
   .btn-primary:hover{background:#d6b06e;}
-  .btn-ghost{border:1px solid var(--line); color:var(--ink);}
+  .btn-ghost{border:1px solid var(--line); color:var(--ink); background:none;}
   .btn-ghost:hover{border-color:var(--gold); color:var(--gold);}
 
   /* ---------- TICKER (signature element) ---------- */
@@ -189,8 +200,19 @@
     to{transform:translateX(-50%);}
   }
 
-  /* ---------- SECTION SHELL ---------- */
-  section{padding:80px 0; border-bottom:1px solid var(--line);}
+  /* ---------- TAB PANELS ---------- */
+  .tab-panels{ }
+  .tab-panel{
+    padding:80px 0;
+    opacity:1; transform:translateY(0);
+    transition:opacity .32s ease, transform .32s ease;
+  }
+  .tab-panel[hidden]{display:none;}
+  .tab-panel.fade-out{opacity:0; transform:translateY(10px);}
+  .tab-panel.fade-in-prep{opacity:0; transform:translateY(10px); transition:none;}
+  @media (prefers-reduced-motion: reduce){
+    .tab-panel{transition:none;}
+  }
   .section-head{
     display:flex; align-items:baseline; justify-content:space-between;
     margin-bottom:40px; flex-wrap:wrap; gap:12px;
@@ -220,7 +242,6 @@
   .stat-block .stat .v{color:var(--mint); font-weight:600;}
 
   /* ---------- EXPERIENCE (ledger rows) ---------- */
-  .ledger{width:100%; border-collapse:collapse;}
   .role{
     display:grid; grid-template-columns:150px 1fr; gap:28px;
     padding:28px 0; border-top:1px solid var(--line);
@@ -286,7 +307,6 @@
   .tag:hover{border-color:var(--gold); color:var(--gold);}
 
   /* ---------- CONTACT ---------- */
-  .contact{border-bottom:none;}
   .contact-grid{
     display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:start;
   }
@@ -313,6 +333,7 @@
     padding:28px 0 40px;
     font-family:var(--font-mono); font-size:12px; color:var(--ink-faint);
     display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    border-top:1px solid var(--line);
   }
 </style>
 </head>
@@ -320,13 +341,13 @@
 
 <header class="site">
   <nav class="wrap">
-    <div class="brand">M<span>·</span>SAAIF</div>
+    <div class="brand">Saaif&rsquo;s <span>Portfolio</span></div>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><button type="button" data-tab="about" class="active">About</button></li>
+      <li><button type="button" data-tab="experience">Experience</button></li>
+      <li><button type="button" data-tab="education">Education</button></li>
+      <li><button type="button" data-tab="skills">Skills</button></li>
+      <li><button type="button" data-tab="contact">Contact</button></li>
     </ul>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
@@ -343,7 +364,7 @@
         <h1>Mohamed Saaif<br><em>Samsath</em></h1>
         <p class="lede">Operations-focused analyst who turns business processes into measurable improvements — reporting, dashboards, and reconciliation, built on Excel, Power BI, and Tableau.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="#contact">Get in touch</a>
+          <button type="button" class="btn btn-primary" data-tab="contact">Get in touch</button>
           <a class="btn btn-ghost" href="mailto:mohamedsaaif99@gmail.com">Email directly</a>
         </div>
       </div>
@@ -367,7 +388,6 @@
       <span class="ticker-item"><span class="dot"></span>RECONCILIATION</span>
       <span class="ticker-item"><span class="dot"></span>STAKEHOLDER COORDINATION</span>
       <span class="ticker-item"><span class="dot"></span>PROCESS IMPROVEMENT</span>
-      <!-- duplicate for seamless loop -->
       <span class="ticker-item"><span class="dot"></span>EXCEL — PIVOT TABLES &amp; XLOOKUP</span>
       <span class="ticker-item"><span class="dot"></span>POWER BI — DASHBOARDS &amp; DAX</span>
       <span class="ticker-item"><span class="dot"></span>TABLEAU — VISUALIZATION</span>
@@ -379,15 +399,16 @@
     </div>
   </div>
 
-  <section id="about">
-    <div class="wrap">
+  <div class="tab-panels wrap">
+
+    <section id="about" class="tab-panel">
       <div class="section-head">
         <h2>About</h2>
         <span class="idx">01 / Profile</span>
       </div>
       <div class="about-grid">
         <div>
-          <p>I work at the intersection of operations and data — reviewing agreements, tracking SLA breaches, and building the daily MIS that lets leadership act faster. My background moves from export operations, to venture administration, to correspondent banking analysis, and now toward an MSc in Fintech and Data Analytics.</p>
+          <p>I work at the intersection of operations and data — reviewing agreements, tracking SLA breaches, and building the daily MIS that lets leadership act faster. My background moves from export operations, to venture administration, to correspondent banking analysis, and now toward an MBA in Fintech and Data Analytics.</p>
           <p>What stays constant is the habit of turning a messy process into a clear, accurate, repeatable one — and a dashboard that makes the numbers legible to whoever needs them next.</p>
         </div>
         <div class="stat-block">
@@ -398,11 +419,9 @@
           <div class="stat"><span>Languages</span><span class="v">English</span></div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="experience">
-    <div class="wrap">
+    <section id="experience" class="tab-panel" hidden>
       <div class="section-head">
         <h2>Experience</h2>
         <span class="idx">02 / Record</span>
@@ -448,11 +467,9 @@
           </ul>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="education">
-    <div class="wrap">
+    <section id="education" class="tab-panel" hidden>
       <div class="section-head">
         <h2>Education &amp; Certifications</h2>
         <span class="idx">03 / Credentials</span>
@@ -494,11 +511,9 @@
       <div class="cert-note">
         <strong>Researcher Training</strong> — 60 Decibels, May 2023
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="skills">
-    <div class="wrap">
+    <section id="skills" class="tab-panel" hidden>
       <div class="section-head">
         <h2>Skills</h2>
         <span class="idx">04 / Toolkit</span>
@@ -543,16 +558,14 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section id="contact" class="contact">
-    <div class="wrap">
+    <section id="contact" class="tab-panel contact" hidden>
       <div class="contact-grid">
         <div>
           <span class="eyebrow">05 / Get in touch</span>
           <h2>Open to analyst &amp; data roles in fintech and operations.</h2>
-          <p>Based in Kuwait City, currently reading for an MSc in Fintech and Data Analytics. References available on request.</p>
+          <p>Based in Kuwait City, currently reading for an MBA in Fintech and Data Analytics. References available on request.</p>
         </div>
         <div class="contact-list">
           <a href="mailto:mohamedsaaif99@gmail.com">
@@ -569,8 +582,9 @@
           </a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+  </div>
 
 </main>
 
@@ -582,18 +596,72 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  var toggle = document.getElementById('nav-toggle');
-  var links = document.getElementById('nav-links');
-  toggle.addEventListener('click', function(){
-    var open = links.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-  links.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      links.classList.remove('open');
-      toggle.setAttribute('aria-expanded', 'false');
+  var toggleBtn = document.getElementById('nav-toggle');
+  var navLinks = document.getElementById('nav-links');
+  var panels = document.querySelectorAll('.tab-panel');
+  var navButtons = navLinks.querySelectorAll('button[data-tab]');
+  var allTriggers = document.querySelectorAll('[data-tab]');
+  var tabPanelsWrap = document.querySelector('.tab-panels');
+
+  function setActiveButtons(tabId){
+    navButtons.forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-tab') === tabId);
+    });
+  }
+
+  function activateTab(tabId){
+    // used only for the very first paint, no animation needed
+    panels.forEach(function(p){
+      if(p.id === tabId){ p.removeAttribute('hidden'); } else { p.setAttribute('hidden',''); }
+    });
+    setActiveButtons(tabId);
+  }
+
+  function switchTab(tabId){
+    var current = Array.prototype.find.call(panels, function(p){ return !p.hasAttribute('hidden'); });
+    var target = document.getElementById(tabId);
+    if(!target || target === current){ setActiveButtons(tabId); return; }
+
+    setActiveButtons(tabId);
+
+    if(current){
+      current.classList.add('fade-out');
+      var cleaned = false;
+      var finish = function(){
+        if(cleaned) return;
+        cleaned = true;
+        current.removeEventListener('transitionend', finish);
+        current.setAttribute('hidden', '');
+        current.classList.remove('fade-out');
+      };
+      current.addEventListener('transitionend', finish);
+      setTimeout(finish, 400); // fallback in case transitionend doesn't fire
+    }
+
+    target.removeAttribute('hidden');
+    target.classList.add('fade-in-prep');
+    // force reflow so the browser registers the "prep" state before we animate out of it
+    void target.offsetWidth;
+    requestAnimationFrame(function(){
+      target.classList.remove('fade-in-prep');
+    });
+  }
+
+  allTriggers.forEach(function(el){
+    el.addEventListener('click', function(){
+      switchTab(this.getAttribute('data-tab'));
+      navLinks.classList.remove('open');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      tabPanelsWrap.scrollIntoView({behavior:'smooth', block:'start'});
     });
   });
+
+  toggleBtn.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  activateTab('about');
 </script>
 
 </body>
