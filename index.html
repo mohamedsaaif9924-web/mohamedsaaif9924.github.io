@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mohamed Saaif Samsath — Analyst, Fintech &amp; Data Analytics</title>
+<meta name="description" content="Portfolio of Mohamed Saaif Samsath — Operations &amp; Data Analyst, MSc Fintech and Data Analytics candidate." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #0B0F14;
+    --surface: #121820;
+    --surface-2: #171F29;
+    --line: #263243;
+    --ink: #E9EDF2;
+    --ink-dim: #94A2B4;
+    --ink-faint: #5C6B7E;
+    --gold: #C6A15B;
+    --mint: #4FD1A5;
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
+    --max: 1120px;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important;}
+  }
+
+  a{color:inherit;}
+  ::selection{background:var(--gold); color:#0B0F14;}
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  @media (max-width:640px){ .wrap{padding:0 20px;} }
+
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  /* ---------- NAV ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,15,20,.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px; max-width:var(--max); margin:0 auto;
+  }
+  .brand{
+    font-family:var(--font-display);
+    font-size:19px; font-weight:600; letter-spacing:.01em;
+  }
+  .brand span{color:var(--gold);}
+  .nav-links{display:flex; gap:32px; list-style:none;}
+  .nav-links a{
+    font-size:13px; text-transform:uppercase; letter-spacing:.08em;
+    color:var(--ink-dim); text-decoration:none; transition:color .2s;
+  }
+  .nav-links a:hover{color:var(--ink);}
+
+  .nav-toggle{
+    display:none; background:none; border:1px solid var(--line);
+    width:40px; height:40px; padding:0; cursor:pointer;
+    flex-direction:column; align-items:center; justify-content:center; gap:5px;
+  }
+  .nav-toggle span{
+    display:block; width:18px; height:1px; background:var(--ink);
+    transition:transform .25s, opacity .25s;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+  .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+  .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+  @media (max-width:720px){
+    .nav-links{
+      display:flex; flex-direction:column; gap:0;
+      position:fixed; top:57px; left:0; right:0; bottom:0;
+      background:var(--bg); padding:8px 24px 24px;
+      transform:translateY(-8px);
+      opacity:0; visibility:hidden; pointer-events:none;
+      transition:opacity .2s, transform .2s, visibility 0s .2s;
+      overflow-y:auto;
+    }
+    .nav-links.open{
+      opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0);
+      transition:opacity .2s, transform .2s;
+    }
+    .nav-links a{
+      display:block; padding:18px 0; border-bottom:1px solid var(--line);
+      font-size:15px;
+    }
+    .nav-toggle{display:flex;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:88px 0 56px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.4fr 1fr; gap:56px; align-items:end;
+  }
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr; gap:32px;} }
+
+  .hero h1{
+    font-family:var(--font-display);
+    font-weight:600;
+    font-size:clamp(38px, 6vw, 64px);
+    line-height:1.05;
+    letter-spacing:-.01em;
+    margin:14px 0 18px;
+  }
+  .hero h1 em{
+    font-style:italic; color:var(--gold); font-weight:500;
+  }
+  .hero p.lede{
+    font-size:16px; color:var(--ink-dim); max-width:52ch;
+  }
+
+  .hero-meta{
+    font-family:var(--font-mono); font-size:13px; color:var(--ink-dim);
+    border-left:1px solid var(--line); padding-left:24px;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .hero-meta a{text-decoration:none; color:var(--ink); border-bottom:1px solid var(--ink-faint);}
+  .hero-meta a:hover{border-color:var(--gold); color:var(--gold);}
+  .hero-meta .row{display:flex; justify-content:space-between; gap:16px;}
+  .hero-meta .k{color:var(--ink-faint);}
+
+  .hero-cta{margin-top:28px; display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--font-mono); font-size:13px; text-decoration:none;
+    padding:12px 20px; border-radius:2px; letter-spacing:.03em;
+    transition:all .2s;
+  }
+  .btn-primary{background:var(--gold); color:#151109; font-weight:600;}
+  .btn-primary:hover{background:#d6b06e;}
+  .btn-ghost{border:1px solid var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--gold); color:var(--gold);}
+
+  /* ---------- TICKER (signature element) ---------- */
+  .ticker{
+    background:var(--surface-2);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+    white-space:nowrap;
+    position:relative;
+  }
+  .ticker::before, .ticker::after{
+    content:""; position:absolute; top:0; bottom:0; width:60px; z-index:2;
+  }
+  .ticker::before{left:0; background:linear-gradient(90deg, var(--surface-2), transparent);}
+  .ticker::after{right:0; background:linear-gradient(-90deg, var(--surface-2), transparent);}
+  .ticker-track{
+    display:inline-flex; align-items:center;
+    animation:scroll-ticker 38s linear infinite;
+    padding:13px 0;
+  }
+  .ticker:hover .ticker-track{animation-play-state:paused;}
+  .ticker-item{
+    font-family:var(--font-mono); font-size:12.5px; letter-spacing:.05em;
+    color:var(--ink-dim); padding:0 22px; display:inline-flex; align-items:center; gap:10px;
+  }
+  .ticker-item .dot{width:5px; height:5px; border-radius:50%; background:var(--mint); display:inline-block;}
+  @keyframes scroll-ticker{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:80px 0; border-bottom:1px solid var(--line);}
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin-bottom:40px; flex-wrap:wrap; gap:12px;
+  }
+  .section-head h2{
+    font-family:var(--font-display); font-weight:600;
+    font-size:clamp(26px,3vw,34px);
+  }
+  .section-head .idx{
+    font-family:var(--font-mono); font-size:12px; color:var(--ink-faint);
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:2fr 1fr; gap:48px;}
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid p{color:var(--ink-dim); font-size:16px; max-width:64ch;}
+  .about-grid p + p{margin-top:16px;}
+  .stat-block{
+    background:var(--surface); border:1px solid var(--line); padding:24px;
+  }
+  .stat-block .stat{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:12px 0; border-bottom:1px solid var(--line);
+    font-family:var(--font-mono); font-size:13px;
+  }
+  .stat-block .stat:last-child{border-bottom:none;}
+  .stat-block .stat .v{color:var(--mint); font-weight:600;}
+
+  /* ---------- EXPERIENCE (ledger rows) ---------- */
+  .ledger{width:100%; border-collapse:collapse;}
+  .role{
+    display:grid; grid-template-columns:150px 1fr; gap:28px;
+    padding:28px 0; border-top:1px solid var(--line);
+  }
+  .role:last-child{border-bottom:1px solid var(--line);}
+  @media (max-width:700px){ .role{grid-template-columns:1fr; gap:8px;} }
+  .role .when{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--gold);
+    letter-spacing:.03em;
+  }
+  .role .who{
+    font-family:var(--font-display); font-size:20px; font-weight:600; margin-bottom:2px;
+  }
+  .role .where{
+    font-family:var(--font-mono); font-size:12.5px; color:var(--ink-faint);
+    margin-bottom:12px; display:block;
+  }
+  .role ul{list-style:none; display:flex; flex-direction:column; gap:9px;}
+  .role li{
+    color:var(--ink-dim); font-size:14.5px; padding-left:18px; position:relative;
+  }
+  .role li::before{
+    content:"–"; position:absolute; left:0; color:var(--ink-faint);
+  }
+
+  /* ---------- EDUCATION ---------- */
+  .edu-list{display:flex; flex-direction:column;}
+  .edu-item{
+    display:grid; grid-template-columns:150px 1fr auto; gap:20px; align-items:baseline;
+    padding:18px 0; border-top:1px solid var(--line);
+  }
+  .edu-item:last-child{border-bottom:1px solid var(--line);}
+  @media (max-width:700px){ .edu-item{grid-template-columns:1fr; gap:4px;} }
+  .edu-item .when{font-family:var(--font-mono); font-size:12.5px; color:var(--gold);}
+  .edu-item .deg{font-weight:600; font-size:15.5px;}
+  .edu-item .inst{color:var(--ink-dim); font-size:13.5px; display:block; margin-top:2px;}
+  .edu-item .grade{
+    font-family:var(--font-mono); font-size:12px; color:var(--ink-faint);
+    justify-self:end; white-space:nowrap;
+  }
+  @media (max-width:700px){ .edu-item .grade{justify-self:start;} }
+
+  .cert-note{
+    margin-top:28px; padding:16px 20px; background:var(--surface);
+    border-left:2px solid var(--mint); font-size:14px; color:var(--ink-dim);
+  }
+  .cert-note strong{color:var(--ink);}
+
+  /* ---------- SKILLS ---------- */
+  .skill-groups{display:grid; grid-template-columns:repeat(2,1fr); gap:36px 48px;}
+  @media (max-width:700px){ .skill-groups{grid-template-columns:1fr;} }
+  .skill-group h3{
+    font-family:var(--font-mono); font-size:12px; text-transform:uppercase;
+    letter-spacing:.1em; color:var(--ink-faint); margin-bottom:14px;
+    padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  .tag-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{
+    font-family:var(--font-mono); font-size:12.5px;
+    border:1px solid var(--line); padding:6px 12px; color:var(--ink-dim);
+    transition:all .2s;
+  }
+  .tag:hover{border-color:var(--gold); color:var(--gold);}
+
+  /* ---------- CONTACT ---------- */
+  .contact{border-bottom:none;}
+  .contact-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:start;
+  }
+  @media (max-width:800px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact h2{
+    font-family:var(--font-display); font-weight:600;
+    font-size:clamp(30px,4vw,44px); line-height:1.15; margin-bottom:16px;
+  }
+  .contact p{color:var(--ink-dim); max-width:48ch; margin-bottom:28px;}
+  .contact-list{display:flex; flex-direction:column; gap:0;}
+  .contact-list a{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:16px 0; border-top:1px solid var(--line);
+    text-decoration:none; font-family:var(--font-mono); font-size:14px;
+    color:var(--ink); transition:color .2s;
+  }
+  .contact-list a:last-child{border-bottom:1px solid var(--line);}
+  .contact-list a:hover{color:var(--gold);}
+  .contact-list .k{color:var(--ink-faint); font-size:11.5px; text-transform:uppercase; letter-spacing:.08em;}
+  .contact-list .arrow{opacity:0; transition:opacity .2s;}
+  .contact-list a:hover .arrow{opacity:1;}
+
+  footer{
+    padding:28px 0 40px;
+    font-family:var(--font-mono); font-size:12px; color:var(--ink-faint);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="wrap">
+    <div class="brand">M<span>·</span>SAAIF</div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero wrap" style="border-bottom:none; padding-bottom:0;">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Analyst — Fintech &amp; Data Analytics</span>
+        <h1>Mohamed Saaif<br><em>Samsath</em></h1>
+        <p class="lede">Operations-focused analyst who turns business processes into measurable improvements — reporting, dashboards, and reconciliation, built on Excel, Power BI, and Tableau.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#contact">Get in touch</a>
+          <a class="btn btn-ghost" href="mailto:mohamedsaaif99@gmail.com">Email directly</a>
+        </div>
+      </div>
+      <div class="hero-meta">
+        <div class="row"><span class="k">Based in</span><span>Kuwait City, Kuwait</span></div>
+        <div class="row"><span class="k">Currently</span><span>Analyst, Al Mulla Exchange</span></div>
+        <div class="row"><span class="k">Studying</span><span>MSc Fintech &amp; Data Analytics</span></div>
+        <div class="row"><span class="k">Contact</span><a href="mailto:mohamedsaaif99@gmail.com">mohamedsaaif99@gmail.com</a></div>
+        <div class="row"><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/mohamed-s-5a6b3918b" target="_blank" rel="noopener">/mohamed-s</a></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="dot"></span>EXCEL — PIVOT TABLES &amp; XLOOKUP</span>
+      <span class="ticker-item"><span class="dot"></span>POWER BI — DASHBOARDS &amp; DAX</span>
+      <span class="ticker-item"><span class="dot"></span>TABLEAU — VISUALIZATION</span>
+      <span class="ticker-item"><span class="dot"></span>MIS REPORTING</span>
+      <span class="ticker-item"><span class="dot"></span>SLA &amp; KPI ANALYSIS</span>
+      <span class="ticker-item"><span class="dot"></span>RECONCILIATION</span>
+      <span class="ticker-item"><span class="dot"></span>STAKEHOLDER COORDINATION</span>
+      <span class="ticker-item"><span class="dot"></span>PROCESS IMPROVEMENT</span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item"><span class="dot"></span>EXCEL — PIVOT TABLES &amp; XLOOKUP</span>
+      <span class="ticker-item"><span class="dot"></span>POWER BI — DASHBOARDS &amp; DAX</span>
+      <span class="ticker-item"><span class="dot"></span>TABLEAU — VISUALIZATION</span>
+      <span class="ticker-item"><span class="dot"></span>MIS REPORTING</span>
+      <span class="ticker-item"><span class="dot"></span>SLA &amp; KPI ANALYSIS</span>
+      <span class="ticker-item"><span class="dot"></span>RECONCILIATION</span>
+      <span class="ticker-item"><span class="dot"></span>STAKEHOLDER COORDINATION</span>
+      <span class="ticker-item"><span class="dot"></span>PROCESS IMPROVEMENT</span>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>About</h2>
+        <span class="idx">01 / Profile</span>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>I work at the intersection of operations and data — reviewing agreements, tracking SLA breaches, and building the daily MIS that lets leadership act faster. My background moves from export operations, to venture administration, to correspondent banking analysis, and now toward an MSc in Fintech and Data Analytics.</p>
+          <p>What stays constant is the habit of turning a messy process into a clear, accurate, repeatable one — and a dashboard that makes the numbers legible to whoever needs them next.</p>
+        </div>
+        <div class="stat-block">
+          <div class="stat"><span>Current role</span><span class="v">Analyst</span></div>
+          <div class="stat"><span>Industry</span><span class="v">Fintech / Exchange</span></div>
+          <div class="stat"><span>Core tools</span><span class="v">Excel · Power BI · Tableau</span></div>
+          <div class="stat"><span>Nationality</span><span class="v">Sri Lankan</span></div>
+          <div class="stat"><span>Languages</span><span class="v">English</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Experience</h2>
+        <span class="idx">02 / Record</span>
+      </div>
+
+      <div class="role">
+        <span class="when">Jun 2023 —<br>Present</span>
+        <div>
+          <div class="who">Analyst</div>
+          <span class="where">Al Mulla Exchange · Kuwait City</span>
+          <ul>
+            <li>Reviewed corporate agreements and coordinated with correspondent banks to secure tie-ups, ensuring compliance and effective risk controls.</li>
+            <li>Analyzed SLA breaches and transaction KPIs to identify root causes, implementing targeted process changes that reduced repeat exceptions.</li>
+            <li>Designed and delivered concise daily MIS and dashboards to leadership and branches, enabling faster interventions and clearer operational visibility.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role">
+        <span class="when">Jul 2022 —<br>Jan 2023</span>
+        <div>
+          <div class="who">Operations Assistant</div>
+          <span class="where">Lion Ventures Group · Colombo</span>
+          <ul>
+            <li>Managed operations tasks for venture activities, maintaining investment databases and documentation to ensure accurate tracking of portfolio activity.</li>
+            <li>Prepared board and investor presentation materials, coordinating inputs to present clear, data-backed updates for meetings and fundraising efforts.</li>
+            <li>Liaised with legal and accounting teams to support compliance and financial accuracy, streamlining approval and reporting processes.</li>
+            <li>Improved administrative efficiency by standardizing document templates and tracking processes, reducing preparation time for investor deliverables.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="role">
+        <span class="when">Jan 2021 —<br>Mar 2021</span>
+        <div>
+          <div class="who">Intern</div>
+          <span class="where">Freshqo · Wattala</span>
+          <ul>
+            <li>Assisted in preparing financial statements and reconciliations, supporting month-end close and improving accuracy of financial records.</li>
+            <li>Prepared export documentation and contracts, ensuring compliance with shipment requirements and reducing processing delays.</li>
+            <li>Generated regular reports on export activity and maintained up-to-date records to support operational planning and audit readiness.</li>
+            <li>Collaborated with the finance team on account reconciliations and data entry tasks to streamline recordkeeping processes.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Education &amp; Certifications</h2>
+        <span class="idx">03 / Credentials</span>
+      </div>
+
+      <div class="edu-list">
+        <div class="edu-item">
+          <span class="when">2025 — Present</span>
+          <div><div class="deg">MSc, Fintech and Data Analytics</div><span class="inst">Anglia Ruskin University, Cambridge, UK</span></div>
+          <span class="grade">In progress</span>
+        </div>
+        <div class="edu-item">
+          <span class="when">2021 — 2022</span>
+          <div><div class="deg">BA (Hons), Business Administration</div><span class="inst">Southampton Solent University, UK</span></div>
+          <span class="grade">First Class</span>
+        </div>
+        <div class="edu-item">
+          <span class="when">2018 — 2020</span>
+          <div><div class="deg">HND, Business Management</div><span class="inst">Pearson College London, Colombo</span></div>
+          <span class="grade">Grade B</span>
+        </div>
+        <div class="edu-item">
+          <span class="when">Jan — Mar 2018</span>
+          <div><div class="deg">Foundation Degree, Business Management</div><span class="inst">Pearson College London, Colombo</span></div>
+          <span class="grade">Pass</span>
+        </div>
+        <div class="edu-item">
+          <span class="when">2015 — 2017</span>
+          <div><div class="deg">Advanced Level, Commerce</div><span class="inst">Al Mannar International School, Colombo</span></div>
+          <span class="grade">Pass</span>
+        </div>
+        <div class="edu-item">
+          <span class="when">2006 — 2014</span>
+          <div><div class="deg">Ordinary Level, Secondary Education</div><span class="inst">Raz International School, Colombo</span></div>
+          <span class="grade">Pass</span>
+        </div>
+      </div>
+
+      <div class="cert-note">
+        <strong>Researcher Training</strong> — 60 Decibels, May 2023
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Skills</h2>
+        <span class="idx">04 / Toolkit</span>
+      </div>
+      <div class="skill-groups">
+        <div class="skill-group">
+          <h3>Technical</h3>
+          <div class="tag-row">
+            <span class="tag">Excel — pivots &amp; XLOOKUP</span>
+            <span class="tag">Power BI &amp; DAX</span>
+            <span class="tag">Tableau</span>
+            <span class="tag">Data modeling</span>
+            <span class="tag">Data cleaning</span>
+            <span class="tag">MS Office</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Analytical &amp; Reporting</h3>
+          <div class="tag-row">
+            <span class="tag">Trend &amp; root-cause analysis</span>
+            <span class="tag">MIS creation</span>
+            <span class="tag">Dashboarding</span>
+            <span class="tag">Data validation</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Operations &amp; Process</h3>
+          <div class="tag-row">
+            <span class="tag">Process improvement</span>
+            <span class="tag">Stakeholder coordination</span>
+            <span class="tag">Transaction handling</span>
+            <span class="tag">Complaint management</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Professional</h3>
+          <div class="tag-row">
+            <span class="tag">Multitasking</span>
+            <span class="tag">Clear communication</span>
+            <span class="tag">Detail-oriented</span>
+            <span class="tag">Works with minimal supervision</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <span class="eyebrow">05 / Get in touch</span>
+          <h2>Open to analyst &amp; data roles in fintech and operations.</h2>
+          <p>Based in Kuwait City, currently reading for an MSc in Fintech and Data Analytics. References available on request.</p>
+        </div>
+        <div class="contact-list">
+          <a href="mailto:mohamedsaaif99@gmail.com">
+            <span><span class="k">Email</span><br>mohamedsaaif99@gmail.com</span>
+            <span class="arrow">→</span>
+          </a>
+          <a href="tel:+96569620090">
+            <span><span class="k">Phone</span><br>+965 6962 0090</span>
+            <span class="arrow">→</span>
+          </a>
+          <a href="https://www.linkedin.com/in/mohamed-s-5a6b3918b" target="_blank" rel="noopener">
+            <span><span class="k">LinkedIn</span><br>/mohamed-s-5a6b3918b</span>
+            <span class="arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>© <span id="year"></span> Mohamed Saaif Samsath</span>
+  <span>Kuwait City, Kuwait</span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var toggle = document.getElementById('nav-toggle');
+  var links = document.getElementById('nav-links');
+  toggle.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
