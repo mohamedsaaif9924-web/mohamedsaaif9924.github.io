@@ -22,7 +22,7 @@
       --ink-faint: #7B8DA0;
       --gold: #C69B4A;
       --gold-soft: #E8D5B0;
-      --mint: #0F7B5E;
+      --mint: #0F7B5C;
       --font-display: "Fraunces", Georgia, serif;
       --font-body: "Inter", -apple-system, sans-serif;
       --font-mono: "IBM Plex Mono", monospace;
@@ -336,24 +336,68 @@
     }
     .cert-note strong{color:var(--ink);}
 
-    /* ---------- SKILLS — refined ---------- */
-    .skill-groups{display:grid; grid-template-columns:repeat(2,1fr); gap:40px 56px;}
-    @media (max-width:700px){ .skill-groups{grid-template-columns:1fr;} }
-    .skill-group h3{
-      font-family:var(--font-mono); font-size:11px; text-transform:uppercase;
-      letter-spacing:.12em; color:var(--ink-faint); margin-bottom:16px;
-      padding-bottom:10px; border-bottom:1px solid var(--line);
+    /* ---------- SKILL CHART ---------- */
+    .skill-chart-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 56px;
+    }
+    @media (max-width: 700px) {
+      .skill-chart-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+    .skill-chart-group h3 {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--gold);
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--gold-soft);
       text-align: left;
     }
-    .tag-row{display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-start;}
-    .tag{
-      font-family:var(--font-mono); font-size:12px;
-      border:1px solid var(--line); padding:6px 14px; color:var(--ink-dim);
-      background:var(--surface);
-      transition:all .25s;
-      border-radius:30px;
+    .skill-bar {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      text-align: left;
     }
-    .tag:hover{border-color:var(--gold); color:var(--gold); background:var(--surface-2); transform:translateY(-2px);}
+    @media (max-width: 480px) {
+      .skill-bar {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+    }
+    .skill-label {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      text-align: left;
+    }
+    .bar-track {
+      width: 100%;
+      height: 8px;
+      background-color: var(--surface-2);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 20px;
+      background: linear-gradient(90deg, var(--gold-soft), var(--gold));
+      transition: width 0.8s ease-out;
+      width: 0;
+    }
+    .bar-fill:hover {
+      filter: brightness(1.05);
+    }
 
     /* ---------- CONTACT — refined ---------- */
     .contact-grid{
@@ -414,7 +458,7 @@
   <section class="hero wrap" style="border-bottom:none; padding-bottom:0;">
     <div class="hero-grid">
       <div>
-        <span class="eyebrow">Analyst — Fintech &amp; Data Analytics</span>
+        <span class="eyebrow">Operations Analyst — Fintech &amp; Data Analytics</span>
         <h1>Mohamed Saaif<br><em>Samsath</em></h1>
         <p class="lede">Operations-focused analyst who turns business processes into measurable improvements — reporting, dashboards, and reconciliation, built on Excel, Power BI, and Tableau.</p>
         <div class="hero-cta">
@@ -458,7 +502,7 @@
     <section id="about" class="tab-panel">
       <div class="section-head">
         <h2>About</h2>
-        <span class="idx">01 / Profile</span>
+        <span class="idx"> Profile</span>
       </div>
       <div class="about-grid">
         <div>
@@ -468,7 +512,9 @@
         <div class="stat-block">
           <div class="stat"><span>Current role</span><span class="v">Analyst</span></div>
           <div class="stat"><span>Industry</span><span class="v">Fintech / Exchange</span></div>
-          <div class="stat"><span>Core tools</span><span class="v"> · Excel · Power BI · Tableau</span></div>
+          <div class="stat"><span>Core tools</span><span class="v">
+· Excel · Power BI · Tableau 
+</span></div>
           <div class="stat"><span>Nationality</span><span class="v">Sri Lankan</span></div>
           <div class="stat"><span>Languages</span><span class="v">English</span></div>
         </div>
@@ -478,7 +524,7 @@
     <section id="experience" class="tab-panel" hidden>
       <div class="section-head">
         <h2>Experience</h2>
-        <span class="idx">02 / Record</span>
+        <span class="idx"> Experience </span>
       </div>
 
       <div class="role">
@@ -526,24 +572,24 @@
     <section id="education" class="tab-panel" hidden>
       <div class="section-head">
         <h2>Education &amp; Certifications</h2>
-        <span class="idx">03 / Credentials</span>
+        <span class="idx"> Education Qualifications </span>
       </div>
 
       <div class="edu-list">
         <div class="edu-item">
           <span class="when">2025 — Present</span>
           <div><div class="deg">MBA, Fintech and Data Analytics</div><span class="inst">Anglia Ruskin University, Cambridge, UK</span></div>
-          <span class="grade">In progress</span>
+          <span class="grade">Reading</span>
         </div>
         <div class="edu-item">
           <span class="when">2021 — 2022</span>
           <div><div class="deg">BA (Hons), Business Administration</div><span class="inst">Southampton Solent University, UK</span></div>
-          <span class="grade">First Class</span>
+          <span class="grade">Distinction</span>
         </div>
         <div class="edu-item">
           <span class="when">2018 — 2020</span>
           <div><div class="deg">HND, Business Management</div><span class="inst">Pearson College London, Colombo</span></div>
-          <span class="grade">Grade B</span>
+          <span class="grade">Merit</span>
         </div>
         <div class="edu-item">
           <span class="when">Jan — Mar 2018</span>
@@ -569,46 +615,96 @@
 
     <section id="skills" class="tab-panel" hidden>
       <div class="section-head">
-        <h2>Skills</h2>
-        <span class="idx">04 / Toolkit</span>
+        <h2>Skills & Expertise</h2>
+        <span class="idx"> Proficiency </span>
       </div>
-      <div class="skill-groups">
-        <div class="skill-group">
-          <h3>Technical</h3>
-          <div class="tag-row">
-            <span class="tag">Excel — pivots &amp; XLOOKUP</span>
-            <span class="tag">Power BI &amp; DAX</span>
-            <span class="tag">Tableau</span>
-            <span class="tag">Data modeling</span>
-            <span class="tag">Data cleaning</span>
-            <span class="tag">MS Office</span>
+
+      <div class="skill-chart-grid">
+        <!-- Group 1 -->
+        <div class="skill-chart-group">
+          <h3>Technical & Systems</h3>
+          <div class="skill-bar">
+            <span class="skill-label">Excel (Pivots, XLOOKUP)</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">Power BI & DAX</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 80%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">Tableau</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 75%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">Data Modeling & Cleaning</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 80%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">MS Office Suite</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
           </div>
         </div>
-        <div class="skill-group">
-          <h3>Analytical &amp; Reporting</h3>
-          <div class="tag-row">
-            <span class="tag">Trend &amp; root-cause analysis</span>
-            <span class="tag">MIS creation</span>
-            <span class="tag">Dashboarding</span>
-            <span class="tag">Data validation</span>
+
+        <!-- Group 2 -->
+        <div class="skill-chart-group">
+          <h3>Analytical & Reporting</h3>
+          <div class="skill-bar">
+            <span class="skill-label">MIS & Dashboard Creation</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">Trend & Root-Cause Analysis</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 88%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">Financial Data Presentation</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">Data Validation & Integrity</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
           </div>
         </div>
-        <div class="skill-group">
-          <h3>Operations &amp; Process</h3>
-          <div class="tag-row">
-            <span class="tag">Process improvement</span>
-            <span class="tag">Stakeholder coordination</span>
-            <span class="tag">Transaction handling</span>
-            <span class="tag">Complaint management</span>
+
+        <!-- Group 3 -->
+        <div class="skill-chart-group">
+          <h3>Operations & Process</h3>
+          <div class="skill-bar">
+            <span class="skill-label">Process Improvement</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">Stakeholder Coordination</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">Transaction Handling</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">Complaint Management</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 80%;"></div></div>
           </div>
         </div>
-        <div class="skill-group">
+
+        <!-- Group 4 -->
+        <div class="skill-chart-group">
           <h3>Professional</h3>
-          <div class="tag-row">
-            <span class="tag">Multitasking</span>
-            <span class="tag">Clear communication</span>
-            <span class="tag">Detail-oriented</span>
-            <span class="tag">Works with minimal supervision</span>
+          <div class="skill-bar">
+            <span class="skill-label">Written & Verbal Communication</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">Attention to Detail & Accuracy</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 98%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">Time Management & Organization</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
+          </div>
+          <div class="skill-bar">
+            <span class="skill-label">Works with Minimal Supervision</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 92%;"></div></div>
           </div>
         </div>
       </div>
@@ -617,7 +713,7 @@
     <section id="contact" class="tab-panel contact" hidden>
       <div class="contact-grid">
         <div>
-          <span class="eyebrow">05 / Get in touch</span>
+          <span class="eyebrow"> Get in touch</span>
           <h2>Open to analyst &amp; data roles in fintech and operations.</h2>
           <p>Based in Kuwait City, currently reading for an MBA in Fintech and Data Analytics. References available on request.</p>
         </div>
