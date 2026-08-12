@@ -70,8 +70,8 @@
 
     /* ---------- NAV / TABS ---------- */
     header.site{
-      position:sticky; top:0; z-index:50;
-      background:rgba(245,247,250,.92);
+      position:sticky; top:0; z-index:1000;
+      background:rgba(245,247,250,.96);
       backdrop-filter:blur(12px);
       -webkit-backdrop-filter:blur(12px);
       border-bottom:1px solid var(--line);
@@ -95,6 +95,7 @@
     .brand span{color:var(--gold);}
     @media (max-width:380px){ .brand{font-size:16px;} }
 
+    /* Desktop nav */
     .nav-links{
       display:flex; gap:6px; list-style:none;
     }
@@ -132,34 +133,54 @@
     .nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
     .nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
+    /* Mobile nav */
     @media (max-width:720px){
       .nav-links{
         display:flex; flex-direction:column; gap:0;
         position:fixed; top:57px; left:0; right:0; bottom:0;
         background:var(--bg);
-        padding:8px 20px 20px;
-        transform:translateY(-8px);
+        padding:20px 20px 40px;
+        transform:translateX(100%);
         opacity:0; visibility:hidden; pointer-events:none;
-        transition:opacity .25s, transform .25s, visibility 0s .25s;
+        transition:transform .3s cubic-bezier(0.4, 0, 0.2, 1), opacity .3s ease, visibility 0s .3s;
         overflow-y:auto;
         -webkit-overflow-scrolling:touch;
-        box-shadow: 0 16px 40px rgba(0,0,0,0.06);
-        z-index:100;
-        padding-top:20px;
+        box-shadow: -8px 0 40px rgba(0,0,0,0.06);
+        z-index:999;
       }
       .nav-links.open{
-        opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0);
-        transition:opacity .25s, transform .25s;
+        transform:translateX(0);
+        opacity:1; visibility:visible; pointer-events:auto;
+        transition:transform .3s cubic-bezier(0.4, 0, 0.2, 1), opacity .3s ease;
       }
       .nav-links button{
         display:block; width:100%; text-align:left;
-        padding:18px 4px; border-bottom:1px solid var(--line); border-top:none;
-        font-size:16px; background:none; border-radius:0;
+        padding:16px 8px; border-bottom:1px solid var(--line); border-top:none;
+        font-size:18px; background:none; border-radius:0;
         touch-action:manipulation;
+        font-weight:500;
+        color:var(--ink);
       }
       .nav-links button:active{background:var(--surface-2);}
-      .nav-links button.active{background:none; border-bottom:2px solid var(--gold);}
+      .nav-links button.active{color:var(--gold); border-bottom:2px solid var(--gold); background:none;}
       .nav-toggle{display:flex;}
+      
+      /* Overlay when menu is open */
+      .nav-overlay{
+        position:fixed; top:57px; left:0; right:0; bottom:0;
+        background:rgba(0,0,0,0.3);
+        z-index:998;
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transition:opacity .3s ease, visibility 0s .3s;
+      }
+      .nav-overlay.active{
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+        transition:opacity .3s ease;
+      }
     }
 
     /* ---------- HERO ---------- */
@@ -285,7 +306,7 @@
       to{transform:translateX(-50%);}
     }
 
-    /* ---------- TAB PANELS — REFINED ---------- */
+    /* ---------- TAB PANELS ---------- */
     .tab-panels{ }
     .tab-panel{
       padding:48px 0;
@@ -323,7 +344,7 @@
       .section-head .idx{font-size:11px;}
     }
 
-    /* ---------- ABOUT — refined stat block ---------- */
+    /* ---------- ABOUT ---------- */
     .about-grid{display:grid; grid-template-columns:1fr; gap:32px;}
     @media (min-width:800px){ .about-grid{grid-template-columns:2fr 1fr; gap:48px;} }
     .about-grid p{color:var(--ink-dim); font-size:15px; max-width:64ch;}
@@ -357,7 +378,7 @@
     .stat-block .stat:last-child{border-bottom:none;}
     .stat-block .stat .v{color:var(--mint); font-weight:600; text-align:right; flex-shrink:0;}
 
-    /* ---------- EXPERIENCE — refined ---------- */
+    /* ---------- EXPERIENCE ---------- */
     .role{
       display:grid; grid-template-columns:1fr; gap:6px;
       padding:20px 0; border-top:1px solid var(--line);
@@ -406,7 +427,7 @@
       content:"—"; position:absolute; left:0; color:var(--gold); opacity:0.6;
     }
 
-    /* ---------- EDUCATION — refined ---------- */
+    /* ---------- EDUCATION ---------- */
     .edu-list{display:flex; flex-direction:column;}
     .edu-item{
       display:grid; grid-template-columns:1fr; gap:4px;
@@ -534,7 +555,7 @@
       filter: brightness(1.05);
     }
 
-    /* ---------- CONTACT — refined ---------- */
+    /* ---------- CONTACT ---------- */
     .contact-grid{
       display:grid; grid-template-columns:1fr; gap:32px; align-items:start;
     }
@@ -595,17 +616,19 @@
 <header class="site" id="site-header">
   <nav class="wrap">
     <div class="brand">Saaif&rsquo;s <span>Portfolio</span></div>
-    <ul class="nav-links" id="nav-links">
-      <li><button type="button" data-tab="about" class="active">About</button></li>
-      <li><button type="button" data-tab="experience">Experience</button></li>
-      <li><button type="button" data-tab="education">Education</button></li>
-      <li><button type="button" data-tab="skills">Skills</button></li>
-      <li><button type="button" data-tab="contact">Contact</button></li>
+    <ul class="nav-links" id="nav-links" role="tablist">
+      <li role="none"><button type="button" role="tab" aria-selected="true" data-tab="about" class="active">About</button></li>
+      <li role="none"><button type="button" role="tab" aria-selected="false" data-tab="experience">Experience</button></li>
+      <li role="none"><button type="button" role="tab" aria-selected="false" data-tab="education">Education</button></li>
+      <li role="none"><button type="button" role="tab" aria-selected="false" data-tab="skills">Skills</button></li>
+      <li role="none"><button type="button" role="tab" aria-selected="false" data-tab="contact">Contact</button></li>
     </ul>
     <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
       <span></span><span></span><span></span>
     </button>
   </nav>
+  <!-- Mobile overlay -->
+  <div class="nav-overlay" id="nav-overlay"></div>
 </header>
 
 <main>
@@ -654,7 +677,7 @@
 
   <div class="tab-panels wrap">
 
-    <section id="about" class="tab-panel">
+    <section id="about" class="tab-panel" role="tabpanel" aria-labelledby="tab-about">
       <div class="section-head">
         <h2>About</h2>
         <span class="idx"> Profile</span>
@@ -671,12 +694,12 @@
 · Excel · Power BI · Tableau 
 </span></div>
           <div class="stat"><span>Nationality</span><span class="v">Sri Lankan</span></div>
-          <div class="stat"><span>Languages</span><span class="v">English</span></div>
+          <div class="stat"><span>Languages</span><span class="v"> ·English ·Sinhala ·Tamil </span></div>
         </div>
       </div>
     </section>
 
-    <section id="experience" class="tab-panel" hidden>
+    <section id="experience" class="tab-panel" hidden role="tabpanel" aria-labelledby="tab-experience">
       <div class="section-head">
         <h2>Experience</h2>
         <span class="idx"> Experience </span>
@@ -724,7 +747,7 @@
       </div>
     </section>
 
-    <section id="education" class="tab-panel" hidden>
+    <section id="education" class="tab-panel" hidden role="tabpanel" aria-labelledby="tab-education">
       <div class="section-head">
         <h2>Education &amp; Certifications</h2>
         <span class="idx"> Education Qualifications </span>
@@ -768,7 +791,7 @@
       </div>
     </section>
 
-    <section id="skills" class="tab-panel" hidden>
+    <section id="skills" class="tab-panel" hidden role="tabpanel" aria-labelledby="tab-skills">
       <div class="section-head">
         <h2>Skills & Expertise</h2>
         <span class="idx"> Proficiency </span>
@@ -865,7 +888,7 @@
       </div>
     </section>
 
-    <section id="contact" class="tab-panel contact" hidden>
+    <section id="contact" class="tab-panel contact" hidden role="tabpanel" aria-labelledby="tab-contact">
       <div class="contact-grid">
         <div>
           <span class="eyebrow"> Get in touch</span>
@@ -899,101 +922,151 @@
 </footer>
 
 <script>
-  document.getElementById('year').textContent = new Date().getFullYear();
+  (function() {
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Scroll shadow for header
-  const header = document.getElementById('site-header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 20);
-  });
-
-  var toggleBtn = document.getElementById('nav-toggle');
-  var navLinks = document.getElementById('nav-links');
-  var panels = document.querySelectorAll('.tab-panel');
-  var navButtons = navLinks.querySelectorAll('button[data-tab]');
-  var allTriggers = document.querySelectorAll('[data-tab]');
-  var tabPanelsWrap = document.querySelector('.tab-panels');
-
-  function setActiveButtons(tabId){
-    navButtons.forEach(function(b){
-      b.classList.toggle('active', b.getAttribute('data-tab') === tabId);
+    // Scroll shadow for header
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', function() {
+      header.classList.toggle('scrolled', window.scrollY > 20);
     });
-  }
 
-  function activateTab(tabId){
-    panels.forEach(function(p){
-      if(p.id === tabId){ p.removeAttribute('hidden'); } else { p.setAttribute('hidden',''); }
-    });
-    setActiveButtons(tabId);
-  }
+    // DOM elements
+    const toggleBtn = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+    const overlay = document.getElementById('nav-overlay');
+    const panels = document.querySelectorAll('.tab-panel');
+    const navButtons = navLinks.querySelectorAll('button[data-tab]');
+    const allTriggers = document.querySelectorAll('[data-tab]');
+    const tabPanelsWrap = document.querySelector('.tab-panels');
 
-  function switchTab(tabId){
-    var current = Array.prototype.find.call(panels, function(p){ return !p.hasAttribute('hidden'); });
-    var target = document.getElementById(tabId);
-    if(!target || target === current){ setActiveButtons(tabId); return; }
-
-    setActiveButtons(tabId);
-
-    if(current){
-      current.classList.add('fade-out');
-      var cleaned = false;
-      var finish = function(){
-        if(cleaned) return;
-        cleaned = true;
-        current.removeEventListener('transitionend', finish);
-        current.setAttribute('hidden', '');
-        current.classList.remove('fade-out');
-      };
-      current.addEventListener('transitionend', finish);
-      setTimeout(finish, 400);
+    // Function to set active button state
+    function setActiveButtons(tabId) {
+      navButtons.forEach(function(btn) {
+        const isActive = btn.getAttribute('data-tab') === tabId;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
     }
 
-    target.removeAttribute('hidden');
-    target.classList.add('fade-in-prep');
-    void target.offsetWidth;
-    requestAnimationFrame(function(){
-      target.classList.remove('fade-in-prep');
-    });
-  }
+    // Function to activate a tab
+    function activateTab(tabId) {
+      panels.forEach(function(panel) {
+        if (panel.id === tabId) {
+          panel.removeAttribute('hidden');
+          panel.setAttribute('aria-hidden', 'false');
+        } else {
+          panel.setAttribute('hidden', '');
+          panel.setAttribute('aria-hidden', 'true');
+        }
+      });
+      setActiveButtons(tabId);
+    }
 
-  allTriggers.forEach(function(el){
-    el.addEventListener('click', function(e){
-      switchTab(this.getAttribute('data-tab'));
+    // Function to switch tabs with animation
+    function switchTab(tabId) {
+      var current = null;
+      for (var i = 0; i < panels.length; i++) {
+        if (!panels[i].hasAttribute('hidden')) {
+          current = panels[i];
+          break;
+        }
+      }
+      
+      var target = document.getElementById(tabId);
+      if (!target || target === current) {
+        setActiveButtons(tabId);
+        return;
+      }
+
+      setActiveButtons(tabId);
+
+      // Animate out current
+      if (current) {
+        current.classList.add('fade-out');
+        var cleaned = false;
+        var finish = function() {
+          if (cleaned) return;
+          cleaned = true;
+          current.removeEventListener('transitionend', finish);
+          current.setAttribute('hidden', '');
+          current.setAttribute('aria-hidden', 'true');
+          current.classList.remove('fade-out');
+        };
+        current.addEventListener('transitionend', finish);
+        setTimeout(finish, 400);
+      }
+
+      // Animate in target
+      target.removeAttribute('hidden');
+      target.setAttribute('aria-hidden', 'false');
+      target.classList.add('fade-in-prep');
+      
+      // Force reflow
+      void target.offsetWidth;
+      
+      requestAnimationFrame(function() {
+        target.classList.remove('fade-in-prep');
+      });
+    }
+
+    // Click handlers for all tab triggers
+    allTriggers.forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        var tabId = this.getAttribute('data-tab');
+        switchTab(tabId);
+        
+        // Close mobile menu if open
+        if (window.innerWidth <= 720) {
+          navLinks.classList.remove('open');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+          overlay.classList.remove('active');
+        }
+        
+        // Scroll to top of tab panels on mobile
+        if (window.innerWidth <= 720) {
+          tabPanelsWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Toggle mobile menu
+    toggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var open = navLinks.classList.toggle('open');
+      toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      overlay.classList.toggle('active', open);
+    });
+
+    // Close menu when clicking overlay
+    overlay.addEventListener('click', function() {
       navLinks.classList.remove('open');
       toggleBtn.setAttribute('aria-expanded', 'false');
-      if(window.innerWidth <= 720){
-        tabPanelsWrap.scrollIntoView({behavior:'smooth', block:'start'});
-      }
+      overlay.classList.remove('active');
     });
-  });
 
-  toggleBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    var open = navLinks.classList.toggle('open');
-    toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-
-  // Close menu when clicking outside on mobile
-  document.addEventListener('click', function(e){
-    if(window.innerWidth <= 720){
-      var isMenuOpen = navLinks.classList.contains('open');
-      if(isMenuOpen && !navLinks.contains(e.target) && !toggleBtn.contains(e.target)){
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && navLinks.classList.contains('open')) {
         navLinks.classList.remove('open');
         toggleBtn.setAttribute('aria-expanded', 'false');
+        overlay.classList.remove('active');
       }
-    }
-  });
-
-  // Handle touch events for mobile
-  if('ontouchstart' in window){
-    document.querySelectorAll('button, a, .btn').forEach(function(el){
-      el.addEventListener('touchstart', function(){
-        // Small haptic feedback simulation
-      }, {passive: true});
     });
-  }
 
-  activateTab('about');
+    // Handle resize - close menu on desktop
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 720 && navLinks.classList.contains('open')) {
+        navLinks.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        overlay.classList.remove('active');
+      }
+    });
+
+    // Activate About tab by default
+    activateTab('about');
+  })();
 </script>
 
 </body>
