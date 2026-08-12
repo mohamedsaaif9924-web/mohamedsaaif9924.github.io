@@ -86,10 +86,13 @@
       display:flex;
       flex-direction:column;
       align-items:center;
-      padding:8px 12px 6px;
+      padding:6px 8px 4px;
       max-width:var(--max);
       margin:0 auto;
-      gap:6px;
+      gap:4px;
+    }
+    @media (min-width:480px){
+      nav{padding:8px 12px 6px; gap:6px;}
     }
     @media (min-width:721px){
       nav{flex-direction:row; justify-content:space-between; padding:12px 32px 10px; gap:0;}
@@ -97,51 +100,60 @@
 
     .brand{
       font-family:var(--font-display);
-      font-size:17px;
+      font-size:15px;
       font-weight:600;
       letter-spacing:-.01em;
       white-space:nowrap;
       width:100%;
       text-align:center;
     }
+    @media (min-width:480px){
+      .brand{font-size:17px;}
+    }
     @media (min-width:721px){
       .brand{font-size:20px; width:auto; text-align:left;}
     }
     .brand span{color:var(--gold);}
-    @media (max-width:380px){ .brand{font-size:15px;} }
+    @media (max-width:380px){ .brand{font-size:13px;} }
 
     /* Navigation tabs - ALWAYS VISIBLE on all devices */
     .nav-links{
       display:flex;
-      gap:4px;
+      gap:3px;
       list-style:none;
       flex-wrap:wrap;
       justify-content:center;
       width:100%;
-      padding:4px 0 2px;
+      padding:2px 0;
+    }
+    @media (min-width:480px){
+      .nav-links{gap:4px; padding:4px 0;}
     }
     @media (min-width:721px){
       .nav-links{width:auto; gap:6px; padding:0; flex-wrap:nowrap;}
     }
     .nav-links button{
       font-family:var(--font-mono);
-      font-size:10px;
+      font-size:9px;
       text-transform:uppercase;
-      letter-spacing:.04em;
+      letter-spacing:.03em;
       color:var(--ink-dim);
       background:none;
       border:1px solid transparent;
-      padding:5px 10px;
+      padding:4px 8px;
       cursor:pointer;
       transition:all .2s;
-      border-radius:20px;
+      border-radius:16px;
       font-weight:500;
       -webkit-touch-callout:none;
       touch-action:manipulation;
       white-space:nowrap;
-      min-height:32px;
+      min-height:28px;
     }
     @media (min-width:480px){
+      .nav-links button{font-size:10px; padding:5px 10px; min-height:32px;}
+    }
+    @media (min-width:640px){
       .nav-links button{font-size:11px; padding:6px 14px; min-height:36px;}
     }
     @media (min-width:721px){
@@ -156,14 +168,16 @@
       box-shadow: var(--shadow-soft);
     }
 
-    /* No hamburger menu needed */
     .nav-toggle{display:none !important;}
 
-    /* ---------- HERO ---------- */
+    /* ---------- HERO - Only visible on About tab ---------- */
     .hero{
-      padding:32px 0 20px;
+      padding:20px 0 16px;
       border-bottom:1px solid var(--line);
       position:relative;
+    }
+    @media (min-width:480px){
+      .hero{padding:32px 0 20px;}
     }
     @media (min-width:640px){
       .hero{padding:60px 0 40px;}
@@ -172,17 +186,31 @@
       .hero{padding:80px 0 48px;}
     }
     .hero-grid{
-      display:grid; grid-template-columns:1fr; gap:24px; align-items:start;
+      display:grid; grid-template-columns:1fr; gap:16px; align-items:start;
     }
-    @media (min-width:860px){ .hero-grid{grid-template-columns:1.5fr 1fr; gap:56px; align-items:end;} }
+    @media (min-width:480px){
+      .hero-grid{gap:20px;}
+    }
+    @media (min-width:640px){
+      .hero-grid{gap:24px;}
+    }
+    @media (min-width:860px){ 
+      .hero-grid{grid-template-columns:1.5fr 1fr; gap:40px; align-items:end;}
+    }
+    @media (min-width:1024px){
+      .hero-grid{gap:56px;}
+    }
 
     .hero h1{
       font-family:var(--font-display);
       font-weight:600;
-      font-size:clamp(26px, 5vw, 68px);
+      font-size:clamp(22px, 4.5vw, 68px);
       line-height:1.05;
       letter-spacing:-.02em;
-      margin:8px 0 10px;
+      margin:4px 0 8px;
+    }
+    @media (min-width:480px){
+      .hero h1{font-size:clamp(26px, 5vw, 68px); margin:8px 0 10px;}
     }
     @media (min-width:640px){
       .hero h1{margin:14px 0 18px;}
@@ -196,29 +224,38 @@
       background:var(--gold-soft); border-radius:4px; opacity:0.5;
     }
     .hero p.lede{
-      font-size:14px; color:var(--ink-dim); max-width:52ch; line-height:1.6;
+      font-size:13px; color:var(--ink-dim); max-width:52ch; line-height:1.5;
+    }
+    @media (min-width:480px){
+      .hero p.lede{font-size:14px; line-height:1.6;}
     }
     @media (min-width:640px){
       .hero p.lede{font-size:17px; line-height:1.7;}
     }
 
     .hero-meta{
-      font-family:var(--font-mono); font-size:10px; color:var(--ink-dim);
-      border-left:2px solid var(--gold-soft); padding-left:14px;
-      display:flex; flex-direction:column; gap:6px;
-      background:var(--surface); padding:14px 14px 14px 18px;
+      font-family:var(--font-mono); font-size:9px; color:var(--ink-dim);
+      border-left:2px solid var(--gold-soft); padding-left:10px;
+      display:flex; flex-direction:column; gap:4px;
+      background:var(--surface); padding:10px 10px 10px 14px;
       border-radius:var(--radius);
       box-shadow: var(--shadow-soft);
+    }
+    @media (min-width:480px){
+      .hero-meta{font-size:10px; gap:6px; padding:14px 14px 14px 18px;}
     }
     @media (min-width:640px){
       .hero-meta{font-size:12.5px; padding:24px 24px 24px 28px; gap:12px;}
     }
     .hero-meta a{text-decoration:none; color:var(--ink); border-bottom:1px solid var(--ink-faint);}
     .hero-meta a:hover{border-color:var(--gold); color:var(--gold);}
-    .hero-meta .row{display:flex; justify-content:space-between; gap:8px; flex-wrap:wrap;}
+    .hero-meta .row{display:flex; justify-content:space-between; gap:6px; flex-wrap:wrap;}
     .hero-meta .k{color:var(--ink-faint);}
 
-    .hero-cta{margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;}
+    .hero-cta{margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;}
+    @media (min-width:480px){
+      .hero-cta{margin-top:16px; gap:10px;}
+    }
     @media (min-width:640px){
       .hero-cta{margin-top:28px; gap:14px;}
     }
@@ -226,14 +263,17 @@
       .hero-cta .btn{width:100%; text-align:center; justify-content:center;}
     }
     .btn{
-      font-family:var(--font-mono); font-size:10px; text-decoration:none;
-      padding:8px 16px; border-radius:30px; letter-spacing:.04em;
+      font-family:var(--font-mono); font-size:9px; text-decoration:none;
+      padding:6px 14px; border-radius:30px; letter-spacing:.04em;
       transition:all .25s; cursor:pointer; border:none;
       display:inline-flex; align-items:center; justify-content:center;
       font-weight:500;
       -webkit-touch-callout:none;
       touch-action:manipulation;
-      min-height:36px;
+      min-height:32px;
+    }
+    @media (min-width:480px){
+      .btn{font-size:10px; padding:8px 16px; min-height:36px;}
     }
     @media (min-width:640px){
       .btn{font-size:12.5px; padding:12px 24px; min-height:44px;}
@@ -254,8 +294,11 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
     }
     .ticker::before, .ticker::after{
-      content:""; position:absolute; top:0; bottom:0; width:30px; z-index:2;
+      content:""; position:absolute; top:0; bottom:0; width:20px; z-index:2;
       pointer-events:none;
+    }
+    @media (min-width:480px){
+      .ticker::before, .ticker::after{width:30px;}
     }
     @media (min-width:640px){
       .ticker::before, .ticker::after{width:60px;}
@@ -265,21 +308,30 @@
     .ticker-track{
       display:inline-flex; align-items:center;
       animation:scroll-ticker 38s linear infinite;
-      padding:6px 0;
+      padding:4px 0;
+    }
+    @media (min-width:480px){
+      .ticker-track{padding:6px 0;}
     }
     @media (min-width:640px){
       .ticker-track{padding:12px 0;}
     }
     .ticker:hover .ticker-track{animation-play-state:paused;}
     .ticker-item{
-      font-family:var(--font-mono); font-size:8px; letter-spacing:.04em;
-      color:var(--ink-dim); padding:0 10px; display:inline-flex; align-items:center; gap:5px;
+      font-family:var(--font-mono); font-size:7px; letter-spacing:.03em;
+      color:var(--ink-dim); padding:0 6px; display:inline-flex; align-items:center; gap:3px;
       white-space:nowrap;
+    }
+    @media (min-width:480px){
+      .ticker-item{font-size:8px; padding:0 10px; gap:5px;}
     }
     @media (min-width:640px){
       .ticker-item{font-size:12px; padding:0 24px; gap:10px;}
     }
-    .ticker-item .dot{width:3px; height:3px; border-radius:50%; background:var(--mint); display:inline-block; flex-shrink:0;}
+    .ticker-item .dot{width:2px; height:2px; border-radius:50%; background:var(--mint); display:inline-block; flex-shrink:0;}
+    @media (min-width:480px){
+      .ticker-item .dot{width:3px; height:3px;}
+    }
     @media (min-width:640px){
       .ticker-item .dot{width:5px; height:5px;}
     }
@@ -291,9 +343,12 @@
     /* ---------- TAB PANELS ---------- */
     .tab-panels{ }
     .tab-panel{
-      padding:24px 0;
+      padding:16px 0;
       opacity:1; transform:translateY(0);
       transition:opacity .35s ease, transform .35s ease;
+    }
+    @media (min-width:480px){
+      .tab-panel{padding:24px 0;}
     }
     @media (min-width:640px){
       .tab-panel{padding:48px 0;}
@@ -309,7 +364,10 @@
     }
     .section-head{
       display:flex; align-items:baseline; justify-content:space-between;
-      margin-bottom:16px; flex-wrap:wrap; gap:6px;
+      margin-bottom:12px; flex-wrap:wrap; gap:4px;
+    }
+    @media (min-width:480px){
+      .section-head{margin-bottom:16px; gap:6px;}
     }
     @media (min-width:640px){
       .section-head{margin-bottom:32px; gap:12px;}
@@ -319,61 +377,66 @@
     }
     .section-head h2{
       font-family:var(--font-display); font-weight:600;
-      font-size:clamp(20px,3vw,36px);
+      font-size:clamp(18px,2.5vw,36px);
       color:var(--ink);
       letter-spacing:-.01em;
     }
+    @media (min-width:480px){
+      .section-head h2{font-size:clamp(20px,3vw,36px);}
+    }
     .section-head .idx{
-      font-family:var(--font-mono); font-size:8px; color:var(--ink-faint);
-      background:var(--surface-2); padding:2px 8px; border-radius:20px;
+      font-family:var(--font-mono); font-size:7px; color:var(--ink-faint);
+      background:var(--surface-2); padding:2px 6px; border-radius:20px;
       white-space:nowrap;
+    }
+    @media (min-width:480px){
+      .section-head .idx{font-size:8px; padding:2px 8px;}
     }
     @media (min-width:640px){
       .section-head .idx{font-size:11px; padding:4px 12px;}
     }
 
-    /* ---------- ABOUT ---------- */
-    .about-grid{display:grid; grid-template-columns:1fr; gap:20px;}
-    @media (min-width:800px){ .about-grid{grid-template-columns:2fr 1fr; gap:48px;} }
-    .about-grid p{color:var(--ink-dim); font-size:13px; max-width:64ch;}
-    @media (min-width:640px){
-      .about-grid p{font-size:16px;}
+    /* ---------- ABOUT (includes hero) ---------- */
+    #about .about-content{
+      display:grid; grid-template-columns:1fr; gap:16px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
     }
-    .about-grid p + p{margin-top:10px;}
-    @media (min-width:640px){
-      .about-grid p + p{margin-top:16px;}
+    @media (min-width:480px){
+      #about .about-content{gap:20px; padding-top:20px;}
     }
-    .stat-block{
-      background:var(--surface); border:1px solid var(--line); padding:14px;
-      border-radius:var(--radius);
-      box-shadow: var(--shadow-soft);
-      transition: box-shadow .3s;
+    @media (min-width:800px){ 
+      #about .about-content{grid-template-columns:2fr 1fr; gap:32px; padding-top:32px;} 
     }
-    @media (min-width:640px){
-      .stat-block{padding:28px;}
+    @media (min-width:1024px){
+      #about .about-content{gap:48px; padding-top:32px;}
     }
-    .stat-block:hover{ box-shadow: var(--shadow-hover); }
-    .stat-block .stat{
-      display:flex; justify-content:space-between; align-items:baseline;
-      padding:6px 0; border-bottom:1px solid var(--line);
-      font-family:var(--font-mono); font-size:9px;
-      text-align: left;
-      gap:6px;
+    #about .about-content p{color:var(--ink-dim); font-size:12px; max-width:64ch;}
+    @media (min-width:480px){
+      #about .about-content p{font-size:13px;}
     }
     @media (min-width:640px){
-      .stat-block .stat{font-size:12.5px; padding:12px 0;}
+      #about .about-content p{font-size:16px;}
     }
-    .stat-block .stat:last-child{border-bottom:none;}
-    .stat-block .stat .v{color:var(--mint); font-weight:600; text-align:right; flex-shrink:0;}
+    #about .about-content p + p{margin-top:8px;}
+    @media (min-width:480px){
+      #about .about-content p + p{margin-top:10px;}
+    }
+    @media (min-width:640px){
+      #about .about-content p + p{margin-top:16px;}
+    }
 
     /* ---------- EXPERIENCE ---------- */
     .role{
-      display:grid; grid-template-columns:1fr; gap:4px;
-      padding:14px 0; border-top:1px solid var(--line);
+      display:grid; grid-template-columns:1fr; gap:3px;
+      padding:10px 0; border-top:1px solid var(--line);
       text-align: left;
       transition: background .2s;
       border-radius:var(--radius);
       padding-left:4px; padding-right:4px;
+    }
+    @media (min-width:480px){
+      .role{padding:14px 0; gap:4px;}
     }
     @media (min-width:700px){
       .role{grid-template-columns:140px 1fr; gap:32px; padding:28px 8px;}
@@ -381,32 +444,47 @@
     .role:hover{ background:var(--surface); box-shadow: var(--shadow-soft); }
     .role:last-child{border-bottom:1px solid var(--line);}
     .role .when{
-      font-family:var(--font-mono); font-size:9px; color:var(--gold);
+      font-family:var(--font-mono); font-size:8px; color:var(--gold);
       letter-spacing:.03em;
+    }
+    @media (min-width:480px){
+      .role .when{font-size:9px;}
     }
     @media (min-width:700px){
       .role .when{font-size:12px;}
     }
     .role .who{
-      font-family:var(--font-display); font-size:16px; font-weight:600; margin-bottom:2px;
+      font-family:var(--font-display); font-size:14px; font-weight:600; margin-bottom:1px;
+    }
+    @media (min-width:480px){
+      .role .who{font-size:16px;}
     }
     @media (min-width:700px){
-      .role .who{font-size:20px;}
+      .role .who{font-size:20px; margin-bottom:2px;}
     }
     .role .where{
-      font-family:var(--font-mono); font-size:9px; color:var(--ink-faint);
-      margin-bottom:6px; display:block;
+      font-family:var(--font-mono); font-size:8px; color:var(--ink-faint);
+      margin-bottom:4px; display:block;
+    }
+    @media (min-width:480px){
+      .role .where{font-size:9px; margin-bottom:6px;}
     }
     @media (min-width:700px){
       .role .where{font-size:12px; margin-bottom:12px;}
     }
-    .role ul{list-style:none; display:flex; flex-direction:column; gap:4px;}
+    .role ul{list-style:none; display:flex; flex-direction:column; gap:3px;}
+    @media (min-width:480px){
+      .role ul{gap:4px;}
+    }
     @media (min-width:700px){
       .role ul{gap:8px;}
     }
     .role li{
-      color:var(--ink-dim); font-size:12px; padding-left:14px; position:relative;
+      color:var(--ink-dim); font-size:11px; padding-left:12px; position:relative;
       text-align: left;
+    }
+    @media (min-width:480px){
+      .role li{font-size:12px; padding-left:14px;}
     }
     @media (min-width:700px){
       .role li{font-size:14.5px; padding-left:20px;}
@@ -418,46 +496,64 @@
     /* ---------- EDUCATION ---------- */
     .edu-list{display:flex; flex-direction:column;}
     .edu-item{
-      display:grid; grid-template-columns:1fr; gap:3px;
-      padding:10px 0; border-top:1px solid var(--line);
+      display:grid; grid-template-columns:1fr; gap:2px;
+      padding:8px 0; border-top:1px solid var(--line);
       text-align: left;
       transition: background .2s;
       border-radius:var(--radius);
       padding-left:4px; padding-right:4px;
+    }
+    @media (min-width:480px){
+      .edu-item{padding:10px 0; gap:3px;}
     }
     @media (min-width:700px){
       .edu-item{grid-template-columns:140px 1fr auto; gap:24px; padding:16px 8px;}
     }
     .edu-item:hover{ background:var(--surface); box-shadow: var(--shadow-soft); }
     .edu-item:last-child{border-bottom:1px solid var(--line);}
-    .edu-item .when{font-family:var(--font-mono); font-size:9px; color:var(--gold);}
+    .edu-item .when{font-family:var(--font-mono); font-size:8px; color:var(--gold);}
+    @media (min-width:480px){
+      .edu-item .when{font-size:9px;}
+    }
     @media (min-width:700px){
       .edu-item .when{font-size:12px;}
     }
-    .edu-item .deg{font-weight:600; font-size:12px;}
+    .edu-item .deg{font-weight:600; font-size:11px;}
+    @media (min-width:480px){
+      .edu-item .deg{font-size:12px;}
+    }
     @media (min-width:700px){
       .edu-item .deg{font-size:15px;}
     }
-    .edu-item .inst{color:var(--ink-dim); font-size:10px; display:block; margin-top:2px;}
+    .edu-item .inst{color:var(--ink-dim); font-size:9px; display:block; margin-top:1px;}
+    @media (min-width:480px){
+      .edu-item .inst{font-size:10px; margin-top:2px;}
+    }
     @media (min-width:700px){
-      .edu-item .inst{font-size:13px;}
+      .edu-item .inst{font-size:13px; margin-top:2px;}
     }
     .edu-item .grade{
-      font-family:var(--font-mono); font-size:8px; color:var(--ink-faint);
+      font-family:var(--font-mono); font-size:7px; color:var(--ink-faint);
       justify-self:start; white-space:nowrap;
-      background:var(--surface-2); padding:2px 8px; border-radius:20px;
+      background:var(--surface-2); padding:1px 6px; border-radius:20px;
       margin-top:2px;
+    }
+    @media (min-width:480px){
+      .edu-item .grade{font-size:8px; padding:2px 8px;}
     }
     @media (min-width:700px){
       .edu-item .grade{justify-self:end; font-size:11px; margin-top:0; padding:2px 12px;}
     }
 
     .cert-note{
-      margin-top:16px; padding:10px 14px; background:var(--surface);
-      border-left:3px solid var(--gold); font-size:11px; color:var(--ink-dim);
+      margin-top:12px; padding:8px 12px; background:var(--surface);
+      border-left:3px solid var(--gold); font-size:10px; color:var(--ink-dim);
       border-radius:0 var(--radius) var(--radius) 0;
       box-shadow: var(--shadow-soft);
       text-align: left;
+    }
+    @media (min-width:480px){
+      .cert-note{padding:10px 14px; font-size:11px; margin-top:16px;}
     }
     @media (min-width:640px){
       .cert-note{padding:16px 24px; font-size:14px; margin-top:28px;}
@@ -468,7 +564,10 @@
     .skill-chart-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 20px;
+      gap: 16px;
+    }
+    @media (min-width:480px) {
+      .skill-chart-grid {gap: 20px;}
     }
     @media (min-width:700px) {
       .skill-chart-grid {
@@ -478,14 +577,17 @@
     }
     .skill-chart-group h3 {
       font-family: var(--font-mono);
-      font-size: 9px;
+      font-size: 8px;
       text-transform: uppercase;
-      letter-spacing: .1em;
+      letter-spacing: .08em;
       color: var(--gold);
-      margin-bottom: 10px;
-      padding-bottom: 4px;
+      margin-bottom: 8px;
+      padding-bottom: 3px;
       border-bottom: 2px solid var(--gold-soft);
       text-align: left;
+    }
+    @media (min-width:480px){
+      .skill-chart-group h3{font-size:9px; margin-bottom:10px; padding-bottom:4px;}
     }
     @media (min-width:640px){
       .skill-chart-group h3{font-size:12px; margin-bottom:20px; padding-bottom:8px;}
@@ -494,11 +596,18 @@
       display: grid;
       grid-template-columns: 1fr 2fr;
       align-items: center;
-      gap: 5px;
-      margin-bottom: 6px;
+      gap: 4px;
+      margin-bottom: 5px;
       text-align: left;
     }
     @media (min-width:480px) {
+      .skill-bar {
+        grid-template-columns: 1fr 2fr;
+        gap: 5px;
+        margin-bottom: 6px;
+      }
+    }
+    @media (min-width:640px) {
       .skill-bar {
         grid-template-columns: 1fr 3fr;
         gap: 10px;
@@ -513,21 +622,27 @@
     }
     .skill-label {
       font-family: var(--font-body);
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 500;
       color: var(--ink);
       text-align: left;
+    }
+    @media (min-width:480px){
+      .skill-label{font-size:10px;}
     }
     @media (min-width:640px){
       .skill-label{font-size:13px;}
     }
     .bar-track {
       width: 100%;
-      height: 4px;
+      height: 3px;
       background-color: var(--surface-2);
       border-radius: 20px;
       overflow: hidden;
       box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+    }
+    @media (min-width:480px){
+      .bar-track{height:4px;}
     }
     @media (min-width:640px){
       .bar-track{height:8px;}
@@ -545,34 +660,45 @@
 
     /* ---------- CONTACT ---------- */
     .contact-grid{
-      display:grid; grid-template-columns:1fr; gap:20px; align-items:start;
+      display:grid; grid-template-columns:1fr; gap:16px; align-items:start;
     }
-    @media (min-width:800px){ .contact-grid{grid-template-columns:1.3fr 1fr; gap:56px;} }
+    @media (min-width:480px){ .contact-grid{gap:20px;} }
+    @media (min-width:800px){ .contact-grid{grid-template-columns:1.3fr 1fr; gap:40px;} }
+    @media (min-width:1024px){ .contact-grid{gap:56px;} }
     .contact h2{
       font-family:var(--font-display); font-weight:600;
-      font-size:clamp(20px,3.5vw,44px); line-height:1.15; margin-bottom:10px;
+      font-size:clamp(18px,3vw,44px); line-height:1.15; margin-bottom:8px;
       text-align: left;
+    }
+    @media (min-width:480px){
+      .contact h2{font-size:clamp(20px,3.5vw,44px); margin-bottom:10px;}
     }
     @media (min-width:640px){
       .contact h2{margin-bottom:16px;}
     }
-    .contact p{color:var(--ink-dim); max-width:48ch; margin-bottom:16px; text-align: left; font-size:13px;}
+    .contact p{color:var(--ink-dim); max-width:48ch; margin-bottom:12px; text-align: left; font-size:12px;}
+    @media (min-width:480px){
+      .contact p{font-size:13px; margin-bottom:16px;}
+    }
     @media (min-width:640px){
       .contact p{font-size:16px; margin-bottom:28px;}
     }
     .contact-list{display:flex; flex-direction:column; gap:0;}
     .contact-list a{
       display:flex; justify-content:space-between; align-items:center;
-      padding:10px 0; border-top:1px solid var(--line);
-      text-decoration:none; font-family:var(--font-mono); font-size:10px;
+      padding:8px 0; border-top:1px solid var(--line);
+      text-decoration:none; font-family:var(--font-mono); font-size:9px;
       color:var(--ink); transition:all .25s;
       text-align: left;
       padding-left:4px; padding-right:4px;
       border-radius:var(--radius);
-      gap:8px;
-      min-height:44px;
+      gap:6px;
+      min-height:40px;
       -webkit-touch-callout:none;
       touch-action:manipulation;
+    }
+    @media (min-width:480px){
+      .contact-list a{font-size:10px; padding:10px 0; min-height:44px;}
     }
     @media (min-width:640px){
       .contact-list a{font-size:13.5px; padding:18px 8px; min-height:auto;}
@@ -580,7 +706,10 @@
     .contact-list a:active{background:var(--surface-2);}
     .contact-list a:hover{ background:var(--surface); box-shadow: var(--shadow-soft); color:var(--gold); }
     .contact-list a:last-child{border-bottom:1px solid var(--line);}
-    .contact-list .k{color:var(--ink-faint); font-size:8px; text-transform:uppercase; letter-spacing:.06em; display:block;}
+    .contact-list .k{color:var(--ink-faint); font-size:7px; text-transform:uppercase; letter-spacing:.05em; display:block;}
+    @media (min-width:480px){
+      .contact-list .k{font-size:8px;}
+    }
     @media (min-width:640px){
       .contact-list .k{font-size:11px;}
     }
@@ -588,15 +717,24 @@
     .contact-list a:hover .arrow{opacity:1; transform:translateX(0);}
 
     footer{
-      padding:16px 0 20px;
-      font-family:var(--font-mono); font-size:8px; color:var(--ink-faint);
-      display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;
+      padding:12px 0 16px;
+      font-family:var(--font-mono); font-size:7px; color:var(--ink-faint);
+      display:flex; justify-content:space-between; flex-wrap:wrap; gap:3px;
       border-top:1px solid var(--line);
       text-align: left;
+    }
+    @media (min-width:480px){
+      footer{font-size:8px; padding:16px 0 20px; gap:4px;}
     }
     @media (min-width:640px){
       footer{font-size:11.5px; padding:28px 0 40px; gap:8px;}
     }
+
+    /* ---------- SCROLLBAR STYLING ---------- */
+    ::-webkit-scrollbar {width:4px; height:4px;}
+    ::-webkit-scrollbar-track {background:var(--bg);}
+    ::-webkit-scrollbar-thumb {background:var(--gold-soft); border-radius:10px;}
+    ::-webkit-scrollbar-thumb:hover {background:var(--gold);}
   </style>
 </head>
 <body>
@@ -616,398 +754,6 @@
 
 <main>
 
-  <section class="hero wrap" style="border-bottom:none; padding-bottom:0;">
-    <div class="hero-grid">
-      <div>
-        <span class="eyebrow">Operations Analyst — Fintech &amp; Data Analytics</span>
-        <h1>Mohamed Saaif<br><em>Samsath</em></h1>
-        <p class="lede">Operations-focused analyst who turns business processes into measurable improvements — reporting, dashboards, and reconciliation, built on Excel, Power BI, and Tableau.</p>
-        <div class="hero-cta">
-          <button type="button" class="btn btn-primary" data-tab="contact">Get in touch</button>
-          <a class="btn btn-ghost" href="mailto:mohamedsaaif99@gmail.com">Email directly</a>
-        </div>
-      </div>
-      <div class="hero-meta">
-        <div class="row"><span class="k">Based in</span><span>Kuwait City, Kuwait</span></div>
-        <div class="row"><span class="k">Currently</span><span>Analyst, Al Mulla Exchange</span></div>
-        <div class="row"><span class="k">Studying</span><span>MBA Fintech &amp; Data Analytics</span></div>
-        <div class="row"><span class="k">Contact</span><a href="mailto:mohamedsaaif99@gmail.com">mohamedsaaif99@gmail.com</a></div>
-        <div class="row"><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/mohamed-saaif-s-5a6b3918b?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener">/mohamed-s</a></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span class="ticker-item"><span class="dot"></span>EXCEL — PIVOT TABLES &amp; XLOOKUP</span>
-      <span class="ticker-item"><span class="dot"></span>POWER BI — DASHBOARDS &amp; DAX</span>
-      <span class="ticker-item"><span class="dot"></span>TABLEAU — VISUALIZATION</span>
-      <span class="ticker-item"><span class="dot"></span>MIS REPORTING</span>
-      <span class="ticker-item"><span class="dot"></span>SLA &amp; KPI ANALYSIS</span>
-      <span class="ticker-item"><span class="dot"></span>RECONCILIATION</span>
-      <span class="ticker-item"><span class="dot"></span>STAKEHOLDER COORDINATION</span>
-      <span class="ticker-item"><span class="dot"></span>PROCESS IMPROVEMENT</span>
-      <span class="ticker-item"><span class="dot"></span>EXCEL — PIVOT TABLES &amp; XLOOKUP</span>
-      <span class="ticker-item"><span class="dot"></span>POWER BI — DASHBOARDS &amp; DAX</span>
-      <span class="ticker-item"><span class="dot"></span>TABLEAU — VISUALIZATION</span>
-      <span class="ticker-item"><span class="dot"></span>MIS REPORTING</span>
-      <span class="ticker-item"><span class="dot"></span>SLA &amp; KPI ANALYSIS</span>
-      <span class="ticker-item"><span class="dot"></span>RECONCILIATION</span>
-      <span class="ticker-item"><span class="dot"></span>STAKEHOLDER COORDINATION</span>
-      <span class="ticker-item"><span class="dot"></span>PROCESS IMPROVEMENT</span>
-    </div>
-  </div>
-
   <div class="tab-panels wrap">
 
-    <section id="about" class="tab-panel" role="tabpanel" aria-labelledby="tab-about">
-      <div class="section-head">
-        <h2>About</h2>
-        <span class="idx"> Profile</span>
-      </div>
-      <div class="about-grid">
-        <div>
-          <p>I work at the intersection of operations and data — reviewing agreements, tracking SLA breaches, and building the daily MIS that lets leadership act faster. My background moves from export operations, to venture administration, to correspondent banking analysis, and now toward an MBA in Fintech and Data Analytics.</p>
-          <p>What stays constant is the habit of turning a messy process into a clear, accurate, repeatable one — and a dashboard that makes the numbers legible to whoever needs them next.</p>
-        </div>
-        <div class="stat-block">
-          <div class="stat"><span>Current role</span><span class="v">Analyst</span></div>
-          <div class="stat"><span>Industry</span><span class="v">Fintech / Exchange</span></div>
-          <div class="stat"><span>Core tools</span><span class="v">
-· Excel · Power BI · Tableau 
-</span></div>
-          <div class="stat"><span>Nationality</span><span class="v">Sri Lankan</span></div>
-          <div class="stat"><span>Languages</span><span class="v">English</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="experience" class="tab-panel" hidden role="tabpanel" aria-labelledby="tab-experience">
-      <div class="section-head">
-        <h2>Experience</h2>
-        <span class="idx"> Experience </span>
-      </div>
-
-      <div class="role">
-        <span class="when">Jun 2023 —<br>Present</span>
-        <div>
-          <div class="who">Analyst</div>
-          <span class="where">Al Mulla Exchange · Kuwait City</span>
-          <ul>
-            <li>Reviewed corporate agreements and coordinated with correspondent banks to secure tie-ups, ensuring compliance and effective risk controls.</li>
-            <li>Analyzed SLA breaches and transaction KPIs to identify root causes, implementing targeted process changes that reduced repeat exceptions.</li>
-            <li>Designed and delivered concise daily MIS and dashboards to leadership and branches, enabling faster interventions and clearer operational visibility.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="role">
-        <span class="when">Jul 2022 —<br>Jan 2023</span>
-        <div>
-          <div class="who">Operations Assistant</div>
-          <span class="where">Lion Ventures Group · Colombo</span>
-          <ul>
-            <li>Managed operations tasks for venture activities, maintaining investment databases and documentation to ensure accurate tracking of portfolio activity.</li>
-            <li>Prepared board and investor presentation materials, coordinating inputs to present clear, data-backed updates for meetings and fundraising efforts.</li>
-            <li>Liaised with legal and accounting teams to support compliance and financial accuracy, streamlining approval and reporting processes.</li>
-            <li>Improved administrative efficiency by standardizing document templates and tracking processes, reducing preparation time for investor deliverables.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="role">
-        <span class="when">Jan 2021 —<br>Mar 2021</span>
-        <div>
-          <div class="who">Intern</div>
-          <span class="where">Freshqo · Wattala</span>
-          <ul>
-            <li>Assisted in preparing financial statements and reconciliations, supporting month-end close and improving accuracy of financial records.</li>
-            <li>Prepared export documentation and contracts, ensuring compliance with shipment requirements and reducing processing delays.</li>
-            <li>Generated regular reports on export activity and maintained up-to-date records to support operational planning and audit readiness.</li>
-            <li>Collaborated with the finance team on account reconciliations and data entry tasks to streamline recordkeeping processes.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="education" class="tab-panel" hidden role="tabpanel" aria-labelledby="tab-education">
-      <div class="section-head">
-        <h2>Education &amp; Certifications</h2>
-        <span class="idx"> Education Qualifications </span>
-      </div>
-
-      <div class="edu-list">
-        <div class="edu-item">
-          <span class="when">2025 — Present</span>
-          <div><div class="deg">MBA, Fintech and Data Analytics</div><span class="inst">Anglia Ruskin University, Cambridge, UK</span></div>
-          <span class="grade">Reading</span>
-        </div>
-        <div class="edu-item">
-          <span class="when">2021 — 2022</span>
-          <div><div class="deg">Bsc (Hons), Business Administration</div><span class="inst">Southampton Solent University, UK</span></div>
-          <span class="grade">Distinction</span>
-        </div>
-        <div class="edu-item">
-          <span class="when">2018 — 2020</span>
-          <div><div class="deg">HND, Business Management</div><span class="inst">Pearson College London, Colombo</span></div>
-          <span class="grade">Merit</span>
-        </div>
-        <div class="edu-item">
-          <span class="when">Jan — Mar 2018</span>
-          <div><div class="deg">Foundation Degree, Business Management</div><span class="inst">Pearson College London, Colombo</span></div>
-          <span class="grade">Pass</span>
-        </div>
-        <div class="edu-item">
-          <span class="when">2015 — 2017</span>
-          <div><div class="deg">Advanced Level, Commerce</div><span class="inst">Al Mannar International School, Colombo</span></div>
-          <span class="grade">Pass</span>
-        </div>
-        <div class="edu-item">
-          <span class="when">2006 — 2014</span>
-          <div><div class="deg">Ordinary Level, Secondary Education</div><span class="inst">Raz International School, Colombo</span></div>
-          <span class="grade">Pass</span>
-        </div>
-      </div>
-
-      <div class="cert-note">
-        <strong>Researcher Training</strong> — 60 Decibels, May 2023
-      </div>
-    </section>
-
-    <section id="skills" class="tab-panel" hidden role="tabpanel" aria-labelledby="tab-skills">
-      <div class="section-head">
-        <h2>Skills & Expertise</h2>
-        <span class="idx"> Proficiency </span>
-      </div>
-
-      <div class="skill-chart-grid">
-        <!-- Group 1 -->
-        <div class="skill-chart-group">
-          <h3>Technical & Systems</h3>
-          <div class="skill-bar">
-            <span class="skill-label">Excel (Pivots, XLOOKUP)</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">Power BI & DAX</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 80%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">Tableau</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 75%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">Data Modeling & Cleaning</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 80%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">MS Office Suite</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
-          </div>
-        </div>
-
-        <!-- Group 2 -->
-        <div class="skill-chart-group">
-          <h3>Analytical & Reporting</h3>
-          <div class="skill-bar">
-            <span class="skill-label">MIS & Dashboard Creation</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">Trend & Root-Cause Analysis</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 88%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">Financial Data Presentation</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">Data Validation & Integrity</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
-          </div>
-        </div>
-
-        <!-- Group 3 -->
-        <div class="skill-chart-group">
-          <h3>Operations & Process</h3>
-          <div class="skill-bar">
-            <span class="skill-label">Process Improvement</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">Stakeholder Coordination</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">Transaction Handling</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">Complaint Management</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 80%;"></div></div>
-          </div>
-        </div>
-
-        <!-- Group 4 -->
-        <div class="skill-chart-group">
-          <h3>Professional</h3>
-          <div class="skill-bar">
-            <span class="skill-label">Written & Verbal Communication</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">Attention to Detail & Accuracy</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 98%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">Time Management & Organization</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
-          </div>
-          <div class="skill-bar">
-            <span class="skill-label">Works with Minimal Supervision</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 92%;"></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="tab-panel contact" hidden role="tabpanel" aria-labelledby="tab-contact">
-      <div class="contact-grid">
-        <div>
-          <span class="eyebrow"> Get in touch</span>
-          <h2>Open to analyst &amp; data roles in fintech and operations.</h2>
-          <p>Based in Kuwait City, currently reading for an MBA in Fintech and Data Analytics. References available on request.</p>
-        </div>
-        <div class="contact-list">
-          <a href="mailto:mohamedsaaif99@gmail.com">
-            <span><span class="k">Email</span><br>mohamedsaaif99@gmail.com</span>
-            <span class="arrow">→</span>
-          </a>
-          <a href="tel:+96569620090">
-            <span><span class="k">Phone</span><br>+965 6962 0090</span>
-            <span class="arrow">→</span>
-          </a>
-          <a href="https://www.linkedin.com/in/mohamed-saaif-s-5a6b3918b?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener">
-            <span><span class="k">LinkedIn</span><br>/mohamed-s-5a6b3918b</span>
-            <span class="arrow">→</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-  </div>
-
-</main>
-
-<footer class="wrap">
-  <span>© <span id="year"></span> Mohamed Saaif Samsath</span>
-  <span>Kuwait City, Kuwait</span>
-</footer>
-
-<script>
-  (function() {
-    // Set current year in footer
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Scroll shadow for header
-    const header = document.getElementById('site-header');
-    window.addEventListener('scroll', function() {
-      header.classList.toggle('scrolled', window.scrollY > 20);
-    });
-
-    // DOM elements
-    const panels = document.querySelectorAll('.tab-panel');
-    const navButtons = document.querySelectorAll('.nav-links button[data-tab]');
-    const allTriggers = document.querySelectorAll('[data-tab]');
-    const tabPanelsWrap = document.querySelector('.tab-panels');
-
-    // Function to set active button state
-    function setActiveButtons(tabId) {
-      navButtons.forEach(function(btn) {
-        const isActive = btn.getAttribute('data-tab') === tabId;
-        btn.classList.toggle('active', isActive);
-        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
-      });
-    }
-
-    // Function to activate a tab
-    function activateTab(tabId) {
-      panels.forEach(function(panel) {
-        if (panel.id === tabId) {
-          panel.removeAttribute('hidden');
-          panel.setAttribute('aria-hidden', 'false');
-        } else {
-          panel.setAttribute('hidden', '');
-          panel.setAttribute('aria-hidden', 'true');
-        }
-      });
-      setActiveButtons(tabId);
-    }
-
-    // Function to switch tabs with animation
-    function switchTab(tabId) {
-      var current = null;
-      for (var i = 0; i < panels.length; i++) {
-        if (!panels[i].hasAttribute('hidden')) {
-          current = panels[i];
-          break;
-        }
-      }
-      
-      var target = document.getElementById(tabId);
-      if (!target || target === current) {
-        setActiveButtons(tabId);
-        return;
-      }
-
-      setActiveButtons(tabId);
-
-      // Animate out current
-      if (current) {
-        current.classList.add('fade-out');
-        var cleaned = false;
-        var finish = function() {
-          if (cleaned) return;
-          cleaned = true;
-          current.removeEventListener('transitionend', finish);
-          current.setAttribute('hidden', '');
-          current.setAttribute('aria-hidden', 'true');
-          current.classList.remove('fade-out');
-        };
-        current.addEventListener('transitionend', finish);
-        setTimeout(finish, 400);
-      }
-
-      // Animate in target
-      target.removeAttribute('hidden');
-      target.setAttribute('aria-hidden', 'false');
-      target.classList.add('fade-in-prep');
-      
-      // Force reflow
-      void target.offsetWidth;
-      
-      requestAnimationFrame(function() {
-        target.classList.remove('fade-in-prep');
-      });
-    }
-
-    // Click handlers for all tab triggers
-    allTriggers.forEach(function(el) {
-      el.addEventListener('click', function(e) {
-        var tabId = this.getAttribute('data-tab');
-        switchTab(tabId);
-        
-        // Scroll to top of tab panels on mobile
-        if (window.innerWidth <= 720) {
-          tabPanelsWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // Activate About tab by default
-    activateTab('about');
-  })();
-</script>
-
-</body>
-</html>
+    <section id="about" class="tab-panel" role="tabpanel" aria-labelledby="tab-about
