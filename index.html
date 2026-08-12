@@ -71,7 +71,7 @@
       .eyebrow{font-size:11px; letter-spacing:.16em;}
     }
 
-    /* ---------- NAV / TABS - ALWAYS VISIBLE ---------- */
+    /* ---------- NAV / TABS - BIGGER ---------- */
     header.site{
       position:sticky; top:0; z-index:1000;
       background:rgba(245,247,250,.96);
@@ -86,21 +86,21 @@
       display:flex;
       flex-direction:column;
       align-items:center;
-      padding:6px 8px 4px;
+      padding:8px 8px 6px;
       max-width:var(--max);
       margin:0 auto;
-      gap:4px;
+      gap:6px;
     }
     @media (min-width:480px){
-      nav{padding:8px 12px 6px; gap:6px;}
+      nav{padding:10px 12px 8px; gap:8px;}
     }
     @media (min-width:721px){
-      nav{flex-direction:row; justify-content:space-between; padding:12px 32px 10px; gap:0;}
+      nav{flex-direction:row; justify-content:space-between; padding:14px 32px 12px; gap:0;}
     }
 
     .brand{
       font-family:var(--font-display);
-      font-size:15px;
+      font-size:18px;
       font-weight:600;
       letter-spacing:-.01em;
       white-space:nowrap;
@@ -108,56 +108,59 @@
       text-align:center;
     }
     @media (min-width:480px){
-      .brand{font-size:17px;}
+      .brand{font-size:20px;}
     }
     @media (min-width:721px){
-      .brand{font-size:20px; width:auto; text-align:left;}
+      .brand{font-size:24px; width:auto; text-align:left;}
     }
     .brand span{color:var(--gold);}
-    @media (max-width:380px){ .brand{font-size:13px;} }
+    @media (max-width:380px){ .brand{font-size:16px;} }
 
-    /* Navigation tabs - ALWAYS VISIBLE on all devices */
+    /* Navigation tabs - BIGGER on all devices */
     .nav-links{
       display:flex;
-      gap:3px;
+      gap:4px;
       list-style:none;
       flex-wrap:wrap;
       justify-content:center;
       width:100%;
-      padding:2px 0;
+      padding:4px 0;
     }
     @media (min-width:480px){
-      .nav-links{gap:4px; padding:4px 0;}
+      .nav-links{gap:6px; padding:6px 0;}
     }
     @media (min-width:721px){
-      .nav-links{width:auto; gap:6px; padding:0; flex-wrap:nowrap;}
+      .nav-links{width:auto; gap:8px; padding:0; flex-wrap:nowrap;}
     }
     .nav-links button{
       font-family:var(--font-mono);
-      font-size:9px;
+      font-size:11px;
       text-transform:uppercase;
-      letter-spacing:.03em;
+      letter-spacing:.05em;
       color:var(--ink-dim);
       background:none;
       border:1px solid transparent;
-      padding:4px 8px;
+      padding:8px 14px;
       cursor:pointer;
-      transition:all .2s;
-      border-radius:16px;
-      font-weight:500;
+      transition:all .25s;
+      border-radius:24px;
+      font-weight:600;
       -webkit-touch-callout:none;
       touch-action:manipulation;
       white-space:nowrap;
-      min-height:28px;
+      min-height:36px;
     }
     @media (min-width:480px){
-      .nav-links button{font-size:10px; padding:5px 10px; min-height:32px;}
+      .nav-links button{font-size:13px; padding:10px 18px; min-height:42px; border-radius:28px;}
     }
     @media (min-width:640px){
-      .nav-links button{font-size:11px; padding:6px 14px; min-height:36px;}
+      .nav-links button{font-size:14px; padding:12px 22px; min-height:48px;}
     }
     @media (min-width:721px){
-      .nav-links button{font-size:12px; padding:8px 16px; letter-spacing:.08em; min-height:auto;}
+      .nav-links button{font-size:13px; padding:10px 20px; letter-spacing:.08em; min-height:44px;}
+    }
+    @media (min-width:1024px){
+      .nav-links button{font-size:14px; padding:12px 24px; min-height:48px;}
     }
     .nav-links button:active{transform:scale(0.95);}
     .nav-links button:hover{color:var(--ink); background:var(--surface-2);}
@@ -856,7 +859,7 @@
           <div class="stat"><span>Industry</span><span class="v">Fintech / Exchange</span></div>
           <div class="stat"><span>Core tools</span><span class="v">· Excel · Power BI · Tableau</span></div>
           <div class="stat"><span>Nationality</span><span class="v">Sri Lankan</span></div>
-          <div class="stat"><span>Languages</span><span class="v">·English ·Sinhala ·Tamil</span></div>
+          <div class="stat"><span>Languages</span><span class="v">English</span></div>
         </div>
       </div>
     </section>
