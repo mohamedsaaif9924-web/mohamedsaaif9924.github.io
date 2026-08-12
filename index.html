@@ -173,7 +173,6 @@
     /* ---------- HERO - Only visible on About tab ---------- */
     .hero{
       padding:20px 0 16px;
-      border-bottom:1px solid var(--line);
       position:relative;
     }
     @media (min-width:480px){
@@ -400,16 +399,15 @@
     #about .about-content{
       display:grid; grid-template-columns:1fr; gap:16px;
       padding-top:16px;
-      border-top:1px solid var(--line);
     }
     @media (min-width:480px){
       #about .about-content{gap:20px; padding-top:20px;}
     }
     @media (min-width:800px){ 
-      #about .about-content{grid-template-columns:2fr 1fr; gap:32px; padding-top:32px;} 
+      #about .about-content{grid-template-columns:2fr 1fr; gap:32px; padding-top:0;} 
     }
     @media (min-width:1024px){
-      #about .about-content{gap:48px; padding-top:32px;}
+      #about .about-content{gap:48px;}
     }
     #about .about-content p{color:var(--ink-dim); font-size:12px; max-width:64ch;}
     @media (min-width:480px){
@@ -424,6 +422,47 @@
     }
     @media (min-width:640px){
       #about .about-content p + p{margin-top:16px;}
+    }
+
+    /* Stat block - original format */
+    .stat-block{
+      background:var(--surface); 
+      border:1px solid var(--line); 
+      padding:14px;
+      border-radius:var(--radius);
+      box-shadow: var(--shadow-soft);
+      transition: box-shadow .3s;
+    }
+    @media (min-width:480px){
+      .stat-block{padding:16px;}
+    }
+    @media (min-width:640px){
+      .stat-block{padding:28px;}
+    }
+    .stat-block:hover{ box-shadow: var(--shadow-hover); }
+    .stat-block .stat{
+      display:flex; 
+      justify-content:space-between; 
+      align-items:baseline;
+      padding:6px 0; 
+      border-bottom:1px solid var(--line);
+      font-family:var(--font-mono); 
+      font-size:9px;
+      text-align: left;
+      gap:6px;
+    }
+    @media (min-width:480px){
+      .stat-block .stat{font-size:10px; padding:8px 0;}
+    }
+    @media (min-width:640px){
+      .stat-block .stat{font-size:12.5px; padding:12px 0;}
+    }
+    .stat-block .stat:last-child{border-bottom:none;}
+    .stat-block .stat .v{
+      color:var(--mint); 
+      font-weight:600; 
+      text-align:right; 
+      flex-shrink:0;
     }
 
     /* ---------- EXPERIENCE ---------- */
@@ -758,7 +797,7 @@
 
     <section id="about" class="tab-panel" role="tabpanel" aria-labelledby="tab-about">
       <!-- Hero section - only in About tab -->
-      <div class="hero" style="border-bottom:none; padding-bottom:0;">
+      <div class="hero">
         <div class="hero-grid">
           <div>
             <span class="eyebrow">Operations Analyst — Fintech &amp; Data Analytics</span>
