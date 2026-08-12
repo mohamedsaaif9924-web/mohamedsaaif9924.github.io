@@ -283,14 +283,16 @@
     .btn-ghost{border:1px solid var(--line); color:var(--ink); background:var(--surface);}
     .btn-ghost:hover{border-color:var(--gold); color:var(--gold); background:var(--surface-2); transform:translateY(-2px);}
 
-    /* ---------- TICKER ---------- */
+    /* ---------- TICKER - UNIFIED ACROSS ALL SECTIONS ---------- */
     .ticker{
       background:var(--surface);
+      border-top:1px solid var(--line);
       border-bottom:1px solid var(--line);
       overflow:hidden;
       white-space:nowrap;
       position:relative;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+      margin:0;
     }
     .ticker::before, .ticker::after{
       content:""; position:absolute; top:0; bottom:0; width:20px; z-index:2;
@@ -307,32 +309,35 @@
     .ticker-track{
       display:inline-flex; align-items:center;
       animation:scroll-ticker 38s linear infinite;
-      padding:4px 0;
+      padding:6px 0;
     }
     @media (min-width:480px){
-      .ticker-track{padding:6px 0;}
+      .ticker-track{padding:8px 0;}
     }
     @media (min-width:640px){
       .ticker-track{padding:12px 0;}
     }
     .ticker:hover .ticker-track{animation-play-state:paused;}
     .ticker-item{
-      font-family:var(--font-mono); font-size:7px; letter-spacing:.03em;
-      color:var(--ink-dim); padding:0 6px; display:inline-flex; align-items:center; gap:3px;
+      font-family:var(--font-mono); font-size:8px; letter-spacing:.04em;
+      color:var(--ink-dim); padding:0 8px; display:inline-flex; align-items:center; gap:4px;
       white-space:nowrap;
     }
     @media (min-width:480px){
-      .ticker-item{font-size:8px; padding:0 10px; gap:5px;}
+      .ticker-item{font-size:9px; padding:0 12px; gap:5px;}
     }
     @media (min-width:640px){
       .ticker-item{font-size:12px; padding:0 24px; gap:10px;}
     }
-    .ticker-item .dot{width:2px; height:2px; border-radius:50%; background:var(--mint); display:inline-block; flex-shrink:0;}
+    .ticker-item .dot{
+      width:3px; height:3px; border-radius:50%; 
+      background:var(--mint); display:inline-block; flex-shrink:0;
+    }
     @media (min-width:480px){
-      .ticker-item .dot{width:3px; height:3px;}
+      .ticker-item .dot{width:4px; height:4px;}
     }
     @media (min-width:640px){
-      .ticker-item .dot{width:5px; height:5px;}
+      .ticker-item .dot{width:6px; height:6px;}
     }
     @keyframes scroll-ticker{
       from{transform:translateX(0);}
@@ -793,6 +798,28 @@
 
 <main>
 
+  <!-- TICKER - UNIFIED ACROSS ALL SECTIONS -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="dot"></span>EXCEL — PIVOT TABLES &amp; XLOOKUP</span>
+      <span class="ticker-item"><span class="dot"></span>POWER BI — DASHBOARDS &amp; DAX</span>
+      <span class="ticker-item"><span class="dot"></span>TABLEAU — VISUALIZATION</span>
+      <span class="ticker-item"><span class="dot"></span>MIS REPORTING</span>
+      <span class="ticker-item"><span class="dot"></span>SLA &amp; KPI ANALYSIS</span>
+      <span class="ticker-item"><span class="dot"></span>RECONCILIATION</span>
+      <span class="ticker-item"><span class="dot"></span>STAKEHOLDER COORDINATION</span>
+      <span class="ticker-item"><span class="dot"></span>PROCESS IMPROVEMENT</span>
+      <span class="ticker-item"><span class="dot"></span>EXCEL — PIVOT TABLES &amp; XLOOKUP</span>
+      <span class="ticker-item"><span class="dot"></span>POWER BI — DASHBOARDS &amp; DAX</span>
+      <span class="ticker-item"><span class="dot"></span>TABLEAU — VISUALIZATION</span>
+      <span class="ticker-item"><span class="dot"></span>MIS REPORTING</span>
+      <span class="ticker-item"><span class="dot"></span>SLA &amp; KPI ANALYSIS</span>
+      <span class="ticker-item"><span class="dot"></span>RECONCILIATION</span>
+      <span class="ticker-item"><span class="dot"></span>STAKEHOLDER COORDINATION</span>
+      <span class="ticker-item"><span class="dot"></span>PROCESS IMPROVEMENT</span>
+    </div>
+  </div>
+
   <div class="tab-panels wrap">
 
     <section id="about" class="tab-panel" role="tabpanel" aria-labelledby="tab-about">
@@ -1043,28 +1070,6 @@
       </div>
     </section>
 
-  </div>
-
-  <!-- Ticker moved outside tab panels -->
-  <div class="ticker" aria-hidden="true">
-    <div class="ticker-track">
-      <span class="ticker-item"><span class="dot"></span>EXCEL — PIVOT TABLES &amp; XLOOKUP</span>
-      <span class="ticker-item"><span class="dot"></span>POWER BI — DASHBOARDS &amp; DAX</span>
-      <span class="ticker-item"><span class="dot"></span>TABLEAU — VISUALIZATION</span>
-      <span class="ticker-item"><span class="dot"></span>MIS REPORTING</span>
-      <span class="ticker-item"><span class="dot"></span>SLA &amp; KPI ANALYSIS</span>
-      <span class="ticker-item"><span class="dot"></span>RECONCILIATION</span>
-      <span class="ticker-item"><span class="dot"></span>STAKEHOLDER COORDINATION</span>
-      <span class="ticker-item"><span class="dot"></span>PROCESS IMPROVEMENT</span>
-      <span class="ticker-item"><span class="dot"></span>EXCEL — PIVOT TABLES &amp; XLOOKUP</span>
-      <span class="ticker-item"><span class="dot"></span>POWER BI — DASHBOARDS &amp; DAX</span>
-      <span class="ticker-item"><span class="dot"></span>TABLEAU — VISUALIZATION</span>
-      <span class="ticker-item"><span class="dot"></span>MIS REPORTING</span>
-      <span class="ticker-item"><span class="dot"></span>SLA &amp; KPI ANALYSIS</span>
-      <span class="ticker-item"><span class="dot"></span>RECONCILIATION</span>
-      <span class="ticker-item"><span class="dot"></span>STAKEHOLDER COORDINATION</span>
-      <span class="ticker-item"><span class="dot"></span>PROCESS IMPROVEMENT</span>
-    </div>
   </div>
 
 </main>
