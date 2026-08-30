@@ -1,293 +1,1861 @@
 <!DOCTYPE html>
-<!-- saved from url=(0027)https://gustavobatista.dev/ -->
-<html lang="en" translate="no" style="scroll-behavior: smooth;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>.jquery-ripples { position: relative; z-index: 0; }</style><link rel="icon" type="image/svg+xml" href="https://gustavobatista.dev/assets/icon-Ciu_KcoW.png"><link rel="stylesheet" href="./Gustavo Batista _ Developer_files/all.min.css"><meta name="viewport" content="width=device-width,height=device-height,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"><meta name="google" content="notranslate"><script src="./Gustavo Batista _ Developer_files/jquery.min.js.download"></script><script type="text/javascript" src="./Gustavo Batista _ Developer_files/email.min.js.download"></script><title>Gustavo Batista | Developer</title><script type="module" crossorigin="" src="./Gustavo Batista _ Developer_files/index-BmbqlTyk.js.download"></script><link rel="stylesheet" crossorigin="" href="./Gustavo Batista _ Developer_files/index-BhF_5uyG.css"><style>
-        body {
-          overflow-y: scroll;
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Saaif's Portfolio — Fintech & Data Analytics</title>
+  <meta name="description" content="Portfolio of Mohamed Saaif Samsath — Operations & Data Analyst, MBA Fintech and Data Analytics candidate." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    /* ======================================================
+       DARK IMMERSIVE THEME — FULL ANIMATIONS + CURSOR
+       ====================================================== */
+    :root {
+      --bg: #080A0C;
+      --surface: rgba(18, 22, 26, 0.75);
+      --surface-2: rgba(26, 33, 40, 0.5);
+      --line: rgba(42, 53, 64, 0.3);
+      --ink: #E8EDF2;
+      --ink-dim: #9AAEB8;
+      --ink-faint: #5C6F7A;
+      --accent: #00D4AA;
+      --accent-soft: rgba(0, 212, 170, 0.12);
+      --accent-glow: rgba(0, 212, 170, 0.15);
+      --gold: #F5A623;
+      --font-display: "Space Grotesk", system-ui, sans-serif;
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: "JetBrains Mono", "Courier New", monospace;
+      --max: 1140px;
+      --radius: 16px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 20px 64px rgba(0, 0, 0, 0.6);
+      --glass-border: rgba(255, 255, 255, 0.05);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+      /* ----- VISIBLE BADGE COLORS ----- */
+      --badge-reading: #8B5CF6;
+      --badge-reading-bg: rgba(139, 92, 246, 0.2);
+      --badge-distinction: #F59E0B;
+      --badge-distinction-bg: rgba(245, 158, 11, 0.2);
+      --badge-merit: #3B82F6;
+      --badge-merit-bg: rgba(59, 130, 246, 0.2);
+      --badge-pass: #6B7280;
+      --badge-pass-bg: rgba(107, 114, 128, 0.2);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+      overflow-x: hidden;
+      min-height: 100vh;
+      cursor: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      body { cursor: default; }
+    }
+
+    a { color: inherit; text-decoration: none; transition: color var(--transition); }
+    ::selection { background: var(--accent); color: #0A0C0E; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    /* ----- CUSTOM CURSOR ----- */
+    #cursor-glow {
+      position: fixed;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 212, 170, 0.3) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+      mix-blend-mode: screen;
+    }
+    #cursor-dot {
+      position: fixed;
+      width: 3px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: width 0.15s, height 0.15s;
+    }
+    a:hover ~ #cursor-glow,
+    button:hover ~ #cursor-glow,
+    .btn:hover ~ #cursor-glow {
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, rgba(0, 212, 170, 0.5) 0%, transparent 70%);
+    }
+
+    /* ----- PARTICLE CANVAS (FULL SCREEN) ----- */
+    #particle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+    @media (max-width: 640px) { .wrap { padding: 0 16px; } }
+
+    /* ---------- GLASS CARD ---------- */
+    .glass-card {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition);
+    }
+    .glass-card:hover {
+      border-color: rgba(0, 212, 170, 0.15);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      display: inline-block;
+      background: var(--accent-soft);
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      margin-bottom: 8px;
+      border: 1px solid rgba(0, 212, 170, 0.12);
+    }
+    @media (min-width: 640px) {
+      .eyebrow { font-size: 11px; padding: 5px 18px; }
+    }
+
+    /* ---------- HEADER / NAV ---------- */
+    header.site {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 10, 12, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--line);
+      transition: box-shadow var(--transition);
+      padding-top: var(--safe-top);
+    }
+    header.site.scrolled { box-shadow: var(--shadow-sm); }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 0 10px;
+      max-width: var(--max);
+      margin: 0 auto;
+      gap: 8px;
+    }
+    @media (min-width: 721px) {
+      nav { flex-direction: row; justify-content: space-between; padding: 14px 0; gap: 0; }
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .brand span { color: var(--accent); }
+    .brand .brand-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.6); }
+    }
+    @media (min-width: 480px) { .brand { font-size: 22px; } }
+    @media (min-width: 721px) { .brand { font-size: 24px; } }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      padding: 4px 0;
+    }
+    @media (min-width: 721px) {
+      .nav-links { width: auto; gap: 2px; padding: 0; flex-wrap: nowrap; }
+    }
+
+    .nav-links button {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink-dim);
+      background: transparent;
+      border: none;
+      padding: 6px 14px;
+      cursor: pointer;
+      transition: all var(--transition);
+      border-radius: var(--radius-full);
+      font-weight: 500;
+      touch-action: manipulation;
+      white-space: nowrap;
+      position: relative;
+    }
+    @media (min-width: 480px) {
+      .nav-links button { font-size: 11px; padding: 8px 18px; }
+    }
+    @media (min-width: 640px) {
+      .nav-links button { font-size: 12px; padding: 10px 22px; }
+    }
+    @media (min-width: 1024px) {
+      .nav-links button { font-size: 13px; padding: 12px 26px; }
+    }
+
+    .nav-links button::before {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: 60%;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 4px;
+      transition: transform var(--transition);
+    }
+    .nav-links button:hover { color: var(--ink); background: var(--surface-2); }
+    .nav-links button.active {
+      color: var(--accent);
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-links button.active::before { transform: translateX(-50%) scaleX(1); }
+    .nav-links button:active { transform: scale(0.95); }
+
+    /* ---------- HERO ---------- */
+    .hero {
+      padding: 24px 0 16px;
+      position: relative;
+    }
+    @media (min-width: 480px) { .hero { padding: 40px 0 24px; } }
+    @media (min-width: 640px) { .hero { padding: 64px 0 40px; } }
+    @media (min-width: 1024px) { .hero { padding: 88px 0 48px; } }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    @media (min-width: 860px) {
+      .hero-grid { grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; }
+    }
+    @media (min-width: 1024px) { .hero-grid { gap: 64px; } }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(30px, 5.5vw, 76px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+      margin: 8px 0 14px;
+    }
+    @media (min-width: 640px) { .hero h1 { margin: 12px 0 18px; } }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent), #00E5C3, var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+    }
+    .hero h1 .highlight::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 2px;
+      width: 100%;
+      height: 3px;
+      background: var(--accent-soft);
+      border-radius: 4px;
+      opacity: 0.3;
+    }
+
+    .hero p.lede {
+      font-size: 14px;
+      color: var(--ink-dim);
+      max-width: 52ch;
+      line-height: 1.6;
+    }
+    @media (min-width: 480px) { .hero p.lede { font-size: 15px; } }
+    @media (min-width: 640px) { .hero p.lede { font-size: 18px; } }
+
+    .hero-cta {
+      margin-top: 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    @media (min-width: 640px) { .hero-cta { margin-top: 30px; gap: 16px; } }
+
+    .btn {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-decoration: none;
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      letter-spacing: 0.04em;
+      transition: all var(--transition);
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      touch-action: manipulation;
+      min-height: 38px;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 480px) {
+      .btn { font-size: 11px; padding: 10px 24px; min-height: 44px; }
+    }
+    @media (min-width: 640px) {
+      .btn { font-size: 13px; padding: 12px 32px; min-height: 50px; }
+    }
+    .btn:active { transform: scale(0.96); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0A0C0E;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+      transform: translateX(-100%) rotate(45deg);
+      transition: transform 0.6s;
+    }
+    .btn-primary:hover::after { transform: translateX(100%) rotate(45deg); }
+    .btn-primary:hover {
+      background: #00E5C3;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px var(--accent-glow);
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--line);
+      color: var(--ink);
+      background: transparent;
+    }
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--surface-2);
+      transform: translateY(-2px);
+    }
+
+    .hero-meta {
+      padding: 20px 24px;
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--ink-dim);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: all var(--transition);
+    }
+    .hero-meta:hover {
+      border-color: rgba(0, 212, 170, 0.2);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+    @media (min-width: 480px) {
+      .hero-meta { font-size: 12px; padding: 24px 28px; gap: 10px; }
+    }
+    @media (min-width: 640px) {
+      .hero-meta { font-size: 14px; padding: 32px 36px; gap: 14px; }
+    }
+    .hero-meta a {
+      color: var(--accent);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition);
+    }
+    .hero-meta a:hover { border-color: var(--accent); }
+    .hero-meta .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .hero-meta .k { color: var(--ink-faint); }
+
+    /* ---------- TICKER ---------- */
+    .ticker {
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+      margin: 0;
+    }
+    .ticker::before,
+    .ticker::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 24px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    @media (min-width: 480px) {
+      .ticker::before,
+      .ticker::after { width: 40px; }
+    }
+    @media (min-width: 640px) {
+      .ticker::before,
+      .ticker::after { width: 80px; }
+    }
+    .ticker::before { left: 0; background: linear-gradient(90deg, var(--surface), transparent); }
+    .ticker::after { right: 0; background: linear-gradient(-90deg, var(--surface), transparent); }
+
+    .ticker-track {
+      display: inline-flex;
+      align-items: center;
+      animation: scroll-ticker 45s linear infinite;
+      padding: 10px 0;
+    }
+    @media (min-width: 640px) { .ticker-track { padding: 14px 0; } }
+    .ticker:hover .ticker-track { animation-play-state: paused; }
+
+    .ticker-item {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.04em;
+      color: var(--ink-dim);
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: color var(--transition);
+    }
+    .ticker-item:hover { color: var(--accent); }
+    @media (min-width: 480px) {
+      .ticker-item { font-size: 10px; padding: 0 14px; gap: 8px; }
+    }
+    @media (min-width: 640px) {
+      .ticker-item { font-size: 13px; padding: 0 28px; gap: 12px; }
+    }
+    .ticker-item .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: inline-block;
+      flex-shrink: 0;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @media (min-width: 640px) {
+      .ticker-item .dot { width: 6px; height: 6px; }
+    }
+    .ticker-item .award { color: var(--gold); font-weight: 600; }
+
+    @keyframes scroll-ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ---------- TAB PANELS ---------- */
+    .tab-panel {
+      padding: 20px 0;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    @media (min-width: 480px) { .tab-panel { padding: 28px 0; } }
+    @media (min-width: 640px) { .tab-panel { padding: 48px 0; } }
+    @media (min-width: 1024px) { .tab-panel { padding: 72px 0; } }
+
+    .tab-panel[hidden] { display: none; }
+    .tab-panel.fade-out { opacity: 0; transform: translateY(16px); }
+    .tab-panel.fade-in-prep { opacity: 0; transform: translateY(16px); transition: none; }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    @media (min-width: 640px) { .section-head { margin-bottom: 32px; gap: 12px; } }
+    @media (min-width: 1024px) { .section-head { margin-bottom: 44px; } }
+
+    .section-head h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(22px, 2.8vw, 40px);
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+    .section-head .idx {
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--ink-faint);
+      background: var(--surface-2);
+      padding: 3px 12px;
+      border-radius: var(--radius-full);
+      white-space: nowrap;
+      border: 1px solid var(--line);
+    }
+    @media (min-width: 640px) {
+      .section-head .idx { font-size: 11px; padding: 4px 16px; }
+    }
+
+    /* ---------- ABOUT ---------- */
+    #about .about-content {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding-top: 8px;
+    }
+    @media (min-width: 480px) { #about .about-content { gap: 28px; padding-top: 12px; } }
+    @media (min-width: 800px) {
+      #about .about-content { grid-template-columns: 2fr 1fr; gap: 40px; padding-top: 0; }
+    }
+    @media (min-width: 1024px) { #about .about-content { gap: 56px; } }
+
+    #about .about-content p {
+      color: var(--ink-dim);
+      font-size: 14px;
+      max-width: 64ch;
+      line-height: 1.7;
+    }
+    @media (min-width: 480px) { #about .about-content p { font-size: 15px; } }
+    @media (min-width: 640px) { #about .about-content p { font-size: 17px; } }
+    #about .about-content p + p { margin-top: 12px; }
+    @media (min-width: 640px) { #about .about-content p + p { margin-top: 18px; } }
+
+    .stat-block {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      padding: 20px;
+      border-radius: var(--radius);
+      transition: all var(--transition);
+    }
+    .stat-block:hover {
+      border-color: rgba(0, 212, 170, 0.15);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+    @media (min-width: 480px) { .stat-block { padding: 24px; } }
+    @media (min-width: 640px) { .stat-block { padding: 32px; } }
+
+    .stat-block .stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-align: left;
+      gap: 8px;
+    }
+    @media (min-width: 480px) { .stat-block .stat { font-size: 12px; padding: 10px 0; } }
+    @media (min-width: 640px) { .stat-block .stat { font-size: 14px; padding: 14px 0; } }
+    .stat-block .stat:last-child { border-bottom: none; }
+    .stat-block .stat .v {
+      color: var(--accent);
+      font-weight: 600;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ---------- EXPERIENCE ---------- */
+    .role {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
+      padding: 14px 0;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      transition: all var(--transition);
+      border-radius: var(--radius);
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+    @media (min-width: 480px) { .role { padding: 18px 0; gap: 6px; } }
+    @media (min-width: 700px) {
+      .role { grid-template-columns: 140px 1fr; gap: 36px; padding: 28px 12px; }
+    }
+    .role:hover {
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-md);
+      transform: translateX(4px);
+      border-color: rgba(0, 212, 170, 0.1);
+    }
+    .role:last-child { border-bottom: 1px solid var(--line); }
+
+    .role .when {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--accent);
+      letter-spacing: 0.03em;
+    }
+    @media (min-width: 700px) { .role .when { font-size: 12px; } }
+
+    .role .who {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    @media (min-width: 480px) { .role .who { font-size: 17px; } }
+    @media (min-width: 700px) { .role .who { font-size: 21px; margin-bottom: 4px; } }
+
+    .role .where {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--ink-faint);
+      margin-bottom: 6px;
+      display: block;
+    }
+    @media (min-width: 700px) { .role .where { font-size: 12px; margin-bottom: 14px; } }
+
+    .role ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    @media (min-width: 700px) { .role ul { gap: 8px; } }
+
+    .role li {
+      color: var(--ink-dim);
+      font-size: 11.5px;
+      padding-left: 16px;
+      position: relative;
+      text-align: left;
+    }
+    @media (min-width: 480px) { .role li { font-size: 12.5px; padding-left: 18px; } }
+    @media (min-width: 700px) { .role li { font-size: 15px; padding-left: 24px; } }
+
+    .role li::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      opacity: 0.5;
+      font-size: 0.6em;
+      top: 0.15em;
+    }
+
+    /* ---------- EDUCATION ---------- */
+    .edu-list { display: flex; flex-direction: column; }
+    .edu-item {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3px;
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+      text-align: left;
+      transition: all var(--transition);
+      border-radius: var(--radius);
+      padding-left: 6px;
+      padding-right: 6px;
+    }
+    @media (min-width: 480px) { .edu-item { padding: 14px 0; gap: 4px; } }
+    @media (min-width: 700px) {
+      .edu-item { grid-template-columns: 140px 1fr auto; gap: 28px; padding: 20px 12px; }
+    }
+    .edu-item:hover {
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-md);
+      transform: translateX(4px);
+    }
+    .edu-item:last-child { border-bottom: 1px solid var(--line); }
+
+    .edu-item .when {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--accent);
+    }
+    @media (min-width: 700px) { .edu-item .when { font-size: 12px; } }
+
+    .edu-item .deg { font-weight: 600; font-size: 12px; }
+    @media (min-width: 480px) { .edu-item .deg { font-size: 13px; } }
+    @media (min-width: 700px) { .edu-item .deg { font-size: 16px; } }
+
+    .edu-item .inst {
+      color: var(--ink-dim);
+      font-size: 10px;
+      display: block;
+      margin-top: 2px;
+    }
+    @media (min-width: 700px) { .edu-item .inst { font-size: 13px; margin-top: 2px; } }
+
+    /* ======================================================
+       HIGHLY VISIBLE BADGES — BIGGER + COLORFUL
+       ====================================================== */
+    .edu-item .grade {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: var(--radius-full);
+      justify-self: start;
+      white-space: nowrap;
+      margin-top: 2px;
+      border: 1.5px solid;
+      transition: all var(--transition);
+      text-shadow: 0 0 20px currentColor;
+    }
+    @media (min-width: 700px) {
+      .edu-item .grade {
+        justify-self: end;
+        font-size: 14px;
+        padding: 6px 20px;
+      }
+    }
+
+    .edu-item .grade:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px currentColor;
+    }
+
+    /* Reading — Purple */
+    .edu-item .grade[data-grade="Reading"] {
+      color: var(--badge-reading);
+      background: var(--badge-reading-bg);
+      border-color: var(--badge-reading);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.15);
+    }
+
+    /* Distinction — Gold */
+    .edu-item .grade[data-grade="Distinction"] {
+      color: var(--badge-distinction);
+      background: var(--badge-distinction-bg);
+      border-color: var(--badge-distinction);
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.15);
+    }
+
+    /* Merit — Blue */
+    .edu-item .grade[data-grade="Merit"] {
+      color: var(--badge-merit);
+      background: var(--badge-merit-bg);
+      border-color: var(--badge-merit);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+    }
+
+    /* Pass — Gray/Silver with subtle accent */
+    .edu-item .grade[data-grade="Pass"] {
+      color: var(--badge-pass);
+      background: var(--badge-pass-bg);
+      border-color: var(--badge-pass);
+      box-shadow: 0 0 20px rgba(107, 114, 128, 0.1);
+    }
+
+    .cert-note {
+      margin-top: 20px;
+      padding: 14px 20px;
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-left: 4px solid var(--accent);
+      font-size: 12px;
+      color: var(--ink-dim);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      box-shadow: var(--shadow-sm);
+      text-align: left;
+      transition: box-shadow var(--transition);
+    }
+    .cert-note:hover { box-shadow: var(--shadow-md); }
+    @media (min-width: 480px) {
+      .cert-note { padding: 16px 24px; font-size: 13px; margin-top: 24px; }
+    }
+    @media (min-width: 640px) {
+      .cert-note { padding: 20px 32px; font-size: 15px; margin-top: 32px; }
+    }
+    .cert-note strong { color: var(--ink); }
+
+    /* ---------- SKILLS ---------- */
+    .skill-chart-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 480px) { .skill-chart-grid { gap: 28px; } }
+    @media (min-width: 700px) {
+      .skill-chart-grid { grid-template-columns: repeat(2, 1fr); gap: 44px 60px; }
+    }
+
+    .skill-chart-group {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      transition: all var(--transition);
+    }
+    .skill-chart-group:hover {
+      border-color: rgba(0, 212, 170, 0.12);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+    @media (min-width: 480px) { .skill-chart-group { padding: 24px 28px; } }
+    @media (min-width: 640px) { .skill-chart-group { padding: 32px 36px; } }
+
+    .skill-chart-group h3 {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 12px;
+      padding-bottom: 4px;
+      border-bottom: 2px solid var(--accent-soft);
+      text-align: left;
+    }
+    @media (min-width: 640px) {
+      .skill-chart-group h3 { font-size: 12px; margin-bottom: 20px; padding-bottom: 8px; }
+    }
+
+    .skill-bar {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 6px;
+      text-align: left;
+    }
+    @media (min-width: 480px) {
+      .skill-bar { grid-template-columns: 1fr 2fr; gap: 6px; margin-bottom: 7px; }
+    }
+    @media (min-width: 640px) {
+      .skill-bar { grid-template-columns: 1fr 3fr; gap: 12px; margin-bottom: 12px; }
+    }
+    @media (max-width: 380px) {
+      .skill-bar { grid-template-columns: 1fr; gap: 2px; }
+    }
+
+    .skill-label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--ink);
+      text-align: left;
+    }
+    @media (min-width: 480px) { .skill-label { font-size: 11px; } }
+    @media (min-width: 640px) { .skill-label { font-size: 14px; } }
+
+    .bar-track {
+      width: 100%;
+      height: 4px;
+      background-color: var(--surface-2);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+    @media (min-width: 640px) { .bar-track { height: 8px; } }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 20px;
+      background: linear-gradient(90deg, var(--accent-soft), var(--accent));
+      transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+      width: 0;
+    }
+    .bar-fill:hover { filter: brightness(1.2); }
+
+    /* ---------- CONTACT ---------- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (min-width: 800px) {
+      .contact-grid { grid-template-columns: 1.3fr 1fr; gap: 48px; }
+    }
+    @media (min-width: 1024px) { .contact-grid { gap: 64px; } }
+
+    .contact h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(22px, 3vw, 46px);
+      line-height: 1.15;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    @media (min-width: 640px) { .contact h2 { margin-bottom: 20px; } }
+
+    .contact p {
+      color: var(--ink-dim);
+      max-width: 48ch;
+      margin-bottom: 14px;
+      text-align: left;
+      font-size: 14px;
+    }
+    @media (min-width: 480px) { .contact p { font-size: 15px; margin-bottom: 18px; } }
+    @media (min-width: 640px) { .contact p { font-size: 17px; margin-bottom: 32px; } }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .contact-list a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--ink);
+      transition: all var(--transition);
+      text-align: left;
+      padding-left: 6px;
+      padding-right: 6px;
+      border-radius: var(--radius);
+      gap: 8px;
+      min-height: 44px;
+      touch-action: manipulation;
+    }
+    @media (min-width: 480px) {
+      .contact-list a { font-size: 11px; padding: 14px 0; min-height: 48px; }
+    }
+    @media (min-width: 640px) {
+      .contact-list a { font-size: 14px; padding: 20px 10px; min-height: auto; }
+    }
+    .contact-list a:active { background: var(--surface-2); }
+    .contact-list a:hover {
+      background: var(--surface);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-md);
+      color: var(--accent);
+      transform: translateX(6px);
+    }
+    .contact-list a:last-child { border-bottom: 1px solid var(--line); }
+
+    .contact-list .k {
+      color: var(--ink-faint);
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: block;
+    }
+    @media (min-width: 480px) { .contact-list .k { font-size: 9px; } }
+    @media (min-width: 640px) { .contact-list .k { font-size: 12px; } }
+
+    .contact-list .arrow {
+      opacity: 0;
+      transition: all var(--transition);
+      transform: translateX(-8px);
+      color: var(--accent);
+    }
+    .contact-list a:hover .arrow { opacity: 1; transform: translateX(0); }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      padding: 16px 0 24px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--ink-faint);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 4px;
+      border-top: 1px solid var(--line);
+      text-align: left;
+    }
+    @media (min-width: 480px) {
+      footer { font-size: 9px; padding: 20px 0 28px; gap: 6px; }
+    }
+    @media (min-width: 640px) {
+      footer { font-size: 12px; padding: 32px 0 48px; gap: 10px; }
+    }
+
+    /* ---------- SCROLLBAR ---------- */
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    /* ---------- LOADING SCREEN ---------- */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #loading-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+    #loader-text {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 5vw, 68px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      text-align: center;
+    }
+    #loader-text .loader-desc {
+      font-family: var(--font-mono);
+      font-size: clamp(12px, 1.5vw, 20px);
+      color: var(--ink-dim);
+      letter-spacing: 0.3em;
+      margin-top: 6px;
+    }
+
+    #loader {
+      width: 60px;
+      height: 60px;
+      border: 3px solid var(--line);
+      border-top: 3px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-top: 40px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .counter {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--ink-faint);
+      margin-top: 20px;
+    }
+
+    /* AWWWARDS BADGE */
+    #awwwards-badge {
+      position: fixed;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      opacity: 0.25;
+      transition: opacity 0.3s;
+    }
+    #awwwards-badge:hover { opacity: 0.7; }
+    #awwwards-badge svg {
+      width: clamp(40px, 6vw, 53px);
+      height: auto;
+      border-radius: 0 12px 12px 0;
+      overflow: hidden;
+      display: block;
+    }
+
+    /* ---------- SCROLL ANIMATIONS ---------- */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fade-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .scale-in {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .scale-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .stagger-children>* {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .stagger-children.visible>*:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+    .stagger-children.visible>*:nth-child(2) { transition-delay: 0.12s; opacity: 1; transform: translateY(0); }
+    .stagger-children.visible>*:nth-child(3) { transition-delay: 0.19s; opacity: 1; transform: translateY(0); }
+    .stagger-children.visible>*:nth-child(4) { transition-delay: 0.26s; opacity: 1; transform: translateY(0); }
+    .stagger-children.visible>*:nth-child(5) { transition-delay: 0.33s; opacity: 1; transform: translateY(0); }
+    .stagger-children.visible>*:nth-child(6) { transition-delay: 0.40s; opacity: 1; transform: translateY(0); }
+
+    .float-animate {
+      animation: float 6s ease-in-out infinite;
+    }
+    .float-animate:nth-child(2) { animation-delay: 0.8s; }
+    .float-animate:nth-child(3) { animation-delay: 1.6s; }
+    .float-animate:nth-child(4) { animation-delay: 2.4s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .glow-on-hover {
+      transition: all 0.4s ease;
+    }
+    .glow-on-hover:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 30px rgba(0, 212, 170, 0.1), var(--shadow-md);
+      transform: translateY(-6px) scale(1.01);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent), #00E5C3, var(--gold));
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradient-shift 6s ease-in-out infinite;
+    }
+    @keyframes gradient-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Ripple effect for buttons */
+    .ripple-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .ripple-btn .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(0);
+      animation: ripple-anim 0.8s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes ripple-anim {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    /* Border glow for cards */
+    .border-glow {
+      position: relative;
+    }
+    .border-glow::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, var(--accent), transparent, var(--accent));
+      background-size: 300% 300%;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: border-rotate 6s linear infinite;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .border-glow:hover::before { opacity: 1; }
+    @keyframes border-rotate {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 300% 50%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AWWWARDS BADGE -->
+  <div id="awwwards-badge">
+    <a href="https://www.awwwards.com/sites/sokolovski-pro" target="_blank">
+      <svg viewBox="0 0 53.08 171.358">
+        <path class="js-color-bg" fill="#121212" d="M0 0h53.08v171.358H0z"></path>
+        <g class="js-color-text" fill="white">
+          <path d="M20.048 153.585v-2.002l6.752-3.757h-6.752v-1.9h10.23v2.002l-6.752 3.757h6.752v1.9zM29.899 142.382a3.317 3.317 0 0 1-1.359 1.293c-.575.297-1.223.446-1.944.446-.721 0-1.369-.149-1.944-.446a3.317 3.317 0 0 1-1.359-1.293c-.331-.564-.497-1.232-.497-2.003 0-.769.166-1.437.497-2.002a3.332 3.332 0 0 1 1.359-1.294c.575-.297 1.224-.445 1.944-.445.722 0 1.369.148 1.944.445a3.326 3.326 0 0 1 1.359 1.294c.33.565.496 1.233.496 2.002.001.77-.166 1.438-.496 2.003m-1.703-3.348c-.435-.331-.967-.497-1.601-.497s-1.167.166-1.601.497c-.434.332-.65.78-.65 1.345s.217 1.014.65 1.346c.434.33.967.496 1.601.496s1.166-.166 1.601-.496c.434-.332.649-.78.649-1.346.001-.565-.215-1.013-.649-1.345M22.912 134.996v-1.812h1.185c-.43-.283-.752-.593-.973-.929-.219-.336-.329-.732-.329-1.19 0-.479.127-.902.38-1.272.254-.37.635-.633 1.141-.79-.478-.262-.851-.591-1.118-.985a2.221 2.221 0 0 1-.402-1.265c0-.682.2-1.218.599-1.607.4-.391.957-.585 1.668-.585h5.218v1.812H25.37c-.682 0-1.023.303-1.023.907 0 .467.264.85.789 1.146.527.299 1.286.446 2.28.446h2.865v1.813H25.37c-.682 0-1.023.303-1.023.906 0 .468.275.851.826 1.147.551.298 1.352.446 2.404.446h2.704v1.812h-7.369zM21.626 122.457c-.225.224-.502.336-.833.336s-.608-.112-.833-.336a1.128 1.128 0 0 1-.336-.833c0-.331.111-.609.336-.833.225-.225.502-.336.833-.336s.608.111.833.336c.225.224.337.502.337.833 0 .332-.112.608-.337.833m1.286-1.739h7.366v1.813h-7.366v-1.813zM22.912 118.668v-1.812h1.185a3.348 3.348 0 0 1-.951-1.009 2.434 2.434 0 0 1-.351-1.272c0-.681.19-1.229.57-1.644.38-.414.931-.621 1.651-.621h5.263v1.812h-4.722c-.418 0-.727.096-.92.285-.195.19-.293.447-.293.769 0 .302.116.58.351.833.233.254.577.458 1.03.613.453.156.992.234 1.615.234h2.938v1.812h-7.366zM29.833 109.129a3.33 3.33 0 0 1-1.432 1.169 4.535 4.535 0 0 1-1.805.373 4.537 4.537 0 0 1-1.807-.373c-.579-.248-1.057-.638-1.432-1.169s-.563-1.196-.563-1.995c0-.771.183-1.413.549-1.93a3.28 3.28 0 0 1 1.382-1.141 4.221 4.221 0 0 1 1.709-.364h.746v5.071c.447-.02.838-.183 1.168-.49.332-.307.498-.724.498-1.248 0-.41-.093-.754-.277-1.031-.186-.278-.473-.529-.863-.753l.542-1.462c.69.303 1.224.724 1.592 1.265.371.541.556 1.235.556 2.083 0 .799-.188 1.464-.563 1.995m-4.085-3.574c-.41.088-.746.261-1.009.52-.262.258-.395.61-.395 1.06 0 .428.137.784.409 1.067.272.282.604.458.994.525v-3.172zM29.833 100.878c-.375.531-.852.921-1.432 1.169a4.552 4.552 0 0 1-3.612 0c-.579-.248-1.057-.638-1.432-1.169s-.563-1.196-.563-1.995c0-.77.183-1.412.549-1.93a3.278 3.278 0 0 1 1.382-1.14 4.222 4.222 0 0 1 1.709-.365h.746v5.072a1.794 1.794 0 0 0 1.168-.49c.332-.307.498-.724.498-1.249 0-.41-.093-.753-.277-1.031-.186-.277-.473-.528-.863-.753l.542-1.462c.69.302 1.224.724 1.592 1.265.371.541.556 1.234.556 2.083 0 .799-.188 1.464-.563 1.995m-4.085-3.573c-.41.088-.746.261-1.009.519-.262.258-.395.611-.395 1.06 0 .429.137.784.409 1.067.272.282.604.458.994.526v-3.172zM35.481 16.926l-4.782 14.969h-3.266l-2.584-9.682-2.584 9.682h-3.268l-4.781-14.969h3.713l2.673 10.276 2.524-10.276h3.445l2.524 10.276 2.674-10.276zM37.979 27.083c1.426 0 2.495 1.068 2.495 2.495 0 1.425-1.069 2.495-2.495 2.495-1.425 0-2.495-1.07-2.495-2.495-.001-1.427 1.07-2.495 2.495-2.495"></path>
+        </g>
+      </svg>
+    </a>
+  </div>
+
+  <!-- CUSTOM CURSOR -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-glow"></div>
+
+  <!-- LOADING SCREEN -->
+  <div id="loading-screen">
+    <div id="loader-text">
+      SAAIF<span style="color:var(--accent);">.</span>
+      <div class="loader-desc">FIN TECH & DATA ANALYTICS</div>
+    </div>
+    <div id="loader"></div>
+    <div class="counter" id="percentage">0%</div>
+  </div>
+
+  <!-- PARTICLE CANVAS -->
+  <canvas id="particle-canvas"></canvas>
+
+  <header class="site" id="site-header">
+    <nav class="wrap">
+      <div class="brand">Saaif<span>.</span><span class="brand-dot"></span></div>
+      <ul class="nav-links" id="nav-links" role="tablist">
+        <li role="none"><button type="button" role="tab" aria-selected="true" data-tab="about" class="active">About</button></li>
+        <li role="none"><button type="button" role="tab" aria-selected="false" data-tab="experience">Experience</button></li>
+        <li role="none"><button type="button" role="tab" aria-selected="false" data-tab="education">Education</button></li>
+        <li role="none"><button type="button" role="tab" aria-selected="false" data-tab="skills">Skills</button></li>
+        <li role="none"><button type="button" role="tab" aria-selected="false" data-tab="contact">Contact</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- TICKER -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span class="ticker-item"><span class="dot"></span>EXCEL — PIVOT TABLES &amp; XLOOKUP</span>
+        <span class="ticker-item"><span class="dot"></span>POWER BI — DASHBOARDS &amp; DAX</span>
+        <span class="ticker-item"><span class="dot"></span>TABLEAU — VISUALIZATION</span>
+        <span class="ticker-item"><span class="dot"></span>MIS REPORTING</span>
+        <span class="ticker-item"><span class="dot"></span>SLA &amp; KPI ANALYSIS</span>
+        <span class="ticker-item"><span class="dot"></span>RECONCILIATION</span>
+        <span class="ticker-item"><span class="dot"></span>STAKEHOLDER COORDINATION</span>
+        <span class="ticker-item"><span class="dot"></span>PROCESS IMPROVEMENT</span>
+        <span class="ticker-item"><span class="dot award">★</span> AWWWARDS NOMINEE</span>
+        <span class="ticker-item"><span class="dot"></span>EXCEL — PIVOT TABLES &amp; XLOOKUP</span>
+        <span class="ticker-item"><span class="dot"></span>POWER BI — DASHBOARDS &amp; DAX</span>
+        <span class="ticker-item"><span class="dot"></span>TABLEAU — VISUALIZATION</span>
+        <span class="ticker-item"><span class="dot"></span>MIS REPORTING</span>
+        <span class="ticker-item"><span class="dot"></span>SLA &amp; KPI ANALYSIS</span>
+        <span class="ticker-item"><span class="dot"></span>RECONCILIATION</span>
+        <span class="ticker-item"><span class="dot"></span>STAKEHOLDER COORDINATION</span>
+        <span class="ticker-item"><span class="dot"></span>PROCESS IMPROVEMENT</span>
+        <span class="ticker-item"><span class="dot award">★</span> AWWWARDS NOMINEE</span>
+      </div>
+    </div>
+
+    <div class="tab-panels wrap">
+
+      <!-- ABOUT TAB -->
+      <section id="about" class="tab-panel" role="tabpanel" aria-labelledby="tab-about">
+        <div class="hero">
+          <div class="hero-grid">
+            <div class="fade-up visible">
+              <span class="eyebrow">Operations Analyst — Fintech &amp; Data Analytics</span>
+              <h1>Mohamed Saaif<br><span class="highlight">Samsath</span></h1>
+              <p class="lede">Operations-focused analyst who turns business processes into measurable improvements — reporting, dashboards, and reconciliation, built on Excel, Power BI, and Tableau.</p>
+              <div class="hero-cta">
+                <button type="button" class="btn btn-primary glow-pulse ripple-btn" data-tab="contact">Get in touch</button>
+                <a class="btn btn-ghost" href="mailto:mohamedsaaif99@gmail.com">Email directly</a>
+              </div>
+              <div class="product-badge" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9px;color:var(--gold);background:rgba(245,166,35,0.1);padding:3px 12px;border-radius:var(--radius-full);border:1px solid rgba(245,166,35,0.12);margin-top:10px;">
+                <span style="color:var(--gold);margin-right:2px;">✦</span> Use a product-based approach in my work
+              </div>
+            </div>
+            <div class="hero-meta fade-up visible" style="animation-delay:0.15s;">
+              <div class="row"><span class="k">Based in</span><span>Kuwait City, Kuwait</span></div>
+              <div class="row"><span class="k">Currently</span><span>Analyst, Al Mulla Exchange</span></div>
+              <div class="row"><span class="k">Studying</span><span>MBA Fintech &amp; Data Analytics</span></div>
+              <div class="row"><span class="k">Contact</span><a href="mailto:mohamedsaaif99@gmail.com">mohamedsaaif99@gmail.com</a></div>
+              <div class="row"><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/mohamed-saaif-s-5a6b3918b" target="_blank" rel="noopener">/mohamed-s</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-content">
+          <div>
+            <p>I work at the intersection of operations and data — reviewing agreements, tracking SLA breaches, and building the daily MIS that lets leadership act faster. My background moves from export operations, to venture administration, to correspondent banking analysis, and now toward an MBA in Fintech and Data Analytics.</p>
+            <p>What stays constant is the habit of turning a messy process into a clear, accurate, repeatable one — and a dashboard that makes the numbers legible to whoever needs them next.</p>
+          </div>
+          <div class="stat-block float-animate glow-on-hover">
+            <div class="stat"><span>Current role</span><span class="v">Analyst</span></div>
+            <div class="stat"><span>Industry</span><span class="v">Fintech / Exchange</span></div>
+            <div class="stat"><span>Core tools</span><span class="v">· Excel · Power BI · Tableau</span></div>
+            <div class="stat"><span>Nationality</span><span class="v">Sri Lankan</span></div>
+            <div class="stat"><span>Languages</span><span class="v">English</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE TAB -->
+      <section id="experience" class="tab-panel" hidden role="tabpanel" aria-labelledby="tab-experience">
+        <div class="section-head">
+          <h2>Experience</h2>
+          <span class="idx"> Career </span>
+        </div>
+
+        <div class="role border-glow glow-on-hover">
+          <span class="when">Jun 2023 —<br>Present</span>
+          <div>
+            <div class="who">Operations Analyst</div>
+            <span class="where">Al Mulla Exchange · Kuwait City</span>
+            <ul>
+              <li>Reviewed corporate agreements and coordinated with correspondent banks to secure tie-ups, ensuring compliance and effective risk controls.</li>
+              <li>Analyzed SLA breaches and transaction KPIs to identify root causes, implementing targeted process changes that reduced repeat exceptions.</li>
+              <li>Designed and delivered concise daily MIS and dashboards to leadership and branches, enabling faster interventions and clearer operational visibility.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="role border-glow glow-on-hover">
+          <span class="when">Jul 2022 —<br>Jan 2023</span>
+          <div>
+            <div class="who">Operations Assistant</div>
+            <span class="where">Lion Ventures Group · Colombo</span>
+            <ul>
+              <li>Managed operations tasks for venture activities, maintaining investment databases and documentation to ensure accurate tracking of portfolio activity.</li>
+              <li>Prepared board and investor presentation materials, coordinating inputs to present clear, data-backed updates for meetings and fundraising efforts.</li>
+              <li>Liaised with legal and accounting teams to support compliance and financial accuracy, streamlining approval and reporting processes.</li>
+              <li>Improved administrative efficiency by standardizing document templates and tracking processes, reducing preparation time for investor deliverables.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="role border-glow glow-on-hover">
+          <span class="when">Jan 2021 —<br>Mar 2021</span>
+          <div>
+            <div class="who">Intern</div>
+            <span class="where">Freshqo · Wattala</span>
+            <ul>
+              <li>Assisted in preparing financial statements and reconciliations, supporting month-end close and improving accuracy of financial records.</li>
+              <li>Prepared export documentation and contracts, ensuring compliance with shipment requirements and reducing processing delays.</li>
+              <li>Generated regular reports on export activity and maintained up-to-date records to support operational planning and audit readiness.</li>
+              <li>Collaborated with the finance team on account reconciliations and data entry tasks to streamline recordkeeping processes.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- EDUCATION TAB — HIGHLY VISIBLE BADGES -->
+      <section id="education" class="tab-panel" hidden role="tabpanel" aria-labelledby="tab-education">
+        <div class="section-head">
+          <h2>Education &amp; Certifications</h2>
+          <span class="idx"> Qualifications </span>
+        </div>
+
+        <div class="edu-list">
+          <div class="edu-item glow-on-hover">
+            <span class="when">2025 — Present</span>
+            <div><div class="deg">MBA, Fintech and Data Analytics</div><span class="inst">Anglia Ruskin University, Cambridge, UK</span></div>
+            <span class="grade" data-grade="Reading">✦ Reading</span>
+          </div>
+          <div class="edu-item glow-on-hover">
+            <span class="when">2021 — 2022</span>
+            <div><div class="deg">Bsc (Hons), Business Administration</div><span class="inst">Southampton Solent University, UK</span></div>
+            <span class="grade" data-grade="Distinction">★ Distinction</span>
+          </div>
+          <div class="edu-item glow-on-hover">
+            <span class="when">2018 — 2020</span>
+            <div><div class="deg">HND, Business Management</div><span class="inst">Pearson College London, Colombo</span></div>
+            <span class="grade" data-grade="Merit">◆ Merit</span>
+          </div>
+          <div class="edu-item glow-on-hover">
+            <span class="when">Jan — Mar 2018</span>
+            <div><div class="deg">Foundation Degree, Business Management</div><span class="inst">Pearson College London, Colombo</span></div>
+            <span class="grade" data-grade="Pass">● Pass</span>
+          </div>
+          <div class="edu-item glow-on-hover">
+            <span class="when">2015 — 2017</span>
+            <div><div class="deg">Advanced Level, Commerce</div><span class="inst">Al Mannar International School, Colombo</span></div>
+            <span class="grade" data-grade="Pass">● Pass</span>
+          </div>
+          <div class="edu-item glow-on-hover">
+            <span class="when">2006 — 2014</span>
+            <div><div class="deg">Ordinary Level, Secondary Education</div><span class="inst">Raz International School, Colombo</span></div>
+            <span class="grade" data-grade="Pass">● Pass</span>
+          </div>
+        </div>
+
+        <div class="cert-note">
+          <strong>Researcher Training</strong> — 60 Decibels, May 2023
+        </div>
+      </section>
+
+      <!-- SKILLS TAB -->
+      <section id="skills" class="tab-panel" hidden role="tabpanel" aria-labelledby="tab-skills">
+        <div class="section-head">
+          <h2>Skills & Expertise</h2>
+          <span class="idx"> Proficiency </span>
+        </div>
+
+        <div class="skill-chart-grid">
+          <div class="skill-chart-group glow-on-hover">
+            <h3>Technical & Systems</h3>
+            <div class="skill-bar">
+              <span class="skill-label">Excel (Pivots, XLOOKUP)</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Power BI & DAX</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 80%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Tableau</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 75%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Data Modeling & Cleaning</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 80%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">MS Office Suite</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
+            </div>
+          </div>
+
+          <div class="skill-chart-group glow-on-hover">
+            <h3>Analytical & Reporting</h3>
+            <div class="skill-bar">
+              <span class="skill-label">MIS & Dashboard Creation</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Trend & Root-Cause Analysis</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 88%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Financial Data Presentation</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Data Validation & Integrity</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
+            </div>
+          </div>
+
+          <div class="skill-chart-group glow-on-hover">
+            <h3>Operations & Process</h3>
+            <div class="skill-bar">
+              <span class="skill-label">Process Improvement</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 85%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Stakeholder Coordination</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Transaction Handling</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Complaint Management</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 80%;"></div></div>
+            </div>
+          </div>
+
+          <div class="skill-chart-group glow-on-hover">
+            <h3>Professional</h3>
+            <div class="skill-bar">
+              <span class="skill-label">Written & Verbal Communication</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 95%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Attention to Detail & Accuracy</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 98%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Time Management & Organization</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 90%;"></div></div>
+            </div>
+            <div class="skill-bar">
+              <span class="skill-label">Works with Minimal Supervision</span>
+              <div class="bar-track"><div class="bar-fill" style="width: 92%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT TAB -->
+      <section id="contact" class="tab-panel contact" hidden role="tabpanel" aria-labelledby="tab-contact">
+        <div class="contact-grid">
+          <div>
+            <span class="eyebrow">Get in touch</span>
+            <h2>Open to analyst &amp; data roles in fintech and operations.</h2>
+            <p>Based in Kuwait City, currently reading for an MBA in Fintech and Data Analytics. References available on request.</p>
+          </div>
+          <div class="contact-list">
+            <a href="mailto:mohamedsaaif99@gmail.com">
+              <span><span class="k">Email</span><br>mohamedsaaif99@gmail.com</span>
+              <span class="arrow">→</span>
+            </a>
+            <a href="tel:+96569620090">
+              <span><span class="k">Phone</span><br>+965 6962 0090</span>
+              <span class="arrow">→</span>
+            </a>
+            <a href="https://www.linkedin.com/in/mohamed-saaif-s-5a6b3918b" target="_blank" rel="noopener">
+              <span><span class="k">LinkedIn</span><br>/mohamed-s-5a6b3918b</span>
+              <span class="arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <footer class="wrap">
+    <span>© <span id="year"></span> Mohamed Saaif Samsath</span>
+    <span>Kuwait City, Kuwait</span>
+  </footer>
+
+  <script>
+    (function() {
+      // ---- LOADING SCREEN ----
+      let counter = 0;
+      const percentageEl = document.getElementById('percentage');
+      const loadingScreen = document.getElementById('loading-screen');
+
+      const interval = setInterval(() => {
+        counter += Math.floor(Math.random() * 8) + 2;
+        if (counter >= 100) {
+          counter = 100;
+          clearInterval(interval);
+          loadingScreen.classList.add('hidden');
         }
-        .mobile-menu {
-          z-index: 6;      
+        percentageEl.textContent = counter + '%';
+      }, 120);
+
+      // ---- YEAR ----
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // ---- HEADER SCROLL ----
+      const header = document.getElementById('site-header');
+      window.addEventListener('scroll', function() {
+        header.classList.toggle('scrolled', window.scrollY > 20);
+      });
+
+      // ---- CUSTOM CURSOR ----
+      const dot = document.getElementById('cursor-dot');
+      const glow = document.getElementById('cursor-glow');
+      let mouseX = 0,
+        mouseY = 0;
+      let dotX = 0,
+        dotY = 0;
+      let glowX = 0,
+        glowY = 0;
+
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animateCursor() {
+        dotX += (mouseX - dotX) * 0.2;
+        dotY += (mouseY - dotY) * 0.2;
+        glowX += (mouseX - glowX) * 0.08;
+        glowY += (mouseY - glowY) * 0.08;
+
+        dot.style.left = dotX + 'px';
+        dot.style.top = dotY + 'px';
+        glow.style.left = glowX + 'px';
+        glow.style.top = glowY + 'px';
+
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      if ('ontouchstart' in window) {
+        dot.style.display = 'none';
+        glow.style.display = 'none';
+        document.body.style.cursor = 'default';
+      }
+
+      // ---- TABS ----
+      const panels = document.querySelectorAll('.tab-panel');
+      const navButtons = document.querySelectorAll('.nav-links button[data-tab]');
+      const allTriggers = document.querySelectorAll('[data-tab]');
+      const tabPanelsWrap = document.querySelector('.tab-panels');
+
+      function setActiveButtons(tabId) {
+        navButtons.forEach(function(btn) {
+          const isActive = btn.getAttribute('data-tab') === tabId;
+          btn.classList.toggle('active', isActive);
+          btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+      }
+
+      function activateTab(tabId) {
+        panels.forEach(function(panel) {
+          if (panel.id === tabId) {
+            panel.removeAttribute('hidden');
+            panel.setAttribute('aria-hidden', 'false');
+          } else {
+            panel.setAttribute('hidden', '');
+            panel.setAttribute('aria-hidden', 'true');
+          }
+        });
+        setActiveButtons(tabId);
+      }
+
+      function switchTab(tabId) {
+        var current = null;
+        for (var i = 0; i < panels.length; i++) {
+          if (!panels[i].hasAttribute('hidden')) {
+            current = panels[i];
+            break;
+          }
         }
-        #loading-screen-nav {
-          z-index: 7;
+
+        var target = document.getElementById(tabId);
+        if (!target || target === current) {
+          setActiveButtons(tabId);
+          return;
         }
-      </style></head><body style="visibility: visible; cursor: default;"><div id="awwwards" style="position: fixed; z-index: 1; transform: translateY(-50%); top: 50%; left: 0px; opacity: 0; visibility: hidden;"><a href="https://www.awwwards.com/sites/gustavo-batista-developer" target="_blank"><svg viewBox="0 0 53.08 171.358" style="width:clamp(40px,8vw,53.08px);height:auto;border-radius:0 12px 12px 0;overflow:hidden;display:block"><path class="js-color-bg" fill="#121212" d="M0 0h53.08v171.358H0z"></path><g class="js-color-text" fill="white"><path d="M20.048 153.585v-2.002l6.752-3.757h-6.752v-1.9h10.23v2.002l-6.752 3.757h6.752v1.9zM29.899 142.382a3.317 3.317 0 0 1-1.359 1.293c-.575.297-1.223.446-1.944.446-.721 0-1.369-.149-1.944-.446a3.317 3.317 0 0 1-1.359-1.293c-.331-.564-.497-1.232-.497-2.003 0-.769.166-1.437.497-2.002a3.332 3.332 0 0 1 1.359-1.294c.575-.297 1.224-.445 1.944-.445.722 0 1.369.148 1.944.445a3.326 3.326 0 0 1 1.359 1.294c.33.565.496 1.233.496 2.002.001.77-.166 1.438-.496 2.003m-1.703-3.348c-.435-.331-.967-.497-1.601-.497s-1.167.166-1.601.497c-.434.332-.65.78-.65 1.345s.217 1.014.65 1.346c.434.33.967.496 1.601.496s1.166-.166 1.601-.496c.434-.332.649-.78.649-1.346.001-.565-.215-1.013-.649-1.345M22.912 134.996v-1.812h1.185c-.43-.283-.752-.593-.973-.929-.219-.336-.329-.732-.329-1.19 0-.479.127-.902.38-1.272.254-.37.635-.633 1.141-.79-.478-.262-.851-.591-1.118-.985a2.221 2.221 0 0 1-.402-1.265c0-.682.2-1.218.599-1.607.4-.391.957-.585 1.668-.585h5.218v1.812H25.37c-.682 0-1.023.303-1.023.907 0 .467.264.85.789 1.146.527.299 1.286.446 2.28.446h2.865v1.813H25.37c-.682 0-1.023.303-1.023.906 0 .468.275.851.826 1.147.551.298 1.352.446 2.404.446h2.704v1.812h-7.369zM21.626 122.457c-.225.224-.502.336-.833.336s-.608-.112-.833-.336a1.128 1.128 0 0 1-.336-.833c0-.331.111-.609.336-.833.225-.225.502-.336.833-.336s.608.111.833.336c.225.224.337.502.337.833 0 .332-.112.608-.337.833m1.286-1.739h7.366v1.813h-7.366v-1.813zM22.912 118.668v-1.812h1.185a3.348 3.348 0 0 1-.951-1.009 2.434 2.434 0 0 1-.351-1.272c0-.681.19-1.229.57-1.644.38-.414.931-.621 1.651-.621h5.263v1.812h-4.722c-.418 0-.727.096-.92.285-.195.19-.293.447-.293.769 0 .302.116.58.351.833.233.254.577.458 1.03.613.453.156.992.234 1.615.234h2.938v1.812h-7.366zM29.833 109.129a3.33 3.33 0 0 1-1.432 1.169 4.535 4.535 0 0 1-1.805.373 4.537 4.537 0 0 1-1.807-.373c-.579-.248-1.057-.638-1.432-1.169s-.563-1.196-.563-1.995c0-.771.183-1.413.549-1.93a3.28 3.28 0 0 1 1.382-1.141 4.221 4.221 0 0 1 1.709-.364h.746v5.071c.447-.02.838-.183 1.168-.49.332-.307.498-.724.498-1.248 0-.41-.093-.754-.277-1.031-.186-.278-.473-.529-.863-.753l.542-1.462c.69.303 1.224.724 1.592 1.265.371.541.556 1.235.556 2.083 0 .799-.188 1.464-.563 1.995m-4.085-3.574c-.41.088-.746.261-1.009.52-.262.258-.395.61-.395 1.06 0 .428.137.784.409 1.067.272.282.604.458.994.525v-3.172zM29.833 100.878c-.375.531-.852.921-1.432 1.169a4.552 4.552 0 0 1-3.612 0c-.579-.248-1.057-.638-1.432-1.169s-.563-1.196-.563-1.995c0-.77.183-1.412.549-1.93a3.278 3.278 0 0 1 1.382-1.14 4.222 4.222 0 0 1 1.709-.365h.746v5.072a1.794 1.794 0 0 0 1.168-.49c.332-.307.498-.724.498-1.249 0-.41-.093-.753-.277-1.031-.186-.277-.473-.528-.863-.753l.542-1.462c.69.302 1.224.724 1.592 1.265.371.541.556 1.234.556 2.083 0 .799-.188 1.464-.563 1.995m-4.085-3.573c-.41.088-.746.261-1.009.519-.262.258-.395.611-.395 1.06 0 .429.137.784.409 1.067.272.282.604.458.994.526v-3.172zM35.481 16.926l-4.782 14.969h-3.266l-2.584-9.682-2.584 9.682h-3.268l-4.781-14.969h3.713l2.673 10.276 2.524-10.276h3.445l2.524 10.276 2.674-10.276zM37.979 27.083c1.426 0 2.495 1.068 2.495 2.495 0 1.425-1.069 2.495-2.495 2.495-1.425 0-2.495-1.07-2.495-2.495-.001-1.427 1.07-2.495 2.495-2.495"></path></g></svg></a></div><script>!function(){function t(t){return t.closest&&t.closest(".privacy-modal-content")}window.addEventListener("touchstart",(function(e){t(e.target)&&e.stopImmediatePropagation()}),{capture:!0,passive:!0}),window.addEventListener("touchmove",(function(e){t(e.target)&&e.stopImmediatePropagation()}),{capture:!0,passive:!0})}()</script><canvas id="main-content" data-engine="three.js r142" width="1920" height="911" style="width: 1920px; height: 911px; opacity: 1; pointer-events: auto;"></canvas><span id="circle" class="circle" style="top: 786.5px; left: 272.5px; width: 1vw; height: 1vw;"><span id="circle" class="circle-inner" style="display: none; width: 1vw; height: 1vw;"></span><div class="label" key="CIRCLE-LABEL" style="display: none; right: 300%;">Click To Enable Sounds</div></span><header id="home"><nav class="menu"><div class="mobile-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div><ul class="nav-list jquery-ripples"><li><a href="https://gustavobatista.dev/#home" class="nav-list-href" key="HOME-MENU">Home</a></li><li><a href="https://gustavobatista.dev/#about" class="nav-list-href" key="ABOUT-MENU">About</a></li><li><a href="https://gustavobatista.dev/#service" class="nav-list-href" key="SERVICE-MENU">Service</a></li><li><a href="https://gustavobatista.dev/#projects" class="nav-list-href" key="PROJECTS-MENU">Projects</a></li><li><a href="https://gustavobatista.dev/#contact" class="nav-list-href" key="CONTACT-MENU">Contact</a></li><div class="social"><a href="https://github.com/Gustav-dev97" target="_blank" rel="noopener noreferrer"><div class="github-logo"><img src="data:image/svg+xml,%3csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20width=&#39;24&#39;%20height=&#39;24&#39;%20viewBox=&#39;0%200%2024%2024&#39;%3e%3cpath%20d=&#39;M12%200c-6.626%200-12%205.373-12%2012%200%205.302%203.438%209.8%208.207%2011.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729%201.205.084%201.839%201.237%201.839%201.237%201.07%201.834%202.807%201.304%203.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931%200-1.311.469-2.381%201.236-3.221-.124-.303-.535-1.524.117-3.176%200%200%201.008-.322%203.301%201.23.957-.266%201.983-.399%203.003-.404%201.02.005%202.047.138%203.006.404%202.291-1.552%203.297-1.23%203.297-1.23.653%201.653.242%202.874.118%203.176.77.84%201.235%201.911%201.235%203.221%200%204.609-2.807%205.624-5.479%205.921.43.372.823%201.102.823%202.222v3.293c0%20.319.192.694.801.576%204.765-1.589%208.199-6.086%208.199-11.386%200-6.627-5.373-12-12-12z&#39;/%3e%3c/svg%3e" alt=""></div></a><a href="mailto:gustavo.dev97@gmail.com" target="_blank" rel="noopener noreferrer"><div class="email-logo"><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27utf-8%27?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20fill=%27%23000000%27%20width=%27800px%27%20height=%27800px%27%20viewBox=%270%200%201920%201920%27%20xmlns=%27http://www.w3.org/2000/svg%27%3e%3cpath%20d=%27M1920%20428.266v1189.54l-464.16-580.146-88.203%2070.585%20468.679%20585.904H83.684l468.679-585.904-88.202-70.585L0%201617.805V428.265l959.944%20832.441L1920%20428.266ZM1919.932%20226v52.627l-959.943%20832.44L.045%20278.628V226h1919.887Z%27%20fill-rule=%27evenodd%27/%3e%3c/svg%3e" alt=""></div></a><a href="https://www.linkedin.com/in/gustavo-batista-dev/" target="_blank" rel="noopener noreferrer"><div class="linkedIn-logo"><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27?%3e%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2030%2030%27%20width=%2730px%27%20height=%2730px%27%3e%3cpath%20d=%27M24,4H6C4.895,4,4,4.895,4,6v18c0,1.105,0.895,2,2,2h18c1.105,0,2-0.895,2-2V6C26,4.895,25.105,4,24,4z%20M10.954,22h-2.95%20v-9.492h2.95V22z%20M9.449,11.151c-0.951,0-1.72-0.771-1.72-1.72c0-0.949,0.77-1.719,1.72-1.719c0.948,0,1.719,0.771,1.719,1.719%20C11.168,10.38,10.397,11.151,9.449,11.151z%20M22.004,22h-2.948v-4.616c0-1.101-0.02-2.517-1.533-2.517%20c-1.535,0-1.771,1.199-1.771,2.437V22h-2.948v-9.492h2.83v1.297h0.04c0.394-0.746,1.356-1.533,2.791-1.533%20c2.987,0,3.539,1.966,3.539,4.522V22z%27/%3e%3c/svg%3e" alt=""></div></a><a href="http://wa.me/+5519978133623/" target="_blank" rel="noopener noreferrer"><div class="whatsapp-logo"><img src="data:image/svg+xml,%3csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20128%20128&#39;%20width=&#39;64px&#39;%20height=&#39;64px&#39;%3e%3cpath%20d=&#39;M%2064%202%20C%2029.8%202%202%2029.8%202%2064%20C%202%2074.5%204.5992188%2084.800391%209.6992188%2093.900391%20L%204.4003906%20113.30078%20C%203.5003906%20116.40078%204.3992188%20119.60039%206.6992188%20121.90039%20C%208.9992188%20124.20039%2012.200781%20125.10078%2015.300781%20124.30078%20L%2035.5%20119%20C%2044.3%20123.6%2054.099609%20126%2064.099609%20126%20C%2098.299609%20126%20126.09961%2098.2%20126.09961%2064%20C%20126.09961%2047.4%20119.7%2031.899219%20108%2020.199219%20C%2096.2%208.4992187%2080.6%202%2064%202%20z%20M%2064%208%20C%2079%208%2093.099609%2013.800391%20103.59961%2024.400391%20C%20114.19961%2035.000391%20120.1%2049.1%20120%2064%20C%20120%2094.9%2094.9%20120%2064%20120%20C%2054.7%20120%2045.399219%20117.59922%2037.199219%20113.19922%20C%2036.799219%20112.99922%2036.300781%20112.80078%2035.800781%20112.80078%20C%2035.500781%20112.80078%2035.3%20112.80039%2035%20112.90039%20L%2013.699219%20118.5%20C%2012.199219%20118.9%2011.200781%20118.09922%2010.800781%20117.69922%20C%2010.400781%20117.29922%209.6%20116.30078%2010%20114.80078%20L%2015.599609%2094.199219%20C%2015.799609%2093.399219%2015.700781%2092.600391%2015.300781%2091.900391%20C%2010.500781%2083.500391%208%2073.8%208%2064%20C%208%2033.1%2033.1%208%2064%208%20z%20M%2064%2017%20C%2038.1%2017%2017%2038%2017%2064%20C%2017%2072.3%2019.200781%2080.4%2023.300781%2087.5%20C%2024.900781%2090.3%2025.3%2093.599219%2024.5%2096.699219%20L%2021.599609%20107.19922%20L%2032.800781%20104.30078%20C%2033.800781%20104.00078%2034.800781%20103.90039%2035.800781%20103.90039%20C%2037.800781%20103.90039%2039.8%20104.40039%2041.5%20105.40039%20C%2048.4%20109.00039%2056.1%20111%2064%20111%20C%2089.9%20111%20111%2089.9%20111%2064%20C%20111%2051.4%20106.09922%2039.599219%2097.199219%2030.699219%20C%2088.399219%2021.899219%2076.6%2017%2064%2017%20z%20M%2043.099609%2036.699219%20L%2045.900391%2036.699219%20C%2047.000391%2036.699219%2048.099219%2036.799219%2049.199219%2039.199219%20C%2050.499219%2042.099219%2053.399219%2049.399609%2053.699219%2050.099609%20C%2054.099219%2050.799609%2054.300781%2051.699219%2053.800781%2052.699219%20C%2053.300781%2053.699219%2053.100781%2054.299219%2052.300781%2055.199219%20C%2051.600781%2056.099219%2050.699609%2057.100781%2050.099609%2057.800781%20C%2049.399609%2058.500781%2048.6%2059.300781%2049.5%2060.800781%20C%2050.4%2062.300781%2053.299219%2067.1%2057.699219%2071%20C%2063.299219%2076%2068.099609%2077.600781%2069.599609%2078.300781%20C%2071.099609%2079.000781%2071.900781%2078.900391%2072.800781%2077.900391%20C%2073.700781%2076.900391%2076.5%2073.599609%2077.5%2072.099609%20C%2078.5%2070.599609%2079.500781%2070.900391%2080.800781%2071.400391%20C%2082.200781%2071.900391%2089.400391%2075.499219%2090.900391%2076.199219%20C%2092.400391%2076.899219%2093.399219%2077.300391%2093.699219%2077.900391%20C%2094.099219%2078.700391%2094.100391%2081.599609%2092.900391%2085.099609%20C%2091.700391%2088.499609%2085.700391%2091.899609%2082.900391%2092.099609%20C%2080.200391%2092.299609%2077.699219%2093.300391%2065.199219%2088.400391%20C%2050.199219%2082.500391%2040.7%2067.099609%2040%2066.099609%20C%2039.3%2065.099609%2034%2058.100781%2034%2050.800781%20C%2034%2043.500781%2037.799219%2040%2039.199219%2038.5%20C%2040.599219%2037%2042.099609%2036.699219%2043.099609%2036.699219%20z&#39;/%3e%3c/svg%3e" alt=""></div></a></div><div class="music-credits"><a href="https://cryochamber.bandcamp.com/album/dream-chambers" class="music-txt" target="_blank" rel="noopener noreferrer" key="MUSIC-TEXT">Music: Alphaxone - Ashes Of Time</a><a href="https://cryochamber.bandcamp.com/album/the-infinite-void" target="_blank" rel="noopener noreferrer"><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27utf-8%27?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20width=%27800px%27%20height=%27800px%27%20viewBox=%270%200%2024%2024%27%20fill=%27none%27%20xmlns=%27http://www.w3.org/2000/svg%27%3e%3cg%20id=%27Interface%20/%20External_Link%27%3e%3cpath%20id=%27Vector%27%20d=%27M10.0002%205H8.2002C7.08009%205%206.51962%205%206.0918%205.21799C5.71547%205.40973%205.40973%205.71547%205.21799%206.0918C5%206.51962%205%207.08009%205%208.2002V15.8002C5%2016.9203%205%2017.4801%205.21799%2017.9079C5.40973%2018.2842%205.71547%2018.5905%206.0918%2018.7822C6.5192%2019%207.07899%2019%208.19691%2019H15.8031C16.921%2019%2017.48%2019%2017.9074%2018.7822C18.2837%2018.5905%2018.5905%2018.2839%2018.7822%2017.9076C19%2017.4802%2019%2016.921%2019%2015.8031V14M20%209V4M20%204H15M20%204L13%2011%27%20stroke=%27%23000000%27%20stroke-width=%272%27%20stroke-linecap=%27round%27%20stroke-linejoin=%27round%27/%3e%3c/g%3e%3c/svg%3e" class="externalLink"></a></div><canvas width="1960" height="1002" style="position: absolute; inset: 0px; z-index: -1;"></canvas></ul></nav><ul class="nav__dot"><li class="" data-nav-href="#home"></li><li data-nav-href="#about" class="current"></li><li data-nav-href="#service"></li><li data-nav-href="#projects"></li><li data-nav-href="#contact"></li></ul><div class="dropdown" style="opacity: 0; visibility: hidden;"><button class="dropdown__button">ENG ▼</button><div class="dropdown__items dropdown--hide"><button class="dropdown__item" id="pt">PT-BR</button> <button class="dropdown__item" id="eng">ENG</button></div></div><a class="speaker mute"><div class="bar-c"><div id="bar-1" class="bar"></div><div id="bar-2" class="bar"></div><div id="bar-3" class="bar"></div><div id="bar-4" class="bar"></div><div id="bar-5" class="bar"></div><div id="bar-6" class="bar"></div></div><button class="muted"></button> </a><button class="game-button" aria-label="Abrir Jogo" style="opacity: 0; visibility: hidden;"><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27utf-8%27?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20fill=%27%23000000%27%20width=%27800px%27%20height=%27800px%27%20viewBox=%270%200%20512%20512%27%20xmlns=%27http://www.w3.org/2000/svg%27%3e%3ctitle%3eionicons-v5-g%3c/title%3e%3cpath%20d=%27M483.13,245.38C461.92,149.49,430,98.31,382.65,84.33A107.13,107.13,0,0,0,352,80c-13.71,0-25.65,3.34-38.28,6.88C298.5,91.15,281.21,96,256,96s-42.51-4.84-57.76-9.11C185.6,83.34,173.67,80,160,80a115.74,115.74,0,0,0-31.73,4.32c-47.1,13.92-79,65.08-100.52,161C4.61,348.54,16,413.71,59.69,428.83a56.62,56.62,0,0,0,18.64,3.22c29.93,0,53.93-24.93,70.33-45.34,18.53-23.1,40.22-34.82,107.34-34.82,59.95,0,84.76,8.13,106.19,34.82,13.47,16.78,26.2,28.52,38.9,35.91,16.89,9.82,33.77,12,50.16,6.37,25.82-8.81,40.62-32.1,44-69.24C497.82,331.27,493.86,293.86,483.13,245.38ZM208,240H176v32a16,16,0,0,1-32,0V240H112a16,16,0,0,1,0-32h32V176a16,16,0,0,1,32,0v32h32a16,16,0,0,1,0,32Zm84,4a20,20,0,1,1,20-20A20,20,0,0,1,292,244Zm44,44a20,20,0,1,1,20-19.95A20,20,0,0,1,336,288Zm0-88a20,20,0,1,1,20-20A20,20,0,0,1,336,200Zm44,44a20,20,0,1,1,20-20A20,20,0,0,1,380,244Z%27/%3e%3c/svg%3e" alt="Game Logo"></button> <button class="back-button" aria-label="Voltar"><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27iso-8859-1%27?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20height=%27800px%27%20width=%27800px%27%20version=%271.1%27%20id=%27Capa_1%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:xlink=%27http://www.w3.org/1999/xlink%27%20viewBox=%270%200%2038.273%2038.273%27%20xml:space=%27preserve%27%3e%3cg%3e%3cpath%20style=%27fill:%23010002;%27%20d=%27M20.621,10.484V5.84c0-0.808-0.458-1.548-1.181-1.909c-0.722-0.359-1.589-0.279-2.236,0.206%20l-9.486,7.147c-0.677,0.292-1.117,0.67-1.401,1.058l-5.468,4.119C0.312,16.866-0.003,17.501,0,18.173%20c0.002,0.673,0.322,1.305,0.862,1.706l16.355,12.133c0.646,0.48,1.51,0.554,2.23,0.191c0.72-0.362,1.174-1.1,1.174-1.905v-5.517%20c0.013,0,0.025,0,0.038,0c3.842,0,10.687,1.089,13.366,8.386c0.311,0.846,1.116,1.397,2.001,1.397c0.079,0,0.157-0.004,0.236-0.013%20c0.975-0.108,1.751-0.868,1.88-1.84c0.052-0.394,1.208-9.682-4.461-16.23C30.621,12.948,26.235,10.935,20.621,10.484z%20M20.659,20.515c-1.443,0-2.379,0.132-2.482,0.146c-1.046,0.154-1.822,1.053-1.822,2.111v3.287l-10.66-7.907l3.555-2.678%20c0.136-0.104,0.259-0.222,0.365-0.351c0.155-0.068,0.301-0.152,0.437-0.254l6.303-4.75v2.401c0,1.168,0.939,2.119,2.108,2.134%20c5.345,0.063,9.374,1.61,11.975,4.6c1.442,1.658,2.314,3.602,2.835,5.469C28.923,21.038,23.424,20.515,20.659,20.515z%27/%3e%3c/g%3e%3c/svg%3e" alt="Game Logo"></button></header><main><section class="section" id="section-home" style="visibility: visible;"><section class="home" data-nav="data-nav"><a href="https://gustavobatista.dev/#home" class="home-href" id="Home"></a><div class="name-container" style="opacity: 0;"><a href="https://gustavobatista.dev/#home" class="home-href" id="Home"><div class="name-highlight"><span id="letter">G</span> <span id="name">USTAVO</span> <span id="letter2">B </span><span class="name2" id="name">ATISTA</span></div><div class="typed-wrapper"><span class="typed" id="typed" key="HOME">| CREATIVE DEVELOPER |</span></div></a><div class="contact-Btn-wrapper"><a href="https://gustavobatista.dev/#home" class="home-href" id="Home"></a><a href="https://gustavobatista.dev/#contact"><button class="contact-Btn" key="CONTACT-BTN">Get in Touch</button></a></div><div id="scroll-down-animation"><span class="mouse" style="opacity: 0;"><span class="move" style="opacity: 0;"></span></span></div></div></section></section><section class="section" id="about" data-nav="data-nav" style="opacity: 0.7758;"><h1 class="about-title" key="ABOUT-TITLE" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">About</h1><h2 class="about-text" key="ABOUT-TEXT" style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">“Hi, i’m Gustavo, a creative developer from Brazil. I'm graduated in Analysis and System Development and i'm currently coursing Computer Science. I have a passion for computers since i was a kid. But i really started to loving coding during my teenage years, when i modded games and created custom scripts. Nowadays i spend my time learning new technologies and creating applications that are functional and attractive. You can check some of my work in this portfolio or GitHub profile, i’m always looking for new challenges and opportunities to grow as a developer and to make a positive impact with my work. If you are interested in working with me please feel free to contact me through WhatsApp, eMail or LinkedIn.”</h2><div class="tab-titles" style=""><p class="tab-links active-link" onclick="openTab(&quot;education&quot;)" key="EDU-BTN" style=""><img class="education-icon" src="./Gustavo Batista _ Developer_files/education.svg">Education</p><p class="tab-links skill-link" onclick="openTab(&quot;skills&quot;)" key="SKILL-BTN" style=""><img class="skill-icon" src="./Gustavo Batista _ Developer_files/skill.svg">Skills</p></div><div class="tab-contents active-tab" id="education"><ul><li class="graduation-title" key="UNESA" style=""><span>2025-2029</span><br>UNESA - Computer Science</li><li class="graduation-title" key="UNOPAR" style=""><span>2020-2022</span><br>UNOPAR - Systems Analysis and Development</li><li class="parent" key="COURSE-TITLE" style=""><span>2021</span><button class="toggle-button">+</button><br><span class="course-text">Coursera - Arquitetura com Google Compute Engine/Architecting with Google Compute Engine</span><ul class="child" style="opacity: 0; max-height: 0px;"><li style="color: rgb(136, 136, 136); font-size: 13px;">Google Cloud Fundamentals: Core Infrastructure</li><li style="color: rgb(136, 136, 136); font-size: 13px;">Essential Google Cloud Infrastructure: Core Services</li><li style="color: rgb(136, 136, 136); font-size: 13px;">Reliable Google Cloud Infrastructure: Design and Process</li><li style="color: rgb(136, 136, 136); font-size: 13px;">Essential Google Cloud Infrastructure: Foundation</li><li style="color: rgb(136, 136, 136); font-size: 13px;">Elastic Google Cloud Infrastructure: Scaling and Automation</li><li style="color: rgb(136, 136, 136); font-size: 13px;">Migrate MySQL data to Cloud SQL using Database Migration Service</li><li style="color: rgb(136, 136, 136); font-size: 13px;">Baseline: Data, ML, AI</li><li style="color: rgb(136, 136, 136); font-size: 13px;">Google Cloud Essentials</li></ul></li><li class="parent" style=""><span>2021</span><button class="toggle-button">+</button><br><span class="course-text">UNOPAR - Trilha de Carreira/Career Path</span><ul class="child" style="opacity: 0; max-height: 0px;"><li style="color: rgb(136, 136, 136); font-size: 13px;">Java - Creating a Complete Application</li><li style="color: rgb(136, 136, 136); font-size: 13px;">Intermediate Java</li><li style="color: rgb(136, 136, 136); font-size: 13px;">Basic Java</li><li style="color: rgb(136, 136, 136); font-size: 13px;">New Developments in IOT</li><li style="color: rgb(136, 136, 136); font-size: 13px;">Data Analysis with Python</li><li style="color: rgb(136, 136, 136); font-size: 13px;">Computer Networks and the Internet of Things</li><li style="color: rgb(136, 136, 136); font-size: 13px;">Sensors, Microcontrollers and Internet of Things Programming</li></ul></li></ul></div><div class="tab-contents" id="skills"><div class="our-skills"><p>Front-End</p><div class="card" style=""><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUwIDUwIiBpZD0iTGF5ZXJfMSIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgNTAgNTAiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxnIGlkPSJIVE1MXzUiPjxwb2x5Z29uIGZpbGw9IiNGMTY1MjkiIHBvaW50cz0iMTcuNCwxMi43IDE4LjYsMTIuNyAxOC42LDE0IDIwLDE0IDIwLDEwIDE4LjYsMTAgMTguNiwxMS4zIDE3LjQsMTEuMyAxNy40LDEwIDE2LDEwIDE2LDE0ICAgIDE3LjQsMTQgICIvPjxwb2x5Z29uIGZpbGw9IiNGMTY1MjkiIHBvaW50cz0iMjIuMiwxNCAyMy41LDE0IDIzLjUsMTEuMyAyNC43LDExLjMgMjQuNywxMCAyMSwxMCAyMSwxMS4zIDIyLjIsMTEuMyAgIi8+PHBvbHlnb24gZmlsbD0iI0YxNjUyOSIgcG9pbnRzPSIyNi44LDEyIDI3LjcsMTMuNSAyNy43LDEzLjUgMjguNiwxMiAyOC42LDE0IDMwLDE0IDMwLDEwIDI4LjYsMTAgMjcuNywxMS40IDI2LjgsMTAgMjUuNCwxMCAgICAyNS40LDE0IDI2LjgsMTQgICIvPjxwb2x5Z29uIGZpbGw9IiNGMTY1MjkiIHBvaW50cz0iMzQsMTIuNyAzMi4xLDEyLjcgMzIuMSwxMCAzMC43LDEwIDMwLjcsMTQgMzQsMTQgICIvPjxwYXRoIGQ9Ik0xNCwxNmwyLDIybDksMmw5LTJsMi0yMkgxNHogTTMxLjUsMjNIMjVoLTRsMC41LDJIMjVoNmwtMSw5bC01LDJsLTUtMmwtMC44LTRIMjJsMC41LDJsMi41LDFsMi41LTFsMC41LTQgICBoLTNoLTZsLTEtOGg3aDdMMzEuNSwyM3oiIGZpbGw9IiNGMTY1MjkiLz48L2c+PHBhdGggZD0iTTI1LDFDMTEuNywxLDEsMTEuNywxLDI1czEwLjcsMjQsMjQsMjRzMjQtMTAuNywyNC0yNFMzOC4zLDEsMjUsMXogTTI1LDQ0QzE0LjUsNDQsNiwzNS41LDYsMjVTMTQuNSw2LDI1LDYgIHMxOSw4LjUsMTksMTlTMzUuNSw0NCwyNSw0NHoiIGZpbGw9IiNGMTY1MjkiLz48L3N2Zz4="><div class="card-content"><h2>HTML5</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20?%3e%3csvg%20height=%27512px%27%20id=%27Layer_1%27%20style=%27enable-background:new%200%200%20512%20512;%27%20version=%271.1%27%20viewBox=%270%200%20512%20512%27%20width=%27512px%27%20xml:space=%27preserve%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:cc=%27http://creativecommons.org/ns%23%27%20xmlns:dc=%27http://purl.org/dc/elements/1.1/%27%20xmlns:inkscape=%27http://www.inkscape.org/namespaces/inkscape%27%20xmlns:rdf=%27http://www.w3.org/1999/02/22-rdf-syntax-ns%23%27%20xmlns:sodipodi=%27http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd%27%20xmlns:svg=%27http://www.w3.org/2000/svg%27%3e%3cdefs%20id=%27defs19%27/%3e%3cg%20id=%27g3021%27%3e%3cpath%20d=%27M%20507,256%20C%20507,394.62347%20394.62347,507%20256,507%20117.37653,507%205.0000012,394.62347%205.0000012,256%205.0000012,117.37653%20117.37653,5.0000039%20256,5.0000039%20394.62347,5.0000039%20507,117.37653%20507,256%20z%27%20id=%27path2989%27%20style=%27fill:none;stroke:%23379ad6;stroke-width:10;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none%27/%3e%3cg%20id=%27g3015%27%3e%3cpolygon%20id=%27polygon3962%27%20points=%27389.402,450.579%20420.191,117.07%2091.809,117.07%20122.593,450.579%20255.999,486.501%20%27%20style=%27fill:%23379ad6;fill-opacity:1;fill-rule:evenodd%27%20transform=%27matrix(0.66995146,0,0,0.66995146,84.49242,84.15745)%27/%3e%3cpolygon%20id=%27polygon3968%27%20points=%27364.257,428.863%20389.175,144.084%20255.997,144.084%20255.997,457.852%20256.298,457.933%20%27%20style=%27fill:%23379ad6;fill-opacity:1;fill-rule:evenodd%27%20transform=%27matrix(0.66995146,0,0,0.66995146,84.49242,84.15745)%27/%3e%3cpath%20d=%27m%20190.7226,143.04082%20h%2033.95515%20v%20-13.27977%20h%20-19.40246%20v%20-13.29854%20h%2019.40246%20V%20101.91049%20H%20190.7226%20v%2041.13033%20z%20m%2048.4663,-26.57764%20c%204.54294,4.54294%206.91189,6.71693%2013.48277,13.28849%20-3.84016,0%20-13.48277,0.0141%20-13.48277,0.0127%20v%2013.27642%20h%2033.95783%20v%20-13.27974%20l%20-13.56384,-13.29854%20h%2013.56384%20V%20101.91049%20H%20239.1889%20c%200,0%200,7.30381%200,14.55269%20z%20m%2082.08848,-14.55269%20h%20-33.95984%20c%200,0%200,7.30381%200,14.55269%204.54295,4.54294%206.91323,6.71693%2013.48412,13.28849%20-3.83882,0%20-13.48412,0.0141%20-13.48412,0.0127%20v%2013.27642%20h%2033.95984%20v%20-13.27974%20l%20-13.5645,-13.29854%20h%2013.5645%20v%20-14.55202%20z%27%20id=%27path4016%27%20style=%27fill:%23379ad6;fill-opacity:1;fill-rule:evenodd%27/%3e%3cpath%20d=%27m%20186.10184,207.69363%204,27.25%2069.5,-0.5%20-67,28.25%201.75,27%2095,0%20-2.25,35.5%20-30.5,9.25%20-31,-8.5%20-1.75,-21.25%20-27.25,0%203.5,41.75%2055.75,16.25%2056.75,-15.75%207,-84.25%20-64.25,0%2066.75,-28.25%202,-27%20z%27%20id=%27path4169%27%20style=%27fill:%23ffffff;fill-opacity:1;stroke:none%27/%3e%3c/g%3e%3c/g%3e%3cg%20id=%27Layer_1_1_%27/%3e%3c/svg%3e"><div class="card-content"><h2>CSS3</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGlkPSJMYWdlcl8xIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAxMjggMTI4OyIgdmVyc2lvbj0iMS4xIiB2aWV3Qm94PSIwIDAgMTI4IDEyOCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+PGc+PGc+PGc+PGNpcmNsZSBjeD0iNjQiIGN5PSI2NCIgcj0iNTAiIHN0eWxlPSJmaWxsOiNGMERCNEY7Ii8+PC9nPjwvZz48ZyBpZD0iTGF5ZXJfMV8xXyI+PGc+PGc+PHBhdGggZD0iTTQ4LjQsNDQuNmg4Ljd2MjQuNWMwLDExLTUuMywxNC45LTEzLjcsMTQuOWMtMi4xLDAtNC43LTAuMy02LjQtMC45bDEtNy4xICAgICAgYzEuMiwwLjQsMi44LDAuNyw0LjUsMC43YzMuNywwLDYtMS43LDYtNy42TDQ4LjQsNDQuNkw0OC40LDQ0LjZ6IiBzdHlsZT0iZmlsbDojMzIzMzMwOyIvPjxwYXRoIGQ9Ik02NC44LDc0LjRjMi4zLDEuMiw2LDIuNCw5LjcsMi40YzQsMCw2LjEtMS43LDYuMS00LjNjMC0yLjQtMS44LTMuOC02LjUtNS40ICAgICAgYy02LjQtMi4zLTEwLjctNS45LTEwLjctMTEuNkM2My40LDQ5LDY5LDQ0LDc4LjEsNDRjNC40LDAsNy42LDAuOSw5LjksMmwtMiw3Yy0xLjUtMC43LTQuMy0xLjgtOC0xLjhjLTMuOCwwLTUuNiwxLjgtNS42LDMuNyAgICAgIGMwLDIuNSwyLjEsMy42LDcuMiw1LjVjNi44LDIuNSwxMCw2LjEsMTAsMTEuNmMwLDYuNS00LjksMTItMTUuNiwxMmMtNC40LDAtOC44LTEuMi0xMS0yLjRMNjQuOCw3NC40eiIgc3R5bGU9ImZpbGw6IzMyMzMzMDsiLz48L2c+PC9nPjwvZz48L2c+PC9zdmc+"><div class="card-content"><h2>Javascript</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27UTF-8%27?%3e%3csvg%20fill=%27none%27%20stroke-linecap=%27square%27%20stroke-miterlimit=%2710%27%20version=%271.1%27%20viewBox=%270%200%20226.77%20226.77%27%20xmlns=%27http://www.w3.org/2000/svg%27%3e%3cg%20transform=%27translate(8.964%204.2527)%27%20fill-rule=%27evenodd%27%20stroke=%27%23000%27%20stroke-linecap=%27butt%27%20stroke-linejoin=%27round%27%20stroke-width=%274%27%3e%3cpath%20d=%27m63.02%20200.61-43.213-174.94%20173.23%2049.874z%27/%3e%3cpath%20d=%27m106.39%2050.612%2021.591%2087.496-86.567-24.945z%27/%3e%3cpath%20d=%27m84.91%20125.03-10.724-43.465%2043.008%2012.346z%27/%3e%3cpath%20d=%27m63.458%2038.153%2010.724%2043.465-43.008-12.346z%27/%3e%3cpath%20d=%27m149.47%2062.93%2010.724%2043.465-43.008-12.346z%27/%3e%3cpath%20d=%27m84.915%20125.06%2010.724%2043.465-43.008-12.346z%27/%3e%3c/g%3e%3c/svg%3e"><div class="card-content"><h2>ThreeJS</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="./Gustavo Batista _ Developer_files/jQuery-DIQqdYH3.svg"><div class="card-content"><h2>jQuery</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml,%3csvg%20height=&#39;1992&#39;%20viewBox=&#39;0%200%20512%20407.864&#39;%20width=&#39;2500&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cpath%20d=&#39;m106.344%200c-29.214%200-50.831%2025.57-49.863%2053.3.929%2026.641-.278%2061.145-8.964%2089.283-8.717%2028.217-23.449%2046.098-47.517%2048.393v25.912c24.068%202.3%2038.8%2020.172%2047.516%2048.393%208.687%2028.138%209.893%2062.642%208.964%2089.283-.968%2027.726%2020.649%2053.3%2049.868%2053.3h299.347c29.214%200%2050.827-25.57%2049.859-53.3-.929-26.641.278-61.145%208.964-89.283%208.717-28.221%2023.413-46.1%2047.482-48.393v-25.912c-24.068-2.3-38.764-20.172-47.482-48.393-8.687-28.134-9.893-62.642-8.964-89.283.968-27.726-20.645-53.3-49.859-53.3h-299.355zm240.775%20251.067c0%2038.183-28.481%2061.34-75.746%2061.34h-80.458a8.678%208.678%200%200%201%20-8.678-8.678v-199.593a8.678%208.678%200%200%201%208.678-8.678h80c39.411%200%2065.276%2021.348%2065.276%2054.124%200%2023.005-17.4%2043.6-39.567%2047.208v1.2c30.176%203.31%2050.495%2024.21%2050.495%2053.077zm-84.519-128.1h-45.876v64.8h38.639c29.87%200%2046.34-12.028%2046.34-33.527-.003-20.148-14.163-31.273-39.103-31.273zm-45.876%2090.511v71.411h47.564c31.1%200%2047.573-12.479%2047.573-35.931s-16.935-35.484-49.573-35.484h-45.564z&#39;%20fill=&#39;%237952b3&#39;%20fill-rule=&#39;evenodd&#39;/%3e%3c/svg%3e"><div class="card-content"><h2>Bootstrap5</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml,%3csvg%20height=&#39;2500&#39;%20viewBox=&#39;175.7%2078%20490.6%20436.9&#39;%20width=&#39;2194&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cg%20fill=&#39;%2361dafb&#39;%3e%3cpath%20d=&#39;m666.3%20296.5c0-32.5-40.7-63.3-103.1-82.4%2014.4-63.6%208-114.2-20.2-130.4-6.5-3.8-14.1-5.6-22.4-5.6v22.3c4.6%200%208.3.9%2011.4%202.6%2013.6%207.8%2019.5%2037.5%2014.9%2075.7-1.1%209.4-2.9%2019.3-5.1%2029.4-19.6-4.8-41-8.5-63.5-10.9-13.5-18.5-27.5-35.3-41.6-50%2032.6-30.3%2063.2-46.9%2084-46.9v-22.3c-27.5%200-63.5%2019.6-99.9%2053.6-36.4-33.8-72.4-53.2-99.9-53.2v22.3c20.7%200%2051.4%2016.5%2084%2046.6-14%2014.7-28%2031.4-41.3%2049.9-22.6%202.4-44%206.1-63.6%2011-2.3-10-4-19.7-5.2-29-4.7-38.2%201.1-67.9%2014.6-75.8%203-1.8%206.9-2.6%2011.5-2.6v-22.3c-8.4%200-16%201.8-22.6%205.6-28.1%2016.2-34.4%2066.7-19.9%20130.1-62.2%2019.2-102.7%2049.9-102.7%2082.3%200%2032.5%2040.7%2063.3%20103.1%2082.4-14.4%2063.6-8%20114.2%2020.2%20130.4%206.5%203.8%2014.1%205.6%2022.5%205.6%2027.5%200%2063.5-19.6%2099.9-53.6%2036.4%2033.8%2072.4%2053.2%2099.9%2053.2%208.4%200%2016-1.8%2022.6-5.6%2028.1-16.2%2034.4-66.7%2019.9-130.1%2062-19.1%20102.5-49.9%20102.5-82.3zm-130.2-66.7c-3.7%2012.9-8.3%2026.2-13.5%2039.5-4.1-8-8.4-16-13.1-24-4.6-8-9.5-15.8-14.4-23.4%2014.2%202.1%2027.9%204.7%2041%207.9zm-45.8%20106.5c-7.8%2013.5-15.8%2026.3-24.1%2038.2-14.9%201.3-30%202-45.2%202-15.1%200-30.2-.7-45-1.9-8.3-11.9-16.4-24.6-24.2-38-7.6-13.1-14.5-26.4-20.8-39.8%206.2-13.4%2013.2-26.8%2020.7-39.9%207.8-13.5%2015.8-26.3%2024.1-38.2%2014.9-1.3%2030-2%2045.2-2%2015.1%200%2030.2.7%2045%201.9%208.3%2011.9%2016.4%2024.6%2024.2%2038%207.6%2013.1%2014.5%2026.4%2020.8%2039.8-6.3%2013.4-13.2%2026.8-20.7%2039.9zm32.3-13c5.4%2013.4%2010%2026.8%2013.8%2039.8-13.1%203.2-26.9%205.9-41.2%208%204.9-7.7%209.8-15.6%2014.4-23.7%204.6-8%208.9-16.1%2013-24.1zm-101.4%20106.7c-9.3-9.6-18.6-20.3-27.8-32%209%20.4%2018.2.7%2027.5.7%209.4%200%2018.7-.2%2027.8-.7-9%2011.7-18.3%2022.4-27.5%2032zm-74.4-58.9c-14.2-2.1-27.9-4.7-41-7.9%203.7-12.9%208.3-26.2%2013.5-39.5%204.1%208%208.4%2016%2013.1%2024s9.5%2015.8%2014.4%2023.4zm73.9-208.1c9.3%209.6%2018.6%2020.3%2027.8%2032-9-.4-18.2-.7-27.5-.7-9.4%200-18.7.2-27.8.7%209-11.7%2018.3-22.4%2027.5-32zm-74%2058.9c-4.9%207.7-9.8%2015.6-14.4%2023.7-4.6%208-8.9%2016-13%2024-5.4-13.4-10-26.8-13.8-39.8%2013.1-3.1%2026.9-5.8%2041.2-7.9zm-90.5%20125.2c-35.4-15.1-58.3-34.9-58.3-50.6s22.9-35.6%2058.3-50.6c8.6-3.7%2018-7%2027.7-10.1%205.7%2019.6%2013.2%2040%2022.5%2060.9-9.2%2020.8-16.6%2041.1-22.2%2060.6-9.9-3.1-19.3-6.5-28-10.2zm53.8%20142.9c-13.6-7.8-19.5-37.5-14.9-75.7%201.1-9.4%202.9-19.3%205.1-29.4%2019.6%204.8%2041%208.5%2063.5%2010.9%2013.5%2018.5%2027.5%2035.3%2041.6%2050-32.6%2030.3-63.2%2046.9-84%2046.9-4.5-.1-8.3-1-11.3-2.7zm237.2-76.2c4.7%2038.2-1.1%2067.9-14.6%2075.8-3%201.8-6.9%202.6-11.5%202.6-20.7%200-51.4-16.5-84-46.6%2014-14.7%2028-31.4%2041.3-49.9%2022.6-2.4%2044-6.1%2063.6-11%202.3%2010.1%204.1%2019.8%205.2%2029.1zm38.5-66.7c-8.6%203.7-18%207-27.7%2010.1-5.7-19.6-13.2-40-22.5-60.9%209.2-20.8%2016.6-41.1%2022.2-60.6%209.9%203.1%2019.3%206.5%2028.1%2010.2%2035.4%2015.1%2058.3%2034.9%2058.3%2050.6-.1%2015.7-23%2035.6-58.4%2050.6z&#39;/%3e%3ccircle%20cx=&#39;420.9&#39;%20cy=&#39;296.5&#39;%20r=&#39;45.7&#39;/%3e%3c/g%3e%3c/svg%3e"><div class="card-content"><h2>React</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27UTF-8%27%20standalone=%27no%27?%3e%3csvg%20xmlns:dc=%27http://purl.org/dc/elements/1.1/%27%20xmlns:cc=%27http://creativecommons.org/ns%23%27%20xmlns:rdf=%27http://www.w3.org/1999/02/22-rdf-syntax-ns%23%27%20xmlns:svg=%27http://www.w3.org/2000/svg%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:sodipodi=%27http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd%27%20xmlns:inkscape=%27http://www.inkscape.org/namespaces/inkscape%27%20aria-label=%27Vue%27%20role=%27img%27%20viewBox=%270%200%2064%2064%27%20version=%271.1%27%20id=%27svg8%27%20sodipodi:docname=%27vue-icon.svg%27%20width=%2764%27%20height=%2764%27%20inkscape:version=%270.92.4%20(5da689c313,%202019-01-14)%27%3e%3cmetadata%20id=%27metadata14%27%3e%3crdf:RDF%3e%3ccc:Work%20rdf:about=%27%27%3e%3cdc:format%3eimage/svg+xml%3c/dc:format%3e%3cdc:type%20rdf:resource=%27http://purl.org/dc/dcmitype/StillImage%27%20/%3e%3cdc:title%3e%3c/dc:title%3e%3c/cc:Work%3e%3c/rdf:RDF%3e%3c/metadata%3e%3cdefs%20id=%27defs12%27%20/%3e%3csodipodi:namedview%20pagecolor=%27%23ffffff%27%20bordercolor=%27%23666666%27%20borderopacity=%271%27%20objecttolerance=%2710%27%20gridtolerance=%2710%27%20guidetolerance=%2710%27%20inkscape:pageopacity=%270%27%20inkscape:pageshadow=%272%27%20inkscape:window-width=%271566%27%20inkscape:window-height=%27855%27%20id=%27namedview10%27%20showgrid=%27false%27%20inkscape:zoom=%2710.546875%27%20inkscape:cx=%2732%27%20inkscape:cy=%2732%27%20inkscape:window-x=%2770%27%20inkscape:window-y=%2727%27%20inkscape:window-maximized=%270%27%20inkscape:current-layer=%27svg8%27%20inkscape:pagecheckerboard=%27true%27%20/%3e%3cpath%20d=%27M%2039.33333,5.5%2032,18.33333%2024.666667,5.5%20H%200%20L%2032,61%2064,5.5%20Z%27%20id=%27path4%27%20inkscape:connector-curvature=%270%27%20style=%27fill:%2342b883;stroke-width:0.16666667%27%20/%3e%3cpath%20d=%27M%2039.33333,5.5%2032,18.33333%2024.666667,5.5%20H%2012.833333%20L%2032,38.83333%2051.16667,5.5%20Z%27%20id=%27path6%27%20inkscape:connector-curvature=%270%27%20style=%27fill:%2335495e;stroke-width:0.16666667%27%20/%3e%3c/svg%3e"><div class="card-content"><h2>VueJS</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml,%3csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20fill=&#39;none&#39;%20viewBox=&#39;0%200%2054%2033&#39;%3e%3cg%20clip-path=&#39;url(%23prefix__clip0)&#39;%3e%3cpath%20fill=&#39;%2338bdf8&#39;%20fill-rule=&#39;evenodd&#39;%20d=&#39;M27%200c-7.2%200-11.7%203.6-13.5%2010.8%202.7-3.6%205.85-4.95%209.45-4.05%202.054.513%203.522%202.004%205.147%203.653C30.744%2013.09%2033.808%2016.2%2040.5%2016.2c7.2%200%2011.7-3.6%2013.5-10.8-2.7%203.6-5.85%204.95-9.45%204.05-2.054-.513-3.522-2.004-5.147-3.653C36.756%203.11%2033.692%200%2027%200zM13.5%2016.2C6.3%2016.2%201.8%2019.8%200%2027c2.7-3.6%205.85-4.95%209.45-4.05%202.054.514%203.522%202.004%205.147%203.653C17.244%2029.29%2020.308%2032.4%2027%2032.4c7.2%200%2011.7-3.6%2013.5-10.8-2.7%203.6-5.85%204.95-9.45%204.05-2.054-.513-3.522-2.004-5.147-3.653C23.256%2019.31%2020.192%2016.2%2013.5%2016.2z&#39;%20clip-rule=&#39;evenodd&#39;/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id=&#39;prefix__clip0&#39;%3e%3cpath%20fill=&#39;%23fff&#39;%20d=&#39;M0%200h54v32.4H0z&#39;/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e"><div class="card-content"><h2>Tailwind CSS</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div></div><div class="our-skills"><p>Back-End</p><div class="card" style=""><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGhlaWdodD0iNTEycHgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEycHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxnIGlkPSJfeDMxXzgxLWphdmEiPjxnPjxwYXRoIGQ9Ik0zMzMuMjgzLDMwNy4xMTdjOC44MDctNi4wMiwyMS4wMjMtMTEuMjMsMjEuMDIzLTExLjIzcy0zNC43NjgsNi4yOS02OS4zNTcsOS4xNjUgICAgYy00Mi4zMTUsMy41MDMtODcuNzc1LDQuMjIxLTExMC41OTUsMS4xNjdjLTUzLjk5Ni03LjE4NywyOS42NDctMjcuMDQ0LDI5LjY0Ny0yNy4wNDRzLTMyLjQzMy0yLjE1NC03Mi40MTMsMTcuMDcgICAgQzg0LjQyMiwzMTkuMDY2LDI0OC4zODMsMzI5LjQ4NywzMzMuMjgzLDMwNy4xMTd6IiBzdHlsZT0iZmlsbDojNTM4MkExOyIvPjxwYXRoIGQ9Ik0yNTYuNTYsMjc4LjI3N2MtMTcuMDctMzguMzYyLTc0LjY1OS03Mi4wNTQsMC0xMzAuOTlDMzQ5LjcyNyw3My43OTcsMzAxLjkzLDI2LDMwMS45MywyNiAgICBjMTkuMzE2LDc1LjkxNy02Ny45Miw5OC45MTctOTkuNDU2LDE0Ni4wODRDMTgxLjAwMSwyMDQuMzM3LDIxMi45ODYsMjM4LjkyNywyNTYuNTYsMjc4LjI3N3oiIHN0eWxlPSJmaWxsOiNGODk4MUQ7Ii8+PHBhdGggZD0iTTM1OS41MTgsMTE5Ljk3NWMwLjA5LDAtMTU3LjQwMywzOS4zNTEtODIuMjA1LDEyNS45NThjMjIuMTkxLDI1LjUxNi01Ljg0LDQ4LjUxNi01Ljg0LDQ4LjUxNiAgICBzNTYuMzMyLTI5LjEwOCwzMC40NTctNjUuNDk1QzI3Ny43NjIsMTk0Ljk5MywyNTkuMjU0LDE3OC4xMDMsMzU5LjUxOCwxMTkuOTc1eiIgc3R5bGU9ImZpbGw6I0Y4OTgxRDsiLz48cGF0aCBkPSJNMzU0LjAzOSwzNjIuOTk5Yy0wLjQ0OSwxLjA3OC0xLjc5NywyLjI0Ny0xLjc5NywyLjMzNiAgICBjMTE1LjI2Ni0zMC4yNzcsNzIuODYxLTEwNi44MjQsMTcuNzg3LTg3LjQxNmMtNC44NTIsMS43MDctNy4zNjUsNS42Ni03LjM2NSw1LjY2czMuMDUzLTEuMjU5LDkuODgzLTIuNjk2ICAgIEM0MDAuMzk2LDI3NS4wNDQsNDQwLjM3NywzMTguMTY4LDM1NC4wMzksMzYyLjk5OUwzNTQuMDM5LDM2Mi45OTl6IiBzdHlsZT0iZmlsbDojNTM4MkExOyIvPjxwYXRoIGQ9Ik0zOTYuNDQzLDQxOC45NzFjMCwwLDEzLjAyNywxMC42OTItMTQuMjg1LDE5LjA0N2MtNTIuMDE4LDE1LjcyMi0yMTYuMzM5LDIwLjQ4My0yNjEuOTc5LDAuNjMgICAgYy0xNi40NDEtNy4wOTksMTQuMzc0LTE3LjA3MiwyNC4wNzgtMTkuMTM3YzEwLjA2MS0yLjE1NywxNS45MDEtMS43OTksMTUuOTAxLTEuNzk5Yy0xOC4yMzgtMTIuODQ3LTExNy45NjMsMjUuMjQ3LTUwLjY3MSwzNi4xMTkgICAgQzI5Mi45NDUsNDgzLjY1Nyw0NDQuMDYxLDQ0MC40NDMsMzk2LjQ0Myw0MTguOTcxTDM5Ni40NDMsNDE4Ljk3MXoiIHN0eWxlPSJmaWxsOiM1MzgyQTE7Ii8+PHBhdGggZD0iTTE5NS41NTcsMzgxLjc3NmMtNzAuNzA2LDE5Ljc2Niw0My4wMzUsNjAuNTU1LDEzMy4wNTUsMjIuMDExICAgIGMtMTQuNzMyLTUuNzQ4LTI1LjMzNC0xMi4zOTctMjUuMzM0LTEyLjM5N2MtNDAuMTYsNy42MzctNTguNzU2LDguMTc1LTk1LjIzMyw0LjA0MyAgICBDMTc3Ljk0OCwzOTIuMDE5LDE5NS41NTcsMzgxLjc3NiwxOTUuNTU3LDM4MS43NzZMMTk1LjU1NywzODEuNzc2eiIgc3R5bGU9ImZpbGw6IzUzODJBMTsiLz48cGF0aCBkPSJNMzU3LjA5Miw0NjkuMTAzYy03MC43MDUsMTMuMjk2LTE1Ny45NDEsMTEuNzcxLTIwOS42MDIsMy4yMzNjMC0wLjA4OCwxMC42MDIsOC43MTYsNjUuMDQ2LDEyLjIyICAgIGM4Mi44MzQsNS4zMDIsMjEwLjA1MS0yLjk2NiwyMTMuMDE2LTQyLjEzNkM0MjUuNTUzLDQ0Mi40Miw0MTkuODAzLDQ1Ny4yNDUsMzU3LjA5Miw0NjkuMTAzTDM1Ny4wOTIsNDY5LjEwM3oiIHN0eWxlPSJmaWxsOiM1MzgyQTE7Ii8+PHBhdGggZD0iTTMxNy45MjIsMzQzLjE0NGMtNTMuMTg4LDEwLjI0My04NC4wMDMsOS45NzMtMTIyLjkwNCw1LjkzICAgIGMtMzAuMDk4LTMuMTQ1LTEwLjQyMi0xNy42OTgtMTAuNDIyLTE3LjY5OGMtNzcuOTgyLDI1Ljg3NCw0My4zMDQsNTUuMTY0LDE1Mi4yODEsMjMuMjY5ICAgIEMzMjUuMjg5LDM1MC42MDEsMzE3LjkyMiwzNDMuMTQ0LDMxNy45MjIsMzQzLjE0NHoiIHN0eWxlPSJmaWxsOiM1MzgyQTE7Ii8+PC9nPjwvZz48ZyBpZD0iTGF5ZXJfMSIvPjwvc3ZnPg=="><div class="card-content"><h2>Java</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml,%3csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20width=&#39;64&#39;%20height=&#39;64&#39;%3e%3cpath%20d=&#39;M58.2%203.365a29.503%2029.503%200%200%201-3.419%206.064A32.094%2032.094%200%201%200%209.965%2055.372l1.186%201.047a32.08%2032.08%200%200%200%2052.67-22.253c.875-8.17-1.524-18.51-5.62-30.8zM14.53%2055.558a2.744%202.744%200%201%201-.404-3.857%202.744%202.744%200%200%201%20.404%203.857zm43.538-9.61c-7.92%2010.55-24.83%206.99-35.672%207.502%200%200-1.922.113-3.857.43%200%200%20.73-.31%201.663-.663%207.614-2.65%2011.213-3.16%2015.838-5.54%208.708-4.427%2017.322-14.122%2019.112-24.2-3.313%209.695-13.373%2018.032-22.53%2021.418-6.276%202.313-17.614%204.566-17.614%204.566l-.457-.245c-7.714-3.75-7.952-20.457%206.077-25.845%206.143-2.366%2012.02-1.067%2018.654-2.65%207.084-1.683%2015.28-6.99%2018.615-13.916%203.73%2011.08%208.224%2028.422.166%2039.15z&#39;%20fill=&#39;%2368bd45&#39;/%3e%3c/svg%3e"><div class="card-content"><h2>Spring</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml,%3csvg%20width=&#39;2397&#39;%20height=&#39;2500&#39;%20viewBox=&#39;0%200%20256%20267&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20preserveAspectRatio=&#39;xMidYMid&#39;%3e%3cpath%20d=&#39;M153.671%20178.933l-.932%202.757%2049.137%2083.342%202.781%201.968L256%20178.22l-51.342-89.137-50.986%2089.85zM50.273.304L0%2089.084l52.234%2089.849%2049.738-89.85-.134-3.63L52.565%202.11%2050.273.304z&#39;%20fill=&#39;%2359666C&#39;/%3e%3cpath%20d=&#39;M50.273.304l51.7%2088.78h102.684L152.601.304H50.273zM52.234%20178.933L102.864%20267h101.793l-50.986-88.067H52.234z&#39;%20fill=&#39;%23BCAE79&#39;/%3e%3c/svg%3e"><div class="card-content"><h2>hibernate</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="./Gustavo Batista _ Developer_files/mySQL-CahDJA36.svg"><div class="card-content"><h2>MySQL</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGhlaWdodD0iNTEycHgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEycHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxnIGlkPSJfeDMyXzY3LXB5dGhvbiI+PGc+PHBhdGggZD0iTTE5NC4wMDUsMjQwLjI1MmgxMDUuMDU0YzI5LjIxNiwwLDUyLjUyOS0yNC4xMDEsNTIuNTI5LTUzLjQxNFY4Ni42MDMgICAgYzAtMjguNTI1LTI0LjAwMi00OS44NzEtNTIuNTI5LTU0LjY5MWMtMzUuMjE0LTUuODA0LTczLjQ3OC01LjUwOS0xMDUuMDU0LDAuMDk3Yy00NC40NjIsNy44Ny01Mi41MjcsMjQuMjk4LTUyLjUyNyw1NC42OTMgICAgdjIxLjQ1M0gyNDYuNjN2MzEuOTU5SDEwMi4wMzNjLTMwLjU5MSwwLTU3LjM0OSwxOC4zOTQtNjUuNzA5LDUzLjMxNWMtOS42NCw0MC4wMzUtMTAuMDMzLDY1LjAyLDAsMTA2LjgyNiAgICBjNy40NzYsMzEuMDg1LDI1LjI4LDUzLjMxNCw1NS44NzIsNTMuMzE0aDM2LjEwMXYtNDguMDAxQzEyOC4yOTYsMjcwLjg0NSwxNTguMjk4LDI0MC4yNTIsMTk0LjAwNSwyNDAuMjUyTDE5NC4wMDUsMjQwLjI1MnoiIHN0eWxlPSJmaWxsOiMzNDdBQjQ7Ii8+PHBhdGggZD0iTTQ3NC45NzUsMjA5LjM3MmMtNy41NzUtMzAuMzk1LTIxLjkzNS01My4zMTUtNTIuNTI3LTUzLjMxNWgtMzkuNDQzdjQ2LjYyNiAgICBjMCwzNi4xOTktMzAuNjkyLDY2LjY5MS02NS43MSw2Ni42OTFIMjEyLjI0Yy0yOC43MjQsMC01Mi41MjgsMjQuNTk0LTUyLjUyOCw1My40MTR2MTAwLjEzOCAgICBjMCwyOC41MjQsMjQuNzg4LDQ1LjI0Niw1Mi41MjgsNTMuNDEzYzMzLjI0Nyw5LjczNyw2NS4yMTUsMTEuNTA5LDEwNS4wNTQsMGMyNi40NjItNy42NzUsNTIuNTI5LTIzLjExNiw1Mi41MjktNTMuNDEzdi0yMC45OTcgICAgSDI2NC44Njd2LTMyLjQxN2gxNTcuNThjMzAuNTkzLDAsNDEuOTA0LTIxLjM0Niw1Mi41MjctNTMuMzE0QzQ4NS45OTIsMjgzLjI0NCw0ODUuNTAxLDI1MS41Nyw0NzQuOTc1LDIwOS4zNzJMNDc0Ljk3NSwyMDkuMzcyeiIgc3R5bGU9ImZpbGw6I0ZGQ0ExRDsiLz48cGF0aCBkPSJNMTg3LjQxNSw4OS41OTRjLTEwLjQ3OSwwLTE4Ljk3NS04LjU5MS0xOC45NzUtMTkuMTY0YzAuMDk0LTEwLjY2OCw4LjQ5Ni0xOS4yNTksMTguOTc1LTE5LjI1OSAgICBjMTAuMzg1LDAsMTguOTc2LDguNjg1LDE4Ljk3NiwxOS4yNTlDMjA2LjM5LDgxLjAwMywxOTcuODk0LDg5LjU5NCwxODcuNDE1LDg5LjU5NHoiIHN0eWxlPSJmaWxsOiNGRkZGRkY7Ii8+PHBhdGggZD0iTTMxNC45MDgsNDYwLjA3NmMtMTAuNDc5LDAtMTguOTc2LTguNTkxLTE4Ljk3Ni0xOS4xNjRjMC4wOTUtMTAuNjY4LDguNDk2LTE5LjI1OSwxOC45NzYtMTkuMjU5ICAgIGMxMC4zODUsMCwxOC45NzYsOC42ODUsMTguOTc2LDE5LjI1OUMzMzMuODg0LDQ1MS40ODUsMzI1LjM4OCw0NjAuMDc2LDMxNC45MDgsNDYwLjA3NnoiIHN0eWxlPSJmaWxsOiNGRkZGRkY7Ii8+PC9nPjwvZz48ZyBpZD0iTGF5ZXJfMSIvPjwvc3ZnPg=="><div class="card-content"><h2>Python</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27UTF-8%27?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20width=%27800px%27%20height=%27800px%27%20viewBox=%270%200%20256%20256%27%20version=%271.1%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:xlink=%27http://www.w3.org/1999/xlink%27%20preserveAspectRatio=%27xMidYMid%27%3e%3cg%3e%3crect%20fill=%27%23092E20%27%20x=%270%27%20y=%270%27%20width=%27256%27%20height=%27256%27%20rx=%2728%27%3e%3c/rect%3e%3cpath%20d=%27M186.377012,94.197636%20L186.377012,160.424478%20C186.377012,183.243286%20184.707519,194.187745%20179.699037,203.649406%20C175.060358,212.741266%20168.937684,218.490548%20156.323731,224.798721%20L129.794937,212.183571%20C142.410087,206.247593%20148.531564,201.05481%20152.427049,193.074749%20C156.509231,184.91278%20157.808923,175.451119%20157.808923,150.593015%20L157.808923,94.197636%20L186.377012,94.197636%20Z%20M140.928486,50.0787207%20L140.928486,182.316986%20C126.272844,185.099476%20115.512688,186.212472%20103.826231,186.212472%20C68.9487718,186.212472%2050.7686431,170.445031%2050.7686431,140.205054%20C50.7686431,111.079269%2070.0629644,92.1583404%2099.9295492,92.1583404%20C104.567032,92.1583404%20108.091519,92.5281423%20112.359199,93.6411381%20L112.359199,50.0787207%20L140.928486,50.0787207%20Z%20M102.713236,115.160254%20C88.243093,115.160254%2079.8944275,124.065418%2079.8944275,139.647359%20C79.8944275,154.860696%2087.8720944,163.208164%20102.527736,163.208164%20C105.680028,163.208164%20108.278215,163.022665%20112.359199,162.467364%20L112.359199,116.643052%20C109.020212,115.531253%20106.237722,115.160254%20102.713236,115.160254%20Z%20M186.377012,50.2307105%20L186.377012,79.5419941%20L157.808923,79.5419941%20L157.808923,50.2307105%20L186.377012,50.2307105%20Z%27%20fill=%27%23FFFFFD%27%3e%3c/path%3e%3c/g%3e%3c/svg%3e"><div class="card-content"><h2>Django</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="./Gustavo Batista _ Developer_files/MongoDB-DWZ-arl6.svg"><div class="card-content"><h2>MongoDB</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27utf-8%27?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20aria-label=%27Docker%27%20role=%27img%27%20viewBox=%270%200%20512%20512%27%3e%3crect%20width=%27512%27%20height=%27512%27%20rx=%2715%25%27%20fill=%27%23ffffff%27/%3e%3cpath%20stroke=%27%23066da5%27%20stroke-width=%2738%27%20d=%27M296%20226h42m-92%200h42m-91%200h42m-91%200h41m-91%200h42m8-46h41m8%200h42m7%200h42m-42-46h42%27/%3e%3cpath%20fill=%27%23066da5%27%20d=%27m472%20228s-18-17-55-11c-4-29-35-46-35-46s-29%2035-8%2074c-6%203-16%207-31%207H68c-5%2019-5%20145%20133%20145%2099%200%20173-46%20208-130%2052%204%2063-39%2063-39%27/%3e%3c/svg%3e"><div class="card-content"><h2>Docker</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="./Gustavo Batista _ Developer_files/Node.js-CJ3H6Nm_.svg"><div class="card-content"><h2>NodeJS</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml,%3csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20width=&#39;92pt&#39;%20height=&#39;92pt&#39;%20viewBox=&#39;0%200%2092%2092&#39;%3e%3cdefs%3e%3cclipPath%20id=&#39;a&#39;%3e%3cpath%20d=&#39;M0%20.113h91.887V92H0Zm0%200&#39;/%3e%3c/clipPath%3e%3c/defs%3e%3cg%20clip-path=&#39;url(%23a)&#39;%3e%3cpath%20style=&#39;stroke:none;fill-rule:nonzero;fill:%23f03c2e;fill-opacity:1&#39;%20d=&#39;M90.156%2041.965%2050.036%201.848a5.918%205.918%200%200%200-8.372%200l-8.328%208.332%2010.566%2010.566a7.03%207.03%200%200%201%207.23%201.684%207.034%207.034%200%200%201%201.669%207.277l10.187%2010.184a7.028%207.028%200%200%201%207.278%201.672%207.04%207.04%200%200%201%200%209.957%207.05%207.05%200%200%201-9.965%200%207.044%207.044%200%200%201-1.528-7.66l-9.5-9.497V59.36a7.04%207.04%200%200%201%201.86%2011.29%207.04%207.04%200%200%201-9.957%200%207.04%207.04%200%200%201%200-9.958%207.06%207.06%200%200%201%202.304-1.539V33.926a7.049%207.049%200%200%201-3.82-9.234L29.242%2014.272%201.73%2041.777a5.925%205.925%200%200%200%200%208.371L41.852%2090.27a5.925%205.925%200%200%200%208.37%200l39.934-39.934a5.925%205.925%200%200%200%200-8.371&#39;/%3e%3c/g%3e%3c/svg%3e"><div class="card-content"><h2>Git</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div><div class="card" style=""><img src="data:image/svg+xml,%3csvg%20height=&#39;206&#39;%20preserveAspectRatio=&#39;xMidYMid&#39;%20viewBox=&#39;0%200%20256%20206&#39;%20width=&#39;256&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%3e%3cpath%20d=&#39;m170.2517%2056.8186%2022.253-22.253%201.483-9.37c-40.551-36.873-105.012-32.692-141.567%208.724-10.154%2011.503-17.687%2025.844-21.704%2040.653l7.97-1.123%2044.505-7.339%203.436-3.514c19.797-21.742%2053.27-24.667%2076.128-6.168z&#39;%20fill=&#39;%23ea4335&#39;/%3e%3cpath%20d=&#39;m224.2048%2073.9182c-5.115-18.836-15.616-35.769-30.217-48.722l-31.232%2031.232c13.188%2010.776%2020.701%2027.01%2020.379%2044.037v5.544c15.351%200%2027.797%2012.445%2027.797%2027.796%200%2015.352-12.446%2027.485-27.797%2027.485h-55.671l-5.466%205.934v33.34l5.466%205.231h55.671c39.93.311%2072.552-31.494%2072.863-71.424.188-24.203-11.745-46.893-31.793-60.453&#39;%20fill=&#39;%234285f4&#39;/%3e%3cpath%20d=&#39;m71.8704%20205.7957h55.593v-44.506h-55.593c-3.961-.001-7.797-.852-11.399-2.498l-7.887%202.42-22.409%2022.253-1.952%207.574c12.567%209.489%2027.9%2014.825%2043.647%2014.757&#39;%20fill=&#39;%2334a853&#39;/%3e%3cpath%20d=&#39;m71.8704%2061.4255c-39.931.238-72.107%2032.802-71.869%2072.732.133%2022.298%2010.547%2043.288%2028.222%2056.881l32.248-32.247c-13.991-6.321-20.208-22.786-13.887-36.776%206.32-13.99%2022.786-20.207%2036.775-13.887%206.165%202.785%2011.102%207.723%2013.887%2013.887l32.248-32.247c-13.721-17.937-35.041-28.424-57.624-28.343&#39;%20fill=&#39;%23fbbc05&#39;/%3e%3c/svg%3e"><div class="card-content"><h2>Google Cloud</h2></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 0px; height: 0px;"></div></div></div></div></div><div class="btn-cv-border" style="translate: none; rotate: none; scale: none; transform: translate(-97.2969px, 0px); opacity: 1;"><a href="https://gustavobatista.dev/file/GustavoCV-Eng.pdf" class="dcv" target="_blank"><span></span> <span></span> <span></span> <span></span> Download CV</a></div></section><section class="section service"><section class="content" id="service" data-nav="data-nav" style="opacity: 0;"><h2 class="service-title" key="SERVICE-TITLE" style="translate: none; rotate: none; scale: none; transform: translate(0px, 50px); opacity: 0;">Service</h2><p class="service-text" key="SERVICE-TEXT" style="translate: none; rotate: none; scale: none; transform: translate(-60px, 0px) scale(0.97, 0.97); opacity: 0;">“You might be wondering how i can help you. As a developer, i can turn your ideas into results, using my experiences in both front-end/back-end technologies. Whether it's an application, desktop software or your website, i'll be here to create solutions that meet your expectations.”</p><div class="service-card-wrapper"><div class="service-card" style="translate: none; rotate: none; scale: none; transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1); opacity: 0; will-change: transform;"><img src="./Gustavo Batista _ Developer_files/api-Qri8goAh.svg"><h1 class="service-card-text api-title" key="API-TITLE">API development</h1><div class="service-card-content"><p class="api-text" key="API-TEXT">I develop custom REST API's that ensure an efficient and secure communication between them to integrate your systems.</p></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 442px; height: 442px;"></div></div></div><div class="service-card" style="translate: none; rotate: none; scale: none; transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1); opacity: 0; will-change: transform;"><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27iso-8859-1%27?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20fill=%27%23000000%27%20height=%27800px%27%20width=%27800px%27%20version=%271.1%27%20id=%27Capa_1%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:xlink=%27http://www.w3.org/1999/xlink%27%20viewBox=%270%200%2024.637%2024.637%27%20xml:space=%27preserve%27%3e%3cg%3e%3cpath%20d=%27M18.537,6.945H1.432C0.641,6.945,0,7.582,0,8.369v14.262c0,0.785,0.641,1.426,1.432,1.426h17.105%20c0.785,0,1.426-0.641,1.426-1.426V8.369C19.963,7.582,19.322,6.945,18.537,6.945z%20M6.817,8.016c0.395,0,0.712,0.318,0.712,0.713%20c0,0.393-0.317,0.713-0.712,0.713c-0.392,0-0.71-0.32-0.71-0.713C6.107,8.334,6.426,8.016,6.817,8.016z%20M4.639,8.016%20c0.391,0,0.71,0.318,0.71,0.713c0,0.393-0.319,0.713-0.71,0.713c-0.397,0-0.717-0.32-0.717-0.713%20C3.922,8.334,4.241,8.016,4.639,8.016z%20M2.494,8.016c0.396,0,0.715,0.318,0.715,0.713c0,0.393-0.318,0.713-0.715,0.713%20c-0.39,0-0.709-0.32-0.709-0.713C1.785,8.334,2.104,8.016,2.494,8.016z%20M18.537,22.631H1.432V10.527h17.105%20C18.537,10.527,18.537,22.631,18.537,22.631z%20M18.537,9.101H8.559V8.387h9.979L18.537,9.101L18.537,9.101z%27/%3e%3cpath%20d=%27M23.209,0.58H6.102c-0.79,0-1.426,0.637-1.426,1.426v4.133h1.426V4.162h17.107v12.104h-2.483v1.426h2.483%20c0.786,0,1.428-0.641,1.428-1.426V2.006C24.637,1.217,23.995,0.58,23.209,0.58z%20M7.17,3.076c-0.394,0-0.711-0.316-0.711-0.711%20c0-0.398,0.317-0.713,0.711-0.713c0.393,0,0.713,0.314,0.713,0.713C7.883,2.76,7.562,3.076,7.17,3.076z%20M9.309,3.076%20c-0.396,0-0.713-0.316-0.713-0.711c0-0.398,0.316-0.713,0.713-0.713c0.394,0,0.714,0.314,0.714,0.713%20C10.022,2.76,9.702,3.076,9.309,3.076z%20M11.494,3.076c-0.396,0-0.717-0.316-0.717-0.711c0-0.398,0.32-0.713,0.717-0.713%20c0.389,0,0.707,0.314,0.707,0.713C12.201,2.76,11.883,3.076,11.494,3.076z%20M23.209,2.734h-9.98V2.019h9.98V2.734z%27/%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3cg%3e%3c/g%3e%3c/g%3e%3c/svg%3e"><h1 class="service-card-text web-title" key="WEB-TITLE">Web Application</h1><div class="service-card-content"><p class="web-text" key="WEB-TEXT">I make custom web applications to help your business stand out online.</p></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 442px; height: 442px;"></div></div></div><div class="service-card" style="translate: none; rotate: none; scale: none; transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1); opacity: 0; will-change: transform;"><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27utf-8%27?%3e%3csvg%20version=%271.1%27%20id=%27Layer_1%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:xlink=%27http://www.w3.org/1999/xlink%27%20x=%270px%27%20y=%270px%27%20viewBox=%270%200%20122.88%20101.91%27%20style=%27enable-background:new%200%200%20122.88%20101.91%27%20xml:space=%27preserve%27%3e%3cstyle%20type=%27text/css%27%3e.st0{fill-rule:evenodd;clip-rule:evenodd;}%3c/style%3e%3cg%3e%3cpath%20class=%27st0%27%20d=%27M3.34,0h116.2c1.84,0,3.34,1.5,3.34,3.34v76.98c0,1.84-1.5,3.34-3.34,3.34H3.34C1.5,83.66,0,82.16,0,80.32%20V3.34C0,1.5,1.5,0,3.34,0L3.34,0L3.34,0z%20M12.57,11.68h9.82v2.56h-9.82V11.68L12.57,11.68z%20M27.07,38.8h-14.5v-2.57h14.5V38.8%20L27.07,38.8z%20M46.8,38.81H30.02v-2.58H46.8V38.81L46.8,38.81z%20M75.66,38.81H49.64v-2.57h26.03V38.81L75.66,38.81z%20M37.25,28.07%20H88.4v2.53H37.25V28.07L37.25,28.07z%20M25.22,28.05h9.26v2.56h-9.26V28.05L25.22,28.05z%20M12.57,28.05h9.82v2.56h-9.82V28.05%20L12.57,28.05z%20M34.77,22.41H12.57v-2.54h22.21V22.41L34.77,22.41z%20M46.8,22.42h-9.26v-2.56h9.26V22.42L46.8,22.42z%20M75.66,22.43%20H49.64v-2.57h26.03V22.43L75.66,22.43z%20M37.25,11.68h22.21v2.54H37.25V11.68L37.25,11.68z%20M25.22,11.68h9.26v2.56h-9.26V11.68%20L25.22,11.68z%20M91.2,62.08l-9.1-5.1v-2.92l9.1-5.1v3.36l-6.34,3.16l6.34,3.26V62.08L91.2,62.08z%20M92.89,64.35l3.29-17.91h1.91%20l-3.31,17.91H92.89L92.89,64.35z%20M99.48,62.1v-3.34l6.35-3.2l-6.35-3.24V49l9.1,5.14v2.88L99.48,62.1L99.48,62.1z%20M46.29,88.27%20h30.3c0.08,5.24,2.24,9.93,8.09,13.63H38.2C42.88,98.51,46.31,94.39,46.29,88.27L46.29,88.27L46.29,88.27z%20M61.44,72.41%20c2.37,0,4.29,1.92,4.29,4.29c0,2.37-1.92,4.29-4.29,4.29c-2.37,0-4.29-1.92-4.29-4.29C57.15,74.33,59.07,72.41,61.44,72.41%20L61.44,72.41z%20M10.05,6.29h102.79c1.63,0,2.95,1.33,2.95,2.95v57.52c0,1.62-1.33,2.95-2.95,2.95H10.05c-1.62,0-2.95-1.33-2.95-2.95%20V9.24C7.09,7.62,8.42,6.29,10.05,6.29L10.05,6.29L10.05,6.29z%27/%3e%3c/g%3e%3c/svg%3e"><h1 class="service-card-text desktop-title" key="DESKTOP-TITLE">Desktop Application</h1><div class="service-card-content"><p class="desktop-text" key="DESKTOP-TEXT">I can create custom desktop software to meet your specific needs.</p></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 442px; height: 442px;"></div></div></div><div class="service-card" style="translate: none; rotate: none; scale: none; transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1); opacity: 0; will-change: transform;"><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27iso-8859-1%27?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20fill=%27%23000000%27%20version=%271.1%27%20id=%27Layer_1%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:xlink=%27http://www.w3.org/1999/xlink%27%20viewBox=%270%200%2032%2032%27%20xml:space=%27preserve%27%3e%3cpath%20id=%27devops_1_%27%20d=%27M18,31.36h-4c-0.128,0-0.248-0.069-0.312-0.181l-2-3.464c-0.064-0.111-0.064-0.248,0-0.359l2-3.464%20c0.064-0.111,0.183-0.181,0.312-0.181h3.792l2.896-5.016c0.1-0.174,0.32-0.231,0.491-0.132c0.173,0.1,0.231,0.319,0.132,0.491%20l-2.896,5.017l1.896,3.284c0.064,0.111,0.064,0.248,0,0.359l-2,3.464C18.247,31.291,18.129,31.36,18,31.36z%20M14.208,30.64h3.584%20l1.792-3.104l-1.792-3.104h-3.584l-1.792,3.104L14.208,30.64z%20M28,25.593h-4c-0.129,0-0.247-0.069-0.312-0.181l-2-3.465%20c-0.064-0.111-0.064-0.248,0-0.359l1.896-3.284l-2.896-5.016c-0.1-0.172-0.041-0.393,0.132-0.492c0.171-0.1,0.392-0.041,0.491,0.131%20l2.896,5.016H28c0.129,0,0.247,0.069,0.312,0.181l2,3.464c0.064,0.111,0.064,0.248,0,0.359l-2,3.465%20C28.247,25.523,28.129,25.593,28,25.593z%20M24.208,24.872h3.584l1.792-3.104l-1.792-3.104h-3.584l-1.792,3.104L24.208,24.872z%20M8,25.593H4c-0.128,0-0.248-0.069-0.312-0.181l-2-3.465c-0.064-0.111-0.064-0.248,0-0.359l2-3.464%20C3.752,18.013,3.872,17.943,4,17.943h4c0.128,0,0.248,0.069,0.312,0.181l1.896,3.283H16c0.199,0,0.36,0.161,0.36,0.36%20s-0.161,0.36-0.36,0.36h-5.792l-1.896,3.284C8.248,25.523,8.128,25.593,8,25.593z%20M4.208,24.872h3.584l1.792-3.104l-1.792-3.104%20H4.208l-1.792,3.104L4.208,24.872z%20M11,19.253c-0.125,0-0.246-0.064-0.312-0.181l-2.896-5.016H4c-0.128,0-0.248-0.068-0.312-0.18%20l-2-3.464c-0.064-0.111-0.064-0.249,0-0.36l2-3.464C3.752,6.477,3.872,6.408,4,6.408h4c0.128,0,0.248,0.068,0.312,0.18l2,3.464%20c0.064,0.111,0.064,0.249,0,0.36l-1.896,3.284l2.896,5.017c0.099,0.172,0.04,0.392-0.132,0.491%20C11.124,19.237,11.062,19.253,11,19.253z%20M4.208,13.336h3.584l1.792-3.104L7.792,7.128H4.208l-1.792,3.104L4.208,13.336z%20M28,14.056%20h-4c-0.129,0-0.247-0.068-0.312-0.18l-1.896-3.285H16c-0.199,0-0.36-0.161-0.36-0.36s0.161-0.36,0.36-0.36h5.792l1.896-3.284%20c0.064-0.111,0.183-0.18,0.312-0.18h4c0.129,0,0.247,0.068,0.312,0.18l2,3.464c0.064,0.111,0.064,0.249,0,0.36l-2,3.464%20C28.247,13.988,28.129,14.056,28,14.056z%20M24.208,13.336h3.584l1.792-3.104l-1.792-3.104h-3.584l-1.792,3.104L24.208,13.336z%20M11,13.484c-0.061,0-0.123-0.015-0.18-0.048c-0.172-0.1-0.231-0.32-0.132-0.492l2.896-5.016l-1.896-3.284%20c-0.064-0.112-0.064-0.249,0-0.36l2-3.464C13.752,0.708,13.872,0.64,14,0.64h4c0.129,0,0.247,0.068,0.312,0.18l2,3.464%20c0.064,0.111,0.064,0.249,0,0.36l-2,3.464C18.247,8.22,18.129,8.288,18,8.288h-3.792l-2.896,5.017%20C11.245,13.42,11.124,13.484,11,13.484z%20M14.208,7.568h3.584l1.792-3.104L17.792,1.36h-3.584l-1.792,3.104L14.208,7.568z%27/%3e%3crect%20id=%27_Transparent_Rectangle%27%20style=%27fill:none;%27%20width=%2732%27%20height=%2732%27/%3e%3c/svg%3e"><h1 class="service-card-text devops-title" key="DEVOPS-TITLE">DevOps &amp; CI/CD</h1><div class="service-card-content"><p class="devops-text" key="DEVOPS-TEXT">I implement DevOps practices and CI/CD pipelines with automation and infrastructure as code, ensuring fast, secure, efficient delivery.</p></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 442px; height: 442px;"></div></div></div><div class="service-card" style="translate: none; rotate: none; scale: none; transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1); opacity: 0; will-change: transform;"><img src="data:image/svg+xml,%3csvg%20id=&#39;Layer_1&#39;%20data-name=&#39;Layer%201&#39;%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20122.88%20122.88&#39;%3e%3cdefs%3e%3cstyle%3e.cls-1{fill-rule:evenodd;}%3c/style%3e%3c/defs%3e%3ctitle%3edata-management%3c/title%3e%3cpath%20class=&#39;cls-1&#39;%20d=&#39;M112.21,67.94l4.42,4.42a3,3,0,0,1,0,4.23l-3.56,3.56A23.78,23.78,0,0,1,115.28,86h4.61a3,3,0,0,1,3,3v6.25a3,3,0,0,1-3,3h-5a23.63,23.63,0,0,1-2.6,5.72l3.26,3.26a3,3,0,0,1,0,4.24l-4.42,4.42a3,3,0,0,1-4.23,0l-3.56-3.56a24,24,0,0,1-5.9,2.21v4.61a3,3,0,0,1-3,3H88.16a3,3,0,0,1-3-3v-5a24,24,0,0,1-5.72-2.61l-3.27,3.26a3,3,0,0,1-4.23,0l-4.42-4.42a3,3,0,0,1,0-4.23l3.56-3.56a23.54,23.54,0,0,1-2.21-5.89H64.26a3,3,0,0,1-3-3V87.45a3,3,0,0,1,3-3h5a23.73,23.73,0,0,1,2.61-5.73l-3.27-3.26a3,3,0,0,1,0-4.23l4.42-4.42a3,3,0,0,1,4.23,0l3.57,3.56a23.83,23.83,0,0,1,5.89-2.21V63.56a3,3,0,0,1,3-3H96a3,3,0,0,1,3,3v5a23.55,23.55,0,0,1,5.73,2.61L108,67.94a3,3,0,0,1,4.24,0ZM18,27.19c8.26,2.76,19.76,4.46,32.53,4.46S74.83,30,83.09,27.19c7.25-2.42,11.73-5.35,11.73-8.22s-4.48-5.79-11.73-8.21C74.83,8,63.33,6.29,50.56,6.29S26.29,8,18,10.76C2.65,15.89,2.22,21.91,18,27.19ZM49.18,95c-12.87-.12-24.55-1.93-33.14-4.8a39.87,39.87,0,0,1-9.68-4.55v18.85c.57,2.67,4.92,5.36,11.67,7.61,8.26,2.76,19.76,4.47,32.53,4.47,2.15,0,4.27,0,6.34-.15a15.28,15.28,0,0,0,2,2.53l0,0,3.45,3.44c-3.8.32-7.77.49-11.85.49-13.41,0-25.62-1.84-34.52-4.81-4.69-1.56-16-6.71-16-12.86v-2Q.07,61.09,0,19C0,13.1,6.13,8.12,16,4.81,24.94,1.84,37.15,0,50.56,0S76.18,1.84,85.08,4.81,100,12.22,101,17.41a3.11,3.11,0,0,1,.18,1.06V49.33A15,15,0,0,0,96,48.42H94.81a1.85,1.85,0,0,0,0-.23h0V28.52a40.15,40.15,0,0,1-9.78,4.62C76.18,36.11,64,38,50.56,38S24.94,36.11,16,33.14a39.87,39.87,0,0,1-9.68-4.56v20.2c.57,2.68,4.92,5.37,11.67,7.62,8.26,2.76,19.76,4.47,32.53,4.47,4.09,0,8.06-.18,11.83-.51L60.72,62c-.23.2-.45.4-.67.62A15,15,0,0,0,57,67c-2.11.09-4.27.14-6.45.14-13.41,0-25.62-1.84-34.52-4.81A39.87,39.87,0,0,1,6.36,57.8V76.65C6.93,79.32,11.28,82,18,84.26c8,2.66,18.9,4.34,31.09,4.46v5c0,.44,0,.88.06,1.31Zm42.9-15.93a12.29,12.29,0,1,1-12.3,12.29,12.29,12.29,0,0,1,12.3-12.29Z&#39;/%3e%3c/svg%3e"><h1 class="service-card-text database-title" key="DATABASE-TITLE">Database Management</h1><div class="service-card-content"><p class="database-text" key="DATABASE-TEXT">I also offer database management services to ensure the security of your data.</p></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 442px; height: 442px;"></div></div></div><div class="service-card" style="translate: none; rotate: none; scale: none; transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1); opacity: 0; will-change: transform;"><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27utf-8%27?%3e%3csvg%20version=%271.1%27%20id=%27Layer_1%27%20xmlns=%27http://www.w3.org/2000/svg%27%20xmlns:xlink=%27http://www.w3.org/1999/xlink%27%20x=%270px%27%20y=%270px%27%20viewBox=%270%200%20120.65%20122.88%27%20style=%27enable-background:new%200%200%20120.65%20122.88%27%20xml:space=%27preserve%27%3e%3cg%3e%3cpath%20d=%27M83.24,27.18c-0.69,0.34-1.37,0.7-2.05,1.1c-2.05,1.2-4.06,2.66-6.12,4.34l-4.39-5.03c1.51-1.41,3.16-2.69,4.91-3.82%20c1.39-0.91,2.85-1.71,4.34-2.41c0.6-0.3,1.2-0.58,1.81-0.84c-2.9-5.13-7.07-8.81-11.79-11.08C65.24,7.18,59.95,6.31,54.81,6.8%20c-5.11,0.49-10.08,2.35-14.18,5.54c-4.74,3.68-8.36,9.18-9.74,16.47l-0.43,2.28l-2.27,0.4c-2.22,0.39-4.21,0.92-5.95,1.6%20c-1.69,0.66-3.19,1.46-4.51,2.41c-1.05,0.76-1.96,1.62-2.73,2.54c-2.39,2.86-3.5,6.45-3.47,10.08c0.03,3.69,1.23,7.41,3.44,10.47%20c0.82,1.14,1.78,2.18,2.87,3.09c1.1,0.92,2.35,1.68,3.75,2.25c1.39,0.57,2.92,0.98,4.63,1.22h65.87c3.21-0.77,6.04-1.82,8.44-3.16%20c2.39-1.34,4.34-2.96,5.8-4.91c2.27-3.02,3.39-7.3,3.43-11.68c0.05-4.6-1.07-9.22-3.26-12.59c-0.63-0.97-1.31-1.84-2.04-2.63%20c-3.28-3.53-7.44-5.07-11.76-5.1C89.55,25.06,86.32,25.82,83.24,27.18L83.24,27.18L83.24,27.18z%20M113.31,84.26%20c2.03,0,3.86,0.82,5.19,2.15c1.33,1.33,2.15,3.17,2.15,5.19c0,2.03-0.82,3.86-2.15,5.19c-1.33,1.33-3.17,2.15-5.19,2.15%20c-2.03,0-3.86-0.82-5.19-2.15c-0.69-0.69-1.25-1.52-1.62-2.45H88.23c-1.44,0-2.61-1.17-2.61-2.61v-19.9H71.83v36.83%20c0.98,0.37,1.86,0.95,2.58,1.67c1.33,1.33,2.15,3.17,2.15,5.19c0,2.03-0.82,3.86-2.15,5.19c-1.33,1.33-3.17,2.15-5.19,2.15%20c-2.03,0-3.86-0.82-5.19-2.15c-1.33-1.33-2.15-3.17-2.15-5.19c0-2.03,0.82-3.86,2.15-5.19c0.73-0.73,1.6-1.3,2.58-1.67V71.84H51.02%20v43.27c0,1.44-1.17,2.61-2.61,2.61H19.37c-0.36,1.15-0.99,2.18-1.82,3.01c-1.33,1.33-3.17,2.15-5.19,2.15%20c-2.03,0-3.86-0.82-5.19-2.15c-1.33-1.33-2.15-3.17-2.15-5.19c0-2.03,0.82-3.86,2.15-5.19c1.33-1.33,3.17-2.15,5.19-2.15%20c2.03,0,3.86,0.82,5.19,2.15c0.62,0.62,1.13,1.35,1.5,2.16H45.8V71.84H32.66v13.44c0,1.44-1.17,2.61-2.61,2.61H14.19%20c-0.37,0.95-0.94,1.8-1.65,2.51c-1.33,1.33-3.17,2.15-5.19,2.15s-3.86-0.82-5.19-2.15C0.82,89.08,0,87.24,0,85.21%20c0-2.03,0.82-3.86,2.15-5.19c1.33-1.33,3.17-2.15,5.19-2.15s3.86,0.82,5.19,2.15c0.74,0.74,1.33,1.65,1.7,2.65h13.2V71.84h-1.37%20l-0.42-0.04c-2.42-0.31-4.63-0.88-6.62-1.7c-2.06-0.85-3.89-1.95-5.5-3.3c-1.52-1.27-2.86-2.72-4-4.29%20c-3.03-4.18-4.66-9.29-4.7-14.37C4.81,43.01,6.41,37.9,9.86,33.76c1.12-1.34,2.43-2.57,3.94-3.66c1.75-1.27,3.76-2.35,6.02-3.23%20c1.56-0.61,3.23-1.12,5-1.52c2-7.93,6.26-14.04,11.73-18.29c5.12-3.97,11.29-6.28,17.63-6.89C60.49-0.44,67,0.63,72.83,3.43%20c6.38,3.06,11.93,8.15,15.54,15.32h0c1.45-0.23,2.9-0.34,4.35-0.33c6.1,0.04,11.98,2.22,16.62,7.22c0.97,1.05,1.89,2.22,2.75,3.54%20c2.91,4.47,4.39,10.43,4.33,16.27c-0.06,5.73-1.61,11.43-4.77,15.63c-2.06,2.74-4.7,4.97-7.87,6.74c-3.05,1.71-6.61,3.01-10.6,3.93%20l-0.74,0.09h-1.58v17.29h15.55c0.37-1.03,0.96-1.96,1.72-2.72C109.44,85.08,111.28,84.26,113.31,84.26L113.31,84.26z%27/%3e%3c/g%3e%3c/svg%3e"><h1 class="service-card-text cloud-title" key="CLOUD-TITLE">Cloud Computing</h1><div class="service-card-content"><p class="cloud-text" key="CLOUD-TEXT">I can help migrate and manage your IT operations in the cloud for better efficiency.</p></div><div class="js-tilt-glare" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; border-radius: inherit;"><div class="js-tilt-glare-inner" style="position: absolute; top: 50%; left: 50%; pointer-events: none; background-image: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 100%); transform: rotate(180deg) translate(-50%, -50%); transform-origin: 0% 0%; opacity: 0; width: 442px; height: 442px;"></div></div></div></div></section></section><section class="section"><section class="content" id="projects" data-nav="data-nav" style="opacity: 0;"><h1 class="project-title" key="PROJECT-TITLE" style="translate: none; rotate: none; scale: none; transform: translate(345.859px, 50px); opacity: 0;">Projects</h1><p class="project-text" key="PROJECT-TEXT" style="translate: none; rotate: none; scale: none; transform: translate(-60px, 0px) scale(0.97, 0.97); opacity: 0;">“Check out some of my projects. They show my experience and dedication to development. Each one of them is unique and created with a focus on the user's needs. I hope they demonstrate the value I can add to your project.”</p><div class="carousel" style="translate: none; rotate: none; scale: none; transform: translate(0px, 80px) scale(0.92, 0.92); opacity: 0;"><div class="carousel__body"><div class="prev"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block" aria-hidden="true"><polyline points="15 6 9 12 15 18"></polyline></svg></div><div class="next"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></div><div class="carousel__prev carousel__prev--large"><div class="prev_mobile"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block" aria-hidden="true"><polyline points="15 6 9 12 15 18"></polyline></svg></div></div><div class="carousel__next carousel__next--large"><div class="next_mobile"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></div></div><div class="carousel__prev carousel__prev--large carousel__prev--second"><div class="far fa-angle-left"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block" aria-hidden="true"><polyline points="15 6 9 12 15 18"></polyline></svg></div></div><div class="carousel__next carousel__next--large carousel__next--second"><div class="far fa-angle-right"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:block" aria-hidden="true"><polyline points="9 6 15 12 9 18"></polyline></svg></div></div><div class="carousel__slider" style="width: 6240px; transform: translate3d(-240px, 0px, 0px);"><div class="carousel__slider__item" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-1" style="transform: perspective(1200px) rotateY(40deg);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/GustavoPortfolio_demo.jpg" data-lightbox="undefined" data-index="0">
-        <source data-src="videos/GustavoPortfolio_demo.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-1">My WebGL Portfolio</h3>
-    <p class="description0" key="description10">My interactive portfolio in WebGL. This one you're seeing it now</p><p class="description1">HTML</p><p class="description2">CSS</p><p class="description3">JavaScript</p><p class="description4">WebGL</p><p class="description9">Backend</p><p class="description10">Frontend</p>
-  </div>
-</div><div class="carousel__slider__item" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-10" style="transform: perspective(1200px) rotateY(40deg);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/Sapientum_demo.jpg" data-lightbox="videos/Sapientum_480p.mp4" data-index="1">
-        <source data-src="videos/Sapientum_demo.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-10">Sapientum</h3>
-    <p class="description0" key="description100">A Virtual library which allows you to search and read a series of books</p><p class="description1">HTML</p><p class="description2">CSS</p><p class="description3">JavaScript</p><p class="description9">Backend</p><p class="description10">Frontend</p><p class="description14">API</p><p class="description22"></p><div class="project-logo-container"><div class="project-solo-logo"><a href="https://sapientum.netlify.app/" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/externalLink.svg" alt="ProjectExternalLink"></a></div></div><p></p>
-  </div>
-</div><div class="carousel__slider__item carousel__slider__item--active" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-14" style="transform: perspective(1200px);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/VuExpensio_demo.jpg" data-lightbox="videos/VuExpensio_720p.mp4" data-index="2">
-        <source data-src="videos/VuExpensio_demo.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-14">VuExpensio</h3>
-    <p class="description0" key="description140">A Expense Tracker with graphics, filters and data export in both PDF and CSV</p><p class="description1">HTML</p><p class="description2">CSS</p><p class="description3">JavaScript</p><p class="description10">Frontend</p><p class="description20">VueJS</p><p class="description22"></p><div class="project-logo-container"><div class="project-group-logo"><a href="https://vuexpensio.netlify.app/" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/externalLink.svg" alt="ProjectExternalLink"></a></div><div class="project-group-logo"><a href="https://github.com/Gustav-dev97/VueExpensio-VueExpenseTracker" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/github.svg" alt="GitHub"></a></div></div><p></p>
-  </div>
-</div><div class="carousel__slider__item" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-11" style="transform: perspective(1200px) rotateY(-40deg);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/Fluxudo_demo.jpg" data-lightbox="videos/Fluxudo_480P.mp4" data-index="3">
-        <source data-src="videos/Fluxudo_demo.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-11">FluxuDo</h3>
-    <p class="description0" key="description110">A React App that allows you to organize tasks, projects and your progress effectively</p><p class="description1">HTML</p><p class="description2">CSS</p><p class="description3">JavaScript</p><p class="description4">WebGL</p><p class="description10">Frontend</p><p class="description19">React</p><p class="description21">Tailwind</p><p class="description22"></p><div class="project-logo-container"><div class="project-solo-logo"><a href="https://fluxudo.netlify.app/" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/externalLink.svg" alt="ProjectExternalLink"></a></div></div><p></p>
-  </div>
-</div><div class="carousel__slider__item" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-2" style="transform: perspective(1200px) rotateY(-40deg);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/Java_API_demo.jpg" data-lightbox="videos/JavaAPI_720p.mp4" data-index="4">
-        <source data-src="videos/Java_API_demo.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-2">Employee Management API</h3>
-    <p class="description0" key="description20">REST API for employee management in Java using SpringBoot and Hibernate</p><p class="description9">Backend</p><p class="description11">Java</p><p class="description12">Hibernate</p><p class="description13">Spring</p><p class="description14">API</p><p class="description15">MySQL</p><p class="description18">Docker</p><p class="description22"></p><div class="project-github-logo"><a href="https://github.com/Gustav-dev97/JavaAPI_REST-SpringBoot-Hibernate" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/github.svg" alt="GitHub"></a></div><p></p>
-  </div>
-</div><div class="carousel__slider__item" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-3" style="transform: perspective(1200px) rotateY(-40deg);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/Python_API_demo.jpg" data-lightbox="videos/PythonAPI_720p.mp4" data-index="5">
-        <source data-src="videos/Python_API_demo.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-3">API with Django and MongoDB</h3>
-    <p class="description0" key="description30">API for employee management in Python with Django and MongoDB</p><p class="description5">Python</p><p class="description7">Django</p><p class="description9">Backend</p><p class="description14">API</p><p class="description16">MongoDB</p><p class="description22"></p><div class="project-github-logo"><a href="https://github.com/Gustav-dev97/PythonAPI-Django-MongoDB" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/github.svg" alt="GitHub"></a></div><p></p>
-  </div>
-</div><div class="carousel__slider__item" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-4" style="transform: perspective(1200px) rotateY(-40deg);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/PhP_demo.jpg" data-lightbox="videos/PhP_720p.mp4" data-index="6">
-        <source data-src="videos/PhP_demo.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-4">Dynamic Photo Gallery</h3>
-    <p class="description0" key="description40">A photo gallery developed with an integrated messaging system</p><p class="description1">HTML</p><p class="description2">CSS</p><p class="description8">PHP</p><p class="description9">Backend</p><p class="description10">Frontend</p><p class="description15">MySQL</p><p class="description22"></p><div class="project-logo-container"><div class="project-group-logo"><a href="https://github.com/Gustav-dev97/gustavoWebSitePhp" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/github.svg" alt="GitHub"></a></div><div class="project-group-logo"><a href="https://photogaleryphp.netlify.app/" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/externalLink.svg" alt="ProjectExternalLink"></a></div></div><p></p>
-  </div>
-</div><div class="carousel__slider__item" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-5" style="transform: perspective(1200px) rotateY(-40deg);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/JavaParkingLot_demo.jpg" data-lightbox="videos/JavaParkingLot_720p.mp4" data-index="7">
-        <source data-src="videos/JavaParkingLot_demo.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-5">Parking Lot Management</h3>
-    <p class="description0" key="description50">Management software, for vehicle control, calculation and report issuance</p><p class="description9">Backend</p><p class="description10">Frontend</p><p class="description11">Java</p><p class="description15">MySQL</p><p class="description22"></p><div class="project-github-logo"><a href="https://github.com/Gustav-dev97/projetoEstacionamento" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/github.svg" alt="GitHub"></a></div><p></p>
-  </div>
-</div><div class="carousel__slider__item" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-6" style="transform: perspective(1200px) rotateY(-40deg);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/Hades_demo.jpg" data-lightbox="videos/Hades_720p.mp4" data-index="8">
-        <source data-src="videos/Hades_demo.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-6">Hades Particles: A WebGL Animation</h3>
-    <p class="description0" key="description60">A WebGL animation, aims to demonstrate the use of particles and textures</p><p class="description1">HTML</p><p class="description2">CSS</p><p class="description3">JavaScript</p><p class="description4">WebGL</p><p class="description10">Frontend</p><p class="description22"></p><div class="project-logo-container"><div class="project-group-logo"><a href="https://github.com/Gustav-dev97/gustavoWebSitePhp" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/github.svg" alt="GitHub"></a></div><div class="project-group-logo"><a href="https://codepen.io/gustav-dev97/pen/qBweRNd" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/codepen.svg" alt="ProjectExternalLink"></a></div></div><p></p>
-  </div>
-</div><div class="carousel__slider__item" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-7" style="transform: perspective(1200px) rotateY(-40deg);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/Saturn_demo.jpg" data-lightbox="videos/Saturn_720p.mp4" data-index="9">
-        <source data-src="videos/Saturn_demo.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-7">Saturn's Shadow: Starting with WebGL</h3>
-    <p class="description0" key="description70">A simple animation that aims to demonstrate the basics about WebGL</p><p class="description1">HTML</p><p class="description2">CSS</p><p class="description3">JavaScript</p><p class="description4">WebGL</p><p class="description10">Frontend</p><p class="description22"></p><div class="project-logo-container"><div class="project-group-logo"><a href="https://github.com/Gustav-dev97/DarkSideOfSaturn-Three.js" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/github.svg" alt="GitHub"></a></div><div class="project-group-logo"><a href="https://codepen.io/gustav-dev97/pen/gOyVgmx" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/codepen.svg" alt="ProjectExternalLink"></a></div></div><p></p>
-  </div>
-</div><div class="carousel__slider__item" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-8" style="transform: perspective(1200px) rotateY(-40deg);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/Face_Recon_demo.jpg" data-lightbox="videos/Face_Recon_720p.mp4" data-index="10">
-        <source data-src="videos/Face_Recon_demo.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-8">Facial Recognition Attendance System</h3>
-    <p class="description0" key="description80">Recognizes faces, records date and time of identification and stores in spreadsheet</p><p class="description5">Python</p><p class="description6">Computer Vision</p><p class="description9">Backend</p><p class="description22"></p><div class="project-github-logo"><a href="https://github.com/Gustav-dev97/reconhecimentoFacial" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/github.svg" alt="GitHub"></a></div><p></p>
-  </div>
-</div><div class="carousel__slider__item" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-9" style="transform: perspective(1200px) rotateY(-40deg);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/Pose_demo.jpg" data-lightbox="videos/Pose_720p.mp4" data-index="11">
-        <source data-src="videos/Pose_demo.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-9">Pose Estimation Module</h3>
-    <p class="description0" key="description90">Human pose detection module, scalable and integrable to other projects</p><p class="description5">Python</p><p class="description6">Computer Vision</p><p class="description9">Backend</p><p class="description22"></p><div class="project-github-logo"><a href="https://github.com/Gustav-dev97/estimativaDePose" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/github.svg" alt="GitHub"></a></div><p></p>
-  </div>
-</div><div class="carousel__slider__item" style="width: 440px; height: 364.4px;">
-  <div class="item__3d-frame" key="PROJECT-12" style="transform: perspective(1200px) rotateY(-40deg);">
-    <div class="item__3d-frame__box item__3d-frame__box--front">
-      <video width="100%" height="100%" loop="" muted="" playsinline="" webkit-playsinline="" preload="none" poster="images/posters/ComingSoon.jpg" data-lightbox="undefined" data-index="12">
-        <source data-src="videos/ComingSoon.mp4" type="video/mp4">
-      </video>
-      <div class="project-card-content">
-        <p class="project-card-text" key="PROJECT-CARD-TEXT">VIZUALIZE PROJECT</p>
-      </div>
-    </div>
-    <div class="item__3d-frame__box item__3d-frame__box--left"></div>
-    <div class="item__3d-frame__box item__3d-frame__box--right"></div>
-  </div>
-  <div class="img img"></div>
-  <div class="card-info">
-    <h3 class="title-projects" key="PROJECT-12">AI Fitness Coach</h3>
-    <p class="description0" key="description120">Coming Soon</p><p class="description5">Python</p><p class="description6">Computer Vision</p><p class="description9">Backend</p><p class="description22"></p><div class="project-github-logo"><a href="https://github.com/Gustav-dev97/AIPersonalTrainer-DEMO" target="_blank" rel="noopener noreferrer"><img src="./Gustavo Batista _ Developer_files/github.svg" alt="GitHub"></a></div><p></p>
-  </div>
-</div></div></div></div><div id="lightboxBackdrop" class="lightbox-backdrop" style="display: none;"></div><div id="videoLightbox" class="lightbox" style="display: none;"><span class="close">×</span><div class="lightbox-grid"><div class="lightbox-video-area"><video id="lightboxVideo" class="lightbox-content" controls="" controlslist="nodownload" loop="" muted="" playsinline="" preload="none"><source src="" type="video/mp4"></video></div><div class="project-description-container"><div class="project-name" key="">PROJECT NAME</div><p class="project-description-text" key="">Start</p><div class="project-tags"></div></div><div class="lightbox-logo-container"></div></div></div></section></section><section class="section spacer-section"><div class="spacer"></div></section><section class="contact section"><section class="content" id="contact" data-nav="data-nav" style="opacity: 0;"><h2 class="contact-title" key="CONTACT-TITLE" style="translate: none; rotate: none; scale: none; transform: translate(27.6875px, 50px); opacity: 0;">Contact</h2><div class="delivering" key="DELIVERING">Delivering...</div><div class="positive"><div class="check-icon"><span class="icon-line line-tip"></span> <span class="icon-line line-long"></span><div class="icon-circle"></div><div class="icon-fix"></div><p class="message" key="SUCCESS">Your message has been sent, I will respond as soon as possible</p></div></div><div class="negative"><div class="ban-icon"><span class="icon-line line-long-invert"></span> <span class="icon-line line-long"></span><div class="icon-circle"></div><div class="icon-fix"></div><p class="message" key="FAILED">Oops, your message could not be sent :/</p></div></div><form id="contact-form" style="translate: none; rotate: none; scale: none; transform: translate(0px, 80px) scale(0.92, 0.92); opacity: 0;"><input type="hidden" name="contact_number"> <input type="text" name="from_name" placeholder="Name:" required="" minlength="4"> <input type="email" name="email_id" placeholder="Email:" required=""> <textarea name="message" placeholder="Message:" required="" minlength="10"></textarea><div class="button-container"><div class="social-contact" style="translate: none; rotate: none; scale: none; transform: translate(0px, 80px) scale(0.92, 0.92); opacity: 0;"><a href="https://github.com/Gustav-dev97" target="_blank" rel="noopener noreferrer"><div class="github-logo-contact"><img src="data:image/svg+xml,%3csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20width=&#39;24&#39;%20height=&#39;24&#39;%20viewBox=&#39;0%200%2024%2024&#39;%3e%3cpath%20d=&#39;M12%200c-6.626%200-12%205.373-12%2012%200%205.302%203.438%209.8%208.207%2011.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729%201.205.084%201.839%201.237%201.839%201.237%201.07%201.834%202.807%201.304%203.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931%200-1.311.469-2.381%201.236-3.221-.124-.303-.535-1.524.117-3.176%200%200%201.008-.322%203.301%201.23.957-.266%201.983-.399%203.003-.404%201.02.005%202.047.138%203.006.404%202.291-1.552%203.297-1.23%203.297-1.23.653%201.653.242%202.874.118%203.176.77.84%201.235%201.911%201.235%203.221%200%204.609-2.807%205.624-5.479%205.921.43.372.823%201.102.823%202.222v3.293c0%20.319.192.694.801.576%204.765-1.589%208.199-6.086%208.199-11.386%200-6.627-5.373-12-12-12z&#39;/%3e%3c/svg%3e" alt=""></div></a><a href="mailto:gustavo.dev97@gmail.com" target="_blank" rel="noopener noreferrer"><div class="email-logo-contact"><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27%20encoding=%27utf-8%27?%3e%3c!--%20Uploaded%20to:%20SVG%20Repo,%20www.svgrepo.com,%20Generator:%20SVG%20Repo%20Mixer%20Tools%20--%3e%3csvg%20fill=%27%23000000%27%20width=%27800px%27%20height=%27800px%27%20viewBox=%270%200%201920%201920%27%20xmlns=%27http://www.w3.org/2000/svg%27%3e%3cpath%20d=%27M1920%20428.266v1189.54l-464.16-580.146-88.203%2070.585%20468.679%20585.904H83.684l468.679-585.904-88.202-70.585L0%201617.805V428.265l959.944%20832.441L1920%20428.266ZM1919.932%20226v52.627l-959.943%20832.44L.045%20278.628V226h1919.887Z%27%20fill-rule=%27evenodd%27/%3e%3c/svg%3e" alt=""></div></a><a href="https://www.linkedin.com/in/gustavo-batista-dev/" target="_blank" rel="noopener noreferrer"><div class="linkedIn-logo-contact"><img src="data:image/svg+xml,%3c?xml%20version=%271.0%27?%3e%3csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2030%2030%27%20width=%2730px%27%20height=%2730px%27%3e%3cpath%20d=%27M24,4H6C4.895,4,4,4.895,4,6v18c0,1.105,0.895,2,2,2h18c1.105,0,2-0.895,2-2V6C26,4.895,25.105,4,24,4z%20M10.954,22h-2.95%20v-9.492h2.95V22z%20M9.449,11.151c-0.951,0-1.72-0.771-1.72-1.72c0-0.949,0.77-1.719,1.72-1.719c0.948,0,1.719,0.771,1.719,1.719%20C11.168,10.38,10.397,11.151,9.449,11.151z%20M22.004,22h-2.948v-4.616c0-1.101-0.02-2.517-1.533-2.517%20c-1.535,0-1.771,1.199-1.771,2.437V22h-2.948v-9.492h2.83v1.297h0.04c0.394-0.746,1.356-1.533,2.791-1.533%20c2.987,0,3.539,1.966,3.539,4.522V22z%27/%3e%3c/svg%3e" alt=""></div></a><a href="http://wa.me/+5519978133623/" target="_blank" rel="noopener noreferrer"><div class="whatsapp-logo-contact"><img src="data:image/svg+xml,%3csvg%20xmlns=&#39;http://www.w3.org/2000/svg&#39;%20viewBox=&#39;0%200%20128%20128&#39;%20width=&#39;64px&#39;%20height=&#39;64px&#39;%3e%3cpath%20d=&#39;M%2064%202%20C%2029.8%202%202%2029.8%202%2064%20C%202%2074.5%204.5992188%2084.800391%209.6992188%2093.900391%20L%204.4003906%20113.30078%20C%203.5003906%20116.40078%204.3992188%20119.60039%206.6992188%20121.90039%20C%208.9992188%20124.20039%2012.200781%20125.10078%2015.300781%20124.30078%20L%2035.5%20119%20C%2044.3%20123.6%2054.099609%20126%2064.099609%20126%20C%2098.299609%20126%20126.09961%2098.2%20126.09961%2064%20C%20126.09961%2047.4%20119.7%2031.899219%20108%2020.199219%20C%2096.2%208.4992187%2080.6%202%2064%202%20z%20M%2064%208%20C%2079%208%2093.099609%2013.800391%20103.59961%2024.400391%20C%20114.19961%2035.000391%20120.1%2049.1%20120%2064%20C%20120%2094.9%2094.9%20120%2064%20120%20C%2054.7%20120%2045.399219%20117.59922%2037.199219%20113.19922%20C%2036.799219%20112.99922%2036.300781%20112.80078%2035.800781%20112.80078%20C%2035.500781%20112.80078%2035.3%20112.80039%2035%20112.90039%20L%2013.699219%20118.5%20C%2012.199219%20118.9%2011.200781%20118.09922%2010.800781%20117.69922%20C%2010.400781%20117.29922%209.6%20116.30078%2010%20114.80078%20L%2015.599609%2094.199219%20C%2015.799609%2093.399219%2015.700781%2092.600391%2015.300781%2091.900391%20C%2010.500781%2083.500391%208%2073.8%208%2064%20C%208%2033.1%2033.1%208%2064%208%20z%20M%2064%2017%20C%2038.1%2017%2017%2038%2017%2064%20C%2017%2072.3%2019.200781%2080.4%2023.300781%2087.5%20C%2024.900781%2090.3%2025.3%2093.599219%2024.5%2096.699219%20L%2021.599609%20107.19922%20L%2032.800781%20104.30078%20C%2033.800781%20104.00078%2034.800781%20103.90039%2035.800781%20103.90039%20C%2037.800781%20103.90039%2039.8%20104.40039%2041.5%20105.40039%20C%2048.4%20109.00039%2056.1%20111%2064%20111%20C%2089.9%20111%20111%2089.9%20111%2064%20C%20111%2051.4%20106.09922%2039.599219%2097.199219%2030.699219%20C%2088.399219%2021.899219%2076.6%2017%2064%2017%20z%20M%2043.099609%2036.699219%20L%2045.900391%2036.699219%20C%2047.000391%2036.699219%2048.099219%2036.799219%2049.199219%2039.199219%20C%2050.499219%2042.099219%2053.399219%2049.399609%2053.699219%2050.099609%20C%2054.099219%2050.799609%2054.300781%2051.699219%2053.800781%2052.699219%20C%2053.300781%2053.699219%2053.100781%2054.299219%2052.300781%2055.199219%20C%2051.600781%2056.099219%2050.699609%2057.100781%2050.099609%2057.800781%20C%2049.399609%2058.500781%2048.6%2059.300781%2049.5%2060.800781%20C%2050.4%2062.300781%2053.299219%2067.1%2057.699219%2071%20C%2063.299219%2076%2068.099609%2077.600781%2069.599609%2078.300781%20C%2071.099609%2079.000781%2071.900781%2078.900391%2072.800781%2077.900391%20C%2073.700781%2076.900391%2076.5%2073.599609%2077.5%2072.099609%20C%2078.5%2070.599609%2079.500781%2070.900391%2080.800781%2071.400391%20C%2082.200781%2071.900391%2089.400391%2075.499219%2090.900391%2076.199219%20C%2092.400391%2076.899219%2093.399219%2077.300391%2093.699219%2077.900391%20C%2094.099219%2078.700391%2094.100391%2081.599609%2092.900391%2085.099609%20C%2091.700391%2088.499609%2085.700391%2091.899609%2082.900391%2092.099609%20C%2080.200391%2092.299609%2077.699219%2093.300391%2065.199219%2088.400391%20C%2050.199219%2082.500391%2040.7%2067.099609%2040%2066.099609%20C%2039.3%2065.099609%2034%2058.100781%2034%2050.800781%20C%2034%2043.500781%2037.799219%2040%2039.199219%2038.5%20C%2040.599219%2037%2042.099609%2036.699219%2043.099609%2036.699219%20z&#39;/%3e%3c/svg%3e" alt=""></div></a></div><div class="center"><button class="sendBtn" type="submit"><span class="sentSpan" key="SEND-SPAN">SEND</span> <i class="fa fa-paper-plane fa-lg replace"></i> <i class="fa fa-paper-plane plane fa-lg hidden"></i><div class="spinner hidden"></div></button></div></div></form></section><h1 class="copyright" key="COPYRIGHT_TEXT">© 2026 Gustavo Batista - All rights reserved.</h1><a href="https://gustavobatista.dev/#" id="footer-privacy-link" class="footer-privacy-link" key="FOOTER_PRIVACY_LINK">Privacy Policy</a></section></main><section id="loading-screen-nav"><div id="loader-text">GUSTAVO BATISTA<div class="loader-desc" key="LOADER-TEXT">CREATIVE DEVELOPER</div></div><div id="loader"></div><div class="counter" id="percentage-nav">100</div></section><div class="device"><div class="screen"></div></div><div id="privacy-banner" class="privacy-banner" style="display:none"><p class="privacy-text"><span key="PRIVACY_BANNER_PREFIX">By continuing to use this site, you agree to the</span> <a href="https://gustavobatista.dev/#" id="privacy-link" class="privacy-link" key="PRIVACY_LINK_TEXT">Privacy Policy</a>.</p><button id="privacy-accept" class="privacy-accept-btn" key="PRIVACY_ACCEPT_BTN">I accept</button></div><div id="privacy-modal" class="privacy-modal" style="display:none"><div class="privacy-modal-content"><span class="privacy-modal-close" id="privacy-modal-close">×</span><h2 key="PRIVACY_MODAL_TITLE">Privacy Policy</h2><div class="privacy-modal-body html-content" key="PRIVACY_MODAL_CONTENT">
-  <p>This Privacy Policy explains how Gustavo Batista ("I", "my"), the owner of this personal portfolio, collects, uses, stores and protects the information of visitors who interact with this site. It is intended to address Brazil's General Data Protection Law (LGPD - Law No. 13,709/2018), the EU General Data Protection Regulation (GDPR), and U.S. privacy laws such as California's CCPA/CPRA.</p>
 
-  <p><strong>1. Data controller:</strong> This is a personal portfolio maintained by Gustavo Batista. For any matter related to your personal data, please contact <a href="mailto:gustavo.dev97@gmail.com">gustavo.dev97@gmail.com</a>.</p>
+        setActiveButtons(tabId);
 
-  <p><strong>2. What data is collected:</strong></p>
-  <ul class="ul-description">
-    <li>Data you voluntarily provide through the contact form (name, email and message), sent via the EmailJS service solely so I can respond to you;</li>
-    <li>Your site preferences — privacy notice acceptance, selected language (Portuguese/English), and the minigame's camera mode (1st/3rd person) — stored locally in your browser (localStorage), which stay only on your device and are never sent to me or third parties;</li>
-    <li>Technical data automatically collected by external providers when loading site resources (such as IP address and browser type), as detailed in item 5.</li>
-  </ul>
-  <p>This site does not use tracking cookies, advertising pixels, or any first-party analytics tools.</p>
+        if (current) {
+          current.classList.add('fade-out');
+          var cleaned = false;
+          var finish = function() {
+            if (cleaned) return;
+            cleaned = true;
+            current.removeEventListener('transitionend', finish);
+            current.setAttribute('hidden', '');
+            current.setAttribute('aria-hidden', 'true');
+            current.classList.remove('fade-out');
+          };
+          current.addEventListener('transitionend', finish);
+          setTimeout(finish, 400);
+        }
 
-  <p><strong>3. Purpose of processing:</strong> Data is used exclusively to respond to messages sent through the contact form and to remember your browsing preferences (language, privacy notice, and minigame settings). I do not use your data for marketing, profiling, or sale to third parties.</p>
+        target.removeAttribute('hidden');
+        target.setAttribute('aria-hidden', 'false');
+        target.classList.add('fade-in-prep');
+        void target.offsetWidth;
+        requestAnimationFrame(function() {
+          target.classList.remove('fade-in-prep');
+        });
+      }
 
-  <p><strong>4. Legal basis:</strong> Processing of contact form data is based on your free and informed consent (Art. 7, I, LGPD; Art. 6(1)(a), GDPR), given at the moment you voluntarily fill out and submit the form. Locally saved preferences (language, privacy notice, game camera mode) rely on legitimate interest in providing a seamless browsing experience (Art. 7, IX, LGPD; Art. 6(1)(f), GDPR), since they never leave your device.</p>
+      allTriggers.forEach(function(el) {
+        el.addEventListener('click', function(e) {
+          var tabId = this.getAttribute('data-tab');
+          switchTab(tabId);
+          if (window.innerWidth <= 720) {
+            tabPanelsWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
 
-  <p><strong>5. Third-party services:</strong> To function, this site loads resources from the following external services, which may process technical data (such as IP address) according to their own privacy policies:</p>
-  <ul class="ul-description">
-    <li><strong>EmailJS</strong> — processes and forwards messages sent through the contact form;</li>
-    <li><strong>Google Fonts</strong> — provides the site's typography;</li>
-    <li><strong>Font Awesome (cdnjs)</strong> — provides interface icons;</li>
-    <li><strong>jQuery</strong> (Google/cdnjs) and <strong>jsDelivr</strong> — provide script libraries required for the site to work.</li>
-  </ul>
-  <p>I do not sell, rent, or share your personal data with third parties for marketing purposes.</p>
+      activateTab('about');
 
-  <p><strong>6. International data transfers:</strong> Some of the services above (such as EmailJS and the CDNs mentioned) may store or process data on servers located outside Brazil, including in the United States and the European Union. By using the contact form, you agree to this transfer, which is necessary to provide the service.</p>
+      // ---- SKILL BAR ANIMATION ----
+      const skillsPanel = document.getElementById('skills');
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.attributeName === 'hidden' && !skillsPanel.hasAttribute('hidden')) {
+            setTimeout(function() {
+              const fills = skillsPanel.querySelectorAll('.bar-fill');
+              fills.forEach(function(fill) {
+                const width = fill.style.width;
+                fill.style.width = '0%';
+                setTimeout(function() {
+                  fill.style.width = width;
+                }, 100);
+              });
+            }, 300);
+          }
+        });
+      });
+      observer.observe(skillsPanel, { attributes: true });
 
-  <p><strong>7. Data retention:</strong> Messages sent through the contact form are kept only for as long as necessary to respond to them, and may be deleted at any time upon request. Preferences saved in localStorage remain in your browser until you manually delete them or clear the site's data.</p>
+      // ---- SCROLL REVEAL (Intersection Observer) ----
+      const revealElements = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-children');
 
-  <p><strong>8. Your rights:</strong> Depending on your location, you may have the following rights:</p>
-  <ul class="ul-description">
-    <li><strong>LGPD (Brazil):</strong> confirmation of processing, access, correction, anonimization, portability, deletion of data, and revocation of consent (Arts. 17-22);</li>
-    <li><strong>GDPR (EU/EEA):</strong> access, rectification, erasure, restriction of processing, portability, and objection (Arts. 15-22);</li>
-    <li><strong>CCPA/CPRA (California, USA):</strong> the right to know what data is collected, to request deletion, and to not be discriminated against for exercising these rights. I do not sell or share personal data for commercial purposes, so no "opt-out of sale" mechanism is required.</li>
-  </ul>
-  <p>To exercise any of these rights, please contact <a href="mailto:gustavo.dev97@gmail.com">gustavo.dev97@gmail.com</a>. To delete locally saved preferences, simply clear this site's browsing data/cookies in your browser settings.</p>
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      });
 
-  <p><strong>9. Security:</strong> I take reasonable technical measures to protect the information you provide against unauthorized access, loss, or alteration. However, no system is 100% secure.</p>
+      revealElements.forEach(el => revealObserver.observe(el));
 
-  <p><strong>10. Children's privacy:</strong> This site is not directed at minors and does not knowingly collect data from children.</p>
+      // ---- RIPPLE EFFECT FOR BUTTONS ----
+      document.querySelectorAll('.ripple-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const rect = this.getBoundingClientRect();
+          const ripple = document.createElement('span');
+          ripple.className = 'ripple';
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+          ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+          this.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 800);
+        });
+      });
 
-  <p><strong>11. Changes to this policy:</strong> This policy may be updated periodically to reflect legal changes or changes to how the site works. I recommend reviewing it from time to time.</p>
+      // ---- PARTICLE CANVAS ----
+      const canvas = document.getElementById('particle-canvas');
+      const ctx = canvas.getContext('2d');
+      let width, height;
+      let particles = [];
+      const particleCount = 120;
 
-  <p><strong>12. Contact:</strong> If you have any questions about this policy or about the processing of your data, please contact <a href="mailto:gustavo.dev97@gmail.com">gustavo.dev97@gmail.com</a>.</p>
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
 
-</div></div></div><script>!function(){const e="privacyAccepted",t=document.getElementById("privacy-banner"),n=document.getElementById("privacy-accept"),l=document.getElementById("privacy-link"),c=document.getElementById("privacy-modal"),d=document.getElementById("privacy-modal-close");localStorage.getItem(e)||(t.style.display="flex"),n.addEventListener("click",(function(n){n.preventDefault(),localStorage.setItem(e,"true"),t.style.display="none"})),l.addEventListener("click",(function(e){e.preventDefault(),c.style.display="flex"})),d.addEventListener("click",(function(){c.style.display="none"})),c.addEventListener("click",(function(e){e.target===c&&(c.style.display="none")})),document.addEventListener("keydown",(function(e){"Escape"===e.key&&"flex"===c.style.display&&(c.style.display="none")})),document.getElementById("footer-privacy-link").addEventListener("click",(function(e){e.preventDefault(),c.style.display="flex"}))}()</script><script src="./Gustavo Batista _ Developer_files/vite.config.js.download"></script><script></script><script>document.onreadystatechange=function(){"complete"!==document.readyState?(document.querySelector("body").style.visibility="hidden",document.querySelector("#loading-screen").style.visibility="visible"):document.querySelector("body").style.visibility="visible"}</script><script>history.scrollRestoration?history.scrollRestoration="manual":setTimeout((function(){window.scrollTo(0,0)}),200)</script><script>let tabLinks=document.getElementsByClassName("tab-links"),tabContents=document.getElementsByClassName("tab-contents");function openTab(t){for(tabLink of tabLinks)tabLink.classList.remove("active-link");for(tabContent of tabContents)tabContent.classList.remove("active-tab");event.currentTarget.classList.add("active-link"),document.getElementById(t).classList.add("active-tab")}</script><script src="./Gustavo Batista _ Developer_files/jquery.ripples.min.js.download"></script><script>function isMobile(){const i=navigator.userAgent,e=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(i),r=/OPR\//i.test(i)&&/Mobile|Android|iPhone|iPad|iPod/i.test(i);return e||r}function isSMorOPR(){const i=navigator.userAgent,e=/SamsungBrowser/i.test(i),r=/OPR\/|Opera Mobi|Opera Mini/i.test(i)&&/Mobile|Android|iPhone|iPad|iPod/i.test(i);return e||r}function isFirefox(){return/Firefox/i.test(navigator.userAgent)}isMobile()?$(document).ready((function(){$("#loading-screen-start").ripples({resolution:250,dropRadius:10,perturbance:1})})):isFirefox()||($(document).ready((function(){$(".nav-list").ripples({resolution:500,dropRadius:10,perturbance:1})})),$(document).ready((function(){$("#loading-screen-start").ripples({resolution:500,dropRadius:10,perturbance:1})})))</script><script>"function"==typeof isMobile&&isMobile()&&document.body.classList.add("is-mobile-device")</script><script>let counter=0;const element=document.querySelector("#percentage-nav"),interval=setInterval((()=>{counter>100?clearInterval(interval):(element.textContent=counter,counter++)}),20)</script><script>function getResolution(){window.screen.width,window.devicePixelRatio,window.screen.height,window.devicePixelRatio}getResolution()</script><script>isSMorOPR()&&(document.body.style.zoom="75%")</script><script>document.addEventListener("gesturestart",(function(e){e.preventDefault(),document.body.style.zoom=.99})),document.addEventListener("gesturechange",(function(e){e.preventDefault(),document.body.style.zoom=.99})),document.addEventListener("gestureend",(function(e){e.preventDefault(),document.body.style.zoom=1}))</script><div></div><div id="sconnect-is-installed" style="display: none;">2.16.1.2</div></body></html>
+      class Particle {
+        constructor() {
+          this.x = Math.random() * width;
+          this.y = Math.random() * height;
+          this.size = Math.random() * 2 + 0.5;
+          this.speedX = (Math.random() - 0.5) * 0.3;
+          this.speedY = (Math.random() - 0.5) * 0.3;
+          this.opacity = Math.random() * 0.4 + 0.15;
+        }
+        update() {
+          this.x += this.speedX;
+          this.y += this.speedY;
+          if (this.x < 0 || this.x > width) this.speedX *= -1;
+          if (this.y < 0 || this.y > height) this.speedY *= -1;
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(0, 212, 170, ${this.opacity})`;
+          ctx.fill();
+        }
+      }
+
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+
+      function drawLines() {
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 150) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(0, 212, 170, ${0.06 * (1 - dist / 150)})`;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, width, height);
+        particles.forEach(p => { p.update();
+          p.draw(); });
+        drawLines();
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+    })();
+  </script>
+
+</body>
+</html>
