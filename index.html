@@ -13,7 +13,7 @@
 
   <style>
     /* ======================================================
-       DARK IMMERSIVE THEME — FULL ANIMATIONS + CURSOR
+       DARK IMMERSIVE THEME — BIG CURSOR + NO "ss"
        ====================================================== */
     :root {
       --bg: #080A0C;
@@ -79,36 +79,46 @@
     ::selection { background: var(--accent); color: #0A0C0E; }
     :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-    /* ----- CUSTOM CURSOR ----- */
+    /* ----- BIG CUSTOM CURSOR ----- */
     #cursor-glow {
       position: fixed;
-      width: 30px;
-      height: 30px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(0, 212, 170, 0.3) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(0, 212, 170, 0.25) 0%, rgba(0, 212, 170, 0.05) 40%, transparent 70%);
       pointer-events: none;
       z-index: 9999;
       transform: translate(-50%, -50%);
-      transition: width 0.2s, height 0.2s, background 0.2s;
+      transition: width 0.3s, height 0.3s, background 0.3s;
       mix-blend-mode: screen;
+      border: 1px solid rgba(0, 212, 170, 0.08);
     }
     #cursor-dot {
       position: fixed;
-      width: 3px;
-      height: 3px;
+      width: 8px;
+      height: 8px;
       background: var(--accent);
       border-radius: 50%;
       pointer-events: none;
       z-index: 10000;
       transform: translate(-50%, -50%);
-      transition: width 0.15s, height 0.15s;
+      transition: width 0.2s, height 0.2s;
+      box-shadow: 0 0 20px var(--accent), 0 0 60px rgba(0, 212, 170, 0.3);
     }
     a:hover ~ #cursor-glow,
     button:hover ~ #cursor-glow,
     .btn:hover ~ #cursor-glow {
-      width: 50px;
-      height: 50px;
-      background: radial-gradient(circle, rgba(0, 212, 170, 0.5) 0%, transparent 70%);
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, rgba(0, 212, 170, 0.35) 0%, rgba(0, 212, 170, 0.08) 40%, transparent 70%);
+      border-color: rgba(0, 212, 170, 0.2);
+    }
+    a:hover ~ #cursor-dot,
+    button:hover ~ #cursor-dot,
+    .btn:hover ~ #cursor-dot {
+      width: 12px;
+      height: 12px;
+      box-shadow: 0 0 30px var(--accent), 0 0 80px rgba(0, 212, 170, 0.4);
     }
 
     /* ----- PARTICLE CANVAS (FULL SCREEN) ----- */
@@ -1057,7 +1067,7 @@
     ::-webkit-scrollbar-thumb { background: var(--accent-soft); border-radius: 10px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-    /* ---------- LOADING SCREEN ---------- */
+    /* ---------- LOADING SCREEN — NO "ss" ---------- */
     #loading-screen {
       position: fixed;
       top: 0;
@@ -1076,18 +1086,18 @@
 
     #loader-text {
       font-family: var(--font-display);
-      font-size: clamp(28px, 5vw, 68px);
+      font-size: clamp(32px, 5.5vw, 72px);
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       color: var(--ink);
       text-align: center;
     }
     #loader-text .loader-desc {
       font-family: var(--font-mono);
-      font-size: clamp(12px, 1.5vw, 20px);
+      font-size: clamp(14px, 1.8vw, 22px);
       color: var(--ink-dim);
-      letter-spacing: 0.3em;
-      margin-top: 6px;
+      letter-spacing: 0.4em;
+      margin-top: 8px;
     }
 
     #loader {
@@ -1138,48 +1148,6 @@
       transform: translateY(0);
     }
 
-    .fade-left {
-      opacity: 0;
-      transform: translateX(-40px);
-      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .fade-left.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .fade-right {
-      opacity: 0;
-      transform: translateX(40px);
-      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .fade-right.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .scale-in {
-      opacity: 0;
-      transform: scale(0.92);
-      transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .scale-in.visible {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .stagger-children>* {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    .stagger-children.visible>*:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
-    .stagger-children.visible>*:nth-child(2) { transition-delay: 0.12s; opacity: 1; transform: translateY(0); }
-    .stagger-children.visible>*:nth-child(3) { transition-delay: 0.19s; opacity: 1; transform: translateY(0); }
-    .stagger-children.visible>*:nth-child(4) { transition-delay: 0.26s; opacity: 1; transform: translateY(0); }
-    .stagger-children.visible>*:nth-child(5) { transition-delay: 0.33s; opacity: 1; transform: translateY(0); }
-    .stagger-children.visible>*:nth-child(6) { transition-delay: 0.40s; opacity: 1; transform: translateY(0); }
-
     .float-animate {
       animation: float 6s ease-in-out infinite;
     }
@@ -1200,63 +1168,6 @@
       box-shadow: 0 0 30px rgba(0, 212, 170, 0.1), var(--shadow-md);
       transform: translateY(-6px) scale(1.01);
     }
-
-    .gradient-text {
-      background: linear-gradient(135deg, var(--accent), #00E5C3, var(--gold));
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradient-shift 6s ease-in-out infinite;
-    }
-    @keyframes gradient-shift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    /* Ripple effect for buttons */
-    .ripple-btn {
-      position: relative;
-      overflow: hidden;
-    }
-    .ripple-btn .ripple {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      transform: scale(0);
-      animation: ripple-anim 0.8s ease-out forwards;
-      pointer-events: none;
-    }
-    @keyframes ripple-anim {
-      to { transform: scale(4); opacity: 0; }
-    }
-
-    /* Border glow for cards */
-    .border-glow {
-      position: relative;
-    }
-    .border-glow::before {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, var(--accent), transparent, var(--accent));
-      background-size: 300% 300%;
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      animation: border-rotate 6s linear infinite;
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      pointer-events: none;
-    }
-    .border-glow:hover::before { opacity: 1; }
-    @keyframes border-rotate {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 300% 50%; }
-    }
   </style>
 </head>
 <body>
@@ -1273,11 +1184,11 @@
     </a>
   </div>
 
-  <!-- CUSTOM CURSOR -->
+  <!-- BIG CUSTOM CURSOR -->
   <div id="cursor-dot"></div>
   <div id="cursor-glow"></div>
 
-  <!-- LOADING SCREEN -->
+  <!-- LOADING SCREEN — NO "ss" -->
   <div id="loading-screen">
     <div id="loader-text">
       SAAIF<span style="color:var(--accent);">.</span>
@@ -1340,7 +1251,7 @@
               <h1>Mohamed Saaif<br><span class="highlight">Samsath</span></h1>
               <p class="lede">Operations-focused analyst who turns business processes into measurable improvements — reporting, dashboards, and reconciliation, built on Excel, Power BI, and Tableau.</p>
               <div class="hero-cta">
-                <button type="button" class="btn btn-primary glow-pulse ripple-btn" data-tab="contact">Get in touch</button>
+                <button type="button" class="btn btn-primary glow-pulse" data-tab="contact">Get in touch</button>
                 <a class="btn btn-ghost" href="mailto:mohamedsaaif99@gmail.com">Email directly</a>
               </div>
               <div class="product-badge" style="display:inline-flex;align-items:center;gap:6px;font-family:var(--font-mono);font-size:9px;color:var(--gold);background:rgba(245,166,35,0.1);padding:3px 12px;border-radius:var(--radius-full);border:1px solid rgba(245,166,35,0.12);margin-top:10px;">
@@ -1379,7 +1290,7 @@
           <span class="idx"> Career </span>
         </div>
 
-        <div class="role border-glow glow-on-hover">
+        <div class="role glow-on-hover">
           <span class="when">Jun 2023 —<br>Present</span>
           <div>
             <div class="who">Operations Analyst</div>
@@ -1392,7 +1303,7 @@
           </div>
         </div>
 
-        <div class="role border-glow glow-on-hover">
+        <div class="role glow-on-hover">
           <span class="when">Jul 2022 —<br>Jan 2023</span>
           <div>
             <div class="who">Operations Assistant</div>
@@ -1406,7 +1317,7 @@
           </div>
         </div>
 
-        <div class="role border-glow glow-on-hover">
+        <div class="role glow-on-hover">
           <span class="when">Jan 2021 —<br>Mar 2021</span>
           <div>
             <div class="who">Intern</div>
@@ -1620,7 +1531,7 @@
         header.classList.toggle('scrolled', window.scrollY > 20);
       });
 
-      // ---- CUSTOM CURSOR ----
+      // ---- BIG CUSTOM CURSOR ----
       const dot = document.getElementById('cursor-dot');
       const glow = document.getElementById('cursor-glow');
       let mouseX = 0,
@@ -1636,10 +1547,10 @@
       });
 
       function animateCursor() {
-        dotX += (mouseX - dotX) * 0.2;
-        dotY += (mouseY - dotY) * 0.2;
-        glowX += (mouseX - glowX) * 0.08;
-        glowY += (mouseY - glowY) * 0.08;
+        dotX += (mouseX - dotX) * 0.15;
+        dotY += (mouseY - dotY) * 0.15;
+        glowX += (mouseX - glowX) * 0.06;
+        glowY += (mouseY - glowY) * 0.06;
 
         dot.style.left = dotX + 'px';
         dot.style.top = dotY + 'px';
@@ -1756,9 +1667,8 @@
       });
       observer.observe(skillsPanel, { attributes: true });
 
-      // ---- SCROLL REVEAL (Intersection Observer) ----
-      const revealElements = document.querySelectorAll('.fade-up, .fade-left, .fade-right, .scale-in, .stagger-children');
-
+      // ---- SCROLL REVEAL ----
+      const revealElements = document.querySelectorAll('.fade-up');
       const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1769,23 +1679,7 @@
         threshold: 0.15,
         rootMargin: '0px 0px -40px 0px'
       });
-
       revealElements.forEach(el => revealObserver.observe(el));
-
-      // ---- RIPPLE EFFECT FOR BUTTONS ----
-      document.querySelectorAll('.ripple-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          const rect = this.getBoundingClientRect();
-          const ripple = document.createElement('span');
-          ripple.className = 'ripple';
-          const size = Math.max(rect.width, rect.height);
-          ripple.style.width = ripple.style.height = size + 'px';
-          ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-          ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-          this.appendChild(ripple);
-          setTimeout(() => ripple.remove(), 800);
-        });
-      });
 
       // ---- PARTICLE CANVAS ----
       const canvas = document.getElementById('particle-canvas');
