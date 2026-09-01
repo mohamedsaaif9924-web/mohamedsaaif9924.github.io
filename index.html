@@ -381,6 +381,38 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
 }
 @keyframes btn-ripple{ to{ transform:translate(-50%,-50%) scale(1); opacity:0; } }
 
+/* ---------- SOUND TOGGLE ---------- */
+.sound-toggle{
+  position:fixed; right:18px; bottom:18px; z-index:970;
+  display:flex; align-items:center; gap:10px;
+  background:var(--glass); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--line); border-radius:999px;
+  padding:7px 16px 7px 7px; cursor:pointer; color:var(--ink-dim);
+  font-family:var(--font-body); font-size:11px; font-weight:600; letter-spacing:.01em;
+  transition:border-color .3s, color .3s;
+}
+@media (min-width:480px){ .sound-toggle{ right:24px; bottom:24px; font-size:12px; } }
+.sound-toggle:hover{ border-color:var(--line-bright); color:var(--ink); }
+.sound-toggle .circle{
+  position:relative; width:28px; height:28px; border-radius:50%;
+  border:1.5px solid var(--ink-faint); display:flex; align-items:center; justify-content:center;
+  flex-shrink:0; transition:border-color .3s;
+}
+.sound-toggle.active .circle{ border-color:var(--cyan); }
+.sound-toggle .circle-inner{
+  width:8px; height:8px; border-radius:50%; background:var(--ink-faint);
+  transition:background .3s, box-shadow .3s;
+}
+.sound-toggle.active .circle-inner{ background:var(--cyan); box-shadow:0 0 10px var(--cyan); }
+.sound-toggle .ping{
+  position:absolute; inset:0; border-radius:50%; border:1.5px solid var(--cyan); opacity:0;
+}
+.sound-toggle.active .ping{ animation:sound-ping 1.8s ease-out infinite; }
+@keyframes sound-ping{
+  0%{ transform:scale(1); opacity:.6; }
+  100%{ transform:scale(2); opacity:0; }
+}
+
 /* ---------- SCROLLBAR ---------- */
 ::-webkit-scrollbar{ width:5px; }
 ::-webkit-scrollbar-track{ background:var(--bg); }
@@ -408,6 +440,14 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
 <div id="scroll-progress"></div>
 <div id="cursor-dot"></div>
 <div id="cursor-glow"></div>
+
+<button type="button" id="sound-toggle" class="sound-toggle" aria-pressed="false" aria-label="Toggle interface sound">
+  <span class="circle">
+    <span class="ping"></span>
+    <span class="circle-inner"></span>
+  </span>
+  <span class="sound-label">Sound Off</span>
+</button>
 
 <!-- PRELOADER -->
 <div id="preloader">
@@ -863,8 +903,53 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
   }, { threshold:.4 });
   gauges.forEach(function(el){ gaugeObs.observe(el); });
 
+  /* ---------- SOUND (synthesized, no audio file needed) ---------- */
+  var soundToggle = document.getElementById('sound-toggle');
+  var soundLabel = soundToggle.querySelector('.sound-label');
+  var soundEnabled = false;
+  var audioCtx = null;
+
+  function ensureAudioCtx(){
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+  }
+
+  function playTone(freqStart, freqEnd, duration, type){
+    if (!audioCtx) return;
+    var now = audioCtx.currentTime;
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    var filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 3200;
+    osc.type = type || 'sine';
+    osc.frequency.setValueAtTime(freqStart, now);
+    osc.frequency.exponentialRampToValueAtTime(Math.max(freqEnd, 20), now + duration);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.16, now + 0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+    osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now); osc.stop(now + duration + 0.02);
+  }
+  function playClickBlip(){ playTone(1200, 480, 0.09, 'sine'); }
+  function playToggleOn(){ playTone(500, 1500, 0.15, 'triangle'); }
+  function playToggleOff(){ playTone(900, 280, 0.12, 'triangle'); }
+
+  soundToggle.addEventListener('click', function(){
+    ensureAudioCtx();
+    soundEnabled = !soundEnabled;
+    soundToggle.classList.toggle('active', soundEnabled);
+    soundToggle.setAttribute('aria-pressed', soundEnabled ? 'true' : 'false');
+    soundLabel.textContent = soundEnabled ? 'Sound On' : 'Sound Off';
+    if (soundEnabled) playToggleOn(); else playToggleOff();
+  });
+
   /* ---------- CLICK EFFECTS ---------- */
   document.addEventListener('click', function(e){
+    var isToggle = !!e.target.closest('#sound-toggle');
+
+    // sci-fi blip on every interaction (once sound is enabled)
+    if (soundEnabled && !isToggle) playClickBlip();
     // targeting-reticle burst at click point
     var fx = document.createElement('div');
     fx.className = 'click-fx';
