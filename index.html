@@ -441,12 +441,12 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
 <div id="cursor-dot"></div>
 <div id="cursor-glow"></div>
 
-<button type="button" id="sound-toggle" class="sound-toggle" aria-pressed="false" aria-label="Toggle interface sound">
+<button type="button" id="sound-toggle" class="sound-toggle active" aria-pressed="true" aria-label="Toggle interface sound">
   <span class="circle">
     <span class="ping"></span>
     <span class="circle-inner"></span>
   </span>
-  <span class="sound-label">Sound Off</span>
+  <span class="sound-label">Sound On</span>
 </button>
 
 <!-- PRELOADER -->
@@ -906,7 +906,7 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
   /* ---------- SOUND (synthesized, no audio file needed) ---------- */
   var soundToggle = document.getElementById('sound-toggle');
   var soundLabel = soundToggle.querySelector('.sound-label');
-  var soundEnabled = false;
+  var soundEnabled = true;
   var audioCtx = null;
 
   function ensureAudioCtx(){
@@ -949,7 +949,7 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
     var isToggle = !!e.target.closest('#sound-toggle');
 
     // sci-fi blip on every interaction (once sound is enabled)
-    if (soundEnabled && !isToggle) playClickBlip();
+    if (soundEnabled && !isToggle) { ensureAudioCtx(); playClickBlip(); }
     // targeting-reticle burst at click point
     var fx = document.createElement('div');
     fx.className = 'click-fx';
