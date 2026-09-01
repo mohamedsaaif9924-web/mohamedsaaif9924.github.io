@@ -78,12 +78,10 @@ a{color:inherit; text-decoration:none;}
   opacity:1;
   transform:translateY(0);
 }
-/* Scroll-reactive glow effect */
 #sound-indicator.scrolled{
   border-color:var(--line-bright);
   box-shadow:0 4px 32px rgba(0,229,255,0.15), 0 4px 24px rgba(0,0,0,0.5);
 }
-/* Subtle bounce on first scroll */
 #sound-indicator.bounce{
   animation:indicator-bounce .5s var(--ease);
 }
@@ -366,6 +364,184 @@ h2.sec-title{
 .chip-list{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
 .chip{ font-size:10.5px; color:var(--ink-dim); border:1px solid var(--line); border-radius:999px; padding:4px 10px; }
 
+/* ---------- PORTFOLIO / MY WORK ---------- */
+.portfolio-grid{
+  display:grid; grid-template-columns:1fr; gap:24px; margin-top:40px;
+}
+@media (min-width:640px){
+  .portfolio-grid{ grid-template-columns:repeat(2, 1fr); }
+}
+@media (min-width:1024px){
+  .portfolio-grid{ grid-template-columns:repeat(2, 1fr); gap:28px; }
+}
+.project-card{
+  overflow:hidden; display:flex; flex-direction:column;
+  transition:transform .4s var(--ease), box-shadow .4s var(--ease);
+}
+.project-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 12px 40px rgba(0,229,255,0.12);
+}
+.project-thumb{
+  position:relative; height:200px; overflow:hidden;
+}
+.thumb-bg{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  transition:transform .5s var(--ease);
+}
+.project-card:hover .thumb-bg{
+  transform:scale(1.05);
+}
+.thumb-icon{
+  font-size:56px;
+  filter:drop-shadow(0 0 20px rgba(0,229,255,0.3));
+  transition:transform .4s var(--ease);
+}
+.project-card:hover .thumb-icon{
+  transform:scale(1.1) rotate(-5deg);
+}
+.project-badge{
+  position:absolute; top:12px; right:12px;
+  background:linear-gradient(120deg, var(--cyan), var(--violet));
+  color:#04060d; font-family:var(--font-display);
+  font-size:10px; font-weight:700; padding:4px 12px; border-radius:999px;
+  box-shadow:0 0 16px rgba(0,229,255,0.3);
+}
+.project-info{
+  padding:22px 24px; display:flex; flex-direction:column; flex:1;
+}
+.project-info h3{
+  font-family:var(--font-display); font-weight:700; font-size:16px;
+  color:var(--ink); margin-bottom:10px;
+}
+.project-info p{
+  font-size:13px; color:var(--ink-dim); line-height:1.7;
+  flex:1; margin-bottom:16px;
+}
+.project-tags{
+  display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px;
+}
+.tag{
+  font-size:10.5px; color:var(--ink-dim);
+  border:1px solid var(--line); border-radius:999px; padding:4px 10px;
+  transition:border-color .3s, color .3s;
+}
+.tag:hover{
+  border-color:var(--cyan); color:var(--cyan);
+}
+.project-actions{
+  display:flex; gap:10px; flex-wrap:wrap;
+}
+.btn-sm{
+  padding:9px 16px; font-size:12px;
+}
+.btn-icon{
+  font-size:14px;
+}
+
+/* ---------- UPLOAD SECTION ---------- */
+.upload-section{
+  margin-top:40px;
+  padding:30px 24px;
+  text-align:center;
+  border:2px dashed var(--line);
+  border-radius:var(--radius);
+  transition:border-color .4s, background .4s;
+}
+.upload-section:hover{
+  border-color:var(--line-bright);
+  background:rgba(0,229,255,0.02);
+}
+.upload-section h3{
+  font-family:var(--font-display);
+  font-size:16px;
+  color:var(--ink);
+  margin-bottom:12px;
+}
+.upload-section p{
+  font-size:13px;
+  color:var(--ink-dim);
+  margin-bottom:20px;
+}
+.upload-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 24px;
+  border-radius:999px;
+  background:linear-gradient(120deg, var(--cyan), var(--violet));
+  color:#04060d;
+  font-family:var(--font-body);
+  font-weight:600;
+  font-size:13px;
+  cursor:pointer;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.upload-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,229,255,0.25);
+}
+#file-input{
+  display:none;
+}
+.upload-status{
+  margin-top:16px;
+  font-size:12px;
+  color:var(--ink-faint);
+}
+
+/* ---------- PDF MODAL ---------- */
+.modal-overlay{
+  position:fixed; inset:0; z-index:9990;
+  background:rgba(5,6,13,0.85); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; visibility:hidden;
+  transition:opacity .4s var(--ease), visibility .4s var(--ease);
+  padding:20px;
+}
+.modal-overlay.open{
+  opacity:1; visibility:visible;
+}
+.modal-content{
+  width:100%; max-width:900px; max-height:90vh;
+  display:flex; flex-direction:column;
+  background:var(--glass); border:1px solid var(--line-bright);
+  border-radius:var(--radius); overflow:hidden;
+  transform:scale(0.95) translateY(20px);
+  transition:transform .4s var(--ease);
+}
+.modal-overlay.open .modal-content{
+  transform:scale(1) translateY(0);
+}
+.modal-header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:16px 20px; border-bottom:1px solid var(--line);
+  background:rgba(5,6,13,0.6);
+}
+.modal-header h3{
+  font-family:var(--font-display); font-size:14px; color:var(--ink); margin:0;
+}
+.modal-close{
+  background:none; border:1px solid var(--line); color:var(--ink-dim);
+  width:32px; height:32px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px; cursor:pointer; transition:all .3s;
+}
+.modal-close:hover{
+  border-color:var(--cyan); color:var(--cyan);
+  box-shadow:0 0 12px rgba(0,229,255,0.3);
+}
+.modal-body{
+  flex:1; overflow:auto; background:rgba(5,6,13,0.3);
+}
+#pdf-frame{
+  width:100%; height:70vh; border:none; background:white;
+}
+.modal-footer{
+  padding:14px 20px; border-top:1px solid var(--line);
+  background:rgba(5,6,13,0.6); display:flex; justify-content:flex-end;
+}
+
 /* ---------- CONTACT ---------- */
 .contact-grid{ display:grid; grid-template-columns:1fr; gap:28px; }
 @media (min-width:840px){ .contact-grid{ grid-template-columns:1.2fr 1fr; gap:44px; align-items:center; } }
@@ -460,7 +636,7 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
 <div id="cursor-dot"></div>
 <div id="cursor-glow"></div>
 
-<!-- SOUND INDICATOR (always on, animated on scroll) -->
+<!-- SOUND INDICATOR -->
 <div id="sound-indicator">
   <span class="sound-pip"></span> Sound On
 </div>
@@ -487,6 +663,7 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
       <li><button type="button" data-nav="education">Education</button></li>
       <li><button type="button" data-nav="skills">Skills</button></li>
       <li><button type="button" data-nav="contact">Contact</button></li>
+      <li><button type="button" data-nav="work">My Work</button></li>
     </ul>
     <button type="button" class="nav-cta" data-nav="contact">Let's talk</button>
     <button type="button" class="nav-toggle" id="nav-toggle">Menu</button>
@@ -497,6 +674,7 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
     <button type="button" data-nav="education">Education</button>
     <button type="button" data-nav="skills">Skills</button>
     <button type="button" data-nav="contact">Contact</button>
+    <button type="button" data-nav="work">My Work</button>
   </div>
 </header>
 
@@ -517,7 +695,7 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
           </div>
           <div class="stat-strip">
             <div class="glass stat-chip"><div class="num" data-count="3">0</div><div class="lbl">Years in Ops</div></div>
-            <div class="glass stat-chip"><div class="num" data-count="6">0</div><div class="lbl">Qualifications</div></div>
+            <div class="glass stat-chip"><div class="num" data-count="5">0</div><div class="lbl">Design Projects</div></div>
             <div class="glass stat-chip"><div class="num" data-count="3">0</div><div class="lbl">BI Platforms</div></div>
             <div class="glass stat-chip"><div class="num" data-count="98" data-suffix="%">0</div><div class="lbl">Accuracy Focus</div></div>
           </div>
@@ -535,20 +713,18 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
 
     <div class="ticker" aria-hidden="true">
       <div class="ticker-track">
-        <span class="ticker-item"><span class="dot"></span>Excel — Pivot Tables &amp; XLOOKUP</span>
-        <span class="ticker-item"><span class="dot"></span>Power BI — Dashboards &amp; DAX</span>
-        <span class="ticker-item"><span class="dot"></span>Tableau — Visualization</span>
-        <span class="ticker-item"><span class="dot"></span>MIS Reporting</span>
-        <span class="ticker-item"><span class="dot"></span>SLA &amp; KPI Analysis</span>
-        <span class="ticker-item"><span class="dot"></span>Reconciliation</span>
-        <span class="ticker-item"><span class="dot"></span>Stakeholder Coordination</span>
-        <span class="ticker-item"><span class="dot"></span>Process Improvement</span>
-        <span class="ticker-item"><span class="dot"></span>Excel — Pivot Tables &amp; XLOOKUP</span>
-        <span class="ticker-item"><span class="dot"></span>Power BI — Dashboards &amp; DAX</span>
-        <span class="ticker-item"><span class="dot"></span>Tableau — Visualization</span>
-        <span class="ticker-item"><span class="dot"></span>MIS Reporting</span>
-        <span class="ticker-item"><span class="dot"></span>SLA &amp; KPI Analysis</span>
-        <span class="ticker-item"><span class="dot"></span>Reconciliation</span>
+        <span class="ticker-item"><span class="dot"></span>Social Media Design</span>
+        <span class="ticker-item"><span class="dot"></span>Campaign Creative</span>
+        <span class="ticker-item"><span class="dot"></span>Brand Promotion</span>
+        <span class="ticker-item"><span class="dot"></span>Marketing Design</span>
+        <span class="ticker-item"><span class="dot"></span>Content Creation</span>
+        <span class="ticker-item"><span class="dot"></span>Visual Storytelling</span>
+        <span class="ticker-item"><span class="dot"></span>Social Media Design</span>
+        <span class="ticker-item"><span class="dot"></span>Campaign Creative</span>
+        <span class="ticker-item"><span class="dot"></span>Brand Promotion</span>
+        <span class="ticker-item"><span class="dot"></span>Marketing Design</span>
+        <span class="ticker-item"><span class="dot"></span>Content Creation</span>
+        <span class="ticker-item"><span class="dot"></span>Visual Storytelling</span>
       </div>
     </div>
 
@@ -557,11 +733,11 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
       <div class="about-grid">
         <div class="reveal">
           <p>I work at the intersection of operations and data — reviewing agreements, tracking SLA breaches, and building the daily MIS that lets leadership act faster. My background moves from export operations, to venture administration, to correspondent banking analysis, and now toward an MBA in Fintech and Data Analytics.</p>
-          <p>What stays constant is the habit of turning a messy process into a clear, accurate, repeatable one — and a dashboard that makes the numbers legible to whoever needs them next.</p>
+          <p>Beyond analytics, I have a strong eye for visual storytelling and marketing design — creating compelling social media campaigns, brand promotions, and content that drives engagement across industries.</p>
         </div>
         <div class="glass info-panel reveal" style="transition-delay:.1s;">
           <div class="stat-row"><span>Current role</span><span class="v">Operations Analyst</span></div>
-          <div class="stat-row"><span>Industry</span><span class="v">Fintech / Exchange</span></div>
+          <div class="stat-row"><span>Design work</span><span class="v">5 Projects</span></div>
           <div class="stat-row"><span>Core tools</span><span class="v">Excel · Power BI · Tableau</span></div>
           <div class="stat-row"><span>Nationality</span><span class="v">Sri Lankan</span></div>
           <div class="stat-row"><span>Languages</span><span class="v">English</span></div>
@@ -713,9 +889,9 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
             <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="94" cx="59" cy="59" r="51"></circle></svg>
             <div class="gauge-val">94%</div>
           </div>
-          <h3>Professional</h3>
+          <h3>Professional &amp; Creative</h3>
           <div class="chip-list">
-            <span class="chip">Communication 95%</span><span class="chip">Accuracy 98%</span><span class="chip">Autonomy 92%</span>
+            <span class="chip">Communication 95%</span><span class="chip">Design 90%</span><span class="chip">Autonomy 92%</span>
           </div>
         </div>
       </div>
@@ -750,7 +926,181 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
     </div>
   </section>
 
+  <!-- MY WORK -->
+  <section id="work">
+    <div class="wrap">
+      <span class="eyebrow reveal">Portfolio</span>
+      <h2 class="sec-title reveal">My Work</h2>
+      
+      <div class="portfolio-grid" id="portfolio-grid">
+        
+        <!-- Project 1: Pick Me Foods -->
+        <div class="glass project-card reveal">
+          <div class="project-thumb">
+            <div class="thumb-bg" style="background: linear-gradient(135deg, #ffd700 0%, #ffa500 50%, #ff6b35 100%);">
+              <span class="thumb-icon">🍔</span>
+            </div>
+            <div class="project-badge">PDF</div>
+          </div>
+          <div class="project-info">
+            <h3>Pick Me Foods — Aurudu Campaign</h3>
+            <p>Sinhala & Tamil New Year promotion celebrating traditional flavors with 20% off all outlets. Bilingual social media campaign design.</p>
+            <div class="project-tags">
+              <span class="tag">Social Media</span>
+              <span class="tag">Festival</span>
+              <span class="tag">Bilingual</span>
+            </div>
+            <div class="project-actions">
+              <button type="button" class="btn btn-ghost btn-sm" onclick="openPDFModal('project1')">
+                <span class="btn-icon">👁️</span> Preview
+              </button>
+              <a href="content creating (1).pdf" download class="btn btn-primary btn-sm">
+                <span class="btn-icon">⬇️</span> Download
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: Spa Ceylon -->
+        <div class="glass project-card reveal" style="transition-delay:.05s;">
+          <div class="project-thumb">
+            <div class="thumb-bg" style="background: linear-gradient(135deg, #8b5cf6 0%, #c084fc 50%, #d8b4fe 100%);">
+              <span class="thumb-icon">🌿</span>
+            </div>
+            <div class="project-badge">PDF</div>
+          </div>
+          <div class="project-info">
+            <h3>Spa Ceylon — Wellness Promo</h3>
+            <p>Luxury wellness brand promotion featuring 35% off all services. Elegant design showcasing relaxation and self-care.</p>
+            <div class="project-tags">
+              <span class="tag">Wellness</span>
+              <span class="tag">Luxury</span>
+              <span class="tag">Promotion</span>
+            </div>
+            <div class="project-actions">
+              <button type="button" class="btn btn-ghost btn-sm" onclick="openPDFModal('project2')">
+                <span class="btn-icon">👁️</span> Preview
+              </button>
+              <a href="content creating (1).pdf" download class="btn btn-primary btn-sm">
+                <span class="btn-icon">⬇️</span> Download
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: Trizen Real Estate -->
+        <div class="glass project-card reveal" style="transition-delay:.1s;">
+          <div class="project-thumb">
+            <div class="thumb-bg" style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);">
+              <span class="thumb-icon">🏢</span>
+            </div>
+            <div class="project-badge">PDF</div>
+          </div>
+          <div class="project-info">
+            <h3>Trizen — Real Estate Investment</h3>
+            <p>John Keells Properties investment campaign promoting Colombo's premier real estate development with strategic location benefits.</p>
+            <div class="project-tags">
+              <span class="tag">Real Estate</span>
+              <span class="tag">Investment</span>
+              <span class="tag">Finance</span>
+            </div>
+            <div class="project-actions">
+              <button type="button" class="btn btn-ghost btn-sm" onclick="openPDFModal('project3')">
+                <span class="btn-icon">👁️</span> Preview
+              </button>
+              <a href="content creating (1).pdf" download class="btn btn-primary btn-sm">
+                <span class="btn-icon">⬇️</span> Download
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4: Kapruka vs Amazon -->
+        <div class="glass project-card reveal" style="transition-delay:.15s;">
+          <div class="project-thumb">
+            <div class="thumb-bg" style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);">
+              <span class="thumb-icon">🛒</span>
+            </div>
+            <div class="project-badge">PDF</div>
+          </div>
+          <div class="project-info">
+            <h3>Kapruka vs Amazon — Creative Campaign</h3>
+            <p>Viral-worthy brand comparison using meme culture to position Kapruka as Sri Lanka's #1 e-commerce platform with Amazon-scale confidence.</p>
+            <div class="project-tags">
+              <span class="tag">E-commerce</span>
+              <span class="tag">Creative</span>
+              <span class="tag">Meme Marketing</span>
+            </div>
+            <div class="project-actions">
+              <button type="button" class="btn btn-ghost btn-sm" onclick="openPDFModal('project4')">
+                <span class="btn-icon">👁️</span> Preview
+              </button>
+              <a href="content creating (1).pdf" download class="btn btn-primary btn-sm">
+                <span class="btn-icon">⬇️</span> Download
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5: Aesthetic Institute -->
+        <div class="glass project-card reveal" style="transition-delay:.2s;">
+          <div class="project-thumb">
+            <div class="thumb-bg" style="background: linear-gradient(135deg, #00e5ff 0%, #06b6d4 50%, #0ea5e9 100%);">
+              <span class="thumb-icon">💉</span>
+            </div>
+            <div class="project-badge">PDF</div>
+          </div>
+          <div class="project-info">
+            <h3>Aesthetic Institute — Education Promo</h3>
+            <p>Professional education campaign for aesthetic practitioners, promoting global recognition and expert-led certification programs.</p>
+            <div class="project-tags">
+              <span class="tag">Education</span>
+              <span class="tag">Medical</span>
+              <span class="tag">Certification</span>
+            </div>
+            <div class="project-actions">
+              <button type="button" class="btn btn-ghost btn-sm" onclick="openPDFModal('project5')">
+                <span class="btn-icon">👁️</span> Preview
+              </button>
+              <a href="Work Project (1).pdf" download class="btn btn-primary btn-sm">
+                <span class="btn-icon">⬇️</span> Download
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- UPLOAD SECTION -->
+      <div class="upload-section reveal">
+        <h3>📁 Upload New Work</h3>
+        <p>Have a new project? Upload any file (PDF, image, document) to showcase it instantly.</p>
+        <label for="file-input" class="upload-btn">
+          <span class="btn-icon">📤</span> Choose File
+        </label>
+        <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg,.gif,.doc,.docx,.ppt,.pptx" />
+        <div class="upload-status" id="upload-status">No file selected</div>
+      </div>
+    </div>
+  </section>
+
 </main>
+
+<!-- PDF PREVIEW MODAL -->
+<div id="pdf-modal" class="modal-overlay">
+  <div class="modal-content glass">
+    <div class="modal-header">
+      <h3 id="modal-title">Project Preview</h3>
+      <button type="button" class="modal-close" onclick="closePDFModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <iframe id="pdf-frame" src="" frameborder="0"></iframe>
+    </div>
+    <div class="modal-footer">
+      <a id="modal-download" href="#" download class="btn btn-primary btn-sm">⬇️ Download PDF</a>
+    </div>
+  </div>
+</div>
 
 <footer class="wrap">
   <span>© <span id="year"></span> Mohamed Saaif Samsath</span>
@@ -771,7 +1121,6 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
   function finishLoad(){
     preloader.classList.add('hidden');
     setTimeout(function(){ preloader.style.display='none'; }, 800);
-    // Show sound indicator after preloader fades
     setTimeout(function(){ soundIndicator.classList.add('visible'); }, 700);
   }
   if (reduced) {
@@ -794,23 +1143,19 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
   window.addEventListener('scroll', function(){
     var currentScroll = window.scrollY;
     
-    // Add glow when scrolled past hero
     if (currentScroll > 300) {
       soundIndicator.classList.add('scrolled');
     } else {
       soundIndicator.classList.remove('scrolled');
     }
     
-    // Bounce on first scroll
     if (!scrolledOnce && currentScroll > 50) {
       scrolledOnce = true;
       soundIndicator.classList.add('bounce');
       setTimeout(function(){ soundIndicator.classList.remove('bounce'); }, 600);
     }
     
-    // Smooth parallax-style subtle movement based on scroll direction
     if (Math.abs(currentScroll - lastScrollY) > 100) {
-      // Fast scrolling - add a subtle wiggle
       soundIndicator.style.transform = 'translateY(-3px)';
       setTimeout(function(){ soundIndicator.style.transform = ''; }, 150);
     }
@@ -884,7 +1229,7 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
   sections.forEach(function(s){ spy.observe(s); });
 
   /* ---------- TYPED ROLE ---------- */
-  var roles = ['Operations Analyst', 'Fintech & Data Analytics', 'MIS & Dashboards', 'Reconciliation & SLA'];
+  var roles = ['Operations Analyst', 'Fintech & Data Analytics', 'MIS & Dashboards', 'Creative Designer'];
   var typedEl = document.getElementById('typed-role');
   var cursorSpan = typedEl.querySelector('.cursor');
   if (reduced) {
@@ -957,7 +1302,150 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
   }, { threshold:.4 });
   gauges.forEach(function(el){ gaugeObs.observe(el); });
 
-  /* ---------- SOUND (synthesized, no audio file needed, always on) ---------- */
+  /* ---------- PDF MODAL ---------- */
+  var pdfModal = document.getElementById('pdf-modal');
+  var pdfFrame = document.getElementById('pdf-frame');
+  var modalTitle = document.getElementById('modal-title');
+  var modalDownload = document.getElementById('modal-download');
+
+  var projects = {
+    'project1': {
+      title: 'Pick Me Foods — Aurudu Campaign',
+      pdf: 'content creating (1).pdf'
+    },
+    'project2': {
+      title: 'Spa Ceylon — Wellness Promo',
+      pdf: 'content creating (1).pdf'
+    },
+    'project3': {
+      title: 'Trizen — Real Estate Investment',
+      pdf: 'content creating (1).pdf'
+    },
+    'project4': {
+      title: 'Kapruka vs Amazon — Creative Campaign',
+      pdf: 'content creating (1).pdf'
+    },
+    'project5': {
+      title: 'Aesthetic Institute — Education Promo',
+      pdf: 'Work Project (1).pdf'
+    }
+  };
+
+  window.openPDFModal = function(projectId) {
+    var project = projects[projectId];
+    if (!project) return;
+    
+    modalTitle.textContent = project.title;
+    pdfFrame.src = project.pdf;
+    modalDownload.href = project.pdf;
+    pdfModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closePDFModal = function() {
+    pdfModal.classList.remove('open');
+    document.body.style.overflow = '';
+    setTimeout(function() {
+      pdfFrame.src = '';
+    }, 300);
+  };
+
+  pdfModal.addEventListener('click', function(e) {
+    if (e.target === pdfModal) {
+      closePDFModal();
+    }
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && pdfModal.classList.contains('open')) {
+      closePDFModal();
+    }
+  });
+
+  /* ---------- UPLOAD FILE ---------- */
+  var fileInput = document.getElementById('file-input');
+  var uploadStatus = document.getElementById('upload-status');
+  var portfolioGrid = document.getElementById('portfolio-grid');
+  
+  fileInput.addEventListener('change', function(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    
+    uploadStatus.textContent = 'Selected: ' + file.name;
+    
+    var fileURL = URL.createObjectURL(file);
+    var fileType = file.type;
+    var fileExt = file.name.split('.').pop().toLowerCase();
+    
+    // Determine icon based on file type
+    var icon = '📄';
+    var badge = fileExt.toUpperCase();
+    var gradient = 'linear-gradient(135deg, #00e5ff 0%, #8b5cf6 100%)';
+    
+    if (fileType === 'application/pdf' || fileExt === 'pdf') {
+      icon = '📕';
+      gradient = 'linear-gradient(135deg, #ff4444 0%, #ff6b35 100%)';
+    } else if (fileType.startsWith('image/')) {
+      icon = '🖼️';
+      gradient = 'linear-gradient(135deg, #00e5ff 0%, #00ff88 100%)';
+    } else if (fileType.includes('word') || fileExt === 'doc' || fileExt === 'docx') {
+      icon = '📘';
+      gradient = 'linear-gradient(135deg, #2196f3 0%, #00bcd4 100%)';
+    } else if (fileType.includes('presentation') || fileExt === 'ppt' || fileExt === 'pptx') {
+      icon = '📙';
+      gradient = 'linear-gradient(135deg, #ff9800 0%, #ff5722 100%)';
+    } else if (fileType.includes('sheet') || fileExt === 'xls' || fileExt === 'xlsx') {
+      icon = '📗';
+      gradient = 'linear-gradient(135deg, #4caf50 0%, #8bc34a 100%)';
+    }
+    
+    // Create new project card
+    var card = document.createElement('div');
+    card.className = 'glass project-card reveal visible';
+    card.innerHTML = `
+      <div class="project-thumb">
+        <div class="thumb-bg" style="background: ${gradient};">
+          <span class="thumb-icon">${icon}</span>
+        </div>
+        <div class="project-badge">${badge}</div>
+      </div>
+      <div class="project-info">
+        <h3>${file.name}</h3>
+        <p>Uploaded project — click Preview to view or Download to save.</p>
+        <div class="project-tags">
+          <span class="tag">Uploaded</span>
+          <span class="tag">${fileExt}</span>
+        </div>
+        <div class="project-actions">
+          <button type="button" class="btn btn-ghost btn-sm" onclick="openUploadedFile('${fileURL}')">
+            <span class="btn-icon">👁️</span> Preview
+          </button>
+          <a href="${fileURL}" download class="btn btn-primary btn-sm">
+            <span class="btn-icon">⬇️</span> Download
+          </a>
+        </div>
+      </div>
+    `;
+    
+    portfolioGrid.appendChild(card);
+    uploadStatus.textContent = '✅ Uploaded! ' + file.name;
+    
+    // Reset after a moment
+    setTimeout(function() {
+      uploadStatus.textContent = 'No file selected';
+      fileInput.value = '';
+    }, 3000);
+  });
+
+  window.openUploadedFile = function(url) {
+    modalTitle.textContent = 'Uploaded File';
+    pdfFrame.src = url;
+    modalDownload.href = url;
+    pdfModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  /* ---------- SOUND (synthesized, always on) ---------- */
   var soundEnabled = true;
   var audioCtx = null;
 
@@ -987,9 +1475,7 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
 
   /* ---------- CLICK EFFECTS ---------- */
   document.addEventListener('click', function(e){
-    // sci-fi blip on every interaction
     if (soundEnabled) { ensureAudioCtx(); playClickBlip(); }
-    // targeting-reticle burst at click point
     var fx = document.createElement('div');
     fx.className = 'click-fx';
     fx.style.left = e.clientX + 'px';
@@ -1019,13 +1505,11 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
     document.body.appendChild(fx);
     setTimeout(function(){ fx.remove(); }, 650);
 
-    // cursor flash
     if (!reduced) {
       dot.classList.add('clicking');
       setTimeout(function(){ dot.classList.remove('clicking'); }, 220);
     }
 
-    // contained ripple on buttons
     var btn = e.target.closest('.btn');
     if (btn) {
       var rect = btn.getBoundingClientRect();
