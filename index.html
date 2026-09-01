@@ -12,19 +12,28 @@
 
 <style>
 :root{
+  /* surface */
   --bg:#05060d;
   --bg-2:#080b18;
   --glass: rgba(18,22,42,0.55);
   --glass-soft: rgba(18,22,42,0.32);
   --line: rgba(139,92,246,0.22);
   --line-bright: rgba(0,229,255,0.5);
+
+  /* action / accent */
   --cyan:#00e5ff;
   --violet:#8b5cf6;
+
+  /* text (contrast-checked against --bg: ink 17.9:1, ink-dim 7.8:1, ink-faint 5.0:1) */
   --ink:#eef1fb;
   --ink-dim:#96a0c4;
-  --ink-faint:#4c5578;
+  --ink-faint:#727cae;
+
+  /* type */
   --font-display:'Orbitron', sans-serif;
   --font-body:'Sora', -apple-system, sans-serif;
+
+  /* layout */
   --max:1160px;
   --radius:18px;
   --ease: cubic-bezier(.19,1,.22,1);
@@ -34,6 +43,8 @@ html{scroll-behavior:smooth;}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
   *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
+  #mesh, .hero h1, .ticker-track, .logo .pip{ animation:none !important; }
+  .hero h1{ background-position:0% center; }
 }
 body{
   background:var(--bg);
@@ -42,9 +53,9 @@ body{
   line-height:1.6;
   overflow-x:hidden;
   min-height:100vh;
-  cursor:none;
 }
-@media (hover:none){ body{cursor:auto;} }
+body.cursor-active{ cursor:none; }
+@media (hover:none){ body.cursor-active{ cursor:auto; } }
 a{color:inherit; text-decoration:none;}
 ::selection{background:var(--cyan); color:#04060d;}
 :focus-visible{outline:2px solid var(--cyan); outline-offset:3px;}
@@ -381,38 +392,6 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
 }
 @keyframes btn-ripple{ to{ transform:translate(-50%,-50%) scale(1); opacity:0; } }
 
-/* ---------- SOUND TOGGLE ---------- */
-.sound-toggle{
-  position:fixed; right:18px; bottom:18px; z-index:970;
-  display:flex; align-items:center; gap:10px;
-  background:var(--glass); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-  border:1px solid var(--line); border-radius:999px;
-  padding:7px 16px 7px 7px; cursor:pointer; color:var(--ink-dim);
-  font-family:var(--font-body); font-size:11px; font-weight:600; letter-spacing:.01em;
-  transition:border-color .3s, color .3s;
-}
-@media (min-width:480px){ .sound-toggle{ right:24px; bottom:24px; font-size:12px; } }
-.sound-toggle:hover{ border-color:var(--line-bright); color:var(--ink); }
-.sound-toggle .circle{
-  position:relative; width:28px; height:28px; border-radius:50%;
-  border:1.5px solid var(--ink-faint); display:flex; align-items:center; justify-content:center;
-  flex-shrink:0; transition:border-color .3s;
-}
-.sound-toggle.active .circle{ border-color:var(--cyan); }
-.sound-toggle .circle-inner{
-  width:8px; height:8px; border-radius:50%; background:var(--ink-faint);
-  transition:background .3s, box-shadow .3s;
-}
-.sound-toggle.active .circle-inner{ background:var(--cyan); box-shadow:0 0 10px var(--cyan); }
-.sound-toggle .ping{
-  position:absolute; inset:0; border-radius:50%; border:1.5px solid var(--cyan); opacity:0;
-}
-.sound-toggle.active .ping{ animation:sound-ping 1.8s ease-out infinite; }
-@keyframes sound-ping{
-  0%{ transform:scale(1); opacity:.6; }
-  100%{ transform:scale(2); opacity:0; }
-}
-
 /* ---------- SCROLLBAR ---------- */
 ::-webkit-scrollbar{ width:5px; }
 ::-webkit-scrollbar-track{ background:var(--bg); }
@@ -440,14 +419,6 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
 <div id="scroll-progress"></div>
 <div id="cursor-dot"></div>
 <div id="cursor-glow"></div>
-
-<button type="button" id="sound-toggle" class="sound-toggle active" aria-pressed="true" aria-label="Toggle interface sound">
-  <span class="circle">
-    <span class="ping"></span>
-    <span class="circle-inner"></span>
-  </span>
-  <span class="sound-label">Sound On</span>
-</button>
 
 <!-- PRELOADER -->
 <div id="preloader">
@@ -780,8 +751,12 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
     glow.style.left=gx+'px'; glow.style.top=gy+'px';
     requestAnimationFrame(animCursor);
   }
-  if (!reduced) animCursor();
-  if ('ontouchstart' in window) { dot.style.display='none'; glow.style.display='none'; }
+  if (!reduced && !('ontouchstart' in window)) {
+    document.body.classList.add('cursor-active');
+    animCursor();
+  } else {
+    dot.style.display='none'; glow.style.display='none';
+  }
 
   /* ---------- SCROLL PROGRESS ---------- */
   var progress = document.getElementById('scroll-progress');
@@ -903,9 +878,7 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
   }, { threshold:.4 });
   gauges.forEach(function(el){ gaugeObs.observe(el); });
 
-  /* ---------- SOUND (synthesized, no audio file needed) ---------- */
-  var soundToggle = document.getElementById('sound-toggle');
-  var soundLabel = soundToggle.querySelector('.sound-label');
+  /* ---------- SOUND (synthesized, no audio file needed, always on) ---------- */
   var soundEnabled = true;
   var audioCtx = null;
 
@@ -932,24 +905,11 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
     osc.start(now); osc.stop(now + duration + 0.02);
   }
   function playClickBlip(){ playTone(1200, 480, 0.09, 'sine'); }
-  function playToggleOn(){ playTone(500, 1500, 0.15, 'triangle'); }
-  function playToggleOff(){ playTone(900, 280, 0.12, 'triangle'); }
-
-  soundToggle.addEventListener('click', function(){
-    ensureAudioCtx();
-    soundEnabled = !soundEnabled;
-    soundToggle.classList.toggle('active', soundEnabled);
-    soundToggle.setAttribute('aria-pressed', soundEnabled ? 'true' : 'false');
-    soundLabel.textContent = soundEnabled ? 'Sound On' : 'Sound Off';
-    if (soundEnabled) playToggleOn(); else playToggleOff();
-  });
 
   /* ---------- CLICK EFFECTS ---------- */
   document.addEventListener('click', function(e){
-    var isToggle = !!e.target.closest('#sound-toggle');
-
-    // sci-fi blip on every interaction (once sound is enabled)
-    if (soundEnabled && !isToggle) { ensureAudioCtx(); playClickBlip(); }
+    // sci-fi blip on every interaction
+    if (soundEnabled) { ensureAudioCtx(); playClickBlip(); }
     // targeting-reticle burst at click point
     var fx = document.createElement('div');
     fx.className = 'click-fx';
