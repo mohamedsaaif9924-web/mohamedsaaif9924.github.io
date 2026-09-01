@@ -364,7 +364,7 @@ h2.sec-title{
 .chip-list{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
 .chip{ font-size:10.5px; color:var(--ink-dim); border:1px solid var(--line); border-radius:999px; padding:4px 10px; }
 
-/* ---------- PORTFOLIO / MY WORK ---------- */
+/* ---------- PORTFOLIO / MY WORK (Empty) ---------- */
 .portfolio-grid{
   display:grid; grid-template-columns:1fr; gap:24px; margin-top:40px;
 }
@@ -437,57 +437,6 @@ h2.sec-title{
 }
 .btn-icon{
   font-size:14px;
-}
-
-/* ---------- UPLOAD SECTION ---------- */
-.upload-section{
-  margin-top:40px;
-  padding:30px 24px;
-  text-align:center;
-  border:2px dashed var(--line);
-  border-radius:var(--radius);
-  transition:border-color .4s, background .4s;
-}
-.upload-section:hover{
-  border-color:var(--line-bright);
-  background:rgba(0,229,255,0.02);
-}
-.upload-section h3{
-  font-family:var(--font-display);
-  font-size:16px;
-  color:var(--ink);
-  margin-bottom:12px;
-}
-.upload-section p{
-  font-size:13px;
-  color:var(--ink-dim);
-  margin-bottom:20px;
-}
-.upload-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:12px 24px;
-  border-radius:999px;
-  background:linear-gradient(120deg, var(--cyan), var(--violet));
-  color:#04060d;
-  font-family:var(--font-body);
-  font-weight:600;
-  font-size:13px;
-  cursor:pointer;
-  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
-}
-.upload-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 24px rgba(0,229,255,0.25);
-}
-#file-input{
-  display:none;
-}
-.upload-status{
-  margin-top:16px;
-  font-size:12px;
-  color:var(--ink-faint);
 }
 
 /* ---------- PDF MODAL ---------- */
@@ -926,181 +875,20 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
     </div>
   </section>
 
-  <!-- MY WORK -->
+  <!-- MY WORK (EMPTY - Add projects later) -->
   <section id="work">
     <div class="wrap">
       <span class="eyebrow reveal">Portfolio</span>
       <h2 class="sec-title reveal">My Work</h2>
       
+      <!-- Add your project cards here later -->
       <div class="portfolio-grid" id="portfolio-grid">
-        
-        <!-- Project 1: Pick Me Foods -->
-        <div class="glass project-card reveal">
-          <div class="project-thumb">
-            <div class="thumb-bg" style="background: linear-gradient(135deg, #ffd700 0%, #ffa500 50%, #ff6b35 100%);">
-              <span class="thumb-icon">🍔</span>
-            </div>
-            <div class="project-badge">PDF</div>
-          </div>
-          <div class="project-info">
-            <h3>Pick Me Foods — Aurudu Campaign</h3>
-            <p>Sinhala & Tamil New Year promotion celebrating traditional flavors with 20% off all outlets. Bilingual social media campaign design.</p>
-            <div class="project-tags">
-              <span class="tag">Social Media</span>
-              <span class="tag">Festival</span>
-              <span class="tag">Bilingual</span>
-            </div>
-            <div class="project-actions">
-              <button type="button" class="btn btn-ghost btn-sm" onclick="openPDFModal('project1')">
-                <span class="btn-icon">👁️</span> Preview
-              </button>
-              <a href="content creating (1).pdf" download class="btn btn-primary btn-sm">
-                <span class="btn-icon">⬇️</span> Download
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 2: Spa Ceylon -->
-        <div class="glass project-card reveal" style="transition-delay:.05s;">
-          <div class="project-thumb">
-            <div class="thumb-bg" style="background: linear-gradient(135deg, #8b5cf6 0%, #c084fc 50%, #d8b4fe 100%);">
-              <span class="thumb-icon">🌿</span>
-            </div>
-            <div class="project-badge">PDF</div>
-          </div>
-          <div class="project-info">
-            <h3>Spa Ceylon — Wellness Promo</h3>
-            <p>Luxury wellness brand promotion featuring 35% off all services. Elegant design showcasing relaxation and self-care.</p>
-            <div class="project-tags">
-              <span class="tag">Wellness</span>
-              <span class="tag">Luxury</span>
-              <span class="tag">Promotion</span>
-            </div>
-            <div class="project-actions">
-              <button type="button" class="btn btn-ghost btn-sm" onclick="openPDFModal('project2')">
-                <span class="btn-icon">👁️</span> Preview
-              </button>
-              <a href="content creating (1).pdf" download class="btn btn-primary btn-sm">
-                <span class="btn-icon">⬇️</span> Download
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 3: Trizen Real Estate -->
-        <div class="glass project-card reveal" style="transition-delay:.1s;">
-          <div class="project-thumb">
-            <div class="thumb-bg" style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);">
-              <span class="thumb-icon">🏢</span>
-            </div>
-            <div class="project-badge">PDF</div>
-          </div>
-          <div class="project-info">
-            <h3>Trizen — Real Estate Investment</h3>
-            <p>John Keells Properties investment campaign promoting Colombo's premier real estate development with strategic location benefits.</p>
-            <div class="project-tags">
-              <span class="tag">Real Estate</span>
-              <span class="tag">Investment</span>
-              <span class="tag">Finance</span>
-            </div>
-            <div class="project-actions">
-              <button type="button" class="btn btn-ghost btn-sm" onclick="openPDFModal('project3')">
-                <span class="btn-icon">👁️</span> Preview
-              </button>
-              <a href="content creating (1).pdf" download class="btn btn-primary btn-sm">
-                <span class="btn-icon">⬇️</span> Download
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 4: Kapruka vs Amazon -->
-        <div class="glass project-card reveal" style="transition-delay:.15s;">
-          <div class="project-thumb">
-            <div class="thumb-bg" style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);">
-              <span class="thumb-icon">🛒</span>
-            </div>
-            <div class="project-badge">PDF</div>
-          </div>
-          <div class="project-info">
-            <h3>Kapruka vs Amazon — Creative Campaign</h3>
-            <p>Viral-worthy brand comparison using meme culture to position Kapruka as Sri Lanka's #1 e-commerce platform with Amazon-scale confidence.</p>
-            <div class="project-tags">
-              <span class="tag">E-commerce</span>
-              <span class="tag">Creative</span>
-              <span class="tag">Meme Marketing</span>
-            </div>
-            <div class="project-actions">
-              <button type="button" class="btn btn-ghost btn-sm" onclick="openPDFModal('project4')">
-                <span class="btn-icon">👁️</span> Preview
-              </button>
-              <a href="content creating (1).pdf" download class="btn btn-primary btn-sm">
-                <span class="btn-icon">⬇️</span> Download
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 5: Aesthetic Institute -->
-        <div class="glass project-card reveal" style="transition-delay:.2s;">
-          <div class="project-thumb">
-            <div class="thumb-bg" style="background: linear-gradient(135deg, #00e5ff 0%, #06b6d4 50%, #0ea5e9 100%);">
-              <span class="thumb-icon">💉</span>
-            </div>
-            <div class="project-badge">PDF</div>
-          </div>
-          <div class="project-info">
-            <h3>Aesthetic Institute — Education Promo</h3>
-            <p>Professional education campaign for aesthetic practitioners, promoting global recognition and expert-led certification programs.</p>
-            <div class="project-tags">
-              <span class="tag">Education</span>
-              <span class="tag">Medical</span>
-              <span class="tag">Certification</span>
-            </div>
-            <div class="project-actions">
-              <button type="button" class="btn btn-ghost btn-sm" onclick="openPDFModal('project5')">
-                <span class="btn-icon">👁️</span> Preview
-              </button>
-              <a href="Work Project (1).pdf" download class="btn btn-primary btn-sm">
-                <span class="btn-icon">⬇️</span> Download
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- UPLOAD SECTION -->
-      <div class="upload-section reveal">
-        <h3>📁 Upload New Work</h3>
-        <p>Have a new project? Upload any file (PDF, image, document) to showcase it instantly.</p>
-        <label for="file-input" class="upload-btn">
-          <span class="btn-icon">📤</span> Choose File
-        </label>
-        <input type="file" id="file-input" accept=".pdf,.png,.jpg,.jpeg,.gif,.doc,.docx,.ppt,.pptx" />
-        <div class="upload-status" id="upload-status">No file selected</div>
+        <!-- Projects will be added here -->
       </div>
     </div>
   </section>
 
 </main>
-
-<!-- PDF PREVIEW MODAL -->
-<div id="pdf-modal" class="modal-overlay">
-  <div class="modal-content glass">
-    <div class="modal-header">
-      <h3 id="modal-title">Project Preview</h3>
-      <button type="button" class="modal-close" onclick="closePDFModal()">×</button>
-    </div>
-    <div class="modal-body">
-      <iframe id="pdf-frame" src="" frameborder="0"></iframe>
-    </div>
-    <div class="modal-footer">
-      <a id="modal-download" href="#" download class="btn btn-primary btn-sm">⬇️ Download PDF</a>
-    </div>
-  </div>
-</div>
 
 <footer class="wrap">
   <span>© <span id="year"></span> Mohamed Saaif Samsath</span>
@@ -1301,149 +1089,6 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
     });
   }, { threshold:.4 });
   gauges.forEach(function(el){ gaugeObs.observe(el); });
-
-  /* ---------- PDF MODAL ---------- */
-  var pdfModal = document.getElementById('pdf-modal');
-  var pdfFrame = document.getElementById('pdf-frame');
-  var modalTitle = document.getElementById('modal-title');
-  var modalDownload = document.getElementById('modal-download');
-
-  var projects = {
-    'project1': {
-      title: 'Pick Me Foods — Aurudu Campaign',
-      pdf: 'content creating (1).pdf'
-    },
-    'project2': {
-      title: 'Spa Ceylon — Wellness Promo',
-      pdf: 'content creating (1).pdf'
-    },
-    'project3': {
-      title: 'Trizen — Real Estate Investment',
-      pdf: 'content creating (1).pdf'
-    },
-    'project4': {
-      title: 'Kapruka vs Amazon — Creative Campaign',
-      pdf: 'content creating (1).pdf'
-    },
-    'project5': {
-      title: 'Aesthetic Institute — Education Promo',
-      pdf: 'Work Project (1).pdf'
-    }
-  };
-
-  window.openPDFModal = function(projectId) {
-    var project = projects[projectId];
-    if (!project) return;
-    
-    modalTitle.textContent = project.title;
-    pdfFrame.src = project.pdf;
-    modalDownload.href = project.pdf;
-    pdfModal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-
-  window.closePDFModal = function() {
-    pdfModal.classList.remove('open');
-    document.body.style.overflow = '';
-    setTimeout(function() {
-      pdfFrame.src = '';
-    }, 300);
-  };
-
-  pdfModal.addEventListener('click', function(e) {
-    if (e.target === pdfModal) {
-      closePDFModal();
-    }
-  });
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && pdfModal.classList.contains('open')) {
-      closePDFModal();
-    }
-  });
-
-  /* ---------- UPLOAD FILE ---------- */
-  var fileInput = document.getElementById('file-input');
-  var uploadStatus = document.getElementById('upload-status');
-  var portfolioGrid = document.getElementById('portfolio-grid');
-  
-  fileInput.addEventListener('change', function(e) {
-    var file = e.target.files[0];
-    if (!file) return;
-    
-    uploadStatus.textContent = 'Selected: ' + file.name;
-    
-    var fileURL = URL.createObjectURL(file);
-    var fileType = file.type;
-    var fileExt = file.name.split('.').pop().toLowerCase();
-    
-    // Determine icon based on file type
-    var icon = '📄';
-    var badge = fileExt.toUpperCase();
-    var gradient = 'linear-gradient(135deg, #00e5ff 0%, #8b5cf6 100%)';
-    
-    if (fileType === 'application/pdf' || fileExt === 'pdf') {
-      icon = '📕';
-      gradient = 'linear-gradient(135deg, #ff4444 0%, #ff6b35 100%)';
-    } else if (fileType.startsWith('image/')) {
-      icon = '🖼️';
-      gradient = 'linear-gradient(135deg, #00e5ff 0%, #00ff88 100%)';
-    } else if (fileType.includes('word') || fileExt === 'doc' || fileExt === 'docx') {
-      icon = '📘';
-      gradient = 'linear-gradient(135deg, #2196f3 0%, #00bcd4 100%)';
-    } else if (fileType.includes('presentation') || fileExt === 'ppt' || fileExt === 'pptx') {
-      icon = '📙';
-      gradient = 'linear-gradient(135deg, #ff9800 0%, #ff5722 100%)';
-    } else if (fileType.includes('sheet') || fileExt === 'xls' || fileExt === 'xlsx') {
-      icon = '📗';
-      gradient = 'linear-gradient(135deg, #4caf50 0%, #8bc34a 100%)';
-    }
-    
-    // Create new project card
-    var card = document.createElement('div');
-    card.className = 'glass project-card reveal visible';
-    card.innerHTML = `
-      <div class="project-thumb">
-        <div class="thumb-bg" style="background: ${gradient};">
-          <span class="thumb-icon">${icon}</span>
-        </div>
-        <div class="project-badge">${badge}</div>
-      </div>
-      <div class="project-info">
-        <h3>${file.name}</h3>
-        <p>Uploaded project — click Preview to view or Download to save.</p>
-        <div class="project-tags">
-          <span class="tag">Uploaded</span>
-          <span class="tag">${fileExt}</span>
-        </div>
-        <div class="project-actions">
-          <button type="button" class="btn btn-ghost btn-sm" onclick="openUploadedFile('${fileURL}')">
-            <span class="btn-icon">👁️</span> Preview
-          </button>
-          <a href="${fileURL}" download class="btn btn-primary btn-sm">
-            <span class="btn-icon">⬇️</span> Download
-          </a>
-        </div>
-      </div>
-    `;
-    
-    portfolioGrid.appendChild(card);
-    uploadStatus.textContent = '✅ Uploaded! ' + file.name;
-    
-    // Reset after a moment
-    setTimeout(function() {
-      uploadStatus.textContent = 'No file selected';
-      fileInput.value = '';
-    }, 3000);
-  });
-
-  window.openUploadedFile = function(url) {
-    modalTitle.textContent = 'Uploaded File';
-    pdfFrame.src = url;
-    modalDownload.href = url;
-    pdfModal.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
 
   /* ---------- SOUND (synthesized, always on) ---------- */
   var soundEnabled = true;
