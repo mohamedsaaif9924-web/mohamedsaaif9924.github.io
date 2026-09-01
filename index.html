@@ -118,8 +118,13 @@ header.nav{
   border-bottom:1px solid var(--line);
 }
 .nav-row{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
-.logo{ font-family:var(--font-display); font-weight:700; font-size:17px; letter-spacing:.03em; display:flex; align-items:center; gap:8px; }
-.logo .pip{ width:7px; height:7px; border-radius:50%; background:var(--cyan); box-shadow:0 0 10px var(--cyan); animation:pip-pulse 2.2s ease-in-out infinite; }
+.logo{
+  font-family:var(--font-display); font-weight:800; font-size:16px; letter-spacing:.09em;
+  display:flex; align-items:center; gap:10px; color:#ffffff;
+  text-shadow:0 0 18px rgba(0,229,255,0.45);
+}
+@media (min-width:480px){ .logo{ font-size:18px; } }
+.logo .pip{ width:7px; height:7px; border-radius:50%; background:var(--cyan); box-shadow:0 0 10px var(--cyan); animation:pip-pulse 2.2s ease-in-out infinite; flex-shrink:0; }
 @keyframes pip-pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
 
 .nav-links{ position:relative; display:none; list-style:none; gap:2px; }
@@ -374,7 +379,7 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
 
 <header class="nav">
   <div class="wrap nav-row">
-    <div class="logo"><span class="pip"></span> SAAIF.OPS</div>
+    <div class="logo"><span class="pip"></span> SAAIF PORTFOLIO</div>
     <ul class="nav-links" id="nav-links">
       <div id="nav-indicator"></div>
       <li><button type="button" data-nav="about" class="active">About</button></li>
