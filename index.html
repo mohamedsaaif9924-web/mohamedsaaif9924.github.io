@@ -1145,130 +1145,121 @@ footer{
 
 <script>
 /* =========================================================
-   INTERACTION SOUND
-   Browsers block autoplay, so sound activates on the first
-   user tap/click. After that, clicks/taps play a subtle blip.
+   INTERACTION SOUND — UPDATED
+   • Original click sound restored
+   • Soft sci-fi swoosh on noticeable cursor/finger rotation
+   • Works on desktop + mobile after first user interaction
    ========================================================= */
 (function(){
   const indicator = document.getElementById('sound-indicator');
   let audioCtx = null;
   let soundEnabled = false;
+  let lastX = null, lastY = null, lastAngle = null, lastMoveSound = 0;
 
   function ensureAudio(){
-    if (!audioCtx) {
-      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-      if (!AudioContextClass) return false;
-      audioCtx = new AudioContextClass();
+    if(!audioCtx){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(!AC) return false;
+      audioCtx = new AC();
     }
-
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-
+    if(audioCtx.state === 'suspended') audioCtx.resume();
     soundEnabled = true;
-
-    if (indicator) {
+    if(indicator){
       indicator.innerHTML = '<span class="sound-pip"></span> Sound On';
       indicator.classList.add('visible');
     }
-
     return true;
   }
 
-  function playTone(freqStart, freqEnd, duration, volume){
-    if (!soundEnabled || !audioCtx) return;
-
+  function playTone(freqStart, freqEnd, duration, volume, type){
+    if(!soundEnabled || !audioCtx) return;
     const now = audioCtx.currentTime;
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     const filter = audioCtx.createBiquadFilter();
-
-    osc.type = 'sine';
+    osc.type = type || 'sine';
     osc.frequency.setValueAtTime(freqStart, now);
-    osc.frequency.exponentialRampToValueAtTime(Math.max(freqEnd, 20), now + duration);
-
-    filter.type = 'lowpass';
-    filter.frequency.value = 3200;
-
+    osc.frequency.exponentialRampToValueAtTime(Math.max(freqEnd,20), now+duration);
+    filter.type='lowpass'; filter.frequency.value=3200;
     gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(volume || 0.12, now + 0.008);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-
-    osc.connect(filter);
-    filter.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    osc.start(now);
-    osc.stop(now + duration + 0.03);
+    gain.gain.exponentialRampToValueAtTime(volume || 0.10, now+0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now+duration);
+    osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now); osc.stop(now+duration+0.03);
   }
 
-  function clickSound(){
-    playTone(1150, 480, 0.09, 0.11);
+  function playOldClick(){ playTone(1200,480,0.09,0.12,'sine'); }
+  function playActivation(){
+    playTone(620,980,0.10,0.08,'sine');
+    setTimeout(()=>playTone(980,1380,0.08,0.055,'sine'),65);
   }
 
-  function activationSound(){
-    playTone(620, 980, 0.12, 0.10);
-    setTimeout(function(){
-      playTone(980, 1380, 0.10, 0.07);
-    }, 70);
+  function playTurnSound(intensity){
+    if(!soundEnabled || !audioCtx) return;
+    intensity = Math.max(0, Math.min(1, intensity));
+    const now = audioCtx.currentTime;
+    const bufferSize = Math.floor(audioCtx.sampleRate * 0.10);
+    const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for(let i=0;i<bufferSize;i++) data[i]=(Math.random()*2-1)*(1-i/bufferSize);
+    const noise=audioCtx.createBufferSource(); noise.buffer=buffer;
+    const filter=audioCtx.createBiquadFilter();
+    filter.type='bandpass'; filter.frequency.setValueAtTime(850,now);
+    filter.frequency.exponentialRampToValueAtTime(1800,now+0.08); filter.Q.value=1.2;
+    const gain=audioCtx.createGain(); const vol=0.012+intensity*0.025;
+    gain.gain.setValueAtTime(0.0001,now);
+    gain.gain.exponentialRampToValueAtTime(vol,now+0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001,now+0.09);
+    noise.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+    noise.start(now); noise.stop(now+0.11);
+    playTone(360+intensity*180,620+intensity*240,0.055,0.018+intensity*0.012,'triangle');
   }
 
-  if (indicator) {
-    indicator.innerHTML = '<span class="sound-pip"></span> Tap for Sound';
-    indicator.style.cursor = 'pointer';
-    indicator.setAttribute('role', 'button');
-    indicator.setAttribute('tabindex', '0');
-
-    indicator.addEventListener('click', function(e){
-      e.stopPropagation();
-      if (ensureAudio()) activationSound();
-    });
-
-    indicator.addEventListener('keydown', function(e){
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        if (ensureAudio()) activationSound();
-      }
-    });
+  if(indicator){
+    indicator.innerHTML='<span class="sound-pip"></span> Tap for Sound';
+    indicator.style.cursor='pointer'; indicator.setAttribute('role','button'); indicator.setAttribute('tabindex','0');
+    indicator.addEventListener('click',e=>{e.stopPropagation(); if(ensureAudio()) playActivation();});
+    indicator.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault(); if(ensureAudio()) playActivation();}});
   }
 
-  /* First real user interaction unlocks audio on iPhone/Android/Desktop */
-  function firstInteraction(){
-    if (ensureAudio()) activationSound();
-    document.removeEventListener('pointerdown', firstInteraction, true);
-    document.removeEventListener('touchstart', firstInteraction, true);
+  function unlockAudio(){
+    if(ensureAudio()) playActivation();
+    document.removeEventListener('pointerdown', unlockAudio, true);
+    document.removeEventListener('touchstart', unlockAudio, true);
   }
+  document.addEventListener('pointerdown', unlockAudio, true);
+  document.addEventListener('touchstart', unlockAudio, {capture:true,passive:true});
 
-  document.addEventListener('pointerdown', firstInteraction, true);
-  document.addEventListener('touchstart', firstInteraction, {capture:true, passive:true});
-
-  /* Play a small sound on buttons, links and nav items */
   document.addEventListener('click', function(e){
-    if (!soundEnabled) return;
-
-    const interactive = e.target.closest(
-      'a, button, .btn, .contact-row, .nav-links button, #mobile-menu button'
-    );
-
-    if (interactive) clickSound();
+    if(!soundEnabled) return;
+    const interactive=e.target.closest('a, button, .btn, .contact-row, .nav-links button, #mobile-menu button');
+    if(interactive) playOldClick();
   });
 
-  /* Extra tap sound for touch devices */
-  document.addEventListener('touchend', function(e){
-    if (!soundEnabled) return;
+  document.addEventListener('pointerdown', function(e){
+    if(!soundEnabled) return;
+    const interactive=e.target.closest('a, button, .btn, .contact-row, .nav-links button, #mobile-menu button');
+    if(!interactive && e.pointerType!=='touch') playTone(950,430,0.065,0.045,'sine');
+  });
 
-    const target = e.target.closest(
-      'a, button, .btn, .contact-row, .nav-links button, #mobile-menu button'
-    );
-
-    if (target) clickSound();
-  }, {passive:true});
-
-  /* Resume audio if the browser suspends it after tab switching */
-  document.addEventListener('visibilitychange', function(){
-    if (!document.hidden && audioCtx && audioCtx.state === 'suspended') {
-      audioCtx.resume();
+  function movementSound(x,y){
+    if(!soundEnabled){ lastX=x; lastY=y; return; }
+    if(lastX===null||lastY===null){ lastX=x; lastY=y; return; }
+    const dx=x-lastX, dy=y-lastY, distance=Math.hypot(dx,dy);
+    if(distance<5) return;
+    const angle=Math.atan2(dy,dx);
+    if(lastAngle!==null){
+      let diff=Math.abs(angle-lastAngle); if(diff>Math.PI) diff=Math.PI*2-diff;
+      const now=performance.now();
+      if(diff>0.48 && now-lastMoveSound>240){ playTurnSound(Math.min(1,diff/1.7)); lastMoveSound=now; }
     }
+    lastAngle=angle; lastX=x; lastY=y;
+  }
+  document.addEventListener('pointermove',e=>movementSound(e.clientX,e.clientY),{passive:true});
+  document.addEventListener('touchmove',e=>{if(e.touches&&e.touches[0]) movementSound(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
+
+  document.addEventListener('visibilitychange', function(){
+    if(!document.hidden && audioCtx && audioCtx.state==='suspended') audioCtx.resume();
   });
 })();
 </script>
