@@ -12,40 +12,25 @@
 
 <style>
 :root{
-  /* surface */
   --bg:#05060d;
   --bg-2:#080b18;
   --glass: rgba(18,22,42,0.55);
   --glass-soft: rgba(18,22,42,0.32);
   --line: rgba(139,92,246,0.22);
   --line-bright: rgba(0,229,255,0.5);
-
-  /* action / accent */
   --cyan:#00e5ff;
   --violet:#8b5cf6;
-
-  /* text */
   --ink:#eef1fb;
   --ink-dim:#96a0c4;
   --ink-faint:#727cae;
-
-  /* type */
   --font-display:'Orbitron', sans-serif;
   --font-body:'Sora', -apple-system, sans-serif;
-
-  /* layout */
   --max:1160px;
   --radius:18px;
-  --ease: cubic-bezier(.19,1,.22,1);
+  --ease:cubic-bezier(.19,1,.22,1);
 }
-*{margin:0; padding:0; box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto;}
-  *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important;}
-  #mesh, .hero h1, .ticker-track, .logo .pip{ animation:none !important; }
-  .hero h1{ background-position:0% center; }
-}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   background:var(--bg);
   color:var(--ink);
@@ -54,515 +39,334 @@ body{
   overflow-x:hidden;
   min-height:100vh;
 }
-body.cursor-active{ cursor:none; }
-@media (hover:none){ body.cursor-active{ cursor:auto; } }
-a{color:inherit; text-decoration:none;}
-::selection{background:var(--cyan); color:#04060d;}
-:focus-visible{outline:2px solid var(--cyan); outline-offset:3px;}
-.wrap{max-width:var(--max); margin:0 auto; padding:0 22px; position:relative; z-index:1;}
-@media (min-width:640px){ .wrap{padding:0 32px;} }
+a{color:inherit;text-decoration:none}
+::selection{background:var(--cyan);color:#04060d}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px;position:relative;z-index:1}
+@media(min-width:640px){.wrap{padding:0 32px}}
 
-/* ---------- SOUND TOGGLE INDICATOR ---------- */
+#mesh{
+  position:fixed;inset:-10%;z-index:0;pointer-events:none;
+  background:
+  radial-gradient(38% 32% at 18% 18%,rgba(139,92,246,.28),transparent 60%),
+  radial-gradient(42% 36% at 85% 12%,rgba(0,229,255,.18),transparent 60%),
+  radial-gradient(50% 40% at 55% 90%,rgba(139,92,246,.14),transparent 60%);
+  filter:blur(10px);animation:mesh-drift 22s ease-in-out infinite alternate
+}
+@keyframes mesh-drift{to{transform:translate(-2%,2%) scale(1.05)}}
+#particle-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.55}
+#grain{
+  position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")
+}
+#scroll-progress{
+  position:fixed;top:0;left:0;height:2px;width:0%;z-index:1001;
+  background:linear-gradient(90deg,var(--cyan),var(--violet));
+  box-shadow:0 0 10px var(--cyan)
+}
+
+/* ===== SKELETON CURSOR ===== */
+#skeleton-cursor{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:9998;
+}
+@media(hover:none),(pointer:coarse){
+  #skeleton-cursor{display:none}
+}
+
+/* hide old circular cursor */
+#cursor-dot,#cursor-glow{display:none!important}
+
+/* sound indicator */
 #sound-indicator{
-  position:fixed; bottom:22px; right:22px; z-index:9997;
-  display:flex; align-items:center; gap:10px;
-  background:rgba(5,6,13,0.75); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-  border:1px solid var(--line); border-radius:999px;
-  padding:9px 18px; font-family:var(--font-body); font-size:12px; color:var(--ink);
-  box-shadow:0 4px 24px rgba(0,0,0,0.5);
-  opacity:0;
-  transform:translateY(20px);
-  transition:opacity .6s var(--ease), transform .6s var(--ease), border-color .4s, box-shadow .4s;
+  position:fixed;bottom:22px;right:22px;z-index:9997;
+  display:flex;align-items:center;gap:10px;
+  background:rgba(5,6,13,.75);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border:1px solid var(--line);border-radius:999px;
+  padding:9px 18px;font-size:12px;color:var(--ink);
+  box-shadow:0 4px 24px rgba(0,0,0,.5);
+  opacity:0;transform:translateY(20px);
+  transition:.6s var(--ease)
 }
-#sound-indicator.visible{
-  opacity:1;
-  transform:translateY(0);
-}
+#sound-indicator.visible{opacity:1;transform:translateY(0)}
 #sound-indicator.scrolled{
   border-color:var(--line-bright);
-  box-shadow:0 4px 32px rgba(0,229,255,0.15), 0 4px 24px rgba(0,0,0,0.5);
-}
-#sound-indicator.bounce{
-  animation:indicator-bounce .5s var(--ease);
-}
-@keyframes indicator-bounce{
-  0%{ transform:translateY(0); }
-  40%{ transform:translateY(-6px); }
-  70%{ transform:translateY(2px); }
-  100%{ transform:translateY(0); }
+  box-shadow:0 4px 32px rgba(0,229,255,.15),0 4px 24px rgba(0,0,0,.5)
 }
 .sound-pip{
-  width:10px; height:10px; border-radius:50%; background:var(--cyan);
-  box-shadow:0 0 10px var(--cyan); animation:pip-pulse 2.2s ease-in-out infinite;
+  width:10px;height:10px;border-radius:50%;background:var(--cyan);
+  box-shadow:0 0 10px var(--cyan);animation:pip-pulse 2.2s ease-in-out infinite
 }
-@keyframes pip-pulse{ 0%,100%{opacity:1;} 50%{opacity:.4;} }
-@media (max-width:560px){
-  #sound-indicator{ padding:8px 14px; font-size:11px; bottom:16px; right:16px; }
-}
+@keyframes pip-pulse{50%{opacity:.4}}
 
-/* ---------- BACKDROP ---------- */
-#mesh{
-  position:fixed; inset:-10%; z-index:0; pointer-events:none;
-  background:
-    radial-gradient(38% 32% at 18% 18%, rgba(139,92,246,0.28), transparent 60%),
-    radial-gradient(42% 36% at 85% 12%, rgba(0,229,255,0.18), transparent 60%),
-    radial-gradient(50% 40% at 55% 90%, rgba(139,92,246,0.14), transparent 60%);
-  filter:blur(10px);
-  animation:mesh-drift 22s ease-in-out infinite alternate;
-}
-@keyframes mesh-drift{
-  0%{ transform:translate(0,0) scale(1); }
-  100%{ transform:translate(-2%,2%) scale(1.05); }
-}
-#particle-canvas{ position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.55; }
-#grain{
-  position:fixed; inset:0; z-index:1; pointer-events:none; opacity:.03;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* ---------- CURSOR ---------- */
-#cursor-glow{
-  position:fixed; width:34px; height:34px; border-radius:50%; pointer-events:none; z-index:9999;
-  transform:translate(-50%,-50%); border:1px solid rgba(0,229,255,0.6);
-  transition:width .25s, height .25s, border-color .25s;
-}
-#cursor-dot{
-  position:fixed; width:5px; height:5px; background:var(--cyan); border-radius:50%; pointer-events:none; z-index:9999;
-  transform:translate(-50%,-50%); box-shadow:0 0 12px var(--cyan), 0 0 30px rgba(0,229,255,0.4);
-}
-a:hover ~ #cursor-glow, button:hover ~ #cursor-glow{ width:56px; height:56px; border-color:var(--violet); }
-
-/* ---------- SCROLL PROGRESS ---------- */
-#scroll-progress{
-  position:fixed; top:0; left:0; height:2px; width:0%; z-index:1001;
-  background:linear-gradient(90deg, var(--cyan), var(--violet));
-  box-shadow:0 0 10px var(--cyan);
-}
-
-/* ---------- PRELOADER ---------- */
+/* preloader */
 #preloader{
-  position:fixed; inset:0; z-index:10000; background:var(--bg);
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px;
-  transition:opacity .7s var(--ease), visibility .7s var(--ease);
+  position:fixed;inset:0;z-index:10000;background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  transition:opacity .7s var(--ease),visibility .7s var(--ease)
 }
-#preloader.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
-.ring-loader{ position:relative; width:96px; height:96px; }
-.ring-loader svg{ width:100%; height:100%; transform:rotate(-90deg); }
-.ring-loader circle{ fill:none; stroke-width:2.5; }
-.ring-loader .track{ stroke:rgba(139,92,246,0.15); }
-.ring-loader .fill{ stroke:url(#grad); stroke-linecap:round; stroke-dasharray:264; stroke-dashoffset:264; transition:stroke-dashoffset .2s linear; }
+#preloader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.ring-loader{position:relative;width:96px;height:96px}
+.ring-loader svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring-loader circle{fill:none;stroke-width:2.5}
+.ring-loader .track{stroke:rgba(139,92,246,.15)}
+.ring-loader .fill{
+  stroke:url(#grad);stroke-linecap:round;stroke-dasharray:264;stroke-dashoffset:264;
+  transition:stroke-dashoffset .2s linear
+}
 .ring-loader .pct{
-  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  font-family:var(--font-display); font-size:15px; color:var(--ink);
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:15px
 }
 #preloader .name{
-  font-family:var(--font-display); font-weight:700; letter-spacing:.08em; font-size:13px; color:var(--ink-dim);
+  font-family:var(--font-display);font-weight:700;letter-spacing:.08em;
+  font-size:13px;color:var(--ink-dim)
 }
-#preloader .name b{ color:var(--cyan); }
+#preloader .name b{color:var(--cyan)}
 
-/* ---------- NAV ---------- */
+/* nav */
 header.nav{
-  position:fixed; top:0; left:0; right:0; z-index:900;
-  background:rgba(5,6,13,0.55); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--line);
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  background:rgba(5,6,13,.55);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line)
 }
-.nav-row{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
+.nav-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
 .logo{
-  font-family:var(--font-display); font-weight:800; font-size:16px; letter-spacing:.09em;
-  display:flex; align-items:center; gap:10px; color:#ffffff;
-  text-shadow:0 0 18px rgba(0,229,255,0.45);
+  font-family:var(--font-display);font-weight:800;font-size:16px;letter-spacing:.09em;
+  display:flex;align-items:center;gap:10px;color:#fff;text-shadow:0 0 18px rgba(0,229,255,.45)
 }
-@media (min-width:480px){ .logo{ font-size:18px; } }
-.logo .pip{ width:7px; height:7px; border-radius:50%; background:var(--cyan); box-shadow:0 0 10px var(--cyan); animation:pip-pulse 2.2s ease-in-out infinite; flex-shrink:0; }
-@keyframes pip-pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
-
-.nav-links{ position:relative; display:none; list-style:none; gap:2px; }
-@media (min-width:760px){ .nav-links{ display:flex; } }
+.logo .pip{
+  width:7px;height:7px;border-radius:50%;background:var(--cyan);
+  box-shadow:0 0 10px var(--cyan);animation:pip-pulse 2.2s infinite;flex-shrink:0
+}
+.nav-links{position:relative;display:none;list-style:none;gap:2px}
+@media(min-width:760px){.nav-links{display:flex}}
 .nav-links button{
-  background:transparent; border:none; color:var(--ink-dim); font-family:var(--font-body); font-weight:600;
-  font-size:13px; letter-spacing:.02em; padding:9px 18px; cursor:pointer; position:relative; z-index:2;
+  background:transparent;border:none;color:var(--ink-dim);font-family:var(--font-body);
+  font-weight:600;font-size:13px;padding:9px 18px;cursor:pointer;position:relative;z-index:2
 }
-.nav-links button.active{ color:var(--ink); }
+.nav-links button.active{color:var(--ink)}
 #nav-indicator{
-  position:absolute; top:0; bottom:0; left:0; width:0; background:var(--glass-soft);
-  border:1px solid var(--line-bright); border-radius:999px; transition:left .4s var(--ease), width .4s var(--ease); z-index:1;
+  position:absolute;top:0;bottom:0;left:0;width:0;background:var(--glass-soft);
+  border:1px solid var(--line-bright);border-radius:999px;
+  transition:left .4s var(--ease),width .4s var(--ease);z-index:1
 }
-
 .nav-cta{
-  font-family:var(--font-body); font-weight:600; font-size:12px; padding:9px 18px; border-radius:999px;
-  background:linear-gradient(120deg, var(--cyan), var(--violet)); color:#04060d; display:none;
+  font-family:var(--font-body);font-weight:600;font-size:12px;padding:9px 18px;border-radius:999px;
+  background:linear-gradient(120deg,var(--cyan),var(--violet));color:#04060d;display:none
 }
-@media (min-width:760px){ .nav-cta{ display:inline-flex; } }
+@media(min-width:760px){.nav-cta{display:inline-flex}}
+.nav-toggle{
+  display:flex;background:transparent;border:1px solid var(--line);color:var(--ink);
+  border-radius:8px;padding:8px 12px;font-family:var(--font-body);font-size:12px
+}
+@media(min-width:760px){.nav-toggle{display:none}}
+#mobile-menu{display:none;flex-direction:column;padding:10px 0 16px;gap:2px}
+#mobile-menu.open{display:flex}
+#mobile-menu button{
+  text-align:left;background:transparent;border:none;color:var(--ink-dim);
+  font-family:var(--font-body);font-size:14px;padding:10px 4px
+}
+#mobile-menu button.active{color:var(--cyan)}
 
-.nav-toggle{ display:flex; background:transparent; border:1px solid var(--line); color:var(--ink); border-radius:8px; padding:8px 12px; font-family:var(--font-body); font-size:12px; }
-@media (min-width:760px){ .nav-toggle{ display:none; } }
-#mobile-menu{ display:none; flex-direction:column; padding:10px 0 16px; gap:2px; }
-#mobile-menu.open{ display:flex; }
-#mobile-menu button{ text-align:left; background:transparent; border:none; color:var(--ink-dim); font-family:var(--font-body); font-size:14px; padding:10px 4px; }
-#mobile-menu button.active{ color:var(--cyan); }
-
-/* ---------- SECTION SHELL ---------- */
-main{ position:relative; z-index:1; }
-section{ padding:70px 0; scroll-margin-top:86px; border-bottom:1px solid var(--line); }
-section:last-of-type{ border-bottom:none; }
-@media (min-width:640px){ section{ padding:100px 0; } }
-
+/* sections */
+main{position:relative;z-index:1}
+section{padding:70px 0;scroll-margin-top:86px;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:none}
+@media(min-width:640px){section{padding:100px 0}}
 .eyebrow{
-  font-family:var(--font-display); font-size:11px; letter-spacing:.14em; color:var(--cyan);
-  display:inline-flex; align-items:center; gap:8px; margin-bottom:14px;
+  font-family:var(--font-display);font-size:11px;letter-spacing:.14em;color:var(--cyan);
+  display:inline-flex;align-items:center;gap:8px;margin-bottom:14px
 }
-.eyebrow::before{ content:''; width:22px; height:1px; background:var(--cyan); box-shadow:0 0 8px var(--cyan); }
-
+.eyebrow:before{
+  content:"";width:22px;height:1px;background:var(--cyan);box-shadow:0 0 8px var(--cyan)
+}
 h2.sec-title{
-  font-family:var(--font-display); font-weight:700; font-size:clamp(24px,3.4vw,40px); letter-spacing:-0.01em; color:var(--ink);
-  margin-bottom:36px;
+  font-family:var(--font-display);font-weight:700;font-size:clamp(24px,3.4vw,40px);
+  margin-bottom:36px
 }
-
-.reveal{ opacity:0; transform:translateY(28px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
-.reveal.visible{ opacity:1; transform:translateY(0); }
-
-/* ---------- GLASS CARD ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
 .glass{
-  background:var(--glass); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
-  border:1px solid var(--line); border-radius:var(--radius);
-  transition:border-color .35s, box-shadow .35s, transform .35s;
+  background:var(--glass);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid var(--line);border-radius:var(--radius);
+  transition:border-color .35s,box-shadow .35s,transform .35s
 }
-.glass:hover{ border-color:var(--line-bright); box-shadow:0 0 40px rgba(0,229,255,0.08); transform:translateY(-3px); }
+.glass:hover{
+  border-color:var(--line-bright);box-shadow:0 0 40px rgba(0,229,255,.08);transform:translateY(-3px)
+}
 
-/* ---------- HERO ---------- */
-.hero{ padding-top:150px; padding-bottom:60px; }
-@media (min-width:640px){ .hero{ padding-top:180px; } }
-.hero-grid{ display:grid; grid-template-columns:1fr; gap:40px; align-items:center; }
-@media (min-width:900px){ .hero-grid{ grid-template-columns:1.25fr 1fr; gap:56px; } }
-
+/* hero */
+.hero{padding-top:150px;padding-bottom:60px}
+@media(min-width:640px){.hero{padding-top:180px}}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+@media(min-width:900px){.hero-grid{grid-template-columns:1.25fr 1fr;gap:56px}}
 .hero h1{
-  font-family:var(--font-display); font-weight:800; font-size:clamp(34px,6.5vw,68px); line-height:1.04; letter-spacing:-0.02em;
-  background:linear-gradient(120deg, #ffffff 10%, var(--cyan) 45%, var(--violet) 85%);
-  background-size:200% auto;
-  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-  animation:shine 7s linear infinite;
+  font-family:var(--font-display);font-weight:800;font-size:clamp(34px,6.5vw,68px);
+  line-height:1.04;letter-spacing:-.02em;
+  background:linear-gradient(120deg,#fff 10%,var(--cyan) 45%,var(--violet) 85%);
+  background-size:200% auto;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;animation:shine 7s linear infinite
 }
-@keyframes shine{ to{ background-position:200% center; } }
-
-.hero-role{
-  margin-top:14px; font-family:var(--font-body); font-weight:600; font-size:15px; color:var(--ink-dim); min-height:1.4em;
+@keyframes shine{to{background-position:200% center}}
+.hero-role{margin-top:14px;font-weight:600;font-size:15px;color:var(--ink-dim);min-height:1.4em}
+.hero-role .cursor{
+  display:inline-block;width:2px;height:1em;background:var(--cyan);margin-left:2px;
+  vertical-align:-2px;animation:blink 1s step-end infinite
 }
-.hero-role .cursor{ display:inline-block; width:2px; height:1em; background:var(--cyan); margin-left:2px; vertical-align:-2px; animation:blink 1s step-end infinite; }
-@keyframes blink{ 50%{ opacity:0; } }
-
-.hero p.lede{ margin-top:20px; font-size:15px; color:var(--ink-dim); max-width:56ch; line-height:1.75; }
-@media (min-width:640px){ .hero p.lede{ font-size:17px; } }
-
-.hero-cta{ margin-top:30px; display:flex; gap:14px; flex-wrap:wrap; }
+@keyframes blink{50%{opacity:0}}
+.hero p.lede{margin-top:20px;font-size:15px;color:var(--ink-dim);max-width:56ch;line-height:1.75}
+.hero-cta{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap}
 .btn{
-  font-family:var(--font-body); font-weight:600; font-size:13px; padding:13px 26px; border-radius:999px;
-  cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:transform .3s var(--ease), box-shadow .3s var(--ease);
-  border:1px solid transparent;
+  font-family:var(--font-body);font-weight:600;font-size:13px;padding:13px 26px;border-radius:999px;
+  cursor:pointer;display:inline-flex;align-items:center;gap:8px;border:1px solid transparent;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease)
 }
-.btn:active{ transform:scale(.96); }
-.btn-primary{ background:linear-gradient(120deg, var(--cyan), var(--violet)); color:#04060d; box-shadow:0 6px 26px rgba(0,229,255,0.18); }
-.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 34px rgba(139,92,246,0.32); }
-.btn-ghost{ border-color:var(--line); color:var(--ink); background:transparent; }
-.btn-ghost:hover{ border-color:var(--cyan); color:var(--cyan); transform:translateY(-2px); }
-
-.stat-strip{ margin-top:44px; display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
-@media (min-width:520px){ .stat-strip{ grid-template-columns:repeat(4,1fr); } }
-.stat-chip{ padding:16px 14px; text-align:left; }
-.stat-chip .num{ font-family:var(--font-display); font-weight:700; font-size:22px; color:var(--cyan); }
-.stat-chip .lbl{ font-size:10.5px; color:var(--ink-faint); margin-top:4px; letter-spacing:.02em; }
-
-.orbit-card{ padding:30px 28px; position:relative; overflow:hidden; }
-.orbit-card::before{
-  content:''; position:absolute; width:220px; height:220px; border-radius:50%;
-  background:radial-gradient(circle, rgba(139,92,246,0.35), transparent 70%);
-  top:-70px; right:-70px; filter:blur(10px);
+.btn-primary{background:linear-gradient(120deg,var(--cyan),var(--violet));color:#04060d}
+.btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
+.stat-strip{margin-top:44px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:520px){.stat-strip{grid-template-columns:repeat(4,1fr)}}
+.stat-chip{padding:16px 14px}
+.stat-chip .num{font-family:var(--font-display);font-weight:700;font-size:22px;color:var(--cyan)}
+.stat-chip .lbl{font-size:10.5px;color:var(--ink-faint);margin-top:4px}
+.orbit-card{padding:30px 28px;position:relative;overflow:hidden}
+.id-row{
+  display:flex;justify-content:space-between;gap:10px;padding:11px 0;
+  border-bottom:1px solid var(--line);font-size:12.5px
 }
-.id-row{ display:flex; justify-content:space-between; gap:10px; padding:11px 0; border-bottom:1px solid var(--line); font-size:12.5px; position:relative; z-index:1; }
-.id-row:last-child{ border-bottom:none; }
-.id-row .k{ color:var(--ink-faint); }
-.id-row .v{ color:var(--ink); text-align:right; }
-.id-row a.v{ color:var(--cyan); }
+.id-row:last-child{border-bottom:none}
+.id-row .k{color:var(--ink-faint)}
+.id-row .v{text-align:right}
+.id-row a.v{color:var(--cyan)}
 
-/* ---------- TICKER ---------- */
-.ticker{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); overflow:hidden; white-space:nowrap; position:relative; background:var(--glass-soft); backdrop-filter:blur(10px); }
-.ticker::before, .ticker::after{ content:''; position:absolute; top:0; bottom:0; width:60px; z-index:2; pointer-events:none; }
-.ticker::before{ left:0; background:linear-gradient(90deg, var(--bg), transparent); }
-.ticker::after{ right:0; background:linear-gradient(-90deg, var(--bg), transparent); }
-.ticker-track{ display:inline-flex; align-items:center; animation:scroll-ticker 46s linear infinite; padding:13px 0; }
-.ticker:hover .ticker-track{ animation-play-state:paused; }
-.ticker-item{ font-family:var(--font-body); font-weight:600; font-size:12px; color:var(--ink-dim); padding:0 22px; display:inline-flex; align-items:center; gap:9px; }
-.ticker-item .dot{ width:5px; height:5px; border-radius:50%; background:var(--cyan); box-shadow:0 0 8px var(--cyan); }
-@keyframes scroll-ticker{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
-
-/* ---------- ABOUT ---------- */
-.about-grid{ display:grid; grid-template-columns:1fr; gap:28px; }
-@media (min-width:840px){ .about-grid{ grid-template-columns:1.4fr 1fr; gap:44px; } }
-.about-grid p{ color:var(--ink-dim); font-size:15px; max-width:62ch; line-height:1.85; }
-@media (min-width:640px){ .about-grid p{ font-size:16.5px; } }
-.about-grid p + p{ margin-top:16px; }
-.info-panel{ padding:28px 26px; }
-.info-panel .stat-row{ display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--line); font-size:13px; }
-.info-panel .stat-row:last-child{ border-bottom:none; }
-.info-panel .stat-row .v{ color:var(--cyan); font-weight:600; text-align:right; }
-
-/* ---------- EXPERIENCE TIMELINE ---------- */
-.timeline{ position:relative; padding-left:26px; }
-.timeline::before{
-  content:''; position:absolute; left:5px; top:6px; bottom:6px; width:2px;
-  background:linear-gradient(to bottom, var(--cyan), var(--violet), transparent);
-  opacity:.35;
+/* ticker */
+.ticker{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  overflow:hidden;white-space:nowrap;background:var(--glass-soft)
 }
-.tl-item{ position:relative; padding-bottom:44px; }
-.tl-item:last-child{ padding-bottom:0; }
-.tl-item::before{
-  content:''; position:absolute; left:-26px; top:6px; width:11px; height:11px; border-radius:50%;
-  background:var(--bg-2); border:2px solid var(--ink-faint); transition:border-color .5s, box-shadow .5s, background .5s;
+.ticker-track{display:inline-flex;align-items:center;animation:scroll-ticker 46s linear infinite;padding:13px 0}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-item{
+  font-weight:600;font-size:12px;color:var(--ink-dim);padding:0 22px;
+  display:inline-flex;align-items:center;gap:9px
 }
-.tl-item.visible::before{ border-color:var(--cyan); background:var(--cyan); box-shadow:0 0 16px var(--cyan); }
-.tl-card{ padding:24px 26px; }
-.tl-head{ display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:10px; margin-bottom:3px; }
-.tl-role{ font-family:var(--font-display); font-weight:700; font-size:17px; color:var(--ink); }
-.tl-time{ font-family:var(--font-body); font-weight:600; font-size:11px; color:var(--cyan); white-space:nowrap; }
-.tl-org{ font-size:12px; color:var(--ink-faint); display:block; margin-bottom:14px; }
-.tl-card ul{ list-style:none; display:flex; flex-direction:column; gap:9px; }
-.tl-card li{ font-size:13.5px; color:var(--ink-dim); padding-left:20px; position:relative; line-height:1.65; }
-.tl-card li::before{ content:''; position:absolute; left:0; top:.55em; width:6px; height:6px; border-radius:50%; background:var(--violet); box-shadow:0 0 6px var(--violet); }
+.ticker-item .dot{
+  width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)
+}
+@keyframes scroll-ticker{to{transform:translateX(-50%)}}
 
-/* ---------- EDUCATION ---------- */
-.edu-grid{ display:grid; grid-template-columns:1fr; gap:14px; }
-@media (min-width:760px){ .edu-grid{ grid-template-columns:1fr 1fr; } }
-.edu-card{ padding:22px 24px; display:flex; flex-direction:column; gap:8px; }
-.edu-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
-.edu-time{ font-size:11px; color:var(--ink-faint); font-family:var(--font-body); font-weight:600; }
-.edu-deg{ font-family:var(--font-display); font-weight:700; font-size:15px; color:var(--ink); margin-top:4px; }
-.edu-inst{ font-size:12.5px; color:var(--ink-dim); }
+/* about */
+.about-grid{display:grid;grid-template-columns:1fr;gap:28px}
+@media(min-width:840px){.about-grid{grid-template-columns:1.4fr 1fr;gap:44px}}
+.about-grid p{color:var(--ink-dim);font-size:15px;max-width:62ch;line-height:1.85}
+.about-grid p+p{margin-top:16px}
+.info-panel{padding:28px 26px}
+.info-panel .stat-row{
+  display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px
+}
+.info-panel .stat-row:last-child{border-bottom:none}
+.info-panel .stat-row .v{color:var(--cyan);font-weight:600;text-align:right}
+
+/* timeline */
+.timeline{position:relative;padding-left:26px}
+.timeline:before{
+  content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(to bottom,var(--cyan),var(--violet),transparent);opacity:.35
+}
+.tl-item{position:relative;padding-bottom:44px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item:before{
+  content:"";position:absolute;left:-26px;top:6px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg-2);border:2px solid var(--ink-faint)
+}
+.tl-item.visible:before{
+  border-color:var(--cyan);background:var(--cyan);box-shadow:0 0 16px var(--cyan)
+}
+.tl-card{padding:24px 26px}
+.tl-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;margin-bottom:3px}
+.tl-role{font-family:var(--font-display);font-weight:700;font-size:17px}
+.tl-time{font-weight:600;font-size:11px;color:var(--cyan)}
+.tl-org{font-size:12px;color:var(--ink-faint);display:block;margin-bottom:14px}
+.tl-card ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.tl-card li{font-size:13.5px;color:var(--ink-dim);padding-left:20px;position:relative;line-height:1.65}
+.tl-card li:before{
+  content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;
+  background:var(--violet);box-shadow:0 0 6px var(--violet)
+}
+
+/* education */
+.edu-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:760px){.edu-grid{grid-template-columns:1fr 1fr}}
+.edu-card{padding:22px 24px;display:flex;flex-direction:column;gap:8px}
+.edu-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.edu-time{font-size:11px;color:var(--ink-faint);font-weight:600}
+.edu-deg{font-family:var(--font-display);font-weight:700;font-size:15px;margin-top:4px}
+.edu-inst{font-size:12.5px;color:var(--ink-dim)}
 .badge{
-  font-family:var(--font-body); font-weight:700; font-size:10.5px; letter-spacing:.03em; padding:5px 13px;
-  border-radius:999px; white-space:nowrap; border:1px solid; align-self:flex-start;
+  font-weight:700;font-size:10.5px;padding:5px 13px;border-radius:999px;white-space:nowrap;border:1px solid
 }
-.badge.distinction{ color:#04060d; background:linear-gradient(120deg,var(--cyan),var(--violet)); border-color:transparent; box-shadow:0 0 16px rgba(0,229,255,.3); }
-.badge.merit{ color:var(--cyan); border-color:rgba(0,229,255,.4); background:rgba(0,229,255,.06); }
-.badge.pass{ color:var(--ink-faint); border-color:var(--line); background:transparent; }
-.badge.reading{ color:var(--violet); border-color:rgba(139,92,246,.5); background:rgba(139,92,246,.08); }
-.badge.reading::before{ content:'● '; }
+.badge.distinction{color:#04060d;background:linear-gradient(120deg,var(--cyan),var(--violet));border-color:transparent}
+.badge.merit{color:var(--cyan);border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.06)}
+.badge.pass{color:var(--ink-faint);border-color:var(--line)}
+.badge.reading{color:var(--violet);border-color:rgba(139,92,246,.5);background:rgba(139,92,246,.08)}
+.cert-note{margin-top:20px;padding:16px 22px;font-size:13px;color:var(--ink-dim);border-left:2px solid var(--cyan)}
 
-.cert-note{ margin-top:20px; padding:16px 22px; font-size:13px; color:var(--ink-dim); border-left:2px solid var(--cyan); }
-.cert-note strong{ color:var(--ink); }
+/* skills */
+.gauge-grid{display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:700px){.gauge-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1040px){.gauge-grid{grid-template-columns:repeat(4,1fr)}}
+.gauge-card{padding:26px 22px;text-align:center}
+.gauge-wrap{position:relative;width:118px;height:118px;margin:0 auto 16px}
+.gauge-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
+.gauge-wrap circle{fill:none;stroke-width:7}
+.gauge-wrap .track{stroke:rgba(139,92,246,.14)}
+.gauge-wrap .fill{
+  stroke:url(#gaugeGrad);stroke-linecap:round;stroke-dasharray:320;stroke-dashoffset:320;
+  transition:stroke-dashoffset 1.4s var(--ease)
+}
+.gauge-val{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-weight:700;font-size:22px
+}
+.gauge-card h3{font-size:13px;margin-bottom:14px}
+.chip-list{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.chip{font-size:10.5px;color:var(--ink-dim);border:1px solid var(--line);border-radius:999px;padding:4px 10px}
 
-/* ---------- SKILLS ---------- */
-.gauge-grid{ display:grid; grid-template-columns:1fr; gap:22px; }
-@media (min-width:700px){ .gauge-grid{ grid-template-columns:repeat(2,1fr); } }
-@media (min-width:1040px){ .gauge-grid{ grid-template-columns:repeat(4,1fr); } }
-.gauge-card{ padding:26px 22px; text-align:center; }
-.gauge-wrap{ position:relative; width:118px; height:118px; margin:0 auto 16px; }
-.gauge-wrap svg{ width:100%; height:100%; transform:rotate(-90deg); }
-.gauge-wrap circle{ fill:none; stroke-width:7; }
-.gauge-wrap .track{ stroke:rgba(139,92,246,.14); }
-.gauge-wrap .fill{ stroke:url(#gaugeGrad); stroke-linecap:round; stroke-dasharray:320; stroke-dashoffset:320; transition:stroke-dashoffset 1.4s var(--ease); }
-.gauge-val{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:700; font-size:22px; color:var(--ink); }
-.gauge-card h3{ font-family:var(--font-body); font-weight:700; font-size:13px; color:var(--ink); margin-bottom:14px; }
-.chip-list{ display:flex; flex-wrap:wrap; gap:6px; justify-content:center; }
-.chip{ font-size:10.5px; color:var(--ink-dim); border:1px solid var(--line); border-radius:999px; padding:4px 10px; }
+/* portfolio */
+.portfolio-grid{display:grid;grid-template-columns:1fr;gap:24px;margin-top:40px}
+@media(min-width:640px){.portfolio-grid{grid-template-columns:repeat(2,1fr)}}
 
-/* ---------- PORTFOLIO / MY WORK (Empty) ---------- */
-.portfolio-grid{
-  display:grid; grid-template-columns:1fr; gap:24px; margin-top:40px;
-}
-@media (min-width:640px){
-  .portfolio-grid{ grid-template-columns:repeat(2, 1fr); }
-}
-@media (min-width:1024px){
-  .portfolio-grid{ grid-template-columns:repeat(2, 1fr); gap:28px; }
-}
-.project-card{
-  overflow:hidden; display:flex; flex-direction:column;
-  transition:transform .4s var(--ease), box-shadow .4s var(--ease);
-}
-.project-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 12px 40px rgba(0,229,255,0.12);
-}
-.project-thumb{
-  position:relative; height:200px; overflow:hidden;
-}
-.thumb-bg{
-  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
-  transition:transform .5s var(--ease);
-}
-.project-card:hover .thumb-bg{
-  transform:scale(1.05);
-}
-.thumb-icon{
-  font-size:56px;
-  filter:drop-shadow(0 0 20px rgba(0,229,255,0.3));
-  transition:transform .4s var(--ease);
-}
-.project-card:hover .thumb-icon{
-  transform:scale(1.1) rotate(-5deg);
-}
-.project-badge{
-  position:absolute; top:12px; right:12px;
-  background:linear-gradient(120deg, var(--cyan), var(--violet));
-  color:#04060d; font-family:var(--font-display);
-  font-size:10px; font-weight:700; padding:4px 12px; border-radius:999px;
-  box-shadow:0 0 16px rgba(0,229,255,0.3);
-}
-.project-info{
-  padding:22px 24px; display:flex; flex-direction:column; flex:1;
-}
-.project-info h3{
-  font-family:var(--font-display); font-weight:700; font-size:16px;
-  color:var(--ink); margin-bottom:10px;
-}
-.project-info p{
-  font-size:13px; color:var(--ink-dim); line-height:1.7;
-  flex:1; margin-bottom:16px;
-}
-.project-tags{
-  display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px;
-}
-.tag{
-  font-size:10.5px; color:var(--ink-dim);
-  border:1px solid var(--line); border-radius:999px; padding:4px 10px;
-  transition:border-color .3s, color .3s;
-}
-.tag:hover{
-  border-color:var(--cyan); color:var(--cyan);
-}
-.project-actions{
-  display:flex; gap:10px; flex-wrap:wrap;
-}
-.btn-sm{
-  padding:9px 16px; font-size:12px;
-}
-.btn-icon{
-  font-size:14px;
-}
-
-/* ---------- PDF MODAL ---------- */
-.modal-overlay{
-  position:fixed; inset:0; z-index:9990;
-  background:rgba(5,6,13,0.85); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
-  display:flex; align-items:center; justify-content:center;
-  opacity:0; visibility:hidden;
-  transition:opacity .4s var(--ease), visibility .4s var(--ease);
-  padding:20px;
-}
-.modal-overlay.open{
-  opacity:1; visibility:visible;
-}
-.modal-content{
-  width:100%; max-width:900px; max-height:90vh;
-  display:flex; flex-direction:column;
-  background:var(--glass); border:1px solid var(--line-bright);
-  border-radius:var(--radius); overflow:hidden;
-  transform:scale(0.95) translateY(20px);
-  transition:transform .4s var(--ease);
-}
-.modal-overlay.open .modal-content{
-  transform:scale(1) translateY(0);
-}
-.modal-header{
-  display:flex; justify-content:space-between; align-items:center;
-  padding:16px 20px; border-bottom:1px solid var(--line);
-  background:rgba(5,6,13,0.6);
-}
-.modal-header h3{
-  font-family:var(--font-display); font-size:14px; color:var(--ink); margin:0;
-}
-.modal-close{
-  background:none; border:1px solid var(--line); color:var(--ink-dim);
-  width:32px; height:32px; border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  font-size:18px; cursor:pointer; transition:all .3s;
-}
-.modal-close:hover{
-  border-color:var(--cyan); color:var(--cyan);
-  box-shadow:0 0 12px rgba(0,229,255,0.3);
-}
-.modal-body{
-  flex:1; overflow:auto; background:rgba(5,6,13,0.3);
-}
-#pdf-frame{
-  width:100%; height:70vh; border:none; background:white;
-}
-.modal-footer{
-  padding:14px 20px; border-top:1px solid var(--line);
-  background:rgba(5,6,13,0.6); display:flex; justify-content:flex-end;
-}
-
-/* ---------- CONTACT ---------- */
-.contact-grid{ display:grid; grid-template-columns:1fr; gap:28px; }
-@media (min-width:840px){ .contact-grid{ grid-template-columns:1.2fr 1fr; gap:44px; align-items:center; } }
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr;gap:28px}
+@media(min-width:840px){.contact-grid{grid-template-columns:1.2fr 1fr;gap:44px;align-items:center}}
 .contact-grid h2{
-  font-family:var(--font-display); font-weight:700; font-size:clamp(24px,3.6vw,42px); line-height:1.18; margin-bottom:16px;
+  font-family:var(--font-display);font-weight:700;font-size:clamp(24px,3.6vw,42px);
+  line-height:1.18;margin-bottom:16px
 }
-.contact-grid p.lede{ color:var(--ink-dim); max-width:48ch; font-size:15px; margin-bottom:26px; }
-.contact-panel{ padding:8px 8px; }
+.contact-grid p.lede{color:var(--ink-dim);max-width:48ch;font-size:15px;margin-bottom:26px}
+.contact-panel{padding:8px}
 .contact-row{
-  display:flex; justify-content:space-between; align-items:center; gap:10px; padding:18px 18px;
-  border-bottom:1px solid var(--line); transition:background .25s, transform .25s;
+  display:flex;justify-content:space-between;align-items:center;gap:10px;padding:18px;
+  border-bottom:1px solid var(--line)
 }
-.contact-row:last-child{ border-bottom:none; }
-.contact-row:hover{ background:rgba(0,229,255,0.04); transform:translateX(4px); }
-.contact-row .k{ font-size:10px; color:var(--ink-faint); display:block; margin-bottom:3px; letter-spacing:.03em; }
-.contact-row .v{ font-size:14.5px; color:var(--ink); font-weight:600; }
-.contact-row .arrow{ color:var(--cyan); opacity:0; transform:translateX(-6px); transition:all .25s; }
-.contact-row:hover .arrow{ opacity:1; transform:translateX(0); }
+.contact-row:last-child{border-bottom:none}
+.contact-row .k{font-size:10px;color:var(--ink-faint);display:block;margin-bottom:3px}
+.contact-row .v{font-size:14.5px;font-weight:600}
+.contact-row .arrow{color:var(--cyan)}
 
-/* ---------- FOOTER ---------- */
-footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
-
-/* ---------- CLICK EFFECTS ---------- */
-.click-fx{
-  position:fixed; z-index:9998; pointer-events:none; left:0; top:0;
-  transform:translate(-50%,-50%);
+footer{
+  padding:30px 0 44px;font-size:12px;color:var(--ink-faint);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px
 }
-.click-ring{
-  width:14px; height:14px; border-radius:50%;
-  border:1.5px solid var(--cyan);
-  box-shadow:0 0 12px rgba(0,229,255,0.7);
-  animation:ring-out .6s var(--ease) forwards;
-}
-@keyframes ring-out{
-  0%{ width:14px; height:14px; opacity:1; border-color:var(--cyan); }
-  70%{ opacity:.6; border-color:var(--violet); }
-  100%{ width:72px; height:72px; opacity:0; border-color:var(--violet); }
-}
-.click-cross{
-  position:absolute; top:50%; left:50%; width:22px; height:22px; transform:translate(-50%,-50%);
-  animation:cross-fade .5s var(--ease) forwards;
-}
-.click-cross i{ position:absolute; background:var(--cyan); box-shadow:0 0 6px var(--cyan); }
-.click-cross i:nth-child(1){ top:50%; left:0; width:100%; height:1px; transform:translateY(-50%) scaleX(0); animation:bar-x .45s var(--ease) forwards; }
-.click-cross i:nth-child(2){ left:50%; top:0; height:100%; width:1px; transform:translateX(-50%) scaleY(0); animation:bar-y .45s var(--ease) forwards; }
-@keyframes bar-x{ 0%{ transform:translateY(-50%) scaleX(0); } 40%{ transform:translateY(-50%) scaleX(1); } 100%{ transform:translateY(-50%) scaleX(1); opacity:0; } }
-@keyframes bar-y{ 0%{ transform:translateX(-50%) scaleY(0); } 40%{ transform:translateX(-50%) scaleY(1); } 100%{ transform:translateX(-50%) scaleY(1); opacity:0; } }
-@keyframes cross-fade{ 0%{ opacity:1; } 80%{ opacity:1; } 100%{ opacity:0; } }
-.click-spark{
-  position:absolute; top:50%; left:50%; width:3px; height:3px; border-radius:50%;
-  background:var(--cyan); box-shadow:0 0 6px var(--cyan);
-  animation:spark-out .55s var(--ease) forwards;
-}
-@keyframes spark-out{
-  0%{ transform:translate(-50%,-50%) translate(0,0); opacity:1; }
-  100%{ transform:translate(-50%,-50%) translate(var(--sx), var(--sy)); opacity:0; }
-}
-#cursor-dot.clicking{ width:9px; height:9px; background:var(--violet); box-shadow:0 0 18px var(--violet); }
-.btn{ position:relative; overflow:hidden; }
-.btn .ripple{
-  position:absolute; border-radius:50%; background:rgba(255,255,255,0.5);
-  transform:translate(-50%,-50%) scale(0); pointer-events:none;
-  animation:btn-ripple .6s ease-out forwards;
-}
-@keyframes btn-ripple{ to{ transform:translate(-50%,-50%) scale(1); opacity:0; } }
-
-/* ---------- SCROLLBAR ---------- */
-::-webkit-scrollbar{ width:5px; }
-::-webkit-scrollbar-track{ background:var(--bg); }
-::-webkit-scrollbar-thumb{ background:linear-gradient(var(--cyan), var(--violet)); border-radius:10px; }
 </style>
 </head>
+
 <body>
 
 <svg width="0" height="0">
@@ -580,17 +384,12 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
 
 <div id="mesh"></div>
 <canvas id="particle-canvas"></canvas>
+<canvas id="skeleton-cursor"></canvas>
 <div id="grain"></div>
 <div id="scroll-progress"></div>
-<div id="cursor-dot"></div>
-<div id="cursor-glow"></div>
 
-<!-- SOUND INDICATOR -->
-<div id="sound-indicator">
-  <span class="sound-pip"></span> Sound On
-</div>
+<div id="sound-indicator"><span class="sound-pip"></span> Sound On</div>
 
-<!-- PRELOADER -->
 <div id="preloader">
   <div class="ring-loader">
     <svg viewBox="0 0 92 92">
@@ -605,288 +404,289 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
 <header class="nav">
   <div class="wrap nav-row">
     <div class="logo"><span class="pip"></span> SAAIF PORTFOLIO</div>
-    <ul class="nav-links" id="nav-links">
+    <ul class="nav-links">
       <div id="nav-indicator"></div>
-      <li><button type="button" data-nav="about" class="active">About</button></li>
-      <li><button type="button" data-nav="experience">Experience</button></li>
-      <li><button type="button" data-nav="education">Education</button></li>
-      <li><button type="button" data-nav="skills">Skills</button></li>
-      <li><button type="button" data-nav="contact">Contact</button></li>
-      <li><button type="button" data-nav="work">My Work</button></li>
+      <li><button data-nav="about" class="active">About</button></li>
+      <li><button data-nav="experience">Experience</button></li>
+      <li><button data-nav="education">Education</button></li>
+      <li><button data-nav="skills">Skills</button></li>
+      <li><button data-nav="contact">Contact</button></li>
+      <li><button data-nav="work">My Work</button></li>
     </ul>
-    <button type="button" class="nav-cta" data-nav="contact">Let's talk</button>
-    <button type="button" class="nav-toggle" id="nav-toggle">Menu</button>
+    <button class="nav-cta" data-nav="contact">Let's talk</button>
+    <button class="nav-toggle" id="nav-toggle">Menu</button>
   </div>
   <div class="wrap" id="mobile-menu">
-    <button type="button" data-nav="about" class="active">About</button>
-    <button type="button" data-nav="experience">Experience</button>
-    <button type="button" data-nav="education">Education</button>
-    <button type="button" data-nav="skills">Skills</button>
-    <button type="button" data-nav="contact">Contact</button>
-    <button type="button" data-nav="work">My Work</button>
+    <button data-nav="about" class="active">About</button>
+    <button data-nav="experience">Experience</button>
+    <button data-nav="education">Education</button>
+    <button data-nav="skills">Skills</button>
+    <button data-nav="contact">Contact</button>
+    <button data-nav="work">My Work</button>
   </div>
 </header>
 
 <main>
 
-  <!-- HERO / ABOUT -->
-  <section id="about">
-    <div class="wrap hero">
-      <div class="hero-grid">
-        <div class="reveal visible">
-          <span class="eyebrow">Operations &amp; Data Analyst</span>
-          <h1>Mohamed Saaif Samsath</h1>
-          <div class="hero-role" id="typed-role"><span class="cursor"></span></div>
-          <p class="lede">Operations-focused analyst who turns business processes into measurable improvements — reporting, dashboards, and reconciliation, built on Excel, Power BI, and Tableau.</p>
-          <div class="hero-cta">
-            <button type="button" class="btn btn-primary" data-nav="contact">Get in touch</button>
-            <a class="btn btn-ghost" href="mailto:mohamedsaaif99@gmail.com">Email directly</a>
-          </div>
-          <div class="stat-strip">
-            <div class="glass stat-chip"><div class="num" data-count="3">0</div><div class="lbl">Years in Ops</div></div>
-            <div class="glass stat-chip"><div class="num" data-count="5">0</div><div class="lbl">Design Projects</div></div>
-            <div class="glass stat-chip"><div class="num" data-count="3">0</div><div class="lbl">BI Platforms</div></div>
-            <div class="glass stat-chip"><div class="num" data-count="98" data-suffix="%">0</div><div class="lbl">Accuracy Focus</div></div>
-          </div>
+<section id="about">
+  <div class="wrap hero">
+    <div class="hero-grid">
+      <div class="reveal visible">
+        <span class="eyebrow">Operations & Data Analyst</span>
+        <h1>Mohamed Saaif Samsath</h1>
+        <div class="hero-role" id="typed-role"><span class="cursor"></span></div>
+        <p class="lede">Operations-focused analyst who turns business processes into measurable improvements — reporting, dashboards, and reconciliation, built on Excel, Power BI, and Tableau.</p>
+        <div class="hero-cta">
+          <button class="btn btn-primary" data-nav="contact">Get in touch</button>
+          <a class="btn btn-ghost" href="mailto:mohamedsaaif99@gmail.com">Email directly</a>
         </div>
-
-        <div class="glass orbit-card reveal visible" style="transition-delay:.1s;">
-          <div class="id-row"><span class="k">Based in</span><span class="v">Kuwait City, Kuwait</span></div>
-          <div class="id-row"><span class="k">Currently</span><span class="v">Analyst, Al Mulla Exchange</span></div>
-          <div class="id-row"><span class="k">Studying</span><span class="v">MBA Fintech &amp; Data Analytics</span></div>
-          <div class="id-row"><span class="k">Contact</span><a class="v" href="mailto:mohamedsaaif99@gmail.com">mohamedsaaif99@gmail.com</a></div>
-          <div class="id-row"><span class="k">LinkedIn</span><a class="v" href="https://www.linkedin.com/in/mohamed-saaif-s-5a6b3918b" target="_blank" rel="noopener">/mohamed-saaif-s</a></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ticker" aria-hidden="true">
-      <div class="ticker-track">
-        <span class="ticker-item"><span class="dot"></span>Social Media Design</span>
-        <span class="ticker-item"><span class="dot"></span>Campaign Creative</span>
-        <span class="ticker-item"><span class="dot"></span>Brand Promotion</span>
-        <span class="ticker-item"><span class="dot"></span>Marketing Design</span>
-        <span class="ticker-item"><span class="dot"></span>Content Creation</span>
-        <span class="ticker-item"><span class="dot"></span>Visual Storytelling</span>
-        <span class="ticker-item"><span class="dot"></span>Social Media Design</span>
-        <span class="ticker-item"><span class="dot"></span>Campaign Creative</span>
-        <span class="ticker-item"><span class="dot"></span>Brand Promotion</span>
-        <span class="ticker-item"><span class="dot"></span>Marketing Design</span>
-        <span class="ticker-item"><span class="dot"></span>Content Creation</span>
-        <span class="ticker-item"><span class="dot"></span>Visual Storytelling</span>
-      </div>
-    </div>
-
-    <div class="wrap" style="margin-top:70px;">
-      <span class="eyebrow reveal">Profile</span>
-      <div class="about-grid">
-        <div class="reveal">
-          <p>I work at the intersection of operations and data — reviewing agreements, tracking SLA breaches, and building the daily MIS that lets leadership act faster. My background moves from export operations, to venture administration, to correspondent banking analysis, and now toward an MBA in Fintech and Data Analytics.</p>
-          <p>Beyond analytics, I have a strong eye for visual storytelling and marketing design — creating compelling social media campaigns, brand promotions, and content that drives engagement across industries.</p>
-        </div>
-        <div class="glass info-panel reveal" style="transition-delay:.1s;">
-          <div class="stat-row"><span>Current role</span><span class="v">Operations Analyst</span></div>
-          <div class="stat-row"><span>Design work</span><span class="v">5 Projects</span></div>
-          <div class="stat-row"><span>Core tools</span><span class="v">Excel · Power BI · Tableau</span></div>
-          <div class="stat-row"><span>Nationality</span><span class="v">Sri Lankan</span></div>
-          <div class="stat-row"><span>Languages</span><span class="v">English</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="wrap">
-      <span class="eyebrow reveal">Career</span>
-      <h2 class="sec-title reveal">Experience</h2>
-
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="glass tl-card reveal">
-            <div class="tl-head"><span class="tl-role">Operations Analyst</span><span class="tl-time">Jun 2023 — Present</span></div>
-            <span class="tl-org">Al Mulla Exchange · Kuwait City</span>
-            <ul>
-              <li>Reviewed corporate agreements and coordinated with correspondent banks to secure tie-ups, ensuring compliance and effective risk controls.</li>
-              <li>Analyzed SLA breaches and transaction KPIs to identify root causes, implementing targeted process changes that reduced repeat exceptions.</li>
-              <li>Designed and delivered concise daily MIS and dashboards to leadership and branches, enabling faster interventions and clearer operational visibility.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="glass tl-card reveal">
-            <div class="tl-head"><span class="tl-role">Operations Assistant</span><span class="tl-time">Jul 2022 — Jan 2023</span></div>
-            <span class="tl-org">Lion Ventures Group · Colombo</span>
-            <ul>
-              <li>Managed operations tasks for venture activities, maintaining investment databases and documentation to ensure accurate tracking of portfolio activity.</li>
-              <li>Prepared board and investor presentation materials, coordinating inputs to present clear, data-backed updates for meetings and fundraising efforts.</li>
-              <li>Liaised with legal and accounting teams to support compliance and financial accuracy, streamlining approval and reporting processes.</li>
-              <li>Improved administrative efficiency by standardizing document templates and tracking processes, reducing preparation time for investor deliverables.</li>
-            </ul>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="glass tl-card reveal">
-            <div class="tl-head"><span class="tl-role">Intern</span><span class="tl-time">Jan 2021 — Mar 2021</span></div>
-            <span class="tl-org">Freshqo · Wattala</span>
-            <ul>
-              <li>Assisted in preparing financial statements and reconciliations, supporting month-end close and improving accuracy of financial records.</li>
-              <li>Prepared export documentation and contracts, ensuring compliance with shipment requirements and reducing processing delays.</li>
-              <li>Generated regular reports on export activity and maintained up-to-date records to support operational planning and audit readiness.</li>
-              <li>Collaborated with the finance team on account reconciliations and data entry tasks to streamline recordkeeping processes.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EDUCATION -->
-  <section id="education">
-    <div class="wrap">
-      <span class="eyebrow reveal">Qualifications</span>
-      <h2 class="sec-title reveal">Education &amp; Certifications</h2>
-
-      <div class="edu-grid">
-        <div class="glass edu-card reveal">
-          <div class="edu-top">
-            <div><span class="edu-time">2025 — Present</span><div class="edu-deg">MBA, Fintech and Data Analytics</div></div>
-            <span class="badge reading">Reading</span>
-          </div>
-          <span class="edu-inst">Anglia Ruskin University, Cambridge, UK</span>
-        </div>
-        <div class="glass edu-card reveal" style="transition-delay:.05s;">
-          <div class="edu-top">
-            <div><span class="edu-time">2021 — 2022</span><div class="edu-deg">BSc (Hons), Business Administration</div></div>
-            <span class="badge distinction">Distinction</span>
-          </div>
-          <span class="edu-inst">Southampton Solent University, UK</span>
-        </div>
-        <div class="glass edu-card reveal" style="transition-delay:.1s;">
-          <div class="edu-top">
-            <div><span class="edu-time">2018 — 2020</span><div class="edu-deg">HND, Business Management</div></div>
-            <span class="badge merit">Merit</span>
-          </div>
-          <span class="edu-inst">Pearson College London, Colombo</span>
-        </div>
-        <div class="glass edu-card reveal" style="transition-delay:.15s;">
-          <div class="edu-top">
-            <div><span class="edu-time">Jan — Mar 2018</span><div class="edu-deg">Foundation Degree, Business Management</div></div>
-            <span class="badge pass">Pass</span>
-          </div>
-          <span class="edu-inst">Pearson College London, Colombo</span>
-        </div>
-        <div class="glass edu-card reveal" style="transition-delay:.2s;">
-          <div class="edu-top">
-            <div><span class="edu-time">2015 — 2017</span><div class="edu-deg">Advanced Level, Commerce</div></div>
-            <span class="badge pass">Pass</span>
-          </div>
-          <span class="edu-inst">Al Mannar International School, Colombo</span>
-        </div>
-        <div class="glass edu-card reveal" style="transition-delay:.25s;">
-          <div class="edu-top">
-            <div><span class="edu-time">2006 — 2014</span><div class="edu-deg">Ordinary Level, Secondary Education</div></div>
-            <span class="badge pass">Pass</span>
-          </div>
-          <span class="edu-inst">Raz International School, Colombo</span>
+        <div class="stat-strip">
+          <div class="glass stat-chip"><div class="num" data-count="3">0</div><div class="lbl">Years in Ops</div></div>
+          <div class="glass stat-chip"><div class="num" data-count="5">0</div><div class="lbl">Design Projects</div></div>
+          <div class="glass stat-chip"><div class="num" data-count="3">0</div><div class="lbl">BI Platforms</div></div>
+          <div class="glass stat-chip"><div class="num" data-count="98" data-suffix="%">0</div><div class="lbl">Accuracy Focus</div></div>
         </div>
       </div>
 
-      <div class="glass cert-note reveal"><strong>Researcher Training</strong> — 60 Decibels, May 2023</div>
+      <div class="glass orbit-card reveal visible">
+        <div class="id-row"><span class="k">Based in</span><span class="v">Kuwait City, Kuwait</span></div>
+        <div class="id-row"><span class="k">Currently</span><span class="v">Analyst, Al Mulla Exchange</span></div>
+        <div class="id-row"><span class="k">Studying</span><span class="v">MBA Fintech & Data Analytics</span></div>
+        <div class="id-row"><span class="k">Contact</span><a class="v" href="mailto:mohamedsaaif99@gmail.com">mohamedsaaif99@gmail.com</a></div>
+        <div class="id-row"><span class="k">LinkedIn</span><a class="v" href="https://www.linkedin.com/in/mohamed-saaif-s-5a6b3918b" target="_blank">/mohamed-saaif-s</a></div>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="wrap">
-      <span class="eyebrow reveal">Proficiency</span>
-      <h2 class="sec-title reveal">Skills &amp; Expertise</h2>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item"><span class="dot"></span>Social Media Design</span>
+      <span class="ticker-item"><span class="dot"></span>Campaign Creative</span>
+      <span class="ticker-item"><span class="dot"></span>Brand Promotion</span>
+      <span class="ticker-item"><span class="dot"></span>Marketing Design</span>
+      <span class="ticker-item"><span class="dot"></span>Content Creation</span>
+      <span class="ticker-item"><span class="dot"></span>Visual Storytelling</span>
+      <span class="ticker-item"><span class="dot"></span>Social Media Design</span>
+      <span class="ticker-item"><span class="dot"></span>Campaign Creative</span>
+      <span class="ticker-item"><span class="dot"></span>Brand Promotion</span>
+      <span class="ticker-item"><span class="dot"></span>Marketing Design</span>
+      <span class="ticker-item"><span class="dot"></span>Content Creation</span>
+      <span class="ticker-item"><span class="dot"></span>Visual Storytelling</span>
+    </div>
+  </div>
 
-      <div class="gauge-grid">
-        <div class="glass gauge-card reveal">
-          <div class="gauge-wrap">
-            <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="85" cx="59" cy="59" r="51"></circle></svg>
-            <div class="gauge-val">85%</div>
-          </div>
-          <h3>Technical &amp; Systems</h3>
-          <div class="chip-list">
-            <span class="chip">Excel 95%</span><span class="chip">Power BI 80%</span><span class="chip">Tableau 75%</span><span class="chip">Data Modeling 80%</span>
-          </div>
+  <div class="wrap" style="margin-top:70px">
+    <span class="eyebrow reveal">Profile</span>
+    <div class="about-grid">
+      <div class="reveal">
+        <p>I work at the intersection of operations and data — reviewing agreements, tracking SLA breaches, and building the daily MIS that lets leadership act faster. My background moves from export operations, to venture administration, to correspondent banking analysis, and now toward an MBA in Fintech and Data Analytics.</p>
+        <p>Beyond analytics, I have a strong eye for visual storytelling and marketing design — creating compelling social media campaigns, brand promotions, and content that drives engagement across industries.</p>
+      </div>
+      <div class="glass info-panel reveal">
+        <div class="stat-row"><span>Current role</span><span class="v">Operations Analyst</span></div>
+        <div class="stat-row"><span>Design work</span><span class="v">5 Projects</span></div>
+        <div class="stat-row"><span>Core tools</span><span class="v">Excel · Power BI · Tableau</span></div>
+        <div class="stat-row"><span>Nationality</span><span class="v">Sri Lankan</span></div>
+        <div class="stat-row"><span>Languages</span><span class="v">English</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <span class="eyebrow reveal">Career</span>
+    <h2 class="sec-title reveal">Experience</h2>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="glass tl-card reveal">
+          <div class="tl-head"><span class="tl-role">Operations Analyst</span><span class="tl-time">Jun 2023 — Present</span></div>
+          <span class="tl-org">Al Mulla Exchange · Kuwait City</span>
+          <ul>
+            <li>Reviewed corporate agreements and coordinated with correspondent banks to secure tie-ups, ensuring compliance and effective risk controls.</li>
+            <li>Analyzed SLA breaches and transaction KPIs to identify root causes, implementing targeted process changes that reduced repeat exceptions.</li>
+            <li>Designed and delivered concise daily MIS and dashboards to leadership and branches, enabling faster interventions and clearer operational visibility.</li>
+          </ul>
         </div>
-        <div class="glass gauge-card reveal" style="transition-delay:.05s;">
-          <div class="gauge-wrap">
-            <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="88" cx="59" cy="59" r="51"></circle></svg>
-            <div class="gauge-val">88%</div>
-          </div>
-          <h3>Analytical &amp; Reporting</h3>
-          <div class="chip-list">
-            <span class="chip">MIS 90%</span><span class="chip">Root-Cause 88%</span><span class="chip">Presentation 85%</span><span class="chip">Validation 90%</span>
-          </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="glass tl-card reveal">
+          <div class="tl-head"><span class="tl-role">Operations Assistant</span><span class="tl-time">Jul 2022 — Jan 2023</span></div>
+          <span class="tl-org">Lion Ventures Group · Colombo</span>
+          <ul>
+            <li>Managed operations tasks for venture activities, maintaining investment databases and documentation to ensure accurate tracking of portfolio activity.</li>
+            <li>Prepared board and investor presentation materials, coordinating inputs to present clear, data-backed updates for meetings and fundraising efforts.</li>
+            <li>Liaised with legal and accounting teams to support compliance and financial accuracy, streamlining approval and reporting processes.</li>
+            <li>Improved administrative efficiency by standardizing document templates and tracking processes.</li>
+          </ul>
         </div>
-        <div class="glass gauge-card reveal" style="transition-delay:.1s;">
-          <div class="gauge-wrap">
-            <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="88" cx="59" cy="59" r="51"></circle></svg>
-            <div class="gauge-val">88%</div>
-          </div>
-          <h3>Operations &amp; Process</h3>
-          <div class="chip-list">
-            <span class="chip">Process Improvement 85%</span><span class="chip">Coordination 90%</span><span class="chip">Transactions 95%</span>
-          </div>
-        </div>
-        <div class="glass gauge-card reveal" style="transition-delay:.15s;">
-          <div class="gauge-wrap">
-            <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="94" cx="59" cy="59" r="51"></circle></svg>
-            <div class="gauge-val">94%</div>
-          </div>
-          <h3>Professional &amp; Creative</h3>
-          <div class="chip-list">
-            <span class="chip">Communication 95%</span><span class="chip">Design 90%</span><span class="chip">Autonomy 92%</span>
-          </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="glass tl-card reveal">
+          <div class="tl-head"><span class="tl-role">Intern</span><span class="tl-time">Jan 2021 — Mar 2021</span></div>
+          <span class="tl-org">Freshqo · Wattala</span>
+          <ul>
+            <li>Assisted in preparing financial statements and reconciliations.</li>
+            <li>Prepared export documentation and contracts.</li>
+            <li>Generated regular reports on export activity and maintained up-to-date records.</li>
+            <li>Collaborated with the finance team on account reconciliations and data entry tasks.</li>
+          </ul>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="wrap">
-      <div class="contact-grid">
-        <div class="reveal">
-          <span class="eyebrow">Get in touch</span>
-          <h2>Open to analyst &amp; data roles in fintech and operations.</h2>
-          <p class="lede">Based in Kuwait City, currently reading for an MBA in Fintech and Data Analytics. References available on request.</p>
-          <button type="button" class="btn btn-primary" onclick="window.location.href='mailto:mohamedsaaif99@gmail.com'">Send an email</button>
+<section id="education">
+  <div class="wrap">
+    <span class="eyebrow reveal">Qualifications</span>
+    <h2 class="sec-title reveal">Education & Certifications</h2>
+
+    <div class="edu-grid">
+      <div class="glass edu-card reveal">
+        <div class="edu-top">
+          <div><span class="edu-time">2025 — Present</span><div class="edu-deg">MBA, Fintech and Data Analytics</div></div>
+          <span class="badge reading">Reading</span>
         </div>
-        <div class="glass contact-panel reveal" style="transition-delay:.1s;">
-          <a class="contact-row" href="mailto:mohamedsaaif99@gmail.com">
-            <span><span class="k">Email</span><span class="v">mohamedsaaif99@gmail.com</span></span>
-            <span class="arrow">→</span>
-          </a>
-          <a class="contact-row" href="tel:+96569620090">
-            <span><span class="k">Phone</span><span class="v">+965 6962 0090</span></span>
-            <span class="arrow">→</span>
-          </a>
-          <a class="contact-row" href="https://www.linkedin.com/in/mohamed-saaif-s-5a6b3918b" target="_blank" rel="noopener">
-            <span><span class="k">LinkedIn</span><span class="v">/mohamed-saaif-s-5a6b3918b</span></span>
-            <span class="arrow">→</span>
-          </a>
+        <span class="edu-inst">Anglia Ruskin University, Cambridge, UK</span>
+      </div>
+
+      <div class="glass edu-card reveal">
+        <div class="edu-top">
+          <div><span class="edu-time">2021 — 2022</span><div class="edu-deg">BSc (Hons), Business Administration</div></div>
+          <span class="badge distinction">Distinction</span>
+        </div>
+        <span class="edu-inst">Southampton Solent University, UK</span>
+      </div>
+
+      <div class="glass edu-card reveal">
+        <div class="edu-top">
+          <div><span class="edu-time">2018 — 2020</span><div class="edu-deg">HND, Business Management</div></div>
+          <span class="badge merit">Merit</span>
+        </div>
+        <span class="edu-inst">Pearson College London, Colombo</span>
+      </div>
+
+      <div class="glass edu-card reveal">
+        <div class="edu-top">
+          <div><span class="edu-time">Jan — Mar 2018</span><div class="edu-deg">Foundation Degree, Business Management</div></div>
+          <span class="badge pass">Pass</span>
+        </div>
+        <span class="edu-inst">Pearson College London, Colombo</span>
+      </div>
+
+      <div class="glass edu-card reveal">
+        <div class="edu-top">
+          <div><span class="edu-time">2015 — 2017</span><div class="edu-deg">Advanced Level, Commerce</div></div>
+          <span class="badge pass">Pass</span>
+        </div>
+        <span class="edu-inst">Al Mannar International School, Colombo</span>
+      </div>
+
+      <div class="glass edu-card reveal">
+        <div class="edu-top">
+          <div><span class="edu-time">2006 — 2014</span><div class="edu-deg">Ordinary Level, Secondary Education</div></div>
+          <span class="badge pass">Pass</span>
+        </div>
+        <span class="edu-inst">Raz International School, Colombo</span>
+      </div>
+    </div>
+
+    <div class="glass cert-note reveal"><strong>Researcher Training</strong> — 60 Decibels, May 2023</div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <span class="eyebrow reveal">Proficiency</span>
+    <h2 class="sec-title reveal">Skills & Expertise</h2>
+
+    <div class="gauge-grid">
+      <div class="glass gauge-card reveal">
+        <div class="gauge-wrap">
+          <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="85" cx="59" cy="59" r="51"></circle></svg>
+          <div class="gauge-val">85%</div>
+        </div>
+        <h3>Technical & Systems</h3>
+        <div class="chip-list">
+          <span class="chip">Excel 95%</span><span class="chip">Power BI 80%</span><span class="chip">Tableau 75%</span><span class="chip">Data Modeling 80%</span>
+        </div>
+      </div>
+
+      <div class="glass gauge-card reveal">
+        <div class="gauge-wrap">
+          <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="88" cx="59" cy="59" r="51"></circle></svg>
+          <div class="gauge-val">88%</div>
+        </div>
+        <h3>Analytical & Reporting</h3>
+        <div class="chip-list">
+          <span class="chip">MIS 90%</span><span class="chip">Root-Cause 88%</span><span class="chip">Presentation 85%</span><span class="chip">Validation 90%</span>
+        </div>
+      </div>
+
+      <div class="glass gauge-card reveal">
+        <div class="gauge-wrap">
+          <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="88" cx="59" cy="59" r="51"></circle></svg>
+          <div class="gauge-val">88%</div>
+        </div>
+        <h3>Operations & Process</h3>
+        <div class="chip-list">
+          <span class="chip">Process Improvement 85%</span><span class="chip">Coordination 90%</span><span class="chip">Transactions 95%</span>
+        </div>
+      </div>
+
+      <div class="glass gauge-card reveal">
+        <div class="gauge-wrap">
+          <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="94" cx="59" cy="59" r="51"></circle></svg>
+          <div class="gauge-val">94%</div>
+        </div>
+        <h3>Professional & Creative</h3>
+        <div class="chip-list">
+          <span class="chip">Communication 95%</span><span class="chip">Design 90%</span><span class="chip">Autonomy 92%</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- MY WORK (EMPTY - Add projects later) -->
-  <section id="work">
-    <div class="wrap">
-      <span class="eyebrow reveal">Portfolio</span>
-      <h2 class="sec-title reveal">My Work</h2>
-      
-      <!-- Add your project cards here later -->
-      <div class="portfolio-grid" id="portfolio-grid">
-        <!-- Projects will be added here -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <span class="eyebrow">Get in touch</span>
+        <h2>Open to analyst & data roles in fintech and operations.</h2>
+        <p class="lede">Based in Kuwait City, currently reading for an MBA in Fintech and Data Analytics. References available on request.</p>
+        <button class="btn btn-primary" onclick="window.location.href='mailto:mohamedsaaif99@gmail.com'">Send an email</button>
+      </div>
+
+      <div class="glass contact-panel reveal">
+        <a class="contact-row" href="mailto:mohamedsaaif99@gmail.com">
+          <span><span class="k">Email</span><span class="v">mohamedsaaif99@gmail.com</span></span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="contact-row" href="tel:+96569620090">
+          <span><span class="k">Phone</span><span class="v">+965 6962 0090</span></span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="contact-row" href="https://www.linkedin.com/in/mohamed-saaif-s-5a6b3918b" target="_blank">
+          <span><span class="k">LinkedIn</span><span class="v">/mohamed-saaif-s-5a6b3918b</span></span>
+          <span class="arrow">→</span>
+        </a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <span class="eyebrow reveal">Portfolio</span>
+    <h2 class="sec-title reveal">My Work</h2>
+    <div class="portfolio-grid" id="portfolio-grid"></div>
+  </div>
+</section>
 
 </main>
 
@@ -897,319 +697,429 @@ footer{ padding:30px 0 44px; font-size:12px; color:var(--ink-faint); display:fle
 
 <script>
 (function(){
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  /* ---------- PRELOADER ---------- */
-  var preloader = document.getElementById('preloader');
-  var ringFill = document.getElementById('ring-fill');
-  var pctEl = document.getElementById('preload-pct');
-  var CIRC = 264;
+  const soundIndicator = document.getElementById('sound-indicator');
+
+  /* preloader */
+  const preloader = document.getElementById('preloader');
+  const ringFill = document.getElementById('ring-fill');
+  const pctEl = document.getElementById('preload-pct');
+  const CIRC = 264;
 
   function finishLoad(){
     preloader.classList.add('hidden');
-    setTimeout(function(){ preloader.style.display='none'; }, 800);
-    setTimeout(function(){ soundIndicator.classList.add('visible'); }, 700);
+    setTimeout(()=>preloader.style.display='none',800);
+    setTimeout(()=>soundIndicator.classList.add('visible'),700);
   }
-  if (reduced) {
+
+  if(reduced){
     finishLoad();
-  } else {
-    var p = 0;
-    var iv = setInterval(function(){
+  }else{
+    let p=0;
+    const iv=setInterval(()=>{
       p += Math.floor(Math.random()*9)+4;
-      if (p >= 100) { p = 100; clearInterval(iv); setTimeout(finishLoad, 300); }
-      pctEl.textContent = p + '%';
-      ringFill.style.strokeDashoffset = CIRC - (CIRC * p / 100);
-    }, 130);
+      if(p>=100){
+        p=100;
+        clearInterval(iv);
+        setTimeout(finishLoad,300);
+      }
+      pctEl.textContent=p+'%';
+      ringFill.style.strokeDashoffset=CIRC-(CIRC*p/100);
+    },130);
   }
 
-  /* ---------- SOUND INDICATOR SCROLL ANIMATION ---------- */
-  var soundIndicator = document.getElementById('sound-indicator');
-  var lastScrollY = window.scrollY;
-  var scrolledOnce = false;
-
-  window.addEventListener('scroll', function(){
-    var currentScroll = window.scrollY;
-    
-    if (currentScroll > 300) {
-      soundIndicator.classList.add('scrolled');
-    } else {
-      soundIndicator.classList.remove('scrolled');
-    }
-    
-    if (!scrolledOnce && currentScroll > 50) {
-      scrolledOnce = true;
-      soundIndicator.classList.add('bounce');
-      setTimeout(function(){ soundIndicator.classList.remove('bounce'); }, 600);
-    }
-    
-    if (Math.abs(currentScroll - lastScrollY) > 100) {
-      soundIndicator.style.transform = 'translateY(-3px)';
-      setTimeout(function(){ soundIndicator.style.transform = ''; }, 150);
-    }
-    
-    lastScrollY = currentScroll;
+  /* sound indicator */
+  window.addEventListener('scroll',()=>{
+    soundIndicator.classList.toggle('scrolled',window.scrollY>300);
   });
 
-  /* ---------- CURSOR ---------- */
-  var dot = document.getElementById('cursor-dot');
-  var glow = document.getElementById('cursor-glow');
-  var mx=0,my=0,dx=0,dy=0,gx=0,gy=0;
-  document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; });
-  function animCursor(){
-    dx += (mx-dx)*.25; dy += (my-dy)*.25;
-    gx += (mx-gx)*.12; gy += (my-gy)*.12;
-    dot.style.left=dx+'px'; dot.style.top=dy+'px';
-    glow.style.left=gx+'px'; glow.style.top=gy+'px';
-    requestAnimationFrame(animCursor);
-  }
-  if (!reduced && !('ontouchstart' in window)) {
-    document.body.classList.add('cursor-active');
-    animCursor();
-  } else {
-    dot.style.display='none'; glow.style.display='none';
-  }
-
-  /* ---------- SCROLL PROGRESS ---------- */
-  var progress = document.getElementById('scroll-progress');
-  window.addEventListener('scroll', function(){
-    var h = document.documentElement;
-    var pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
-    progress.style.width = pct + '%';
+  /* scroll progress */
+  const progress=document.getElementById('scroll-progress');
+  window.addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    const pct=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+    progress.style.width=pct+'%';
   });
 
-  /* ---------- NAV ---------- */
-  var navButtons = document.querySelectorAll('.nav-links button, #mobile-menu button, [data-nav].btn, .nav-cta');
+  /* nav */
   function goTo(id){
-    var t = document.getElementById(id);
-    if (t) t.scrollIntoView({ behavior: reduced?'auto':'smooth', block:'start' });
+    const t=document.getElementById(id);
+    if(t)t.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
     document.getElementById('mobile-menu').classList.remove('open');
   }
-  navButtons.forEach(function(btn){
-    btn.addEventListener('click', function(){ goTo(this.getAttribute('data-nav')); });
+
+  document.querySelectorAll('[data-nav]').forEach(btn=>{
+    btn.addEventListener('click',()=>goTo(btn.getAttribute('data-nav')));
   });
-  document.getElementById('nav-toggle').addEventListener('click', function(){
+
+  document.getElementById('nav-toggle').addEventListener('click',()=>{
     document.getElementById('mobile-menu').classList.toggle('open');
   });
 
-  var navLinkButtons = document.querySelectorAll('.nav-links button');
-  var mobileButtons = document.querySelectorAll('#mobile-menu button');
-  var indicator = document.getElementById('nav-indicator');
+  const desktopButtons=document.querySelectorAll('.nav-links button');
+  const mobileButtons=document.querySelectorAll('#mobile-menu button');
+  const indicator=document.getElementById('nav-indicator');
+
   function setActive(id){
-    navLinkButtons.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-nav')===id); });
-    mobileButtons.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-nav')===id); });
-    var activeBtn = document.querySelector('.nav-links button.active');
-    if (activeBtn) {
-      indicator.style.left = activeBtn.offsetLeft + 'px';
-      indicator.style.width = activeBtn.offsetWidth + 'px';
+    desktopButtons.forEach(b=>b.classList.toggle('active',b.dataset.nav===id));
+    mobileButtons.forEach(b=>b.classList.toggle('active',b.dataset.nav===id));
+    const active=document.querySelector('.nav-links button.active');
+    if(active){
+      indicator.style.left=active.offsetLeft+'px';
+      indicator.style.width=active.offsetWidth+'px';
     }
   }
-  setTimeout(function(){ setActive('about'); }, 400);
-  window.addEventListener('resize', function(){
-    var a = document.querySelector('.nav-links button.active');
-    if (a) { indicator.style.left=a.offsetLeft+'px'; indicator.style.width=a.offsetWidth+'px'; }
-  });
 
-  var sections = document.querySelectorAll('main section');
-  var spy = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if (e.isIntersecting) setActive(e.target.id); });
-  }, { rootMargin:'-40% 0px -50% 0px' });
-  sections.forEach(function(s){ spy.observe(s); });
+  setTimeout(()=>setActive('about'),400);
 
-  /* ---------- TYPED ROLE ---------- */
-  var roles = ['Operations Analyst', 'Fintech & Data Analytics', 'MIS & Dashboards', 'Creative Designer'];
-  var typedEl = document.getElementById('typed-role');
-  var cursorSpan = typedEl.querySelector('.cursor');
-  if (reduced) {
-    typedEl.insertBefore(document.createTextNode(roles[0]), cursorSpan);
-  } else {
-    var ri=0, ci=0, deleting=false;
+  const spy=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)setActive(e.target.id)});
+  },{rootMargin:'-40% 0px -50% 0px'});
+
+  document.querySelectorAll('main section').forEach(s=>spy.observe(s));
+
+  /* typed role */
+  const roles=['Operations Analyst','Fintech & Data Analytics','MIS & Dashboards','Creative Designer'];
+  const typedEl=document.getElementById('typed-role');
+  const cursorSpan=typedEl.querySelector('.cursor');
+
+  if(reduced){
+    typedEl.insertBefore(document.createTextNode(roles[0]),cursorSpan);
+  }else{
+    let ri=0,ci=0,deleting=false;
     function typeLoop(){
-      var word = roles[ri];
-      if (!deleting) {
+      const word=roles[ri];
+      if(!deleting){
         ci++;
-        if (ci > word.length) { deleting = true; setTimeout(typeLoop, 1400); return; }
-      } else {
+        if(ci>word.length){
+          deleting=true;
+          setTimeout(typeLoop,1400);
+          return;
+        }
+      }else{
         ci--;
-        if (ci < 0) { deleting = false; ri = (ri+1) % roles.length; ci = 0; }
+        if(ci<0){
+          deleting=false;
+          ri=(ri+1)%roles.length;
+          ci=0;
+        }
       }
-      typedEl.childNodes.length && typedEl.firstChild !== cursorSpan && typedEl.firstChild.remove();
-      typedEl.insertBefore(document.createTextNode(word.slice(0, ci)), cursorSpan);
-      setTimeout(typeLoop, deleting ? 35 : 70);
+      if(typedEl.firstChild!==cursorSpan)typedEl.firstChild.remove();
+      typedEl.insertBefore(document.createTextNode(word.slice(0,ci)),cursorSpan);
+      setTimeout(typeLoop,deleting?35:70);
     }
     typeLoop();
   }
 
-  /* ---------- REVEAL ---------- */
-  var revealEls = document.querySelectorAll('.reveal');
-  var revealObs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold:.15, rootMargin:'0px 0px -60px 0px' });
-  revealEls.forEach(function(el){ revealObs.observe(el); });
+  /* reveal */
+  const revealObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+  },{threshold:.15,rootMargin:'0px 0px -60px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
 
-  /* ---------- TIMELINE NODES ---------- */
-  var tlItems = document.querySelectorAll('.tl-item');
-  var tlObs = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold:.3 });
-  tlItems.forEach(function(el){ tlObs.observe(el); });
+  /* timeline */
+  const tlObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+  },{threshold:.3});
+  document.querySelectorAll('.tl-item').forEach(el=>tlObs.observe(el));
 
-  /* ---------- COUNTERS ---------- */
-  var counters = document.querySelectorAll('.num[data-count]');
-  var countObs = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if (entry.isIntersecting) {
-        var el = entry.target;
-        var target = parseInt(el.getAttribute('data-count'), 10);
-        var suffix = el.getAttribute('data-suffix') || '';
-        var cur = 0;
-        var step = Math.max(1, Math.round(target/40));
-        var iv = setInterval(function(){
-          cur += step;
-          if (cur >= target) { cur = target; clearInterval(iv); }
-          el.textContent = cur + suffix;
-        }, 30);
+  /* counters */
+  const countObs=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el=entry.target;
+        const target=parseInt(el.dataset.count,10);
+        const suffix=el.dataset.suffix||'';
+        let cur=0;
+        const step=Math.max(1,Math.round(target/40));
+        const iv=setInterval(()=>{
+          cur+=step;
+          if(cur>=target){cur=target;clearInterval(iv)}
+          el.textContent=cur+suffix;
+        },30);
         countObs.unobserve(el);
       }
     });
-  }, { threshold:.6 });
-  counters.forEach(function(el){ countObs.observe(el); });
+  },{threshold:.6});
+  document.querySelectorAll('.num[data-count]').forEach(el=>countObs.observe(el));
 
-  /* ---------- GAUGES ---------- */
-  var GCIRC = 320.4;
-  var gauges = document.querySelectorAll('.gauge-wrap .fill');
-  var gaugeObs = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if (entry.isIntersecting) {
-        var el = entry.target;
-        var pct = parseFloat(el.getAttribute('data-pct'));
-        el.style.strokeDashoffset = GCIRC - (GCIRC * pct/100);
+  /* gauges */
+  const GCIRC=320.4;
+  const gaugeObs=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const el=entry.target;
+        const pct=parseFloat(el.dataset.pct);
+        el.style.strokeDashoffset=GCIRC-(GCIRC*pct/100);
         gaugeObs.unobserve(el);
       }
     });
-  }, { threshold:.4 });
-  gauges.forEach(function(el){ gaugeObs.observe(el); });
+  },{threshold:.4});
+  document.querySelectorAll('.gauge-wrap .fill').forEach(el=>gaugeObs.observe(el));
 
-  /* ---------- SOUND (synthesized, always on) ---------- */
-  var soundEnabled = true;
-  var audioCtx = null;
+  /* particles */
+  if(!reduced){
+    const canvas=document.getElementById('particle-canvas');
+    const ctx=canvas.getContext('2d');
+    let W,H,particles=[];
 
-  function ensureAudioCtx(){
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-  }
-
-  function playTone(freqStart, freqEnd, duration, type){
-    if (!audioCtx) return;
-    var now = audioCtx.currentTime;
-    var osc = audioCtx.createOscillator();
-    var gain = audioCtx.createGain();
-    var filter = audioCtx.createBiquadFilter();
-    filter.type = 'lowpass';
-    filter.frequency.value = 3200;
-    osc.type = type || 'sine';
-    osc.frequency.setValueAtTime(freqStart, now);
-    osc.frequency.exponentialRampToValueAtTime(Math.max(freqEnd, 20), now + duration);
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.16, now + 0.008);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-    osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
-    osc.start(now); osc.stop(now + duration + 0.02);
-  }
-  function playClickBlip(){ playTone(1200, 480, 0.09, 'sine'); }
-
-  /* ---------- CLICK EFFECTS ---------- */
-  document.addEventListener('click', function(e){
-    if (soundEnabled) { ensureAudioCtx(); playClickBlip(); }
-    var fx = document.createElement('div');
-    fx.className = 'click-fx';
-    fx.style.left = e.clientX + 'px';
-    fx.style.top = e.clientY + 'px';
-
-    var ring = document.createElement('div');
-    ring.className = 'click-ring';
-    fx.appendChild(ring);
-
-    var cross = document.createElement('div');
-    cross.className = 'click-cross';
-    cross.innerHTML = '<i></i><i></i>';
-    fx.appendChild(cross);
-
-    if (!reduced) {
-      for (var i=0; i<6; i++){
-        var spark = document.createElement('div');
-        spark.className = 'click-spark';
-        var angle = (Math.PI * 2 / 6) * i + Math.random()*0.4;
-        var dist = 26 + Math.random()*18;
-        spark.style.setProperty('--sx', Math.cos(angle)*dist + 'px');
-        spark.style.setProperty('--sy', Math.sin(angle)*dist + 'px');
-        fx.appendChild(spark);
-      }
+    function resize(){
+      W=canvas.width=window.innerWidth;
+      H=canvas.height=window.innerHeight;
     }
+    window.addEventListener('resize',resize);
+    resize();
 
-    document.body.appendChild(fx);
-    setTimeout(function(){ fx.remove(); }, 650);
-
-    if (!reduced) {
-      dot.classList.add('clicking');
-      setTimeout(function(){ dot.classList.remove('clicking'); }, 220);
-    }
-
-    var btn = e.target.closest('.btn');
-    if (btn) {
-      var rect = btn.getBoundingClientRect();
-      var r = document.createElement('span');
-      r.className = 'ripple';
-      var size = Math.max(rect.width, rect.height) * 1.6;
-      r.style.width = size + 'px';
-      r.style.height = size + 'px';
-      r.style.left = (e.clientX - rect.left) + 'px';
-      r.style.top = (e.clientY - rect.top) + 'px';
-      btn.appendChild(r);
-      setTimeout(function(){ r.remove(); }, 650);
-    }
-  });
-
-  /* ---------- PARTICLE CANVAS ---------- */
-  if (!reduced) {
-    var canvas = document.getElementById('particle-canvas');
-    var ctx = canvas.getContext('2d');
-    var W,H, particles=[];
-    function resize(){ W=canvas.width=window.innerWidth; H=canvas.height=window.innerHeight; }
-    window.addEventListener('resize', resize); resize();
     function P(){
-      this.x=Math.random()*W; this.y=Math.random()*H;
-      this.vx=(Math.random()-.5)*.25; this.vy=(Math.random()-.5)*.25;
+      this.x=Math.random()*W;
+      this.y=Math.random()*H;
+      this.vx=(Math.random()-.5)*.25;
+      this.vy=(Math.random()-.5)*.25;
       this.r=Math.random()*1.6+.6;
     }
-    for (var i=0;i<70;i++) particles.push(new P());
+
+    for(let i=0;i<70;i++)particles.push(new P());
+
     function step(){
       ctx.clearRect(0,0,W,H);
-      for (var i=0;i<particles.length;i++){
-        var p=particles[i];
-        p.x+=p.vx; p.y+=p.vy;
+
+      for(let i=0;i<particles.length;i++){
+        const p=particles[i];
+        p.x+=p.vx;
+        p.y+=p.vy;
         if(p.x<0||p.x>W)p.vx*=-1;
         if(p.y<0||p.y>H)p.vy*=-1;
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle='rgba(0,229,255,0.5)'; ctx.fill();
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle='rgba(0,229,255,.5)';
+        ctx.fill();
       }
-      for (var i=0;i<particles.length;i++){
-        for (var j=i+1;j<particles.length;j++){
-          var dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
-          var d=Math.sqrt(dx*dx+dy*dy);
-          if (d<130){
+
+      for(let i=0;i<particles.length;i++){
+        for(let j=i+1;j<particles.length;j++){
+          const dx=particles[i].x-particles[j].x;
+          const dy=particles[i].y-particles[j].y;
+          const d=Math.sqrt(dx*dx+dy*dy);
+          if(d<130){
             ctx.beginPath();
             ctx.moveTo(particles[i].x,particles[i].y);
             ctx.lineTo(particles[j].x,particles[j].y);
             ctx.strokeStyle='rgba(139,92,246,'+(0.12*(1-d/130))+')';
-            ctx.lineWidth=.6; ctx.stroke();
+            ctx.lineWidth=.6;
+            ctx.stroke();
           }
         }
       }
+
       requestAnimationFrame(step);
     }
     step();
   }
+})();
+
+/* =========================================================
+   SKELETON / LIZARD CURSOR EFFECT
+   ========================================================= */
+(function(){
+  if(window.matchMedia('(hover:none), (pointer:coarse)').matches) return;
+
+  const canvas=document.getElementById('skeleton-cursor');
+  const ctx=canvas.getContext('2d');
+
+  let W,H,DPR;
+  let mouse={x:window.innerWidth/2,y:window.innerHeight/2};
+
+  const POINTS=34;
+  const SPACING=12;
+  const spine=[];
+
+  for(let i=0;i<POINTS;i++){
+    spine.push({x:mouse.x-i*SPACING,y:mouse.y});
+  }
+
+  function resize(){
+    DPR=Math.min(window.devicePixelRatio||1,2);
+    W=window.innerWidth;
+    H=window.innerHeight;
+    canvas.width=W*DPR;
+    canvas.height=H*DPR;
+    canvas.style.width=W+'px';
+    canvas.style.height=H+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+
+  resize();
+  window.addEventListener('resize',resize);
+
+  document.addEventListener('mousemove',e=>{
+    mouse.x=e.clientX;
+    mouse.y=e.clientY;
+  });
+
+  function directionAt(i){
+    const a=spine[Math.max(0,i-1)];
+    const b=spine[Math.min(spine.length-1,i+1)];
+    return Math.atan2(b.y-a.y,b.x-a.x);
+  }
+
+  function drawBone(x1,y1,x2,y2,alpha=.62,width=1.15){
+    ctx.beginPath();
+    ctx.moveTo(x1,y1);
+    ctx.lineTo(x2,y2);
+    ctx.strokeStyle=`rgba(224,235,255,${alpha})`;
+    ctx.lineWidth=width;
+    ctx.stroke();
+  }
+
+  function drawLeg(index,side,upper=43,lower=34){
+    const p=spine[index];
+    const ang=directionAt(index);
+    const sideAng=ang+side*Math.PI/2;
+
+    const joint={
+      x:p.x+Math.cos(sideAng)*upper,
+      y:p.y+Math.sin(sideAng)*upper
+    };
+
+    const lowerAng=sideAng+side*.7;
+    const foot={
+      x:joint.x+Math.cos(lowerAng)*lower,
+      y:joint.y+Math.sin(lowerAng)*lower
+    };
+
+    drawBone(p.x,p.y,joint.x,joint.y,.58,1.2);
+    drawBone(joint.x,joint.y,foot.x,foot.y,.58,1.2);
+
+    for(let t=-1;t<=1;t++){
+      const toeAng=lowerAng+side*t*.23;
+      drawBone(
+        foot.x,foot.y,
+        foot.x+Math.cos(toeAng)*9,
+        foot.y+Math.sin(toeAng)*9,
+        .52,.9
+      );
+    }
+  }
+
+  function drawHead(){
+    const h=spine[0];
+    const n=spine[1];
+    const ang=Math.atan2(h.y-n.y,h.x-n.x);
+
+    ctx.save();
+    ctx.translate(h.x,h.y);
+    ctx.rotate(ang);
+
+    ctx.beginPath();
+    ctx.ellipse(4,0,8,5.5,0,0,Math.PI*2);
+    ctx.strokeStyle='rgba(235,242,255,.88)';
+    ctx.lineWidth=1.1;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(10,-2.6);
+    ctx.lineTo(19,0);
+    ctx.lineTo(10,2.6);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(5,-1.2,1.2,0,Math.PI*2);
+    ctx.fillStyle='#00e5ff';
+    ctx.shadowColor='#00e5ff';
+    ctx.shadowBlur=10;
+    ctx.fill();
+    ctx.shadowBlur=0;
+
+    ctx.restore();
+  }
+
+  function update(){
+    spine[0].x+=(mouse.x-spine[0].x)*.24;
+    spine[0].y+=(mouse.y-spine[0].y)*.24;
+
+    for(let i=1;i<spine.length;i++){
+      const prev=spine[i-1];
+      const cur=spine[i];
+      let dx=prev.x-cur.x;
+      let dy=prev.y-cur.y;
+      let dist=Math.hypot(dx,dy)||.001;
+      const diff=dist-SPACING;
+      cur.x+=(dx/dist)*diff;
+      cur.y+=(dy/dist)*diff;
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    update();
+
+    ctx.lineCap='round';
+    ctx.lineJoin='round';
+    ctx.shadowColor='#00e5ff';
+    ctx.shadowBlur=5;
+
+    /* central spine */
+    ctx.beginPath();
+    ctx.moveTo(spine[0].x,spine[0].y);
+    for(let i=1;i<spine.length;i++)ctx.lineTo(spine[i].x,spine[i].y);
+    ctx.strokeStyle='rgba(224,235,255,.72)';
+    ctx.lineWidth=1.25;
+    ctx.stroke();
+
+    /* ribs */
+    for(let i=4;i<24;i++){
+      const p=spine[i];
+      const ang=directionAt(i);
+      const perp=ang+Math.PI/2;
+      const t=(i-4)/20;
+      const rib=17+Math.sin(t*Math.PI)*20;
+
+      const lx=p.x+Math.cos(perp)*rib;
+      const ly=p.y+Math.sin(perp)*rib;
+      const rx=p.x-Math.cos(perp)*rib;
+      const ry=p.y-Math.sin(perp)*rib;
+
+      ctx.beginPath();
+      ctx.moveTo(lx,ly);
+      ctx.quadraticCurveTo(
+        p.x+Math.cos(perp)*rib*.42,
+        p.y+Math.sin(perp)*rib*.42,
+        p.x,p.y
+      );
+      ctx.quadraticCurveTo(
+        p.x-Math.cos(perp)*rib*.42,
+        p.y-Math.sin(perp)*rib*.42,
+        rx,ry
+      );
+      ctx.strokeStyle='rgba(218,230,250,.58)';
+      ctx.lineWidth=.95;
+      ctx.stroke();
+    }
+
+    /* vertebrae */
+    for(let i=0;i<spine.length;i++){
+      const p=spine[i];
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,i<4?1.9:1.25,0,Math.PI*2);
+      ctx.fillStyle='rgba(235,242,255,.82)';
+      ctx.fill();
+    }
+
+    /* legs */
+    drawLeg(8,1,42,31);
+    drawLeg(8,-1,42,31);
+    drawLeg(18,1,45,33);
+    drawLeg(18,-1,45,33);
+
+    drawHead();
+
+    ctx.shadowBlur=0;
+    requestAnimationFrame(draw);
+  }
+
+  draw();
 })();
 </script>
 
