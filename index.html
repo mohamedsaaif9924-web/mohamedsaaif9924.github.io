@@ -74,9 +74,7 @@ a{color:inherit;text-decoration:none}
   pointer-events:none;
   z-index:9998;
 }
-@media(hover:none),(pointer:coarse){
-  #skeleton-cursor{display:none}
-}
+@media(max-width:768px){#skeleton-cursor{opacity:.82}}
 
 /* hide old circular cursor */
 #cursor-dot,#cursor-glow{display:none!important}
@@ -923,13 +921,15 @@ footer{
    SKELETON / LIZARD CURSOR EFFECT
    ========================================================= */
 (function(){
-  if(window.matchMedia('(hover:none), (pointer:coarse)').matches) return;
+  
 
   const canvas=document.getElementById('skeleton-cursor');
   const ctx=canvas.getContext('2d');
 
   let W,H,DPR;
   let mouse={x:window.innerWidth/2,y:window.innerHeight/2};
+  let lastTouchTime=0;
+  const isTouchDevice=('ontouchstart' in window)||navigator.maxTouchPoints>0||window.matchMedia('(pointer:coarse)').matches;
 
   const POINTS=34;
   const SPACING=12;
@@ -956,7 +956,17 @@ footer{
   document.addEventListener('mousemove',e=>{
     mouse.x=e.clientX;
     mouse.y=e.clientY;
-  });
+  },{passive:true});
+
+  function setTouchTarget(t){
+    mouse.x=t.clientX;
+    mouse.y=t.clientY;
+    lastTouchTime=performance.now();
+  }
+  document.addEventListener('touchstart',e=>{ if(e.touches&&e.touches[0]) setTouchTarget(e.touches[0]); },{passive:true});
+  document.addEventListener('touchmove',e=>{ if(e.touches&&e.touches[0]) setTouchTarget(e.touches[0]); },{passive:true});
+  document.addEventListener('pointerdown',e=>{ if(e.pointerType==='touch'||e.pointerType==='pen'){ mouse.x=e.clientX; mouse.y=e.clientY; lastTouchTime=performance.now(); } },{passive:true});
+  document.addEventListener('pointermove',e=>{ if(e.pointerType==='touch'||e.pointerType==='pen'){ mouse.x=e.clientX; mouse.y=e.clientY; lastTouchTime=performance.now(); } },{passive:true});
 
   function directionAt(i){
     const a=spine[Math.max(0,i-1)];
@@ -1035,9 +1045,18 @@ footer{
     ctx.restore();
   }
 
+  let idlePhase=0;
   function update(){
-    spine[0].x+=(mouse.x-spine[0].x)*.24;
-    spine[0].y+=(mouse.y-spine[0].y)*.24;
+    if(isTouchDevice && performance.now()-lastTouchTime>1200){
+      idlePhase+=0.012;
+      const padX=Math.min(W*.28,120);
+      const padY=Math.min(H*.18,90);
+      mouse.x=W*.5+Math.cos(idlePhase)*padX;
+      mouse.y=H*.28+Math.sin(idlePhase*1.35)*padY;
+    }
+    const follow=isTouchDevice?.18:.24;
+    spine[0].x+=(mouse.x-spine[0].x)*follow;
+    spine[0].y+=(mouse.y-spine[0].y)*follow;
 
     for(let i=1;i<spine.length;i++){
       const prev=spine[i-1];
@@ -1120,6 +1139,137 @@ footer{
   }
 
   draw();
+})();
+</script>
+
+
+<script>
+/* =========================================================
+   INTERACTION SOUND
+   Browsers block autoplay, so sound activates on the first
+   user tap/click. After that, clicks/taps play a subtle blip.
+   ========================================================= */
+(function(){
+  const indicator = document.getElementById('sound-indicator');
+  let audioCtx = null;
+  let soundEnabled = false;
+
+  function ensureAudio(){
+    if (!audioCtx) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return false;
+      audioCtx = new AudioContextClass();
+    }
+
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+
+    soundEnabled = true;
+
+    if (indicator) {
+      indicator.innerHTML = '<span class="sound-pip"></span> Sound On';
+      indicator.classList.add('visible');
+    }
+
+    return true;
+  }
+
+  function playTone(freqStart, freqEnd, duration, volume){
+    if (!soundEnabled || !audioCtx) return;
+
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    const filter = audioCtx.createBiquadFilter();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freqStart, now);
+    osc.frequency.exponentialRampToValueAtTime(Math.max(freqEnd, 20), now + duration);
+
+    filter.type = 'lowpass';
+    filter.frequency.value = 3200;
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(volume || 0.12, now + 0.008);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start(now);
+    osc.stop(now + duration + 0.03);
+  }
+
+  function clickSound(){
+    playTone(1150, 480, 0.09, 0.11);
+  }
+
+  function activationSound(){
+    playTone(620, 980, 0.12, 0.10);
+    setTimeout(function(){
+      playTone(980, 1380, 0.10, 0.07);
+    }, 70);
+  }
+
+  if (indicator) {
+    indicator.innerHTML = '<span class="sound-pip"></span> Tap for Sound';
+    indicator.style.cursor = 'pointer';
+    indicator.setAttribute('role', 'button');
+    indicator.setAttribute('tabindex', '0');
+
+    indicator.addEventListener('click', function(e){
+      e.stopPropagation();
+      if (ensureAudio()) activationSound();
+    });
+
+    indicator.addEventListener('keydown', function(e){
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (ensureAudio()) activationSound();
+      }
+    });
+  }
+
+  /* First real user interaction unlocks audio on iPhone/Android/Desktop */
+  function firstInteraction(){
+    if (ensureAudio()) activationSound();
+    document.removeEventListener('pointerdown', firstInteraction, true);
+    document.removeEventListener('touchstart', firstInteraction, true);
+  }
+
+  document.addEventListener('pointerdown', firstInteraction, true);
+  document.addEventListener('touchstart', firstInteraction, {capture:true, passive:true});
+
+  /* Play a small sound on buttons, links and nav items */
+  document.addEventListener('click', function(e){
+    if (!soundEnabled) return;
+
+    const interactive = e.target.closest(
+      'a, button, .btn, .contact-row, .nav-links button, #mobile-menu button'
+    );
+
+    if (interactive) clickSound();
+  });
+
+  /* Extra tap sound for touch devices */
+  document.addEventListener('touchend', function(e){
+    if (!soundEnabled) return;
+
+    const target = e.target.closest(
+      'a, button, .btn, .contact-row, .nav-links button, #mobile-menu button'
+    );
+
+    if (target) clickSound();
+  }, {passive:true});
+
+  /* Resume audio if the browser suspends it after tab switching */
+  document.addEventListener('visibilitychange', function(){
+    if (!document.hidden && audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+  });
 })();
 </script>
 
