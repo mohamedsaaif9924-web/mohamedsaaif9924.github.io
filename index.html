@@ -1258,6 +1258,100 @@ footer{
   document.addEventListener('pointermove',e=>movementSound(e.clientX,e.clientY),{passive:true});
   document.addEventListener('touchmove',e=>{if(e.touches&&e.touches[0]) movementSound(e.touches[0].clientX,e.touches[0].clientY);},{passive:true});
 
+
+  /* ---------------- INVISIBLE HOTSPOT HIT SOUND ---------------- */
+  let activeHotspot = -1;
+  let lastHotspotSound = 0;
+
+  function playHotspotSound(){
+    if(!soundEnabled || !audioCtx) return;
+
+    const now = audioCtx.currentTime;
+
+    const osc1 = audioCtx.createOscillator();
+    const osc2 = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc1.type = 'triangle';
+    osc2.type = 'sine';
+
+    osc1.frequency.setValueAtTime(560, now);
+    osc1.frequency.exponentialRampToValueAtTime(190, now + 0.12);
+
+    osc2.frequency.setValueAtTime(1100, now);
+    osc2.frequency.exponentialRampToValueAtTime(460, now + 0.09);
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.075, now + 0.006);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+
+    osc1.connect(gain);
+    osc2.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc1.start(now);
+    osc2.start(now);
+    osc1.stop(now + 0.15);
+    osc2.stop(now + 0.15);
+  }
+
+  function checkHotspot(x, y){
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    /* Invisible hit zones. They scale with screen size. */
+    const hotspots = [
+      {x:w*0.18, y:h*0.25, r:44},
+      {x:w*0.50, y:h*0.20, r:44},
+      {x:w*0.82, y:h*0.28, r:44},
+      {x:w*0.28, y:h*0.60, r:48},
+      {x:w*0.56, y:h*0.52, r:48},
+      {x:w*0.78, y:h*0.68, r:48}
+    ];
+
+    let hit = -1;
+
+    for(let i=0; i<hotspots.length; i++){
+      const dx = x - hotspots[i].x;
+      const dy = y - hotspots[i].y;
+
+      if(Math.hypot(dx,dy) <= hotspots[i].r){
+        hit = i;
+        break;
+      }
+    }
+
+    /* Trigger only when ENTERING a hotspot */
+    if(hit !== -1 && hit !== activeHotspot){
+      const now = performance.now();
+
+      if(now - lastHotspotSound > 350){
+        playHotspotSound();
+        lastHotspotSound = now;
+      }
+
+      activeHotspot = hit;
+    }
+
+    /* Reset after leaving, so it can trigger again next time */
+    if(hit === -1){
+      activeHotspot = -1;
+    }
+  }
+
+  document.addEventListener('pointermove', function(e){
+    checkHotspot(e.clientX, e.clientY);
+  }, {passive:true});
+
+  document.addEventListener('touchmove', function(e){
+    if(e.touches && e.touches[0]){
+      checkHotspot(
+        e.touches[0].clientX,
+        e.touches[0].clientY
+      );
+    }
+  }, {passive:true});
+
   document.addEventListener('visibilitychange', function(){
     if(!document.hidden && audioCtx && audioCtx.state==='suspended') audioCtx.resume();
   });
