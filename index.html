@@ -363,6 +363,184 @@ footer{
   display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px
 }
 </style>
+
+<style>
+/* =========================================================
+   V2 ENHANCEMENTS
+   ========================================================= */
+
+/* smoother mobile interactions */
+html, body{
+  overscroll-behavior-y:none;
+}
+body{
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* availability status badge */
+.status-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-top:16px;
+  padding:8px 13px;
+  border-radius:999px;
+  border:1px solid rgba(0,229,255,.28);
+  background:rgba(0,229,255,.06);
+  color:var(--ink-dim);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.02em;
+  box-shadow:0 0 22px rgba(0,229,255,.06);
+}
+.status-badge .status-dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#55ffb3;
+  box-shadow:0 0 12px rgba(85,255,179,.8);
+  animation:statusPulse 2s ease-in-out infinite;
+}
+@keyframes statusPulse{
+  0%,100%{transform:scale(1);opacity:1}
+  50%{transform:scale(.78);opacity:.55}
+}
+
+/* refined nav on scroll */
+header.nav{
+  transition:padding .35s var(--ease), background .35s var(--ease), border-color .35s;
+}
+header.nav.compact{
+  background:rgba(5,6,13,.78);
+  border-bottom-color:rgba(0,229,255,.16);
+}
+header.nav.compact .nav-row{
+  padding-top:9px;
+  padding-bottom:9px;
+}
+
+/* stronger scroll reveal variants */
+.reveal-left{
+  opacity:0;
+  transform:translateX(-38px);
+  transition:opacity .85s var(--ease), transform .85s var(--ease);
+}
+.reveal-right{
+  opacity:0;
+  transform:translateX(38px);
+  transition:opacity .85s var(--ease), transform .85s var(--ease);
+}
+.reveal-scale{
+  opacity:0;
+  transform:scale(.965);
+  transition:opacity .85s var(--ease), transform .85s var(--ease);
+}
+.reveal-left.visible,
+.reveal-right.visible,
+.reveal-scale.visible{
+  opacity:1;
+  transform:none;
+}
+
+/* parallax cards */
+.parallax-card{
+  transform-style:preserve-3d;
+  will-change:transform;
+  transition:transform .25s ease-out, border-color .35s, box-shadow .35s;
+}
+.parallax-card > *{
+  transform:translateZ(1px);
+}
+.parallax-card:hover{
+  box-shadow:
+    0 16px 44px rgba(0,0,0,.22),
+    0 0 32px rgba(0,229,255,.08);
+}
+
+/* subtle interactive target glow */
+.interactive-glow{
+  position:relative;
+}
+.interactive-glow::after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:0;
+  box-shadow:0 0 0 1px rgba(0,229,255,.18),0 0 22px rgba(0,229,255,.16);
+  transition:opacity .25s ease;
+}
+.interactive-glow:hover::after,
+.interactive-glow.fx-active::after{
+  opacity:1;
+}
+
+/* click shockwave */
+.v2-shockwave{
+  position:fixed;
+  z-index:9995;
+  pointer-events:none;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  border:1px solid rgba(0,229,255,.65);
+  box-shadow:
+    0 0 16px rgba(0,229,255,.45),
+    inset 0 0 10px rgba(139,92,246,.22);
+  transform:translate(-50%,-50%) scale(.35);
+  opacity:.95;
+  animation:v2Shock .7s cubic-bezier(.19,1,.22,1) forwards;
+}
+@keyframes v2Shock{
+  100%{
+    transform:translate(-50%,-50%) scale(5.2);
+    opacity:0;
+  }
+}
+
+/* section glow-on-entry */
+section.v2-section-active{
+  position:relative;
+}
+section.v2-section-active::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:0;
+  width:min(72vw,760px);
+  height:1px;
+  transform:translateX(-50%);
+  background:linear-gradient(90deg,transparent,rgba(0,229,255,.45),rgba(139,92,246,.42),transparent);
+  box-shadow:0 0 18px rgba(0,229,255,.12);
+  pointer-events:none;
+}
+
+/* mobile performance + touch smoothing */
+@media(max-width:768px){
+  .parallax-card{
+    transform:none!important;
+  }
+  .glass:hover{
+    transform:none;
+  }
+  .reveal-left,
+  .reveal-right{
+    transform:translateY(22px);
+  }
+  #skeleton-cursor{
+    opacity:.72;
+    filter:drop-shadow(0 0 4px rgba(0,229,255,.15));
+  }
+}
+
+/* reduced motion */
+@media(prefers-reduced-motion:reduce){
+  .status-badge .status-dot{animation:none}
+  .parallax-card{transform:none!important}
+}
+</style>
+
 </head>
 
 <body>
@@ -439,14 +617,14 @@ footer{
           <a class="btn btn-ghost" href="mailto:mohamedsaaif99@gmail.com">Email directly</a>
         </div>
         <div class="stat-strip">
-          <div class="glass stat-chip"><div class="num" data-count="3">0</div><div class="lbl">Years in Ops</div></div>
-          <div class="glass stat-chip"><div class="num" data-count="5">0</div><div class="lbl">Design Projects</div></div>
-          <div class="glass stat-chip"><div class="num" data-count="3">0</div><div class="lbl">BI Platforms</div></div>
-          <div class="glass stat-chip"><div class="num" data-count="98" data-suffix="%">0</div><div class="lbl">Accuracy Focus</div></div>
+          <div class="glass stat-chip parallax-card"><div class="num" data-count="3">0</div><div class="lbl">Years in Ops</div></div>
+          <div class="glass stat-chip parallax-card"><div class="num" data-count="5">0</div><div class="lbl">Design Projects</div></div>
+          <div class="glass stat-chip parallax-card"><div class="num" data-count="3">0</div><div class="lbl">BI Platforms</div></div>
+          <div class="glass stat-chip parallax-card"><div class="num" data-count="98" data-suffix="%">0</div><div class="lbl">Accuracy Focus</div></div>
         </div>
       </div>
 
-      <div class="glass orbit-card reveal visible">
+      <div class="glass orbit-card reveal visible parallax-card interactive-glow">
         <div class="id-row"><span class="k">Based in</span><span class="v">Kuwait City, Kuwait</span></div>
         <div class="id-row"><span class="k">Currently</span><span class="v">Analyst, Al Mulla Exchange</span></div>
         <div class="id-row"><span class="k">Studying</span><span class="v">MBA Fintech & Data Analytics</span></div>
@@ -480,7 +658,7 @@ footer{
         <p>I work at the intersection of operations and data — reviewing agreements, tracking SLA breaches, and building the daily MIS that lets leadership act faster. My background moves from export operations, to venture administration, to correspondent banking analysis, and now toward an MBA in Fintech and Data Analytics.</p>
         <p>Beyond analytics, I have a strong eye for visual storytelling and marketing design — creating compelling social media campaigns, brand promotions, and content that drives engagement across industries.</p>
       </div>
-      <div class="glass info-panel reveal">
+      <div class="glass info-panel reveal-right parallax-card interactive-glow">
         <div class="stat-row"><span>Current role</span><span class="v">Operations Analyst</span></div>
         <div class="stat-row"><span>Design work</span><span class="v">5 Projects</span></div>
         <div class="stat-row"><span>Core tools</span><span class="v">Excel · Power BI · Tableau</span></div>
@@ -498,7 +676,7 @@ footer{
 
     <div class="timeline">
       <div class="tl-item">
-        <div class="glass tl-card reveal">
+        <div class="glass tl-card reveal-scale parallax-card interactive-glow">
           <div class="tl-head"><span class="tl-role">Operations Analyst</span><span class="tl-time">Jun 2023 — Present</span></div>
           <span class="tl-org">Al Mulla Exchange · Kuwait City</span>
           <ul>
@@ -510,7 +688,7 @@ footer{
       </div>
 
       <div class="tl-item">
-        <div class="glass tl-card reveal">
+        <div class="glass tl-card reveal-scale parallax-card interactive-glow">
           <div class="tl-head"><span class="tl-role">Operations Assistant</span><span class="tl-time">Jul 2022 — Jan 2023</span></div>
           <span class="tl-org">Lion Ventures Group · Colombo</span>
           <ul>
@@ -523,7 +701,7 @@ footer{
       </div>
 
       <div class="tl-item">
-        <div class="glass tl-card reveal">
+        <div class="glass tl-card reveal-scale parallax-card interactive-glow">
           <div class="tl-head"><span class="tl-role">Intern</span><span class="tl-time">Jan 2021 — Mar 2021</span></div>
           <span class="tl-org">Freshqo · Wattala</span>
           <ul>
@@ -544,7 +722,7 @@ footer{
     <h2 class="sec-title reveal">Education & Certifications</h2>
 
     <div class="edu-grid">
-      <div class="glass edu-card reveal">
+      <div class="glass edu-card reveal-scale parallax-card interactive-glow">
         <div class="edu-top">
           <div><span class="edu-time">2025 — Present</span><div class="edu-deg">MBA, Fintech and Data Analytics</div></div>
           <span class="badge reading">Reading</span>
@@ -552,7 +730,7 @@ footer{
         <span class="edu-inst">Anglia Ruskin University, Cambridge, UK</span>
       </div>
 
-      <div class="glass edu-card reveal">
+      <div class="glass edu-card reveal-scale parallax-card interactive-glow">
         <div class="edu-top">
           <div><span class="edu-time">2021 — 2022</span><div class="edu-deg">BSc (Hons), Business Administration</div></div>
           <span class="badge distinction">Distinction</span>
@@ -560,7 +738,7 @@ footer{
         <span class="edu-inst">Southampton Solent University, UK</span>
       </div>
 
-      <div class="glass edu-card reveal">
+      <div class="glass edu-card reveal-scale parallax-card interactive-glow">
         <div class="edu-top">
           <div><span class="edu-time">2018 — 2020</span><div class="edu-deg">HND, Business Management</div></div>
           <span class="badge merit">Merit</span>
@@ -568,7 +746,7 @@ footer{
         <span class="edu-inst">Pearson College London, Colombo</span>
       </div>
 
-      <div class="glass edu-card reveal">
+      <div class="glass edu-card reveal-scale parallax-card interactive-glow">
         <div class="edu-top">
           <div><span class="edu-time">Jan — Mar 2018</span><div class="edu-deg">Foundation Degree, Business Management</div></div>
           <span class="badge pass">Pass</span>
@@ -576,7 +754,7 @@ footer{
         <span class="edu-inst">Pearson College London, Colombo</span>
       </div>
 
-      <div class="glass edu-card reveal">
+      <div class="glass edu-card reveal-scale parallax-card interactive-glow">
         <div class="edu-top">
           <div><span class="edu-time">2015 — 2017</span><div class="edu-deg">Advanced Level, Commerce</div></div>
           <span class="badge pass">Pass</span>
@@ -584,7 +762,7 @@ footer{
         <span class="edu-inst">Al Mannar International School, Colombo</span>
       </div>
 
-      <div class="glass edu-card reveal">
+      <div class="glass edu-card reveal-scale parallax-card interactive-glow">
         <div class="edu-top">
           <div><span class="edu-time">2006 — 2014</span><div class="edu-deg">Ordinary Level, Secondary Education</div></div>
           <span class="badge pass">Pass</span>
@@ -593,7 +771,7 @@ footer{
       </div>
     </div>
 
-    <div class="glass cert-note reveal"><strong>Researcher Training</strong> — 60 Decibels, May 2023</div>
+    <div class="glass cert-note reveal-scale parallax-card interactive-glow"><strong>Researcher Training</strong> — 60 Decibels, May 2023</div>
   </div>
 </section>
 
@@ -603,7 +781,7 @@ footer{
     <h2 class="sec-title reveal">Skills & Expertise</h2>
 
     <div class="gauge-grid">
-      <div class="glass gauge-card reveal">
+      <div class="glass gauge-card reveal-scale parallax-card interactive-glow">
         <div class="gauge-wrap">
           <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="85" cx="59" cy="59" r="51"></circle></svg>
           <div class="gauge-val">85%</div>
@@ -614,7 +792,7 @@ footer{
         </div>
       </div>
 
-      <div class="glass gauge-card reveal">
+      <div class="glass gauge-card reveal-scale parallax-card interactive-glow">
         <div class="gauge-wrap">
           <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="88" cx="59" cy="59" r="51"></circle></svg>
           <div class="gauge-val">88%</div>
@@ -625,7 +803,7 @@ footer{
         </div>
       </div>
 
-      <div class="glass gauge-card reveal">
+      <div class="glass gauge-card reveal-scale parallax-card interactive-glow">
         <div class="gauge-wrap">
           <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="88" cx="59" cy="59" r="51"></circle></svg>
           <div class="gauge-val">88%</div>
@@ -636,7 +814,7 @@ footer{
         </div>
       </div>
 
-      <div class="glass gauge-card reveal">
+      <div class="glass gauge-card reveal-scale parallax-card interactive-glow">
         <div class="gauge-wrap">
           <svg viewBox="0 0 118 118"><circle class="track" cx="59" cy="59" r="51"></circle><circle class="fill" data-pct="94" cx="59" cy="59" r="51"></circle></svg>
           <div class="gauge-val">94%</div>
@@ -660,7 +838,7 @@ footer{
         <button class="btn btn-primary" onclick="window.location.href='mailto:mohamedsaaif99@gmail.com'">Send an email</button>
       </div>
 
-      <div class="glass contact-panel reveal">
+      <div class="glass contact-panel reveal-right parallax-card interactive-glow">
         <a class="contact-row" href="mailto:mohamedsaaif99@gmail.com">
           <span><span class="k">Email</span><span class="v">mohamedsaaif99@gmail.com</span></span>
           <span class="arrow">→</span>
@@ -1355,6 +1533,310 @@ footer{
   document.addEventListener('visibilitychange', function(){
     if(!document.hidden && audioCtx && audioCtx.state==='suspended') audioCtx.resume();
   });
+})();
+</script>
+
+
+<script>
+/* =========================================================
+   ENHANCED V2 EXPERIENCE
+   - smoother mobile touch-following support
+   - 3D parallax cards
+   - refined scroll animations
+   - compact nav on scroll
+   - contextual sound & interaction feedback
+   ========================================================= */
+(function(){
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isTouch = ('ontouchstart' in window) || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer:coarse)').matches;
+
+  /* ---------------- COMPACT NAV ---------------- */
+  const nav = document.querySelector('header.nav');
+  function updateNav(){
+    if(nav) nav.classList.toggle('compact', window.scrollY > 60);
+  }
+  updateNav();
+  window.addEventListener('scroll', updateNav, {passive:true});
+
+  /* ---------------- PARALLAX CARDS ---------------- */
+  if(!reduced && !isTouch){
+    document.querySelectorAll('.parallax-card').forEach(card=>{
+      let raf = null;
+
+      card.addEventListener('mousemove', e=>{
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+
+        const rx = (0.5 - py) * 5.5;
+        const ry = (px - 0.5) * 7;
+
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(()=>{
+          card.style.transform =
+            `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-3px)`;
+        });
+      });
+
+      card.addEventListener('mouseleave', ()=>{
+        cancelAnimationFrame(raf);
+        card.style.transform = '';
+      });
+    });
+  }
+
+  /* ---------------- EXTRA REVEAL OBSERVER ---------------- */
+  const extraReveal = document.querySelectorAll('.reveal-left,.reveal-right,.reveal-scale');
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.14, rootMargin:'0px 0px -50px 0px'});
+
+  extraReveal.forEach(el=>obs.observe(el));
+
+  /* ---------------- SECTION ACTIVE GLOW ---------------- */
+  const sections = document.querySelectorAll('main section');
+  const secObs = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        sections.forEach(s=>s.classList.remove('v2-section-active'));
+        entry.target.classList.add('v2-section-active');
+      }
+    });
+  }, {rootMargin:'-35% 0px -55% 0px'});
+
+  sections.forEach(s=>secObs.observe(s));
+
+  /* ---------------- SHOCKWAVE CLICK ---------------- */
+  document.addEventListener('pointerdown', e=>{
+    const fx = document.createElement('span');
+    fx.className = 'v2-shockwave';
+    fx.style.left = e.clientX + 'px';
+    fx.style.top = e.clientY + 'px';
+    document.body.appendChild(fx);
+    setTimeout(()=>fx.remove(), 720);
+  }, {passive:true});
+
+  /* ---------------- CONTEXTUAL GLOW ---------------- */
+  const interactiveSelector =
+    'a,button,.btn,.contact-row,.stat-chip,.orbit-card,.tl-card,.edu-card,.gauge-card,.info-panel';
+
+  document.querySelectorAll(interactiveSelector).forEach(el=>{
+    el.addEventListener('pointerenter', ()=>{
+      el.classList.add('fx-active');
+      setTimeout(()=>el.classList.remove('fx-active'), 280);
+    });
+  });
+
+  /* ---------------- MOBILE TOUCH EASING ASSIST ----------------
+     Adds a smoothed virtual pointer stream used by the skeleton
+     without blocking normal scrolling.
+  ------------------------------------------------------------ */
+  if(isTouch){
+    let targetX = window.innerWidth/2;
+    let targetY = window.innerHeight/3;
+    let smoothX = targetX;
+    let smoothY = targetY;
+    let touching = false;
+
+    function setTarget(e){
+      const t = e.touches && e.touches[0];
+      if(!t) return;
+      targetX = t.clientX;
+      targetY = t.clientY;
+      touching = true;
+    }
+
+    document.addEventListener('touchstart', setTarget, {passive:true});
+    document.addEventListener('touchmove', setTarget, {passive:true});
+    document.addEventListener('touchend', ()=>{ touching = false; }, {passive:true});
+
+    function loop(){
+      smoothX += (targetX - smoothX) * .16;
+      smoothY += (targetY - smoothY) * .16;
+
+      if(touching){
+        window.dispatchEvent(new CustomEvent('v2-smoothed-touch',{
+          detail:{x:smoothX,y:smoothY}
+        }));
+      }
+
+      requestAnimationFrame(loop);
+    }
+    loop();
+  }
+
+  /* ---------------- REFINED SOUND EFFECTS ----------------
+     WebAudio must be unlocked by a user gesture.
+  -------------------------------------------------------- */
+  let ac = null;
+  let audioReady = false;
+  let lastHoverSound = 0;
+  let lastSectionSound = 0;
+
+  function ensureAudio(){
+    if(!ac){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(!AC) return false;
+      ac = new AC();
+    }
+    if(ac.state === 'suspended') ac.resume();
+    audioReady = true;
+    return true;
+  }
+
+  function tone(start,end,duration,volume,type='sine'){
+    if(!audioReady || !ac) return;
+
+    const now = ac.currentTime;
+    const osc = ac.createOscillator();
+    const gain = ac.createGain();
+    const filter = ac.createBiquadFilter();
+
+    osc.type = type;
+    osc.frequency.setValueAtTime(start,now);
+    osc.frequency.exponentialRampToValueAtTime(Math.max(end,20),now+duration);
+
+    filter.type='lowpass';
+    filter.frequency.value=3600;
+
+    gain.gain.setValueAtTime(.0001,now);
+    gain.gain.exponentialRampToValueAtTime(volume,now+.006);
+    gain.gain.exponentialRampToValueAtTime(.0001,now+duration);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(ac.destination);
+
+    osc.start(now);
+    osc.stop(now+duration+.02);
+  }
+
+  function clickSound(){
+    tone(1180,470,.085,.085,'sine');
+  }
+
+  function hoverSound(){
+    tone(760,980,.045,.018,'triangle');
+  }
+
+  function sectionSound(){
+    tone(330,520,.07,.018,'sine');
+  }
+
+  function hotspotSound(){
+    tone(620,260,.11,.055,'triangle');
+    setTimeout(()=>tone(1020,520,.075,.026,'sine'),28);
+  }
+
+  function unlock(){
+    if(ensureAudio()){
+      tone(520,860,.09,.045,'sine');
+    }
+    document.removeEventListener('pointerdown', unlock, true);
+    document.removeEventListener('touchstart', unlock, true);
+  }
+  document.addEventListener('pointerdown', unlock, true);
+  document.addEventListener('touchstart', unlock, {capture:true,passive:true});
+
+  /* refined click */
+  document.addEventListener('click', e=>{
+    if(!audioReady) return;
+    if(e.target.closest('a,button,.btn,.contact-row')) clickSound();
+  });
+
+  /* subtle hover */
+  if(!isTouch){
+    document.querySelectorAll('a,button,.btn,.contact-row,.parallax-card').forEach(el=>{
+      el.addEventListener('pointerenter', ()=>{
+        const now = performance.now();
+        if(now-lastHoverSound>140){
+          hoverSound();
+          lastHoverSound = now;
+        }
+      });
+    });
+  }
+
+  /* section arrival sound */
+  const soundSecObs = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting && audioReady){
+        const now = performance.now();
+        if(now-lastSectionSound>850){
+          sectionSound();
+          lastSectionSound = now;
+        }
+      }
+    });
+  }, {rootMargin:'-42% 0px -48% 0px'});
+  sections.forEach(s=>soundSecObs.observe(s));
+
+  /* smarter hotspots:
+     trigger near hero CTA, profile panel, skills center and contact panel */
+  let activeZone = null;
+  let lastHotspot = 0;
+
+  function getZones(){
+    const selectors = [
+      '.hero-cta',
+      '.orbit-card',
+      '#skills .gauge-grid',
+      '.contact-panel'
+    ];
+
+    return selectors.map(sel=>{
+      const el=document.querySelector(sel);
+      if(!el) return null;
+      const r=el.getBoundingClientRect();
+      return {
+        el,
+        x:r.left+r.width/2,
+        y:r.top+r.height/2,
+        r:Math.max(44,Math.min(90,Math.max(r.width,r.height)*.24))
+      };
+    }).filter(Boolean);
+  }
+
+  function detectHotspot(x,y){
+    const zones=getZones();
+    let found=null;
+
+    for(const z of zones){
+      if(Math.hypot(x-z.x,y-z.y) < z.r){
+        found=z.el;
+        break;
+      }
+    }
+
+    if(found && found!==activeZone){
+      const now=performance.now();
+      if(audioReady && now-lastHotspot>420){
+        hotspotSound();
+        lastHotspot=now;
+      }
+      found.classList.add('fx-active');
+      setTimeout(()=>found.classList.remove('fx-active'),320);
+      activeZone=found;
+    }
+
+    if(!found) activeZone=null;
+  }
+
+  document.addEventListener('pointermove',e=>{
+    detectHotspot(e.clientX,e.clientY);
+  },{passive:true});
+
+  document.addEventListener('touchmove',e=>{
+    if(e.touches && e.touches[0]){
+      detectHotspot(e.touches[0].clientX,e.touches[0].clientY);
+    }
+  },{passive:true});
+
 })();
 </script>
 
